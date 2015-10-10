@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+
+    Remove or Change Displayed States and Regions
+
+    LICENSE
+
+    This source file is subject to the Eltrino LLC EULA
+    that is bundled with this package in the file LICENSE_EULA.txt.
+    It is also available through the world-wide-web at this URL:
+    http://eltrino.com/license-eula.txt
+    If you did not receive a copy of the license and are unable to
+    obtain it through the world-wide-web, please send an email
+    to license@eltrino.com so we can send you a copy immediately.
+
+    @category    Eltrino
+    @package     Eltrino_Region
+    @copyright   Copyright (c) 2014 Eltrino LLC. (http://eltrino.com)
+    @license     http://eltrino.com/license-eula.txt  Eltrino LLC EULA
+
+-->
+<config>
+    <sections>
+        <eltrino_region translate="label" module="eltrino_region">
+            <class>separator-top</class>
+            <label>Region Management Pro</label>
+            <tab>sales</tab>
+            <sort_order>330</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general_fieldsets translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <address_region_disabled_message translate="label,comment">
+                            <label>Disabled address region message</label>
+                            <comment><![CDATA[This message will be shown if the customer trying to use address with disabled region during checkout process.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </address_region_disabled_message>
+                    </fields>
+                </general_fieldsets>
+                <region_fieldsets translate="label">
+                    <label>Checkout Totals Sort Order</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>eltrino_region/adminhtml_system_config_fieldset</frontend_model>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <region_container translate="label">
+                            <label>Region Container</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </region_container>
+                    </fields>
+                </region_fieldsets>
+            </groups>
+        </eltrino_region>
+    </sections>
+</config>

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_stockimport_profile_index>
+        <reference name="content">
+            <block type="xtento_stockimport/adminhtml_profile" name="xtento_stockimport_profile"/>
+        </reference>
+    </adminhtml_stockimport_profile_index>
+    <adminhtml_stockimport_profile_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_stockimport/adminhtml_profile_grid" name="xtento_stockimport_profile_grid"/>
+        </block>
+    </adminhtml_stockimport_profile_grid>
+    <adminhtml_stockimport_profile_source>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_stockimport/adminhtml_profile_edit_tab_source" name="stockimport.profile.edit.tab.source"/>
+            <block type="xtento_stockimport/adminhtml_widget_grid_serializer" name="source_grid_serializer">
+                <reference name="source_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>stockimport.profile.edit.tab.source</grid_block_name>
+                        <data_callback>getSelectedSources</data_callback>
+                        <hidden_input_name>source_ids</hidden_input_name>
+                        <reload_param_name>profile_sources</reload_param_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_stockimport_profile_source>
+    <adminhtml_stockimport_profile_sourcegrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_stockimport/adminhtml_profile_edit_tab_source" name="stockimport.profile.edit.tab.source"/>
+        </block>
+    </adminhtml_stockimport_profile_sourcegrid>
+    <adminhtml_stockimport_profile_loggrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_stockimport/adminhtml_profile_edit_tab_log" name="stockimport.profile.edit.tab.log"/>
+        </block>
+    </adminhtml_stockimport_profile_loggrid>
+    <adminhtml_stockimport_profile_historygrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_stockimport/adminhtml_profile_edit_tab_history" name="stockimport.profile.edit.tab.history"/>
+        </block>
+    </adminhtml_stockimport_profile_historygrid>
+    <adminhtml_stockimport_source_index>
+        <reference name="content">
+            <block type="xtento_stockimport/adminhtml_source" name="xtento_stockimport_source"/>
+        </reference>
+    </adminhtml_stockimport_source_index>
+    <adminhtml_stockimport_source_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_stockimport/adminhtml_source_grid" name="xtento_stockimport_source_grid"/>
+        </block>
+    </adminhtml_stockimport_source_grid>
+    <adminhtml_stockimport_log_index>
+        <reference name="content">
+            <block type="xtento_stockimport/adminhtml_log" name="xtento_stockimport_log"/>
+        </reference>
+    </adminhtml_stockimport_log_index>
+    <adminhtml_stockimport_log_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_stockimport/adminhtml_log_grid" name="xtento_stockimport_log_grid"/>
+        </block>
+    </adminhtml_stockimport_log_grid>
+    <adminhtml_stockimport_history_index>
+        <reference name="content">
+            <block type="xtento_stockimport/adminhtml_history" name="xtento_stockimport_history"/>
+        </reference>
+    </adminhtml_stockimport_history_index>
+    <adminhtml_stockimport_history_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_stockimport/adminhtml_history_grid" name="xtento_stockimport_history_grid"/>
+        </block>
+    </adminhtml_stockimport_history_grid>
+    <adminhtml_stockimport_manual_index>
+        <reference name="head">
+            <action method="addJs">
+                <file>mage/cookies.js</file>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="xtento_stockimport/adminhtml_manual" name="xtento_stockimport_manual"/>
+        </reference>
+    </adminhtml_stockimport_manual_index>
+    <adminhtml_stockimport_tools_index>
+        <reference name="content">
+            <block type="xtento_stockimport/adminhtml_tools" name="xtento_stockimport_tools">
+                <block type="xtento_stockimport/adminhtml_tools_import" name="xtento_stockimport_tools_import" template="xtento/stockimport/tools/import.phtml"/>
+                <block type="xtento_stockimport/adminhtml_tools_export" name="xtento_stockimport_tools_export" template="xtento/stockimport/tools/export.phtml"/>
+            </block>
+        </reference>
+    </adminhtml_stockimport_tools_index>
+</layout>

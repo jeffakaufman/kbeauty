@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ddg_Transactional>
+            <version>1.0.1</version>
+        </Ddg_Transactional>
+    </modules>
+    <global>
+        <helpers>
+            <ddg_transactional>
+                <class>Ddg_Transactional_Helper</class>
+            </ddg_transactional>
+        </helpers>
+        <blocks>
+            <ddg_transactional>
+                <class>Ddg_Transactional_Block</class>
+            </ddg_transactional>
+        </blocks>
+        <models>
+            <ddg_transactional>
+                <class>Ddg_Transactional_Model</class>
+            </ddg_transactional>
+            <core>
+                <rewrite>
+                    <email_template>Ddg_Transactional_Model_Email_Template</email_template>
+                    <email>Ddg_Transactional_Model_Email</email>
+                </rewrite>
+            </core>
+        </models>
+    </global>
+</config>

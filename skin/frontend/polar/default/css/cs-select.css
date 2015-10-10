@@ -1,0 +1,309 @@
+/* Default custom select styles */
+div.cs-select {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	text-align: left;
+	background: #fff;
+	width: 100%;
+	max-width: 500px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+div.cs-select:focus {
+	outline: none; /* For better accessibility add a style for this in your skin */
+}
+
+.cs-select select {
+	display: none;
+}
+
+.cs-select span {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	padding: 1em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* Placeholder and selected option */
+.cs-select > span {
+	padding-right: 3em;
+}
+
+.cs-select > span::after,
+.cs-select .cs-selected span::after {
+	speak: none;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.cs-select.cs-active > span::after {
+	-webkit-transform: translateY(-50%) rotate(180deg);
+	transform: translateY(-50%) rotate(180deg);
+}
+
+div.cs-active {
+	z-index: 200;
+}
+
+/* Options */
+.cs-select .cs-options {
+	position: absolute;
+	overflow: hidden;
+	width: 100%;
+	background: #fff;
+	visibility: hidden;
+}
+
+.cs-select.cs-active .cs-options {
+	visibility: visible;
+}
+
+.cs-select ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.cs-select ul span {
+	padding: 1em;
+}
+
+.cs-select ul li.cs-focus span {
+	background-color: #ddd;
+}
+
+/* Optgroup and optgroup label */
+.cs-select li.cs-optgroup ul {
+	padding-left: 1em;
+}
+
+.cs-select li.cs-optgroup > span {
+	cursor: default;
+}
+
+div.cs-skin-border {
+	background: transparent;
+	font-size: 1.2rem;
+	max-width: 400px;
+	margin-bottom: 1rem;
+}
+
+/*@media screen and (max-width: 30em) {
+	div.cs-skin-border { font-size: 1em; }
+}*/
+
+.cs-skin-border > span {
+	border: 1px solid #000;
+	border-color: inherit;
+	-webkit-transition: background 0.2s, border-color 0.2s;
+	transition: background 0.2s, border-color 0.2s;
+	line-height: normal;
+	background-repeat: no-repeat;
+  background-image: url(../images/down.svg);
+  background-position: 95% 50%;
+  background-size: 20px;
+  padding: 2px 8px;
+  color: #000;
+}
+
+.cs-skin-border ul {
+	border: 1px solid #000;
+	border-top: none;
+}
+
+.cs-skin-border ul span {
+	padding: 0 8px;
+}
+
+.cs-skin-border ul span::after {
+	content: '';
+	opacity: 0;
+}
+
+.cs-skin-border.cs-active > span {
+	border-bottom: none;
+	background-image: url(../images/up.svg);
+}
+
+.cs-skin-border .cs-options {
+	color: #000;
+	font-size: 0.75em;
+	opacity: 0;
+	-webkit-transition: opacity 0.2s, visibility 0s 0.2s;
+	transition: opacity 0.2s, visibility 0s 0.2s;
+}
+.cs-skin-border .cs-options li {
+	font-size: 1.2rem;
+}
+.cs-skin-border .cs-options li:hover {
+	color: #fff;
+	background: #b2a177;
+}
+.cs-skin-border.cs-active .cs-options {
+	opacity: 1;
+	-webkit-transition: opacity 0.2s;
+	transition: opacity 0.2s;
+}
+
+.cs-skin-border ul span {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+div.cs-skin-slide {
+	/*color: #fff;
+	font-size: 1.5em;
+	width: 300px;*/
+}
+
+/*@media screen and (max-width: 30em) {
+	div.cs-skin-slide { font-size: 1em; width: 250px; }
+}*/
+
+div.cs-skin-slide::before {
+	content: '';
+	background: #fff;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-webkit-transition: -webkit-transform 0.3s;
+	transition: transform 0.3s;
+}
+
+.cs-skin-slide.cs-active::before {
+	-webkit-transform: scale3d(1.1,3.5,1);
+	transform: scale3d(1.1,3.5,1);
+}
+
+.cs-skin-slide > span {
+	/*height: 80px;
+	line-height: 32px;*/
+	-webkit-transition: text-indent 0.3s, opacity 0.3s;
+	transition: text-indent 0.3s, opacity 0.3s;
+	padding: 0.5rem 2rem 0.5rem 0.5rem;
+	border: 3px solid #000;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	font-weight: bold;
+	letter-spacing: 0.18em;
+	background-image: url(../images/down.svg);
+	background-size: 12px;
+	background-position: 95% 50%;
+	background-repeat: no-repeat;
+	width: 100%;
+	cursor: pointer;
+}
+
+/*@media screen and (max-width: 30em) {
+	.cs-skin-slide > span { height: 60px; line-height: 28px; }
+}*/
+
+.cs-skin-slide.cs-active > span {
+	text-indent: -10000px;
+	opacity: 0;
+}
+
+/*.cs-skin-slide > span::after,
+.cs-skin-slide.cs-active > span::after {
+	font-family: 'icomoon';
+	content: '\e00f';
+	color: #eb7e7f;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}*/
+
+.cs-skin-slide.cs-active > span::after {
+	-webkit-transform: translate3d(0,-50%,0);
+	transform: translate3d(0,-50%,0);
+}
+
+.cs-skin-slide .cs-options {
+	background: transparent;
+	/*width: 70%;*/
+	height: 400%;
+	padding: 0.75em 0;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate3d(-50%,-50%,0);
+	transform: translate3d(-50%,-50%,0);
+}
+
+@media screen and (max-width: 30em) {
+	.cs-skin-slide .cs-options { padding-top: 3em; }
+}
+
+.cs-skin-slide .cs-options li {
+	opacity: 0;
+	-webkit-transform: translate3d(30%,0,0);
+	transform: translate3d(30%,0,0);
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+}
+
+.cs-skin-slide.cs-active .cs-options li {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+	opacity: 1;
+}
+
+.cs-skin-slide.cs-active .cs-options li:first-child {
+	-webkit-transition-delay: 0.05s;
+	transition-delay: 0.05s;
+}
+
+.cs-skin-slide.cs-active .cs-options li:nth-child(2) {
+	-webkit-transition-delay: 0.1s;
+	transition-delay: 0.1s;
+}
+
+.cs-skin-slide.cs-active .cs-options li:nth-child(3) {
+	-webkit-transition-delay: 0.15s;
+	transition-delay: 0.15s;
+}
+
+.cs-skin-slide.cs-active .cs-options li:nth-child(4) {
+	-webkit-transition-delay: 0.2s;
+	transition-delay: 0.2s;
+}
+
+.cs-skin-slide.cs-active .cs-options li:nth-child(5) {
+	-webkit-transition-delay: 0.25s;
+	transition-delay: 0.25s;
+} /* more options need more delay declaration */
+
+.cs-skin-slide .cs-options li span {
+	text-transform: uppercase;
+	letter-spacing: 0.18em;
+	font-size: 90%;
+	padding: 0.5em 1em;
+}
+
+.cs-skin-slide .cs-options li span:hover,
+.cs-skin-slide .cs-options li.cs-focus span,
+.cs-skin-slide .cs-options li.cs-selected span {
+	color: #fff;
+	background: #b2a177;
+}
+
+.cs-skin-slide .cs-selected span::after {
+	content: '';
+}
+

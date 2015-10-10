@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   FME
+ * @package    FME_Richsnippets
+ * @author     Farman Ullah
+ * @license    farman.ullah@unitedsol.net
+ */
+ -->
+<config>
+    <modules>
+        <FME_Richsnippets>
+            <version>0.1.0</version>
+        </FME_Richsnippets>
+    </modules>
+    <frontend>
+        <routers>
+            <richsnippets>
+                <use>standard</use>
+                <args>
+                    <module>FME_Richsnippets</module>
+                    <frontName>richsnippets</frontName>
+                </args>
+            </richsnippets>
+        </routers>
+        <layout>
+            <updates>
+                <richsnippets>
+                    <file>richsnippets.xml</file>
+                </richsnippets>
+            </updates>
+        </layout>
+    </frontend>
+    <admin>
+        <routers>
+			<richsnippets>
+				<use>admin</use>
+				<args>
+					<module>FME_Richsnippets</module>
+					<frontName>richsnippets</frontName>
+				</args>
+			</richsnippets>
+        </routers>
+    </admin>
+    <adminhtml>
+		<menu>
+			<richsnippets module="richsnippets">
+				<title>FME Extensions</title>
+				<sort_order>71</sort_order>               
+				<children>
+					<rs_config module="richsnippets">
+						<title>Rich Snippets</title>
+						<sort_order>0</sort_order>
+						<action>adminhtml/system_config/edit/section/richsnippets_options</action>
+					</rs_config>
+				</children>
+
+			</richsnippets>
+		</menu>
+           <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <richsnippets_options module="richsnippets">
+                                        <title>FME Rich Snippets</title>
+                                    </richsnippets_options>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <richsnippets module="richsnippets">
+                <title>FME Rich Snippets</title>
+                <sort_order>71</sort_order>               
+                <children>
+                    <rs_config translate="title" module="richsnippets">
+                        <title>Configuration</title>
+                        <sort_order>2</sort_order>
+                    </rs_config>
+                </children>
+            </richsnippets>
+                 </children>
+            </admin>
+        </resources>
+    </acl>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<FME_Richsnippets>
+							<title>Richsnippets Module</title>
+							<sort_order>10</sort_order>
+						</FME_Richsnippets>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+		<layout>
+			<updates>
+				<richsnippets>
+					<file>richsnippets.xml</file>
+				</richsnippets>
+			</updates>
+		</layout>
+    </adminhtml>   
+    <global>
+        <models>
+            <richsnippets>
+                <class>FME_Richsnippets_Model</class>
+                <resourceModel>richsnippets_mysql4</resourceModel>
+            </richsnippets>
+            <richsnippets_mysql4>
+                <class>FME_Richsnippets_Model_Mysql4</class>
+                <entities>
+                    <richsnippets>
+                        <table>richsnippets</table>
+                    </richsnippets>
+                </entities>
+            </richsnippets_mysql4>
+        </models>
+        <resources>
+            <richsnippets_setup>
+                <setup>
+                    <module>FME_Richsnippets</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </richsnippets_setup>
+            <richsnippets_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </richsnippets_write>
+            <richsnippets_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </richsnippets_read>
+        </resources>
+        <blocks>
+            <richsnippets>
+                <class>FME_Richsnippets_Block</class>
+            </richsnippets>
+        </blocks>
+        <helpers>
+            <richsnippets>
+                <class>FME_Richsnippets_Helper</class>
+            </richsnippets>
+        </helpers>
+    </global>
+</config>

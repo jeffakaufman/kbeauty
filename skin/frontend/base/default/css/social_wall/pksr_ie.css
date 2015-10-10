@@ -1,0 +1,5 @@
+@charset "utf-8";
+/* CSS Document */
+.stream li.isotope-hidden .section-intro, .stream li.isotope-hidden .icon, .stream li.isotope-hidden a {
+    display: none;
+}

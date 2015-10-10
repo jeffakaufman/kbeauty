@@ -1,0 +1,84 @@
+<?php
+/**
+ * Remove or Change Displayed States and Regions
+ *
+ * LICENSE
+ *
+ * This source file is subject to the Eltrino LLC EULA
+ * that is bundled with this package in the file LICENSE_EULA.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://eltrino.com/license-eula.txt
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@eltrino.com so we can send you a copy immediately.
+ *
+ * @category    Eltrino
+ * @package     Eltrino_Region
+ * @copyright   Copyright (c) 2014 Eltrino LLC. (http://eltrino.com)
+ * @license     http://eltrino.com/license-eula.txt  Eltrino LLC EULA
+ */
+?>
+<script>
+    customerAddresses.reloadRegionField = function (event) {
+        var countryElement = Event.element(event);
+        if (countryElement.id) {
+            var regionElement = $(countryElement.id.replace(/country_id/, 'region'));
+            if (regionElement) {
+                this.regionElement = regionElement;
+                this.countryEl = countryElement;
+
+                var website = $("_accountwebsite_id").getValue();
+                website = parseInt(website);
+                if (!isNaN(website)) {
+                    website = '/website/' + website;
+                } else {
+                    website = '';
+                }
+
+                var store = $("_accountsendemail_store_id").getValue();
+                store = parseInt(store);
+                if (!isNaN(store)) {
+                    store = '/store/' + store;
+                } else {
+                    store = '';
+                }
+
+                if (countryElement.value) {
+                    var url = this.regionsUrl + 'parent/' + countryElement.value + website + store;
+                    this.loader.load(url, {}, this.refreshRegionField.bind(this));
+                } else {
+                    // Set empty text field in region
+                    this.refreshRegionField('[]');
+                }
+            }
+            // set Zip optional/required
+            varienGlobalEvents.fireEvent("address_country_changed", countryElement);
+        }
+    };
+
+    $('_accountwebsite_id').observe('change', function (event) {
+        resetCountryElement();
+    });
+
+    $('_accountsendemail_store_id').observe('change', function (event) {
+        resetCountryElement();
+    });
+
+    function resetCountryElement() {
+        var regionElement = customerAddresses.regionElement;
+        $$('#address_list li').each(function (item) {
+            var id = item.id;
+            id = id.substr(8);
+
+            var countryElement = document.getElementById("_item" + id + "country_id");
+            if (countryElement != null) {
+                countryElement.selectedIndex = "0";
+            }
+
+            customerAddresses.regionElement = $("_item" + id + 'region');
+            customerAddresses.refreshRegionField('[]');
+        });
+        customerAddresses.regionElement = regionElement;
+    }
+</script>
+

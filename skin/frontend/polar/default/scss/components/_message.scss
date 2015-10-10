@@ -1,0 +1,107 @@
+/* MESSAGES - _messages.scss */
+.messages {
+  /* Firefox fix */
+  clear: both;
+  width: 100%;
+  /* End Firefox fix */
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  position: relative;
+  .closeBtn {
+    color: #fff;
+    margin: $base-font-size;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    &:hover {
+      color: #000;
+    }
+  }
+  ul, li {
+    margin: 0;
+  }
+  li {
+    margin-bottom: 0;
+    @include clearfix();
+    a,
+    a:visited {
+      text-decoration: underline;
+      color: $white;
+    }
+    a:active,
+    a:hover,
+    a:focus {
+      text-decoration: none;
+    }
+  }
+  .note-msg,
+  li li {
+    list-style-type: none;
+    color: $white;
+    @include panel();
+    @include border-radius($global-radius);
+    &:before {
+      display: none;
+    }
+    margin-bottom: 0;
+    padding-right: 3em;
+  }
+  li {
+    &.success-msg li {
+      background: $success-color;
+      color: $white;
+      text-align: center;
+    }
+    &.error-msg li {
+      background: $alert-color;
+      color: $white;
+      text-align: center;
+    }
+    &.notice-msg li {
+      background: $success-color;
+      color: $white;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+}
+body.cms-index-noroute {
+  background: url(../images/404_bg.jpg) no-repeat;
+  background-size: cover;
+  height: 100%;
+  text-align: center;
+  .wrapper {
+    content: '';
+    background: #fff;
+    border: 8px solid #000;
+    height: 50%;
+    width: 80%;
+    margin: auto;
+    display: inline-block;
+    @include vertical-align;
+    @media #{$medium-up} {
+      width: 600px;
+      height: 300px;
+    }
+    .inner-wrap {
+      text-align: center;
+      @include vertical-align;
+      
+      h1 {
+        font-weight: normal;
+        letter-spacing: 0.4em;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+      }
+      p {
+        font-weight: 100;
+        margin: auto 20%;
+      }
+      a {
+        text-transform: uppercase;
+        font-weight: normal;
+      }
+    }
+  }
+}

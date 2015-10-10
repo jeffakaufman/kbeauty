@@ -1,0 +1,26 @@
+<div class="fieldset">
+    <div class="box-title">
+        <h2><?php echo $this->__('Payment Methods') ?></h2>
+    </div>
+    <div class="box-content">
+		
+	<?php if( count( $this->getCards() ) > 0 ): ?>
+		<?php foreach( $this->getCards() as $card ): ?>
+			<?php $card = $card->getTypeInstance(); ?>
+			<div class="item info-box block <?php if( $card->getExpires() != '' && strtotime( $card->getExpires() ) < time() ): ?>expired<?php endif; ?>">
+				<?php echo $this->__( 'CARD: %s', $card->getLabel() ) ?>
+				<?php if( $card->getExpires() != '' ): ?>
+					Exp <?php echo date( 'n/y', strtotime( $card->getExpires() ) ); ?>
+				<?php endif; ?>
+				
+				<address class="box-content">
+					<?php echo $card->getAddressObject()->format('html'); ?>
+				</address>
+			</div>
+		<?php endforeach; ?>
+	<?php else: ?>
+		<div class="item"><?php echo $this->__('You do not have any payment data saved yet.') ?></div>
+	<?php endif; ?>
+		
+	</div>
+</div>

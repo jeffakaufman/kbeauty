@@ -1,0 +1,65 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     rwd_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $_item = $this->getItem() ?>
+<?php $_order = $this->getItem()->getOrder() ?>
+<?php $_product = Mage::getModel('catalog/product')->setStoreId($_item->getOrder()->getStoreId())->load($_item->getProductId()); ?>
+<?php $simbol= Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); ?>
+<?php $categories = $_product->getCategoryIds(); ?>
+<tr>
+    <td class="cell-content product-info" width="100" align="left" style="padding: 15px 0 0 0;"><img src="<?php echo Mage::helper('catalog/image')->init($_product, 'image')->constrainOnly(TRUE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(75,75); ?>" alt="<?php echo $_item->getName() ?>" /></td>
+    <td class="cell-content product-info" align="left" style="text-transform: uppercase; letter-spacing: 0.2em; padding: 15px 0 0 0;">
+        <strong><?php echo $this->escapeHtml($_item->getName()) ?></strong><br>
+        <?php /*echo $this->__('SKU'); ?>: <?php echo $this->escapeHtml($this->getSku($_item))*/ ?>
+        <?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?><br>
+        <p style="padding: 10px 0 0 0; margin: 0; letter-spacing: 0.4em;">
+            <?php if ($this->getItemOptions()) { ?>
+            
+            <?php foreach ($this->getItemOptions() as $option): ?>
+                <?php echo nl2br($option['value']) ?>
+            <?php endforeach; ?>
+            
+        <?php } else if ($_product && $_product->getAttributeText('colorswatch_color') != 'none') { ?>
+        
+            <?php echo $_product->getAttributeText('colorswatch_color'); ?>
+        
+        <?php } ?>
+        </p>
+        <?php $addInfoBlock = $this->getProductAdditionalInformationBlock(); ?>
+        <?php if ($addInfoBlock) :?>
+            <?php echo $addInfoBlock->setItem($_item->getOrderItem())->toHtml(); ?>
+        <?php endif; ?>
+        <?php echo $this->escapeHtml($_item->getDescription()) ?>
+    </td>
+    <?php /* <td class="cell-content align-center"><?php echo $this->escapeHtml($this->getSku($_item)) ?></td> */ ?>
+    <td class="cell-content align-center" align="center" style="padding: 15px 0 0 0;"><?php echo $_item->getQty()*1 ?></td>
+    <td class="cell-content align-right" align="right" style="padding: 15px 0 0 0; letter-spacing: 0.2em;">
+        <strong>
+            <?php echo $simbol.number_format($_item->getPrice(),2); ?>
+        </strong>
+    </td>
+</tr>
+

@@ -1,0 +1,112 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php $customer_data=Mage::getSingleton('customer/session')->isLoggedIn(); ?>
+<?php if ($customer_data): ?>
+<nav class="breadcrumbs">
+    <a href="<?php echo $this->getUrl('checkout/cart') ?>" title="<?php echo $this->__('Shopping Bag') ?>"><?php echo $this->__('Shopping Bag') ?></a>
+    <span class="billing-shipping"><?php echo $this->__('Billing & Shipping Info') ?></span>
+    <span class="review-payment"><?php echo $this->__('Review & Payment Info') ?></span>
+    <span class="confirmation"><?php echo $this->__('Order Confirmation') ?></span>
+    <?php /*
+    <a href="/checkout/onepage/#billing" title="<?php echo $this->__('Shipping & Billing Info') ?>" class="billing-shipping"><?php echo $this->__('Shipping & Billing Info') ?></a>
+    <a href="/checkout/onepage/#review" onclick="accordion.openSection('opc-payment')" title="<?php echo $this->__('Review & Payment Info') ?>" class="review-payment"><?php echo $this->__('Review & Payment Info') ?></a>
+    <a href="<?php echo $this->getCheckoutUrl() ?>" title="<?php echo $this->__('Order Confirmation') ?>" class="confirmation"><?php echo $this->__('Order Confirmation') ?></a>
+    */ ?>
+</nav>
+<?php endif; ?>
+<div class="page-title">
+    <h1><?php echo $this->__('Checkout') ?></h1>
+</div>
+<script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
+
+<ol class="opc <?php echo $this->getActiveStep() ?>" id="checkoutSteps">
+<?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>
+<?php if (!$this->getChild($_stepId) || !$this->getChild($_stepId)->isShow()): continue; endif; $i++ ?>
+    <li id="opc-<?php echo $_stepId ?>" class="section<?php echo !empty($_stepInfo['allow'])?' allow':'' ?><?php echo !empty($_stepInfo['complete'])?' saved':'' ?>">
+        <div class="step-title">
+            <h2><a href="#"><span class="number"><?php echo $i ?>/<?php echo count($this->getSteps()); ?></span> <?php echo $_stepInfo['label'] ?></a></h2>
+        </div>
+        <div id="checkout-step-<?php echo $_stepId ?>" class="step a-item" style="display: none;">
+            <?php echo $this->getChildHtml($_stepId) ?>
+        </div>        
+    </li>
+<?php endforeach ?>
+</ol>
+<script type="text/javascript">
+//<![CDATA[
+    if(!window.location.hash) jQuery('.breadcrumbs .billing-shipping').addClass('current');
+    else if(window.location.hash == '#review') jQuery('.breadcrumbs .review-payment').addClass('current');
+    
+    var accordion = new Accordion('checkoutSteps', '.box-title a', true);
+    <?php if($this->getActiveStep()): ?>
+    accordion.openSection('opc-<?php echo $this->getActiveStep() ?>');
+    <?php endif ?>
+    var checkout = new Checkout(accordion,{
+        progress: '<?php echo $this->getUrl('checkout/onepage/progress') ?>',
+        review: '<?php echo $this->getUrl('checkout/onepage/review') ?>',
+        saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveMethod') ?>',
+        failure: '<?php echo $this->getUrl('checkout/cart') ?>'}
+    );
+    jQuery('#checkout-progress-wrapper').insertAfter('.page-title');
+    jQuery('.button').click(function() {
+        //console.log(checkout.currentStep);
+        jQuery('.col-main').addClass(checkout.currentStep);
+        if (jQuery('#opc-shipping_method').hasClass('active')) {
+            jQuery('.breadcrumbs span').removeClass('current');
+            jQuery('.breadcrumbs .review-payment').addClass('current');
+        } else if (jQuery('#opc-payment').hasClass('active')) {
+            jQuery('.breadcrumbs span').removeClass('current');
+            jQuery('.breadcrumbs .confirmation').addClass('current');
+        }
+    });
+
+    jQuery('#billing-progress-opcheckout .box-title a').click(function(e) {
+        e.preventDefault();
+        jQuery('.col-main').removeClass('billing');
+        accordion.openSection('opc-billing');
+        checkout.changeSection('opc-billing'); return false;
+    });
+    jQuery('#shipping-progress-opcheckout .box-title a').click(function() {
+        jQuery('.col-main').removeClass('shipping');
+    });
+    jQuery('#shipping_method-progress-opcheckout .box-title a').click(function() {
+        jQuery('.col-main').removeClass('shipping_method');
+    });
+    jQuery('#payment-progress-opcheckout .box-title a').click(function() {
+        jQuery('.col-main').removeClass('payment');
+    });
+
+    var checkShipping=setInterval(function () {
+        if (jQuery('#opc-shipping_method').hasClass('active')) {
+            jQuery('.col-main').addClass('shipping');
+            window.clearInterval(checkShipping)
+        }
+    }, 1000);
+        
+//]]>
+</script>

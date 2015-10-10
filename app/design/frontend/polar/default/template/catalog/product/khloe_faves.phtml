@@ -1,0 +1,92 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<div class="sister_faves" class="clearfix">
+  <div class="page-title text-center">
+    <h1>Khloe's Faves</h1>
+  </div>
+    <?php if(!$_productCollection->count()): ?>
+      <p class="note-msg container"><?php echo $this->__('There are no products matching the selection.') ?></p>
+    <?php else: ?>
+      <?php // Grid Mode ?>
+      <?php $_collectionSize = $_productCollection->count() ?>
+      
+      <?php $_columnCount = 3; ?>
+      <?php $row = 0; $i=0; ?>
+      <?php foreach ($_productCollection as $_product): ?>
+          <?php if ($i%$_columnCount==0): ?>
+          <div id="group2" class="row" data-group="2">
+            <?php //print_r($_product) ?>
+            <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-3 products-grid" data-equalizer>
+          <?php endif ?>
+                <li class="item item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
+                  <?php $categories = $_product->getCategoryIds(); ?>
+                  <?php
+                   if ($_product->getFinalPrice() < $_product->getPrice()):?>
+                       <?php echo $this->getChildHtml('polar.sale.item') ?>
+                  <?php endif; ?>
+                  <div class="item-wrapper">
+                    <a href="<?php echo $_product->getProductUrl() ?>">
+                      <div class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></div>
+                      <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h3>
+                      <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
+                      <?php /*if($_product->getRatingSummary()): ?>
+                        <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                      <?php endif;*/ ?>
+                      <div class="price"><?php echo $this->getPriceHtml($_product, true) ?></div>
+                    </a>
+                    <div class="actions">
+                        
+                      <button type="button" title="<?php echo $this->__('QUICK VIEW') ?>" class="button btn-quick quick-view-link" data-url="<?php echo Mage::getBaseUrl(), 'catalog/ajax_product/view/id/', $_product->getId() ?>"><span><span><?php echo $this->__('QUICK VIEW') ?></span></span></button>
+
+                      <button type="button" title="<?php echo $this->__('DETAILS') ?>" class="button btn-cart" onclick="setLocation('<?php echo $_product->getProductUrl() ?>')"><span><span><?php echo $this->__('DETAILS') ?></span></span></button>
+                        
+                    </div>
+                  </div><!-- /item-wrapper -->
+                </li>
+                <?php $i++ ?>
+            <?php if ($i % $_columnCount==0) : ?>
+            <?php $row++ ?>
+            </ul>
+          </div>
+          <?php endif ?>
+          <?php endforeach ?>
+      
+      
+  <?php endif; ?>
+</div>
+

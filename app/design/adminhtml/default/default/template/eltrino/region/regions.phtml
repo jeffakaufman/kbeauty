@@ -1,0 +1,169 @@
+<?php
+/**
+ * Remove or Change Displayed States and Regions
+ *
+ * LICENSE
+ *
+ * This source file is subject to the Eltrino LLC EULA
+ * that is bundled with this package in the file LICENSE_EULA.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://eltrino.com/license-eula.txt
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@eltrino.com so we can send you a copy immediately.
+ *
+ * @category    Eltrino
+ * @package     Eltrino_Region
+ * @copyright   Copyright (c) 2014 Eltrino LLC. (http://eltrino.com)
+ * @license     http://eltrino.com/license-eula.txt  Eltrino LLC EULA
+ */
+?>
+<tr>
+    <td class="label">Region/States</td>
+    <td class="grid tier">
+        <table cellspacing="0" class="data border" id="tiers_table">
+            <thead>
+            <tr class="headings">
+                <th style="width:420px">Region/States</th>
+                <th style="width:45px">Action</th>
+            </tr>
+            </thead>
+            <tbody id="regions-container"></tbody>
+            <tfoot>
+            <tr>
+                <td colspan="2" class="a-right">
+                    <button id="add-region" title="Add Region" type="button" class="scalable add">
+                        <span><span><span>Add New</span></span></span></button>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </td>
+</tr>
+
+<style>
+    #regions-container .region-name {
+        width: 99%;
+    }
+
+    .grid.tier {
+        padding-left: 5px !important;
+    }
+</style>
+
+<script type="text/javascript">
+    var regionRow = '<tr id="region-row-#{count}">' +
+            '<td><input id="region-name-#{count}" class="region-name required-entry check #{nameUnique}" type="text" value="#{regionName}" name="regions[#{count}][name]"/></td>' +
+            '<td id="delete-column-#{count}" class="last">' +
+            '<button title="Delete Region" type="button" class="scalable delete icon-btn delete-product-option"' +
+            'data-region-id="#{regionId}" data-count="#{count}" data-region-row="region-row-#{count}"' +
+            'data-region-name="region-name-#{count}">' +
+            '<span><span><span>Delete</span></span></span></button>' +
+            '#{hasId}' +
+            '</td>' +
+            '</tr>',
+        input = '<input type="hidden" value="#{regionId}" name="regions[#{count}][id]"/>';
+
+    var regionsControl = {
+        template: new Template(regionRow),
+        inputTemplate: new Template(input),
+        itemsCount: 0,
+        savedRegions: <?php echo $this->getRegionList(); ?>,
+        data: [],
+
+        addItem: function () {
+            var that = this;
+            $('add-region').observe('click', function () {
+                $('regions-container').insert(that.template.evaluate({count: that.itemsCount++, nameUnique: 'name-unique'}));
+            });
+
+            return this;
+        },
+        deleteItem: function () {
+            $('regions-container').on('click', 'button', function (event, element) {
+                var parentRowId = element.readAttribute('data-region-row'),
+                    regionId = element.readAttribute('data-region-id'),
+                    regionNameId = element.readAttribute('data-region-name');
+
+                if (regionId) {
+                    var number = $(element).readAttribute('data-count'),
+                        elem = $('delete-column-' + number),
+                        input = document.createElement('input');
+
+                    input.type = 'hidden';
+                    input.className = 'delete';
+                    input.name = 'regions[' + number + '][delete]';
+                    input.value = true;
+                    elem.insertBefore(input, elem.firstChild);
+                    $(parentRowId).addClassName('no-display');
+                    $(regionNameId).toggleClassName('check');
+                } else {
+                    $(parentRowId).remove();
+                }
+            });
+
+            return this;
+        },
+        initRegions: function () {
+            var regionArrayLength = this.savedRegions.length;
+            if (regionArrayLength > 0) {
+                for (var i = 0; regionArrayLength > i; i++) {
+                    var regionName = this.savedRegions[i].name ? this.savedRegions[i].name : this.savedRegions[i].default_name,
+                        regionId = this.savedRegions[i].region_id,
+                        inputTemplate = this.inputTemplate.evaluate({regionId: regionId, count: this.itemsCount}),
+                        data = {regionName: regionName,
+                            count: this.itemsCount,
+                            regionId: regionId,
+                            hasId: inputTemplate},
+                        template = this.template.evaluate(data);
+                    $('regions-container').insert(template);
+                    this.itemsCount++;
+                }
+            }
+
+            return this;
+        },
+        customValidation: function () {
+            var submit = editForm.submit.bind(editForm),
+                that = this;
+            editForm.submit = function (url) {
+                that.data = {
+                    'fields': [],
+                    'repeat': []
+                };
+                $$('.region-name.check').each(function (el) {
+                    that.data.fields.push(el.getValue());
+                });
+                submit(url);
+            };
+
+            Validation.add('name-unique', 'Name value must be unique', function (value, el) {
+                var key = el.id.slice(-1);
+                for (var i = 0; that.data.fields.length > i; i++) {
+                    if (that.data.fields[i] == value) {
+                        if (typeof that.data.repeat[key] == 'undefined') {
+                            that.data.repeat[key] = 0;
+                        }
+                        that.data.repeat[key]++;
+                    }
+                }
+                if (that.data.repeat[key] < 2)  return true;
+
+                return false;
+            });
+        },
+        saveAndContinueEdit: function (url) {
+            editForm.submit(url);
+        },
+        init: function () {
+            this.initRegions()
+                .addItem()
+                .deleteItem()
+                .customValidation();
+        }
+    };
+
+    Event.observe(window, "load", function () {
+        regionsControl.init();
+    });
+</script>

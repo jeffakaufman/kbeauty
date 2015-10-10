@@ -1,0 +1,93 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * @var Mage_Page_Block_Html_Header $this
+ */
+?>
+<?php echo $this->getChildHtml('topMenu') ?>
+<?php $count = $this->helper('checkout/cart')->getSummaryCount(); ?>
+<?php // In page/html/topmenu.phtml we've added two static blocks: polar-before-nav and polar-after-nav where you can place custom <li></li> for custom menu elements (Home, i.e.) ?>
+<div class="top-line">
+    <div class="top-line-section">
+      <section class="logo small-12 columns hide-for-medium-up">
+        <a class="left-off-canvas-toggle burger-icon" href="">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+        <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+        <div id="cartLogin">
+          <div id="cartBtn"><a class="right-off-canvas-toggle" href=""><div class="count"><?php echo $count; ?></div><div class="icon icon-bag"></div></a></div>
+          <?php if (Mage::getSingleton('customer/session')->isLoggedIn()) : ?>
+          <?php $customer = Mage::getSingleton('customer/session')->getCustomer(); ?>
+          <ul id="accountBtn" class="show-for-medium-up">
+            <li><?php echo $customer->getFirstname() ?>
+              <ul>
+                <li><a href="/customer/account/index/"><?php echo $this->__('My Account'); ?></a></li>
+                <li><a href="/checkout/cart/"><?php echo $this->__('Shopping Bag'); ?></a></li>
+                <li><a href="/sales/order/history/"><?php echo $this->__('My Orders'); ?></a></li>
+                <li><a href="/wishlist/"><?php echo $this->__('My Wishlist'); ?></a></li>
+                <li><a href="/customer/account/edit/"><?php echo $this->__('Settings'); ?></a></li>
+                <li><a href="<?php echo Mage::helper('customer')->getLogoutUrl(); ?>"><?php echo $this->__('Log OUT'); ?></a></li>
+            </li>
+          </ul>
+          <?php else :?>
+          <div id="loginBtn" class="show-for-medium-up"><?php echo $this->__('Login') ?></div>
+          <?php endif; ?>
+        </div>
+      </section>
+      <section class="medium-6 small-10 columns ls">
+        <a class="left-off-canvas-toggle burger-icon" href="">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+        <ul>
+          <li id="open-shop"><?php echo $this->__('SHOP') ?></li>
+          <li id="k-life"><a href="/the-kurrent"><?php echo $this->__('THE KURRENT') ?></a></li>
+        </ul>
+        <?php /*echo $this->getChildHtml('topLinks')*/ ?>
+        <?php // In page/html/top-links.phtml we've added two static blocks: polar-before-top-links and polar-after-top-links where you can place custom <li></li> for custom links ?>
+      </section>
+      <section class="logo hide-for-small-only">
+          <a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>" class="logo"><img src="<?php echo $this->getLogoSrc() ?>" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+      </section>
+      <section class="medium-6 small-2 columns rs">
+          <?php echo $this->getChildHtml('topSearch') ?>
+          <a class="icon icon-search mobile-searchBtn hide-for-medium-up" href="#miniSearh"></a>
+          <?php /*echo $this->getChildHtml('cart_header-mobile')*/ // Only visible on mobile ?>
+          <?php /*echo $this->getChildHtml('cart_header')*/ ?>
+          
+          <?php /*echo $this->getChildHtml('topContainer')*/ ?>
+      </section>
+      <div class="miniSearch small-12 hide-for-medium-up"><?php echo $this->getChildHtml('topSearch-mobile') ?></div>
+    </div>
+</div>
+
+
+

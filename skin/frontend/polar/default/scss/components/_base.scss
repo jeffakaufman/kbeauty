@@ -1,0 +1,199 @@
+/* BASE - _base.scss */
+
+/* Body and HTML */
+
+body {
+  font-size: $base-font-size;
+  font-family: $body-font-family;
+  color: $body-font-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.1em;
+}
+body.fixed {
+  overflow: hidden; 
+}
+* { outline: none; }
+/* Page */
+.page {
+  background-color: $background-color;
+  height: 100%;
+}
+/* No list style, but keep the vertical alignment */
+ul, ol {
+  margin-left: 0;
+}
+th {
+  text-align: left;
+}
+#crosssell-products-list li,
+.add-to-links li,
+.checkout-types li,
+.footer ul li,
+ul.form-list li,
+.products-grid li,
+.products-list li,
+.breadcrumbs li,
+.sidebar li {
+  list-style-type: none;
+}
+/* Standard classes */
+.hidden,
+.no-display {
+  display: none !important;
+}
+.f-left {
+  float: left;
+}
+img.f-left {
+  margin: 0 $base-font-size $base-font-size 0;
+}
+.f-right {
+  float: right;
+}
+img.f-right {
+  margin: 0 0 $base-font-size $base-font-size;
+}
+.f-fix {
+  @include clearfix();
+}
+.v-middle {
+  vertical-align: middle;
+}
+/* Mobile hide/show */
+.polar-toggle-trigger {
+  cursor: pointer;
+}
+.blind {
+  display: none;
+}
+address {
+  font-style: normal;
+  line-height: 1.5em;
+}
+form {
+  clear: both;
+}
+.fieldset {
+  @include panel();
+}
+*:not(.box-collateral),
+*:not(.std) {
+  & h1,
+  & h2 {
+    font-size: $h3-font-size;
+  }
+}
+.page-title {
+  margin: 2em $base-font-size * 0.75;
+  letter-spacing: 0.3em;
+  text-align: left;
+  @media #{$small-only} {
+    text-align: center;
+  }
+  @media #{$large-up} {
+    margin: 2em $base-font-size * 1.5;
+  }
+}
+
+.col-left .page-title, .columns .page-title {
+  margin: 2em 0;
+}
+.customer-account-index .my-wishlist .page-title {
+  display: none;
+}
+.cms-page-view .page-title, body.login .page-title {
+  text-align: center;
+}
+.checkout-onepage-index .page-title {
+  margin: 1rem 0;
+}
+h1, h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.headings {
+  display: none;
+  border-top: 1px solid $border-color;
+  line-height: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  @media #{$medium-up} {
+    display: block;
+  }
+  .text-left {
+    padding-left: 0;
+  }
+  .text-right {
+    padding-right: 0;
+  }
+  a {
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    font-size: $base-font-size * 0.7;
+    text-decoration: underline;
+    line-height: 4.5em;
+    
+    @media #{$medium-up} {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    &:hover {
+      color: $jet;
+    }
+  }
+}
+
+/* Line-height in .std areas */
+.short-description .std,
+.product-collateral .std {
+  line-height: $paragraph-line-height;
+}
+
+/* Anchor links */
+a {
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+p a {
+  color: #000;
+  text-decoration: underline;
+}
+
+/* Remove padding on right and left side. For rows you want to fill out to the edges. */
+@media #{$medium-up} {
+  .large-collapse-edges {
+    .column:first-child,
+    .columns:first-child {
+      padding-left: 0;
+    }
+    .column:last-child,
+    .columns:last-child {
+      padding-right: 0;
+    }
+  }
+}
+
+/* Grid cheat for col-set */
+.col2-set {
+  @include grid-row($behavior:nest);
+  .col-1,
+  .col-2 {
+    @include grid-column(12);
+    @media #{$medium-up} {
+      @include grid-column(6);
+    }
+  }
+  @media #{$small-only} {
+    .col-2 {
+      margin-top: $base-font-size * 2;
+    }
+  }
+}

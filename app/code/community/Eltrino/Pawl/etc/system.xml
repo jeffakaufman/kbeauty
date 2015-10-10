@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!--
+
+    Eltrino News Notification
+
+    LICENSE
+
+    This source file is subject to the Open Software License (OSL 3.0)
+    that is bundled with this package in the file LICENSE_OSL.txt.
+    It is also available through the world-wide-web at this URL:
+    http://opensource.org/licenses/osl-3.0.php
+    If you did not receive a copy of the license and are unable to
+    obtain it through the world-wide-web, please send an email
+    to license@eltrino.com so we can send you a copy immediately.
+
+    @category    Eltrino
+    @package     Eltrino_Pawl
+    @copyright   Copyright (c) 2013 Eltrino LLC. (http://eltrino.com)
+    @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+
+-->
+<config>
+    <tabs>
+        <eltrino translate="label" module="eltrino_pawl">
+            <label>Eltrino Extensions</label>
+            <class>eltrino-tab</class>
+            <sort_order>300</sort_order>
+        </eltrino>
+    </tabs>
+	<sections>
+		<eltrino_pawl translate="label" module="eltrino_pawl">
+			<label>General Information</label>
+			<tab>eltrino</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>100</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>0</show_in_website>
+			<show_in_store>0</show_in_store>
+			<groups>
+                <!--<extensions>-->
+                <!--</extensions>-->
+				<news translate="label">
+					<label>News</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>0</show_in_website>
+					<show_in_store>0</show_in_store>
+					<fields>
+                        <enabled translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enabled>
+						<channels translate="label">
+							<label>Channels</label>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>200</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>0</show_in_website>
+							<show_in_store>0</show_in_store>
+							<can_be_empty>1</can_be_empty>
+							<source_model>eltrino_pawl/source_channels</source_model>
+                            <depends><enabled>1</enabled></depends>
+						</channels>
+					</fields>	
+				</news>
+			</groups>
+		</eltrino_pawl>
+	</sections>
+</config>

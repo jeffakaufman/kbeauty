@@ -1,0 +1,229 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Product list template
+ *
+ * @see Mage_Catalog_Block_Product_List
+ */
+?>
+<?php
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<!-- <script src="/js/calendar/calendar.js"></script>
+<script src="/js/calendar/calendar-setup.js"></script>
+<script src="/skin/frontend/base/default/js/bundle.js"></script>
+<script src="/js/colorswatch/colorswatch-product-config.js"></script> -->
+
+<div id="bestsellers">
+  <h2>Best Sellers</h2>
+
+  <div class="products">
+    <div class="row">
+      <?php if(!$_productCollection->count()): ?>
+        <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+      <?php else: ?>
+      <div class="touchcarousel">
+      <?php // Grid Mode ?>
+      <?php //$_collectionSize = $_productCollection->count() ?>
+      <?php $_limit = 5 ?>
+      <?php $_columnCount = $this->getColumnCount(); ?>
+
+      <ul class="products-grid touchcarousel-container" data-equalizer>
+        <?php $i=0; foreach ($_productCollection as $_product): ?>
+              <li class="item item<?php echo $i ?> text-center touchcarousel-item" itemscope itemtype="http://schema.org/Product" data-equalizer-watch>
+                <?php
+                  $categories = $_product->getCategoryIds();
+                  $_category = Mage::getModel('catalog/category')->load($categories[0]) ;
+                  $cat_name = Mage::getModel('catalog/category')->load($categories[0])->getName();
+                  $catImageUrl = $_category->getImageUrl();
+                  $_imgUrl = $this->helper('catalog/image')->init($_product, 'small_image')->resize(400);
+                  $parentIds = Mage::getResourceSingleton('catalog/product_type_configurable')->getParentIdsByChild($_product->getId());
+                  if (isset($parentIds[0])) {
+                      $parent = Mage::getModel('catalog/product')->load($parentIds[0]);
+                  }
+                  if ($_product->getFinalPrice() < $_product->getPrice()):?>
+                     <?php echo $this->getChildHtml('polar.sale.item') ?>
+                <?php endif; ?>
+                <?php 
+                    $_attribute_code = Mage::getResourceModel('eav/entity_attribute')->getIdByCode('catalog_product', 'colorswatch_color');
+                    $_attribute_name = Mage::getModel('catalog/product')->load($_product->getId())->getAttributeText('colorswatch_color');
+                    $_attribute_id = Mage::getModel('catalog/product')->load($_product->getId())->getData('colorswatch_color'); ?>
+                <div class="item-wrapper">
+                  <a href="<?php echo $parent->getProductUrl() ?>?color=<?php echo $_attribute_id; ?>">
+                    <span class="product-image"><img src="<?php if ($_imgUrl) echo $_imgUrl; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></span>
+                    <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h3>
+                    <?php /*if($_product->getRatingSummary()): ?>
+                      <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                    <?php endif;*/ ?>
+
+                    <div class="attribute">
+                      <?php if ($_attribute_name != 'None') echo $_attribute_name; ?>
+                    </div>
+                    <?php echo $this->getPriceHtml($_product, true) ?>
+                  </a>
+                  <div class="actions">
+                      <?php if ($_product->isSaleable()): ?>
+                        <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form<?php echo $_product->getId() ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                          <?php echo $this->getBlockHtml('formkey') ?>
+                          <div class="no-display">
+                            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+                            <input type="hidden" name="related_product" value="" />
+                            <input type="hidden" name="super_attribute[<?php echo $_attribute_code; ?>]" value="<?php echo $_attribute_id; ?>">
+                            <input type="hidden" name="qty" value="1" />
+                            <!-- <input type="hidden" name="attributes_info[value]" value="<?php if ($_attribute_name != 'none') echo $_attribute_name; ?>">
+                            <input type="hidden" name="price" value="<?php echo number_format($_product->getPrice(), 2) ?>"> -->
+                          </div>
+                          <button type="button" title="" class="product-addtocart-button button btn-cart" data-ptype="<?php echo $_product->getTypeID(); ?>" onclick="setupForm(productAddToCartForm<?php echo $_product->getId() ?>, '<?php echo $_product->getId() ?>', this);"><span><span>Add to Bag</span></span></button>
+                          <div class='ajax_loader' style="display:none; text-align: center;"><img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif')?>'/></div>
+                        </form>
+                      <?php else: ?>
+                          <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                      <?php endif; ?>
+                  </div>
+                </div><!-- /item-wrapper -->
+              </li>
+          <script type="text/javascript">//<![CDATA[
+            var productAddToCartForm<?php echo $_product->getId() ?> = new VarienForm('product_addtocart_form<?php echo $_product->getId() ?>');
+            //]]>
+          </script>
+          <?php $i++; if ($i==$_limit) break; ?>
+          
+          <?php endforeach ?>
+        </ul>
+      </div>
+      <?php endif; ?>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    /*function setupForm(form, id) {
+      var the_form = jQuery('#product_addtocart_form'+id);
+      var data = the_form.serialize();
+      data += '&isAjax=1';
+      console.log(data);
+      the_form.ajaxForm({
+          url: the_form.attr('action').replace('checkout/cart','ajax/index'),
+          data: data,
+          dataType: 'json',
+          beforeSubmit: function(){    
+              if(form.validator.validate()){
+                                  
+              }else{
+                  return false;
+              }
+          },
+          error: function(data){
+              
+          },
+          success : function(data){
+            console.log(data);
+              jQuery('.ajax_loader').hide();
+              if(jQuery('.block-cart') && data.status == 'SUCCESS'){
+                  jQuery('.right-off-canvas-toggle').click();
+                  var curQty = jQuery('.right-off-canvas-toggle .count').text();
+                  if (curQty == '') curQty = 0;
+                  jQuery('.right-off-canvas-toggle .count').html(parseInt(curQty) + parseInt(data.qty));
+                  //console.log(data.qty);
+                  jQuery('.block-cart').replaceWith(data.sidebar);
+              }else{
+                  
+              }
+          }
+      });
+    }*/
+    function setupForm(productAddToCartForm,id,button) {
+      //console.log(productAddToCartForm);
+      //productAddToCartForm.submit = function(button, url) {
+        if (productAddToCartForm.validator.validate()) {
+            var form = productAddToCartForm.form;
+            var oldUrl = form.action;
+
+            if (url) {
+                productAddToCartForm.action = url;
+            }
+            var e = null;
+            
+            if(!url){
+                var url = jQuery('#product_addtocart_form'+id).attr('action');
+            }
+            url = url.replace("checkout/cart","ajax/index");
+            var data = jQuery('#product_addtocart_form'+id).serialize();
+            data += '&isAjax=1';
+            //console.log(data);
+            jQuery('#product_addtocart_form'+id+' .ajax_loader').show();
+            try {
+                jQuery.ajax({
+                      url: url,
+                      dataType: 'json',
+                      type : 'post',
+                      data: data,
+                      success: function(data){
+                            jQuery('#product_addtocart_form'+id+' .ajax_loader').hide();
+                            //jQuery('.status_message').html(data.message);
+                            //alert(data.status + ": " + data.message);
+                            //console.log(data);
+                            if(jQuery('.block-cart') && data.status == 'SUCCESS'){
+                                jQuery('.right-off-canvas-toggle .count').text(data.totalItemsInCart);
+                                jQuery('.right-off-canvas-toggle').click();
+                                jQuery('.block-cart').replaceWith(data.sidebar);
+                            }
+                      }
+                });
+            } catch (e) {
+            }
+            productAddToCartForm.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                //button.disabled = true;
+            }
+        }
+      //}.bind(productAddToCartForm);
+    }
+    /*productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);*/
+//]]>
+</script>

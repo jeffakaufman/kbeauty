@@ -1,0 +1,67 @@
+<config>
+<!--
+  /**
+	* MageSpeedTest.com Magento integration
+	*
+	* @package    Magespeedtest_Speedtest
+	* @author     Ashley Schroder (magespeedtest.com)
+	* @copyright  Copyright 2012 Ashley Schroder
+	*/
+-->
+    <modules>
+        <Magespeedtest_Speedtest>
+            <version>0.0.3</version>
+        </Magespeedtest_Speedtest>
+    </modules>
+    <global>
+		<models>
+			<magespeedtest>
+				<class>Magespeedtest_Speedtest_Model</class>
+			</magespeedtest>
+		</models>
+		<helpers>
+            <magespeedtest>
+                <class>Magespeedtest_Speedtest_Helper</class>
+            </magespeedtest>
+        </helpers>
+        <blocks>
+			<magespeedtest>
+				<class>Magespeedtest_Speedtest_Block</class>
+			</magespeedtest>
+		</blocks>
+	</global>
+	  <admin>
+	       <routers>
+	           <magespeedtest>	
+				<use>admin</use>
+	               <args>
+	                   <module>Magespeedtest_Speedtest</module>
+	                   <frontName>magespeedtest</frontName>
+	               </args>
+	           </magespeedtest>
+	       </routers>
+    </admin>
+	<adminhtml>
+	 <menu>
+         <system>
+             <children>
+                 <tools>
+                     <children>
+                         <magespeedtest translate="title" module="magespeedtest">
+                             <title>Performance</title>
+                             <action>magespeedtest/performance</action>
+                         </magespeedtest>
+                     </children>
+                 </tools>
+             </children>
+         </system>
+      </menu>
+	</adminhtml>
+	<default>
+		<magespeedtest>
+			<settings>
+ 				<baseurl>http://www.magespeedtest.com</baseurl>
+			</settings>
+		</magespeedtest>
+	</default>
+</config>

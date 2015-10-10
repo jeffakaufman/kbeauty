@@ -1,0 +1,32 @@
+<?php echo $this->getChildHtml('head') ?>
+<body<?php echo $this->getBodyClass()?' class="standard-page '.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+
+<div class="page">
+  <div class="wrapper off-canvas-wrap" data-offcanvas>
+    <div class="inner-wrap">
+      <?php echo $this->getChildHtml('off_canvas_left') ?>
+      <?php echo $this->getChildHtml('off_canvas_right') ?>
+      <a class="exit-off-canvas"></a>
+      <?php echo $this->getChildHtml('global_notices') ?>
+      <?php echo $this->getChildHtml('header') ?>
+      <div class="main-container col1-layout">
+          <div class="row main">
+              <?php echo $this->getChildHtml('breadcrumbs') ?>
+              <div class="small-12 columns col-main">
+                  <?php echo $this->getChildHtml('global_messages') ?>
+                  <?php echo $this->getChildHtml('content') ?>
+              </div>
+          </div>
+      </div>
+      <div id="loginForm"></div>
+      <?php echo $this->getChildHtml('footer') ?>
+    </div>
+  </div>
+</div>
+<?php // echo $this->getChildHtml('off_canvas_right') ?>
+<?php echo $this->getChildHtml('before_body_end') ?>
+<?php echo $this->getAbsoluteFooter() ?>
+<?php echo $this->getChildHtml('bottom') ?>
+</body>
+</html>

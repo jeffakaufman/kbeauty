@@ -1,0 +1,277 @@
+/* ACCOUNT - _account.scss */
+
+/* Login */
+.customer-account-login {
+  .col2-set {
+    .buttons-set {
+      text-align: right;
+    }
+  }
+}
+.col-main {
+  .my-account {
+    //padding-top: 1em /* Fix padding above title on some pages */
+  }
+}
+
+/* My account */
+/*.my-account {
+  
+  .page-title {
+    margin: 0 0 0.5em;
+    width: 100%;
+    border-bottom: 1px solid $border-color;
+    @include clearfix();
+    &.title-buttons {
+      float: left;
+      clear: both;
+      text-align: left;
+      line-height: 1.2em;
+      padding-bottom: 1em;
+      h1 {
+        line-height: 1.2em;
+        margin-bottom: 0;
+      }
+      @media #{$large-up} {
+        line-height: $h1-font-size;
+        text-align: right;
+        padding-bottom: 0;
+        h1 {
+          float: left;
+          width: auto;
+        }      
+      }
+    }
+  }
+}*/
+.customer-account-index .my-account {
+  @media #{$medium-up} {
+    margin-top: 6.3rem;
+  }
+}
+.sales-order-history .col-main .my-account {
+  display: none;
+}
+.my-account .data-table {
+  width: 100%;
+  background-color: transparent;
+  td.last {
+    white-space: nowrap
+  }
+}
+.my-account .buttons-set {
+  clear: both;
+  @include clearfix();
+  button {
+    margin-left: 10px;
+  }
+  .back-link {
+    float: left;
+    width: auto;
+    margin: 0;
+    padding: 6px 0;
+    padding: 0;
+  }
+}
+.my-account ol {
+  list-style-type: none;
+}
+.my-account .addresses-list {
+  .item {
+    //@include panel();
+    margin-bottom: $base-font-size;
+    border-bottom: 1px solid $jet;
+  }
+}
+
+/* Recent orders and My orders, list */
+.order-list {
+  width: 100%;
+  list-style: none;
+  font-size: $base-font-size;
+  letter-spacing: 0.1em;
+  .item {
+    margin-bottom: $base-font-size;
+  }
+  li {
+    width: 100%;
+    position: relative;
+    margin-bottom: $base-font-size;
+    border-bottom: 1px solid $border-color;
+  }
+  .order-details {
+    padding-bottom: $base-font-size;
+    font-size: $base-font-size * 0.9;
+  }
+  .qtyOrdered {
+    @media #{$medium-up} {
+      display: none;
+    }
+  }
+  .itemTotal {
+    font-weight: bold;
+  }
+  .item-options .option {
+    @media #{$small-only} {
+      margin-bottom: 0;
+    }
+  }
+  .order-id,
+  .order-date {
+  }
+  .order-date {
+    
+  }
+  .order-total,
+  .order-to {
+    
+  }
+  .order-total {
+    
+  }
+  .order-status {
+    font-style: italic;
+  }
+  .order-actions {
+    float: right;
+    clear: right;
+    text-align: right;
+    color: #999;
+    a {
+      color: #999;
+      text-decoration: underline;
+      font-size: $base-font-size * 0.7;
+      text-transform: uppercase;
+      &:hover {
+        color: $gold;
+      }
+    }
+  }
+}
+.customer-account-index .order-list li {
+  border-bottom: none;
+}
+/* View order */
+.my-account .order-info {
+  margin-bottom: 0;
+  ul {
+    margin-bottom: 0;
+  }
+  dt,
+  dd,
+  li {
+    display: inline-block;
+  }
+  li {
+    margin-left: $base-font-size;
+  }
+}
+.order-info-box {
+  h2 {
+    font-size: $base-font-size * 1.25;
+  }
+}
+.ordered-totals {
+  float: right;
+  clear: both;
+  text-align: right;
+  @include panel();
+  width: 40%;
+}
+.back-link {
+  display: none;
+}
+.order-details {
+  .product-image {
+    margin-top: $base-font-size * 0.5;
+  }
+  .product-info {
+    padding-left: 80px;
+    min-height: 88px;
+    @media #{$medium-up} {
+      padding-left: 100px;
+    }
+  }
+  .product-name {
+    letter-spacing: 0.1em;
+    margin-bottom: 0;
+    font-size: $base-font-size;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .price {
+    
+  }
+}
+/* Boxes */
+.box-account {
+  @include clearfix();
+  .box-head {
+    @include clearfix();
+    border-bottom: 1px solid $border-color;
+    h2,
+    h3 {
+      font-size: $h4-font-size;
+      float: left;
+    }
+    h2 {
+      font-weight: bold;
+    }
+  }
+  .box {
+    @include panel();
+    @include clearfix();
+  }
+  .box-title {
+    border-bottom: 1px solid $border-color;
+    @include clearfix();
+
+    h3 {
+      float: left;
+    }
+  }
+  h4 {
+    font-size: $base-font-size;
+  }
+  .box-head,
+  .box-title {
+    a:visited,
+    a {
+      float: right;
+      margin-right: $base-font-size;
+      margin-left: $base-font-size;
+      font-size: 0.8em;
+      line-height: 4em;
+      color: $gray;
+    }
+    a:hover,
+    a:focus,
+    a:active {
+      color: $body-font-color;
+    }
+  }
+  .box-reviews {
+    li.item {
+      border-bottom: 1px solid $border-color;
+      .number {
+        float: left;
+        padding: 0 ($base-font-size / 2);
+        line-height: 1em;        
+      }
+    }
+  }
+}
+
+/* Account navigation */
+.block-account {
+  margin-top: 1em;
+  ul {
+    li {
+      &:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+
+

@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+ <!-- * @author     Farman Ullah
+      * @license    farman.ullah@unitedsol.net -->
+ <config>
+    <tabs>
+        <FME module="richsnippets" translate="label">
+            <label>FME Extensions</label>
+            <sort_order>101</sort_order>
+        </FME>
+    </tabs>
+    <sections>
+        <richsnippets_options module="richsnippets" translate="label">
+            <label>Rich Snippets</label>
+            <sort_order>200</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <tab>FME</tab>
+            <groups>
+                <general_info>
+                    <label>General Configuration</label>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <module_enable>
+                        <label>Module Enable</label>
+                        <frontend_type>select</frontend_type>
+                        <source_model>adminhtml/system_config_source_yesno</source_model>
+                        <comment>Enable or disable module</comment>
+                        <sort_order>1</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                     </module_enable>
+                     <!-- <schema_url>
+                        <label>Set Url for Schema</label>
+                        <frontend_type>text</frontend_type>
+                        <comment>E.g.http://schema.org/Product</comment>
+                        <sort_order>2</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                     </schema_url>
+                     <schema_offerurl>
+                        <label>Set Url for Schema offer</label>
+                        <frontend_type>text</frontend_type>
+                        <comment>E.g.http://schema.org/Offer</comment>
+                        <sort_order>3</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                     </schema_offerurl>
+                     <breadcrumb_url>
+                        <label>Set Url for Breadcrumbs</label>
+                        <frontend_type>text</frontend_type>
+                        <comment>E.g.http://data-vocabulary.org/Breadcrumb</comment>
+                        <sort_order>4</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                     </breadcrumb_url> -->
+                    </fields>
+                </general_info>
+                <settings>
+                    <label>Settings for Rich Snippets</label>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                       <set_name translate="label">
+                            <label>Set Product name</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Send Product name to search engine</comment>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </set_name>
+                        <set_breadcrumbs translate="label">
+                            <label>Set Breadcrumbs</label>
+                            <frontend_type>select</frontend_type>
+                           <source_model>adminhtml/system_config_source_yesno</source_model>
+                           <comment>Send breadcrumb data to search engine</comment>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </set_breadcrumbs>
+                         <product_sku translate="label">
+                            <label>Set Product SKU</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Send Product SKU to search engine</comment>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_sku>
+                         <set_url translate="label">
+                            <label>Set Product Url</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Send Product URL to search engine</comment>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </set_url>
+                         <set_image translate="label">
+                            <label>Set Product image</label>
+                            <frontend_type>select</frontend_type>
+                           <source_model>adminhtml/system_config_source_yesno</source_model>
+                           <comment>Send Product image to search engine</comment>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </set_image>
+                         <set_desc translate="label">
+                            <label>Set Product description</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Send Product descriptions to search engine</comment>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </set_desc>
+                         <set_price translate="label">
+                            <label>Set Product price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Send Product price to search engine</comment>
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </set_price>
+                        <set_pricecurrencey translate="label">
+                            <label>Set Currency for Product price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Send Product price Currency to search engine</comment>
+                            <sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </set_pricecurrencey>
+                         <product_status translate="label">
+                            <label>Set Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+
+                            <comment>Send Product status(in stock/out stock) to search engine</comment>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </product_status>
+                         <p_brand translate="label">
+                            <label>Set Product brand</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Send Product brand to search engine</comment>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </p_brand>
+                        <p_brand_att translate="label">
+                            <label>Set Product attribute for brand</label>
+                            <frontend_type>select</frontend_type>
+                          <source_model>richsnippets/Getattributes</source_model>
+                            <comment>Send Product attribute for brand to search engine</comment>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </p_brand_att>
+                         <p_color translate="label">
+                            <label>Set Product color</label>
+                            <frontend_type>select</frontend_type>
+                           <source_model>adminhtml/system_config_source_yesno</source_model>
+                           <comment>Send Product color to search engine</comment>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </p_color>
+                        <p_coloratt translate="label">
+                            <label>Set Product color attribute</label>
+                            <frontend_type>select</frontend_type>
+                           <source_model>richsnippets/Getattributescolor</source_model>
+                           <comment>Send Product color attribute to search engine</comment>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </p_coloratt>
+                         <p_weight translate="label">
+                            <label>Set Product weight</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Send Product weight to search engine</comment>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </p_weight>
+                        <p_weightatt translate="label">
+                            <label>Set Product weight attribute</label>
+                            <frontend_type>select</frontend_type>
+                          <source_model>richsnippets/Getattributesweight</source_model>
+                            <comment>Send Product weight attribute to search engine</comment>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </p_weightatt>
+                         <p_review translate="label">
+                            <label>Set Product review</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment>Send Product reviews data to search engine</comment>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </p_review>
+                    </fields>
+
+                </settings>
+        
+            </groups>
+        </richsnippets_options>
+    </sections>
+ </config>
+    

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<widgets>
+    <socialwall type="socialwall/SocialMediaWall">
+		<name>Social Media Stream Wall</name>
+   		<description>Displays the different social media streams</description>
+    </socialwall>
+</widgets>

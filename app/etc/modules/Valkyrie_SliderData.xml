@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Valkyrie_SliderData>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Valkyrie_SliderData>
+    </modules>
+</config>
+

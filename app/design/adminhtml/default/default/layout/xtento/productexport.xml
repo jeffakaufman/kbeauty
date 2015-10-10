@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_productexport_profile_index>
+        <reference name="content">
+            <block type="xtento_productexport/adminhtml_profile" name="xtento_productexport_profile"/>
+        </reference>
+    </adminhtml_productexport_profile_index>
+    <!--<adminhtml_productexport_profile_edit>
+        <reference name="head">
+            <action method="addJs"><script>xtento/productexport/ace/ace.js</script></action>
+        </reference>
+    </adminhtml_productexport_profile_edit>-->
+    <adminhtml_productexport_profile_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_productexport/adminhtml_profile_grid" name="xtento_productexport_profile_grid"/>
+        </block>
+    </adminhtml_productexport_profile_grid>
+    <adminhtml_productexport_profile_destination>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_productexport/adminhtml_profile_edit_tab_destination" name="productexport.profile.edit.tab.destination"/>
+            <block type="xtento_productexport/adminhtml_widget_grid_serializer" name="destination_grid_serializer">
+                <reference name="destination_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>productexport.profile.edit.tab.destination</grid_block_name>
+                        <data_callback>getSelectedDestinations</data_callback>
+                        <hidden_input_name>destination_ids</hidden_input_name>
+                        <reload_param_name>profile_destinations</reload_param_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </adminhtml_productexport_profile_destination>
+    <adminhtml_productexport_profile_destinationgrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_productexport/adminhtml_profile_edit_tab_destination" name="productexport.profile.edit.tab.destination"/>
+        </block>
+    </adminhtml_productexport_profile_destinationgrid>
+    <adminhtml_productexport_profile_loggrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_productexport/adminhtml_profile_edit_tab_log" name="productexport.profile.edit.tab.log"/>
+        </block>
+    </adminhtml_productexport_profile_loggrid>
+    <adminhtml_productexport_profile_historygrid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_productexport/adminhtml_profile_edit_tab_history" name="productexport.profile.edit.tab.history"/>
+        </block>
+    </adminhtml_productexport_profile_historygrid>
+    <adminhtml_productexport_destination_index>
+        <reference name="content">
+            <block type="xtento_productexport/adminhtml_destination" name="xtento_productexport_destination"/>
+        </reference>
+    </adminhtml_productexport_destination_index>
+    <adminhtml_productexport_destination_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_productexport/adminhtml_destination_grid" name="xtento_productexport_destination_grid"/>
+        </block>
+    </adminhtml_productexport_destination_grid>
+    <adminhtml_productexport_log_index>
+        <reference name="content">
+            <block type="xtento_productexport/adminhtml_log" name="xtento_productexport_log"/>
+        </reference>
+    </adminhtml_productexport_log_index>
+    <adminhtml_productexport_log_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_productexport/adminhtml_log_grid" name="xtento_productexport_log_grid"/>
+        </block>
+    </adminhtml_productexport_log_grid>
+    <adminhtml_productexport_history_index>
+        <reference name="content">
+            <block type="xtento_productexport/adminhtml_history" name="xtento_productexport_history"/>
+        </reference>
+    </adminhtml_productexport_history_index>
+    <adminhtml_productexport_history_grid>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="xtento_productexport/adminhtml_history_grid" name="xtento_productexport_history_grid"/>
+        </block>
+    </adminhtml_productexport_history_grid>
+    <adminhtml_productexport_manual_index>
+        <reference name="head">
+            <action method="addJs">
+                <file>mage/cookies.js</file>
+            </action>
+            <!--
+            <action method="addJs"><script>xtento/productexport/jquery/jquery-1.8.3.min.js</script></action>
+            <action method="addJs"><script>xtento/productexport/jquery/jquery.fileDownload.js</script></action>
+            <action method="addJs"><script>xtento/productexport/jquery/jquery.blockUI.js</script></action>
+            <action method="addJs"><script>prototype/prototype.js</script></action>
+            -->
+        </reference>
+        <reference name="content">
+            <block type="xtento_productexport/adminhtml_manual" name="xtento_productexport_manual"/>
+        </reference>
+    </adminhtml_productexport_manual_index>
+    <adminhtml_productexport_tools_index>
+        <reference name="content">
+            <block type="xtento_productexport/adminhtml_tools" name="xtento_productexport_tools">
+                <block type="xtento_productexport/adminhtml_tools_import" name="xtento_productexport_tools_import" template="xtento/productexport/tools/import.phtml"/>
+                <block type="xtento_productexport/adminhtml_tools_export" name="xtento_productexport_tools_export" template="xtento/productexport/tools/export.phtml"/>
+            </block>
+        </reference>
+    </adminhtml_productexport_tools_index>
+</layout>

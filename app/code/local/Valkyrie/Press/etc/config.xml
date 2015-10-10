@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Valkyrie_Press>
+            <version>0.1.0</version>
+        </Valkyrie_Press>
+    </modules>
+
+    <adminhtml>
+        <!-- The <layout> updates allow us to define our block layouts in a seperate file so are aren't messin' with the magento layout files.  -->
+        <layout>
+            <updates>
+                <press>
+                    <file>press.xml</file>
+                </press>
+            </updates>
+        </layout>
+        <!-- The <acl> section is for access control. Here we define the pieces where access can be controlled within a role. -->
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <cms>
+                            <press translate="title" module="press">
+                                <title>Press Data</title>
+                                <sort_order>3</sort_order>
+                            </press>
+                        </cms>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <admin>
+        <!--
+            Here we are telling the Magento router to look for the controllers in the Super_Awesome_controllers_Adminhtml before we look in the
+            Mage_Adminhtml module for all urls that begin with /admin/controller_name
+         -->
+        <routers>
+            <press_admin>
+                <use>admin</use>
+                <args>
+                    <module>Valkyrie_Press</module>
+                    <frontName>press_admin</frontName>
+                    <!--<modules>-->
+                        <!--<sliderdata before="Mage_Adminhtml">Valkyrie_SliderData_Adminhtml</sliderdata>-->
+                    <!--</modules>-->
+                </args>
+            </press_admin>
+        </routers>
+    </admin>
+
+
+    <frontend>
+        <routers>
+            <Press>
+                <use>standard</use>
+                <args>
+                    <module>Valkyrie_Press</module>
+                    <frontName>press</frontName>
+                </args>
+            </Press>
+        </routers>
+
+        <layout>
+            <updates>
+                <valkyrie_press module="Valkyrie_Press">
+                    <file>valkyrie_press.xml</file>
+                </valkyrie_press>
+            </updates>
+        </layout>
+
+    </frontend>
+
+    <global>
+        <events>
+            <sales_order_place_after>
+                <observers>
+<!--
+                    <feed_sales_order_observer>
+                        <class>Wexo_Employee_Model_Observer</class>
+                        <method>sendAdditionalEmail</method>
+                    </feed_sales_order_observer>
+-->
+                </observers>
+            </sales_order_place_after>
+        </events>
+
+        <models>
+            <press>
+                <class>Valkyrie_Press_Model</class>
+                <resourceModel>press_mysql4</resourceModel>
+            </press>
+            <press_mysql4>
+                <class>Valkyrie_Press_Model_Mysql4</class>
+                <entities>
+                    <press>
+                        <table>press_list</table>
+                    </press>
+                </entities>
+            </press_mysql4>
+        </models>
+
+        <resources>
+            <press_setup>
+                <setup>
+                    <module>Valkyrie_Press</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </press_setup>
+            <press_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </press_write>
+            <press_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </press_read>
+        </resources>
+
+        <blocks>
+            <press>
+                <class>Valkyrie_Press_Block</class>
+            </press>
+        </blocks>
+
+        <helpers>
+            <press>
+                <class>Valkyrie_Press_Helper</class>
+            </press>
+        </helpers>
+
+    </global>
+</config>

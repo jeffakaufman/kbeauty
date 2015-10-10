@@ -1,0 +1,127 @@
+<?php 
+	$active = Mage::getStoreConfig('tab1/general/active');
+	$stream_days = Mage::getStoreConfig('tab1/general/stream_days');
+	$stream_limit = Mage::getStoreConfig('tab1/general/stream_limit');
+	$stream_max = Mage::getStoreConfig('tab1/general/stream_max');
+	$animation_speed = Mage::getStoreConfig('tab1/general/animation_speed');
+	if(empty($stream_days))$stream_days= 30;
+	if(empty($stream_limit))$stream_limit= 50;
+	if(empty($animation_speed))$animation_speed= 600;
+	$fb_active = Mage::getStoreConfig('tab1/socialwall_facebook/socialwall_active');
+	$fb_id = Mage::getStoreConfig('tab1/socialwall_facebook/socialwall_id');
+	$tw_active = Mage::getStoreConfig('tab1/socialwall_twitter/socialwall_active');
+	$tw_id = Mage::getStoreConfig('tab1/socialwall_twitter/socialwall_id');
+	$tw_consumerkey = Mage::getStoreConfig('tab1/socialwall_twitter/socialwall_ck');
+	$tw_consumersecret = Mage::getStoreConfig('tab1/socialwall_twitter/socialwall_cs');
+	$tw_acctoken = Mage::getStoreConfig('tab1/socialwall_twitter/socialwall_at');
+	$tw_acctokensecret = Mage::getStoreConfig('tab1/socialwall_twitter/socialwall_ats');
+	$google_active = Mage::getStoreConfig('tab1/socialwall_google/socialwall_active');
+	$google_id = Mage::getStoreConfig('tab1/socialwall_google/socialwall_id');
+	$google_key = Mage::getStoreConfig('tab1/socialwall_google/socialwall_key');
+	$yt_active = Mage::getStoreConfig('tab1/socialwall_youtube/socialwall_active');
+	$yt_id = Mage::getStoreConfig('tab1/socialwall_youtube/socialwall_id');
+	$instagram_active = Mage::getStoreConfig('tab1/socialwall_instagram/socialwall_active');
+	$instagram_id = Mage::getStoreConfig('tab1/socialwall_instagram/socialwall_id');
+	$instagram_accesstoken = Mage::getStoreConfig('tab1/socialwall_instagram/socialwall_at');
+	$instagram_customerid = Mage::getStoreConfig('tab1/socialwall_instagram/socialwall_ci');
+	$rss_active = Mage::getStoreConfig('tab1/socialwall_rss/socialwall_active');
+	$rss_id = Mage::getStoreConfig('tab1/socialwall_rss/socialwall_id');
+	$stumbleupon_active = Mage::getStoreConfig('tab1/socialwall_stumbleupon/socialwall_active');
+	$stumbleupon_id = Mage::getStoreConfig('tab1/socialwall_stumbleupon/socialwall_id');
+	$delicious_active = Mage::getStoreConfig('tab1/socialwall_delicious/socialwall_active');
+	$delicious_id = Mage::getStoreConfig('tab1/socialwall_delicious/socialwall_id');
+	$vimeo_active = Mage::getStoreConfig('tab1/socialwall_vimeo/socialwall_active');
+	$vimeo_id = Mage::getStoreConfig('tab1/socialwall_vimeo/socialwall_id');
+	$pinterest_active = Mage::getStoreConfig('tab1/socialwall_pinterest/socialwall_active');
+	$pinterest_id = Mage::getStoreConfig('tab1/socialwall_pinterest/socialwall_id');
+	$flickr_active = Mage::getStoreConfig('tab1/socialwall_flickr/socialwall_active');
+	$flickr_id = Mage::getStoreConfig('tab1/socialwall_flickr/socialwall_id');
+	$lastfm_active = Mage::getStoreConfig('tab1/socialwall_lastfm/socialwall_active');
+	$lastfm_id = Mage::getStoreConfig('tab1/socialwall_lastfm/socialwall_id');
+	$dribbble_active = Mage::getStoreConfig('tab1/socialwall_dribbble/socialwall_active');
+	$dribbble_id = Mage::getStoreConfig('tab1/socialwall_dribbble/socialwall_id');
+	$tumblr_active = Mage::getStoreConfig('tab1/socialwall_tumblr/socialwall_active');
+	$tumblr_id = Mage::getStoreConfig('tab1/socialwall_tumblr/socialwall_id');
+	$deviantart_active = Mage::getStoreConfig('tab1/socialwall_deviantart/socialwall_active');
+	$deviantart_id = Mage::getStoreConfig('tab1/socialwall_deviantart/socialwall_id');
+?>
+<?php if($active): ?> 
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<script type='text/javascript' src='<?php echo $this->getSkinUrl('js/socialwall/jquery.social.pksr.wall.js');?>'></script>
+<script type='text/javascript' src='<?php echo $this->getSkinUrl('js/socialwall/jquery.social.pksr.js'); ?>'></script>
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getSkinUrl('css/social_wall/pksr.css');?>" />
+<!--[if IE]>
+	<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getSkinUrl('css/social_wall/pksr_ie.css');?>" />
+<![endif]-->
+
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl('js/fancybox/jquery.fancybox.css');?>" type="text/css" media="screen" />
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/fancybox/jquery.fancybox.pack.js'); ?>"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function($){$('#social-stream').dcSocialStream({feeds: {<?php if($tw_active): ?>twitter:{url: "<?php echo trim(Mage::getStoreConfig(Mage_Core_Model_Url::XML_PATH_SECURE_URL),'/');?>/twitter-master/run.php",id: '<?php echo $tw_id; ?>',images: 'small'},<?php endif ?><?php if($fb_active): ?>facebook:{id:'<?php echo $fb_id; ?>',out: 'intro,text,user,share',text:'content'},<?php endif ?><?php if($google_active): ?>google:{id:'<?php echo $google_id; ?>',api_key: '<?php echo $google_key;?>'},<?php endif ?><?php if($yt_active):?>youtube:{id: '<?php echo $yt_id;?>',thumb: '0'},<?php endif ?><?php if($instagram_active): ?>instagram:{id: '<?php echo $instagram_id;?>',accessToken: '<?php echo $instagram_accesstoken;?>',clientId: '<?php echo $instagram_customerid; ?>',comments:0,likes:0},<?php endif ?><?php if($rss_active):?>rss:{id:'<?php echo $rss_id;?>'},<?php endif;?><?php if($stumbleupon_active):?>stumbleupon:{id:'<?php echo $stumbleupon_id;?>'},<?php endif;?><?php if($delicious_active):?>delicious:{id: '<?php echo $delicious_id;?>'},<?php endif;?><?php if($vimeo_active):?>vimeo:{id: '<?php echo $vimeo_id;?>',feed: 'all_videos'},<?php endif;?><?php if($pinterest_active):?>pinterest:{id: '<?php echo $pinterest_id;?>',out: 'intro,thumb,text,user,share'},<?php endif;?><?php if($flickr_active):?>flickr:{id: '<?php echo $flickr_id;?>'},<?php endif;?><?php if($lastfm_active):?>lastfm:{id: '<?php echo $lastfm_id;?>'},<?php endif;?><?php if($dribbble_active):?>dribbble:{id: '<?php echo $dribbble_id;?>'},<?php endif;?><?php if($tumblr_active):?>tumblr:{id: '<?php echo $tumblr_id;?>',thumb: 250},<?php endif;?><?php if($deviantart_active):?>deviantart:{id: '<?php echo $deviantart_id;?>'},<?php endif;?>},rotate:{delay:0},control: false,filter: true,wall: true,days: <?php echo $stream_days;?>,limit: <?php echo $stream_limit;?>,speed: <?php echo $animation_speed;?>,max: 'limit',iconPath: '<?php echo $this->getSkinUrl('images/social_images');?>/',imagePath:'<?php echo $this->getSkinUrl('images/social_images');?>/'});});
+jQuery(document).ready(function(e) {
+	document.addEventListener("DOMNodeInserted", function(e) {
+		if (e.target.nodeName == "LI") {
+
+            jQuery(e.target).find(".inner a")
+//            .click(function(e) {
+//                e.stopPropagation();
+//                e.preventDefault();
+
+//                jQuery(e.currentTarget).fancybox();
+//                console.log(e);
+//                console.log(e.currentTarget);
+//                alert(e.currentTarget.href);
+//            })
+            .fancybox({
+                helpers: {
+                    overlay: {
+                        locked: false
+                    }
+                },
+                transitionIn:'elastic'
+            });
+
+			var t = e.target.className;
+			var n = t.indexOf("pksr-facebook");
+			if (n > -1) {
+				jQuery(".pksr-facebook a").each(function() {
+					var e = jQuery(this).attr("href");
+					if (e.substr(0, 1) === "/") {
+						jQuery(this).attr("href", "https://www.facebook.com" + e)
+					} else if (e.indexOf("http://l.facebook.com/l.php?u=") > -1) {
+						e = e.replace("http://l.facebook.com/l.php?u=", "");
+						jQuery(this).attr("href", e)
+					}
+				})
+			}
+			//jQuery("span.section-share").remove();
+			jQuery('.pksr-facebook').each(function(){
+				jQuery(this).find('.section-text img').parent('a').wrap('<div class="image"></div>').insertBefore(jQuery(this).find('.section-text'));
+				jQuery(this).find('.section-text').appendTo(jQuery(this).find('.section-intro'));
+				jQuery(this).find('.section-user').prependTo(jQuery(this).find('.section-intro'));
+				jQuery(this).find('.section-share').appendTo(jQuery(this).find('.section-intro'));
+			});
+			jQuery('.pksr-instagram').each(function(){
+				jQuery(this).find('.section-text').appendTo(jQuery(this).find('.section-intro'));
+				jQuery(this).find('.section-user').prependTo(jQuery(this).find('.section-intro'));
+				jQuery(this).find('.section-share').appendTo(jQuery(this).find('.section-intro'));
+			});
+			jQuery('.pksr-twitter').each(function(){
+				jQuery(this).find('.section-text p.with-image').appendTo(jQuery(this).find('.section-intro'));
+				jQuery(this).find('.section-user').prependTo(jQuery(this).find('.section-intro'));
+				jQuery(this).find('.section-share').appendTo(jQuery(this).find('.section-intro'));
+				if (!jQuery(this).find('.section-intro p').length) jQuery(this).find('.section-share').css('margin-top','5px');
+			});
+			setTimeout(function(){
+				jQuery('#social-stream').animate({
+					opacity: 1
+				}, 1000);
+			}, 2000);
+			
+		}
+	});
+});
+</script><div id="wall" class="full-wall"><div id="social-stream"></div></div><div class="clear"></div><div class="banner-horizontal" style="padding-bottom: 20px;"></div></div>
+<style>#alexa {overflow: hidden; height: 1px; width: 1px; display: block; margin-bottom: -20px;}</style>
+<?php endif;?>

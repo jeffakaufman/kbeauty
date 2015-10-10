@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <system>
+            <children>
+                <xtento_extensions translate="title">
+                    <title>XTENTO Extensions</title>
+                    <sort_order>1</sort_order>
+                    <children>
+                        <stockimport translate="title">
+                            <title>Stock Import Configuration</title>
+                            <sort_order>95</sort_order>
+                            <action>adminhtml/system_config/edit/section/stockimport</action>
+                        </stockimport>
+                    </children>
+                </xtento_extensions>
+            </children>
+        </system>
+        <catalog>
+            <children>
+                <stockimport translate="title">
+                    <title>Stock Import</title>
+                    <sort_order>1000</sort_order>
+                    <action>adminhtml/stockimport_index/redirect</action>
+                    <children>
+                        <manual translate="title">
+                            <title>Manual Import</title>
+                            <sort_order>5</sort_order>
+                            <action>adminhtml/stockimport_manual</action>
+                        </manual>
+                        <log translate="title">
+                            <title>Execution Log</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/stockimport_log</action>
+                        </log>
+                        <!--<history translate="title">
+                            <title>Import History</title>
+                            <sort_order>15</sort_order>
+                            <action>adminhtml/stockimport_history</action>
+                        </history>-->
+                        <profile translate="title">
+                            <title>Import Profiles</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/stockimport_profile</action>
+                        </profile>
+                        <source>
+                            <title>Import Sources</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/stockimport_source</action>
+                        </source>
+                        <tools>
+                            <title>Tools</title>
+                            <sort_order>40</sort_order>
+                            <action>adminhtml/stockimport_tools</action>
+                        </tools>
+                    </children>
+                </stockimport>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <stockimport>
+                                <title>XTENTO Stock Import</title>
+                                <sort_order>1000</sort_order>
+                                <children>
+                                    <manual translate="title">
+                                        <title>Manual Import</title>
+                                        <sort_order>5</sort_order>
+                                    </manual>
+                                    <log translate="title">
+                                        <title>Execution Log</title>
+                                        <sort_order>10</sort_order>
+                                    </log>
+                                    <!--<history translate="title">
+                                        <title>Import History</title>
+                                        <sort_order>15</sort_order>
+                                    </history>-->
+                                    <profile translate="title">
+                                        <title>Import Profiles</title>
+                                        <sort_order>20</sort_order>
+                                    </profile>
+                                    <source>
+                                        <title>Import Sources</title>
+                                        <sort_order>30</sort_order>
+                                    </source>
+                                    <tools>
+                                        <title>Tools</title>
+                                        <sort_order>40</sort_order>
+                                    </tools>
+                                </children>
+                            </stockimport>
+                        </children>
+                    </catalog>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <stockimport translate="title">
+                                        <title>XTENTO Stock Import Configuration</title>
+                                        <sort_order>1</sort_order>
+                                    </stockimport>
+                                </children>
+                            </config>
+                            <xtento_extensions translate="title">
+                                <title>XTENTO Extensions</title>
+                                <sort_order>1</sort_order>
+                                <children>
+                                    <stockimport_config translate="title">
+                                        <title>Stock Import Configuration</title>
+                                        <sort_order>495</sort_order>
+                                        <action>adminhtml/system_config/edit/section/stockimport</action>
+                                    </stockimport_config>
+                                </children>
+                            </xtento_extensions>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
+<!--
+/**
+ * Product:       Xtento_StockImport (2.2.8)
+ * ID:            WoetuzBqimD1uDNOwepRNUAFKdmy9BrgG2qHWNW+DsA=
+ * Packaged:      2015-03-18T17:20:17+00:00
+ * Last Modified: 2013-08-07T17:45:04+02:00
+ * File:          app/code/local/Xtento/StockImport/etc/adminhtml.xml
+ * Copyright:     Copyright (c) 2015 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
+ */
+-->

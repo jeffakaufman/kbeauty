@@ -1,0 +1,55 @@
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+?>
+
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+<div class="product-image" data-type="group" data-number="0">
+    <?php
+        $_img = '<img class="main-image" src="'.$this->helper('catalog/image')->init($_product, 'image').'" alt="'.$this->escapeHtml($this->getImageLabel()).'" title="'.$this->escapeHtml($this->getImageLabel()).'" />';
+        echo $_helper->productAttribute($_product, $_img, 'image');
+    ?>
+</div>
+<?php endif; ?>
+<script type="text/javascript">
+    <!--//--><![CDATA[//><!--
+    <?php if (count($this->getGalleryImages()) > 0): ?>
+        
+        <?php $group = 0;?>
+        var group = new Array();
+        <?php foreach ($this->getGalleryImages() as $_image): ?>
+            
+            group[<?php echo $group ?>] = new Image();
+            group[<?php echo $group ?>].src = "<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image'); ?>";
+            <?php $group++; ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    <?php if ($_product->getTypeId() == "configurable") { 
+        $associated_products = $_product->loadByAttribute('sku', $_product->getSku())->getTypeInstance()->getUsedProducts(); 
+        foreach ($associated_products as $assoc) { 
+            $assocProduct =Mage::getModel('catalog/product')->load($assoc->getId()); 
+            $_attribute_code = Mage::getResourceModel('eav/entity_attribute')->getIdByCode('catalog_product', 'colorswatch_color');
+            $_attribute_name = Mage::getModel('catalog/product')->load($assoc->getId())->getAttributeText('colorswatch_color');
+            $_attribute_id = Mage::getModel('catalog/product')->load($assoc->getId())->getData('colorswatch_color');
+            $i=0; 
+
+            if (count($assocProduct->getMediaGalleryImages()) > 0) { ?>
+                var color_swatch_<?php echo $_attribute_code; ?>_<?php echo $_attribute_id; ?> = new Array();
+                <?php 
+                foreach ($assocProduct->getMediaGalleryImages() as $_image) { 
+                    $imageFile=str_replace(Mage::getBaseUrl('media'),"",$_image->url); ?>
+                    color_swatch_<?php echo $_attribute_code; ?>_<?php echo $_attribute_id; ?>[<?php echo $i ?>] = new Image();
+                    color_swatch_<?php echo $_attribute_code; ?>_<?php echo $_attribute_id; ?>[<?php echo $i ?>].src = "<?php echo $_image->url; ?>";
+
+                    <?php $i++;
+                } 
+            } else {
+                $noColor = true;
+            }
+        } 
+    } ?>
+    var colorExists = true;<?php if ($noColor): ?>colorExists = false; <?php endif; ?>
+    if (colorExists) jQuery('.product-essential .product-image').prepend('<div class="arrow icon-arrow_left" data-product="<?php echo $_product->getId() ?>"></div><div class="arrow icon-arrow_right" data-product="<?php echo $_product->getId() ?>"></div>');
+    //--><!]]>
+</script>
+

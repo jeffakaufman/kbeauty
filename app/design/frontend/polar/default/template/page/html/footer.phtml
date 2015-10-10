@@ -1,0 +1,69 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<div id="signup" class="footer-newsletter clearfix">
+  <div class="row">
+    <div class="small-12 columns newsletter clearfix">
+      <?php echo $this->getChildHtml('footer.newsletter'); ?>
+    </div>
+  </div>
+</div>
+<div class="footer-container clearfix">
+  <div class="row">
+    <div class="small-12 columns footer clearfix">
+      <div class="social">
+        <h4>FIND US ON</h4>
+        <div class="icons">
+          <a href="https://www.facebook.com/KardashianBeauty" target="_blank"><span class="icon icon-facebook"></span></a>
+          <a href="https://instagram.com/kbeautyofficial" target="_blank"><span class="icon icon-instagram"></span></a>
+          <a href="https://www.twitter.com/kbeautyofficial" target="_blank"><span class="icon icon-twitter"></span></a>
+          <a href="https://plus.google.com/110331810222509266276/posts" target="_blank"><span class="icon icon-gplus"></span></a>
+        </div>
+        <div class="buttons">
+          <div class="fb-like" data-href="https://www.facebook.com/KardashianBeauty" data-width="70" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+          <div class="sep">|</div>
+          <a class="twitter-follow-button" href="https://twitter.com/kbeautyofficial" data-show-count="false" data-show-screen-name="false" data-lang="en">Follow</a>
+          <script>window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return t;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));</script>
+        </div>
+      </div>
+      
+      <?php $footer_links1 =  $this->getLayout()->createBlock('cms/block')->setBlockId('footer_links1')->toHtml(); ?>
+      <?php $footer_links2 =  $this->getLayout()->createBlock('cms/block')->setBlockId('footer_links2')->toHtml(); ?>
+      
+      <div class="links"><?php if($footer_links1) { echo $footer_links1; } ?></div>
+
+      <script type="text/javascript" src="https://sealserver.trustwave.com/seal.js?code=2e28d46b0abb4f9aa149afdbc03a7ae9"></script>
+      <!-- (c) 2005, 2015. Authorize.Net is a registered trademark of CyberSource Corporation -->
+      <div class="AuthorizeNetSeal"><script type="text/javascript" language="javascript">var ANS_customer_id="be969bef-900c-4181-a820-8621f98c8965";</script> <script type="text/javascript" language="javascript" src="//verify.authorize.net/anetseal/seal.js" ></script></div>
+      
+      <div class="copyright">
+          <p><?php echo $this->getCopyright() ?></p>
+      </div>
+    
+    </div>
+  </div>
+  
+</div>

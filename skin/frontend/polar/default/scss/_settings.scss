@@ -1,0 +1,154 @@
+@import "message-to-css-people";
+
+// Media query ranges. Commented calculations done with 16px as rem.
+$small-range: (0em, 40em); // 0 - 640px
+$medium-range: (40.063em, 64em); // 640px - 1024px
+$large-range: (64.063em, 90em); // 1024px - 1440px
+$xlarge-range: (90.063em, 120em); // 1441px - 1920px
+$xxlarge-range: (120.063em, 99999999em); // 1921px - 1599999984px (full width)
+
+// Add this to your themes _settings.scss to include the entire compass library.
+// By not including all of Compass you increase your compilation speed.
+
+// @import "compass";
+
+// Only import what's needed from compass
+@import "compass/css3/border-radius";
+@import "compass/css3/box-shadow";
+@import "compass/css3/text-shadow";
+@import "compass/css3/opacity";
+@import "compass/css3/transition";
+@import "compass/css3/transform";
+@import "compass/css3/images"; // Gradients etc.
+
+// Import standard Foundation variables and functions
+@import "../foundation/scss/foundation/functions";
+@import "../foundation/scss/foundation/components/global";
+
+// Typography
+$base-font-size: rem-calc(16);
+$h2-font-size: rem-calc(18);
+$base-line-height: 1.5em;
+
+// Grid. Needs to be defined after importing foundation's _global.scss.
+$row-width: rem-calc(1140);
+$column-gutter: $base-font-size * 1.5;
+$block-grid-default-spacing: $column-gutter;
+
+// Default colors
+$blue: #5db4c2;
+$light-blue: #76e4f4;
+$white: #fff;
+$black: #000;
+$gray: #4f4f4f;
+$light-gray: lighten($gray, 20%);
+$lighter-gray: lighten($gray, 30%);
+$almost-white: #f1f1f1;
+
+$primary-color: $blue;
+$secondary-color: $light-blue;
+$alert-color: #c25d5d; // Red
+$success-color: #5fc25d; // Green
+
+$background-color: $white;
+
+$border-color: darken($almost-white, 10%);
+$rating-color: #f2cd00; // Yellow/gold
+
+$price-size: $base-font-size * 1.2;
+$price-color: $body-font-color;
+$price-color-old: lighten($price-color, 30%);
+$buy-color: $success-color;
+
+// Radius
+$global-radius: 0;
+
+
+// Off canvas
+$canvas-width-small: 85% !default;
+$canvas-width-large: rem-calc(20) !default;
+
+
+// Tables
+$table-even-row-bg: transparent;
+$table-row-font-size: 1rem; // Increase default font size to 1em in tables
+$table-head-font-size: $table-row-font-size;
+
+// Background color for the table and even rows
+$table-bg:               transparent;
+$table-even-row-bg:      transparent;
+
+// Table cell border style
+$table-border-color:     transparent;
+
+// Table head styles
+$table-head-bg:          $almost-white;
+$table-head-font-size:   $base-font-size;
+$table-head-font-color:  $black;
+$table-head-font-weight: normal;
+$table-head-padding:     $base-font-size / 2;
+
+// Row padding and font styles
+$table-row-padding:      $table-head-padding;
+$table-row-font-size:    $table-head-font-size;
+$table-row-font-color:   $black;
+$table-line-height:      $base-font-size * 1.5;
+
+// Display and margin of tables
+$table-margin-bottom:    $base-font-size * 2;
+
+// Background and border styles
+$panel-bg:              $almost-white;
+$panel-border-size:     0;
+
+// Default inner padding and bottom margin
+$panel-margin-bottom:   $base-font-size;
+$panel-padding:         $base-font-size;
+
+// Default font colors
+$panel-font-color:      $body-font-color;
+$panel-font-color-alt:  $white;
+
+// Forms
+
+//
+// Product tabs (Tab)
+//
+
+$tabs-navigation-padding: $base-font-size / 2;
+$tabs-navigation-bg-color: $almost-white;
+$tabs-navigation-hover-bg-color: darken($tabs-navigation-bg-color, 5%);
+$tabs-navigation-font-color: $body-font-color;
+$tabs-navigation-font-size: $base-font-size;
+$tabs-navigation-font-family: $body-font-family;
+
+$tabs-content-margin-bottom: $base-font-size * 1.5;
+$tabs-content-padding: $column-gutter/2;
+
+$tabs-vertical-navigation-margin-bottom: 1.25rem;
+
+// Off canvas
+$off-canvas-overlay-box-shadow: -4px 0 8px rgba(#000, 0.2), 4px 0 8px rgba(#000, 0.2);
+
+// Labels are by default commented out, but this is just in case they are added. Magento uses quite some elements
+// with the class .label and this will easily crash with Foundation's .label styling
+$label-font-sizing: 1rem;
+$include-html-label-classes: false; // This is not set to default so that the label styles on elements with the .label class is removed
+$label-padding: 0;
+$label-radius: $global-radius;
+
+// Let's tone down those huge Foundation buttons
+$button-med: rem-calc(9);
+$button-border-width: 0;
+$button-font-weight: normal;
+
+// Breadcrumbs
+$crumb-bg: transparent;
+$crumb-border-color: $crumb-bg;
+$crumb-padding: 0;
+$crumb-side-padding: rem-calc(6);
+$crumb-font-size: $base-font-size;
+$crumb-font-transform: none;
+$crumb-slash-color: $black;
+$crumb-slash: "›";
+

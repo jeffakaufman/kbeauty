@@ -1,0 +1,573 @@
+<?php
+$_product    = $this->getProduct();
+$_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
+?>
+<?php echo $this->getChildHtml('head') ?>
+<body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
+<?php echo $this->getChildHtml('after_body_start') ?>
+
+<!--<link rel="stylesheet" href="//code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">-->
+<!--<script src="//code.jquery.cod/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+
+<div class="page">
+  <div class="wrapper off-canvas-wrap" data-offcanvas>
+    <?php echo $this->getChildHtml('off_canvas_left') ?>
+    <?php echo $this->getChildHtml('off_canvas_right') ?>
+    <div class="inner-wrap">
+      <?php /*echo $this->getChildHtml('sidebar_mobile')*/ ?>
+      <a class="exit-off-canvas"></a>
+      <?php echo $this->getChildHtml('global_notices') ?>
+      <?php echo $this->getChildHtml('header') ?>
+      <div class="main-container col1-layout fullwidth">
+      <?php echo $this->getChildHtml('breadcrumbs') ?>
+          <div class="main">
+
+            <?php echo $this->getChildHtml('global_messages') ?>
+            <div id="slider">
+              <div class="arrow icon-arrow_left"></div>
+              <div class="arrow icon-arrow_right"></div>
+              <div class="pager">
+                <div class="dot active"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+              <ul class="slides">
+              </ul>
+            </div>
+
+<?php
+    $slHelper = $this->helper('sliderdata');
+    /**
+    * @var Valkyrie_SliderData_Helper_Data $slHelper
+    */
+    foreach($slHelper->getSlidesList() as $sl) {
+        if(strlen($sl->getData('disclaimers_content'))) {
+            ?>
+
+            <div id="disclaimers-<?php echo $sl->getData('slide_id'); ?>" class="reveal-modal" data-reveal
+                 aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+                <h3 id="modalTitle">Read Disclaimer</h3>
+
+                <p><?php echo $sl->getData('disclaimers_content');?></p>
+                <button class="close-reveal-modal" aria-label="Close" type="button" class="button dark">Close</button>
+            </div>
+            <?php
+        }
+    }
+?>
+            <?php echo $this->getChildHtml('faves') ?>
+            <?php echo $this->getChildHtml('bestsellers') ?>
+          </div>
+      </div>
+      <?php echo $this->getChildHtml('footer') ?>
+    </div>
+  </div>
+</div>
+<?php // echo $this->getChildHtml('off_canvas_right') ?>
+<?php echo $this->getChildHtml('before_body_end') ?>
+<?php echo $this->getAbsoluteFooter() ?>
+<?php echo $this->getChildHtml('bottom') ?>
+<style>
+#slider { width: 100%; min-height: 300px; opacity: 0; position: relative; margin: 0; }
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  #slider { overflow: hidden; min-height: 200px; } }
+@media only screen and (min-width: 64.063em) { 
+  #slider { overflow: hidden; min-height: 400px; } }
+#slider:before { content: ''; }
+#slider .container { content: ''; height: 100%; vertical-align: middle; position: relative; margin: 0; }
+#slider ul { margin: 0; }
+#slider li { padding: 0; width: 100%; list-style: none; background-size: contain; background-repeat: no-repeat; height: 100%; position: relative; right: 0; }
+
+#slider li .big-image {
+    position:absolute;
+    width:100%;
+}
+
+#slider li .big-image img {
+    width:100%;
+}
+
+.reveal-modal {
+    text-align: center;
+    width: 50%;
+    left: 0%;
+}
+
+#slider li.currentSlide { z-index:10}
+#slider li.nextSlide { margin-top: -100%; z-index:1}
+#slider .pager { position: absolute; top: 101%; left: 50%; text-align: center; width: 100px; margin-left: -50px; z-index: 100; }
+@media only screen and (min-width: 40.063em) { 
+    #slider .pager { top: 95%; } }
+#slider .pager .dot { display: inline-block; width: 10px; height: 10px; background: #ccc; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; margin: 0 2px; cursor: pointer; }
+#slider .pager .dot:hover, #slider .pager .dot.active { background: #b2a177; }
+#slider .arrow { position: absolute; font-size: 2rem; padding: 0.15em 0; background: #fff; color: #000; top: 50%; z-index: 1000; display: inline-block; margin-top: -30px; cursor: pointer; opacity:0}
+#slider .arrow.icon-arrow_left { left: 0; }
+#slider .arrow.icon-arrow_right { right: 0; }
+#slider .arrow:hover { color: #fff; background: #b2a177; }
+#slider .text { position: relative; width: 90%; margin: 0 auto; text-align: center; display: block; vertical-align: middle; }
+#slider .text .title { font-weight: bold; font-size: 2rem; letter-spacing: 0.4em; text-transform: uppercase; line-height: 1.2em; }
+#slider .text .subtitle { letter-spacing: 0.4em; font-size: 1.1rem; line-height: 1.2em; text-transform: uppercase; }
+#slider .container .action { position: relative; display: block; margin: 0; width: 100%; height: 100%; }
+#slider .container .action a.action { position: relative; z-index: 100; display: block; margin: 0; width: 100%; height: 100%; padding: 0; letter-spacing: 0.2em; font-weight: bold; color: #000; font-size: 1.1rem; text-transform: uppercase; }
+#slider .container .action a.action:hover { text-decoration: none; }
+#slider .text .action a.action:hover { text-decoration: none; background: #b2a177; }
+#slider .container .action a.pop { position: absolute; z-index: 200; text-transform: uppercase; letter-spacing: 0.4em; bottom: 10px; color: #000; text-decoration: underline; font-size: 0.8em; text-align: center; }
+#slider .container .action a.pop:hover { color: #b2a177; }
+
+@media only screen and (max-width: 40em){
+  #slider .container.mobile .action a.pop { bottom: 0px; width:100%;}
+    .reveal-modal {
+        left: 25%;
+    }
+
+    .big-image.mobile, .container.mobile {
+        display: block;
+    }
+
+    .big-image.desktop, .container.desktop {
+        display: none;
+    }
+
+}
+@media only screen and (min-width: 40.063em){
+  #slider .text { margin: auto; width: 42%; left: 5%; top: 0; right: 53%; bottom: 0; display: inline-block; }
+  #slider .text .title { font-size: 1.6rem; }
+  #slider .text .subtitle { letter-spacing: 0.3em; font-size: 1rem; }
+  #slider .text .action a { font-size: 1rem; }
+  #slider .container.desktop .action a.pop { bottom: 10px; width:100%;text-decoration: none;}
+  #slider .container.desktop .action a.pop:hover { text-decoration: none;}
+
+    .big-image.mobile, .container.mobile {
+        display: none;
+    }
+
+    .big-image.desktop, .container.desktop {
+        display: block;
+    }
+
+}
+@media only screen and (min-width: 64.063em) {
+  #slider .text { width: 35%; left: 13%; right: 52%; }
+  #slider .text .title { font-size: 2rem; }
+  #slider .text .subtitle { letter-spacing: 0.4em; font-size: 1.1rem; }
+  #slider .text .action a { font-size: 1.1rem; }
+  #slider .image { position: relative; display: block; width: 90%; margin: 0 5% 5% 5%; vertical-align: middle; }
+  #slider .image img { -moz-box-shadow: -3px 3px 14px #aaa; -webkit-box-shadow: -3px 3px 14px #aaa; box-shadow: -3px 3px 14px #aaa; }
+  #slider .container.desktop .action a.pop { bottom: 5px; left:10px; text-align: left; font-size: 1.1rem; display:block; width: 100px; height: 30px; text-decoration: none;}
+  #slider .container.desktop .action a.pop:hover {text-decoration: none;}
+
+    .big-image.mobile, .container.mobile {
+        display: none;
+    }
+
+    .big-image.desktop, .container.desktop {
+        display: block;
+    }
+
+}
+@media only screen and (min-width: 40.063em) { 
+  #slider .image { margin: auto; display: inline-block; width: 37%; top: 0; left: 51%; right: 12%; bottom: 0; }
+    #slider .container.desktop .action a.pop { bottom: 5px; left:10px; text-align: left; font-size: 1.1rem; display:block; width: 100px; height: 30px; text-decoration: none;}
+    #slider .container.desktop .action a.pop:hover {text-decoration: none;}
+
+    .big-image.mobile, .container.mobile {
+        display: none;
+    }
+
+    .big-image.desktop, .container.desktop {
+        display: block;
+    }
+
+}
+</style>
+<script>
+(function( $ ) {
+  $(window).load(function() {
+    $('.touchcarousel').touchCarousel({
+      pagingNav: false,
+      snapToItems: false,
+      itemsPerMove: 1,
+      scrollToLast: false,
+      loopItems: true,
+      scrollbar: false
+    });
+  });
+})(jQuery);
+</script>
+
+<script type="text/javascript">
+
+
+    function OpenTopMenu() {
+        jQuery("#open-shop").click();
+    }
+
+    (function($) {
+        $(document).ready(function() {
+
+
+            $("#slider").mouseenter(function() {
+                $(this).find(".arrow").stop().animate({opacity:1})
+            }).mouseleave(function() {
+                $(this).find(".arrow").stop().animate({opacity:0})
+            });
+
+
+
+            var sData = [
+
+<?php
+    $slHelper = $this->helper('sliderdata');
+    /**
+    * @var Valkyrie_SliderData_Helper_Data $slHelper
+    */
+    foreach($slHelper->getSlidesList() as $sl) {
+?>
+                {
+                    desktop: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="'.$sl->getData('desktop_image').'"}}') ?>",
+                    mobile: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="'.$sl->getData('mobile_image').'"}}') ?>",
+                    linkHref: "<?php echo $sl->getData('link_href'); ?>",
+                    disclaimers: "<?php echo strlen($sl->getData('disclaimers_content')) ? 'disclaimers-'.$sl->getData('slide_id') : '';?>"
+                },
+<?php
+    }
+?>
+//                {
+//                    desktop: "<?php //echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Desktop Carousel Images/1-promo-TEMPORARY.jpg"}}') ?>//",
+//                    mobile: "<?php //echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Mobile Carousel Images/1-promo-TEMPORARY.jpg"}}') ?>//"
+//                },
+
+/*
+                {
+                    desktop: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Desktop Carousel Images/2-kourtney-touchtones.jpg"}}') ?>",
+                    mobile: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Mobile Carousel Images/2-kourtney-touchtones.jpg"}}') ?>",
+                    linkHref: "eyeshadow/touch-tones-gradient-eyeshadow"
+                },
+                {
+                    desktop: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Desktop Carousel Images/FreeShipping_R01_A.jpg"}}') ?>",
+                    mobile: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Mobile Carousel Images/FreeShipping_Mobile.jpg"}}') ?>",
+                    linkHref: "javascript:OpenTopMenu();"
+                },
+                {
+                    desktop: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Desktop Carousel Images/4-kim-aunatural.jpg"}}') ?>",
+                    mobile: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Mobile Carousel Images/4-kim-aunatural.jpg"}}') ?>",
+                    linkHref: "lip-color/au-naturel"
+                },
+                {
+                    desktop: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Desktop Carousel Images/Bronzer_24Hour_Promo_R03_A.jpg"}}') ?>",
+                    mobile: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Mobile Carousel Images/Bronzer_24Hour_Promo_Mobile.jpg"}}') ?>",
+                    linkHref: "cabana-bronze-matte-bronzer-1381"
+                },
+                {
+                    desktop: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Desktop Carousel Images/6-khloe-DashofGlam.jpg"}}') ?>",
+                    mobile: "<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="sliderdata_images/new/Mobile Carousel Images/6-khloe-DashofGlam.jpg"}}') ?>",
+                    linkHref: "bronzer-and-highlighter/intimate-spotlight"
+                },
+*/
+            ];
+/*
+ Kourtney - Touch Tones
+ Promo 1 - Free Shipping
+ Kim - Au Naturel
+ Promo 2 - Cabana Bronze
+ Khloe - Intimate Spotlight
+*/
+
+            (function(sData) {
+
+
+                function _getNextIndex(current, sizeOf) {
+                    var next = current + 1;
+                    if(next > sizeOf - 1) {
+                        next = 0;
+                    }
+                    return next;
+                }
+
+                function _getPrevIndex(current, sizeOf) {
+                    var prev = current - 1;
+                    if(prev < 0) {
+                        prev = sizeOf - 1;
+                    }
+                    return prev;
+                }
+
+                var timings = {
+                    sliderDelay:104500,
+                    foregroundFadeOut:700,
+
+                    backgroundFadeOutDelay:200,
+                    backgroundFadeOut:1200,
+
+                    foregroundFadeInDelay:800,
+                    foregroundMoveIn:1600,
+                    foregroundFadeIn:700
+                };
+
+                var sizeOf = sData.length;
+                var currentIdx = 0;
+                var nextIdx = _getNextIndex(currentIdx, sizeOf);
+                var prevIdx = _getPrevIndex(currentIdx, sizeOf);
+
+                var _isAnimating = false;
+                var _queuedAction = false;
+
+                var _pagerHtml = '';
+                for(var i = 0; i<sizeOf; i++) {
+                    _pagerHtml += "<div class='dot'></div>";
+                }
+                $("#slider .pager").html(_pagerHtml);
+
+
+                $("#slider .pager .dot").click(function() {
+
+                    var _idx = $("#slider .pager .dot").index(this);
+                    if(_isAnimating) {
+                        _queuedAction = 'idx'+_idx;
+                    } else {
+                        if(_idx != currentIdx) {
+                            _moveToIndex(_idx);
+                        }
+                    }
+                }).eq(currentIdx).addClass('active');
+
+
+                function _buildHtmlPart(idx, extraClass) {
+                    var _data = sData[idx];
+
+                    var _classString = "";
+                    if(extraClass) {
+                        _classString = "class='"+extraClass+"'";
+                    }
+
+//                    var _imgUrl;
+
+//                    var wW;
+//                    if(device.desktop()) wW = window.outerWidth;
+//                    else wW = $(window).width();
+
+//                    if(wW > 640) {
+//                        _imgUrl = _data.desktop;
+//                    } else {
+//                        _imgUrl = _data.mobile;
+//                    }
+
+//                    _imgUrl = encodeURI(_imgUrl);
+
+                    var _html = "<li "+_classString+">" +
+                        "<div class='big-image desktop'>"+
+                        "<img src='"+encodeURI(_data.desktop)+"' />"+
+                        "</div>"+
+                        "<div class='container desktop'>";
+
+                        _html += "<div class='action'><a class='action' href='"+_data.linkHref+"'>&nbsp;</a>";
+                        if(_data.disclaimers) {
+                            _html += "<a href='javascript:void(0);' class='pop' data-reveal-id='"+_data.disclaimers+"'>&nbsp;</a>";
+                        }
+                        _html += "</div>";
+                        _html +="</div>"+
+
+                        "<div class='big-image mobile'>"+
+                        "<img src='"+encodeURI(_data.mobile)+"' />"+
+                        "</div>"+
+                        "<div class='container mobile'>";
+
+                        _html += "<div class='action'><a class='action' href='"+_data.linkHref+"'>&nbsp;</a>";
+                        if(_data.disclaimers) {
+                            _html += "<a href='javascript:void(0);' class='pop' data-reveal-id='"+_data.disclaimers+"'>DETAIL<span style='letter-spacing: 0;'>S</span></a>";
+                        }
+                        _html += "</div>";
+                        _html +="</div>"+
+                        "</li>";
+                    return _html;
+                }
+
+
+                function _buildHtml() {
+                    var html = _buildHtmlPart(currentIdx, 'currentSlide') + _buildHtmlPart(nextIdx, 'nextSlide');
+                    return html;
+                }
+
+                var html = _buildHtml();
+//console.log(html)                ;
+                $("#slider .slides").html(html);
+                $('.nextSlide').css('opacity', 0);
+
+                function _incrementCurrentIdx() {
+                    currentIdx++;
+                    if(currentIdx > sizeOf - 1) {
+                        currentIdx = 0;
+                    }
+                    nextIdx = _getNextIndex(currentIdx, sizeOf);
+                    prevIdx = _getPrevIndex(currentIdx, sizeOf);
+                }
+
+                function _decrementCurrentIdx() {
+                    currentIdx--;
+                    if(currentIdx < 0) {
+                        currentIdx = sizeOf - 1;
+                    }
+                    nextIdx = _getNextIndex(currentIdx, sizeOf);
+                    prevIdx = _getPrevIndex(currentIdx, sizeOf);
+                }
+
+                function _setCurrentIdx(_idx) {
+                    currentIdx = _idx;
+                    if(currentIdx < 0) {
+                        currentIdx = sizeOf - 1;
+                    }
+                    if(currentIdx > sizeOf - 1) {
+                        currentIdx = 0;
+                    }
+
+                    nextIdx = _getNextIndex(currentIdx, sizeOf);
+                    prevIdx = _getPrevIndex(currentIdx, sizeOf);
+                }
+
+                function _inheritCssValues(newSelector, oldSelector) {
+                    $(newSelector).css('width', $(oldSelector).css('width')).css('height', $(oldSelector).css('height')).css('margin-top', '-'+$(oldSelector).css('height'));
+                    $(newSelector+' .container.desktop').css('height', $(oldSelector+' .container.desktop').css('height'));
+                    $(newSelector+' .container.mobile').css('height', $(oldSelector+' .container.mobile').css('height'));
+
+                }
+
+                function _moveToNext() {
+                    _isAnimating = true;
+
+
+                    $("#slider .pager .dot").removeClass('active').eq(nextIdx).addClass('active');
+
+                    $('.nextSlide').css('opacity', 1);
+
+                    setTimeout(function() {
+                        $('.currentSlide').animate(
+                            {
+                                opacity: 0
+                            },
+                            {
+                                duration: timings.backgroundFadeOut,
+//                                easing: 'swing',
+                                queue:false,
+
+                                complete: function() {
+                                    _incrementCurrentIdx();
+
+                                    $('.currentSlide').remove();
+                                    $('.nextSlide').removeClass('nextSlide').addClass('currentSlide').after(_buildHtmlPart(nextIdx, 'nextSlide')).css('margin-top', 0);
+                                    $('.nextSlide').css('opacity', 0);
+                                    _inheritCssValues('.nextSlide', '.currentSlide');
+
+                                    _isAnimating = false;
+                                    _processQueuedAction();
+
+                                }
+
+                            }
+                        );
+
+                    }, timings.backgroundFadeOutDelay);
+
+
+                }
+
+                function _moveToIndex(_idx) {
+
+                    if(currentIdx != _idx) {
+                        _setCurrentIdx(_idx - 1);
+                        $('.nextSlide').remove();
+                        $('.currentSlide').after(_buildHtmlPart(nextIdx, 'nextSlide'));
+                        $('.nextSlide').css('opacity', 0);
+                        _inheritCssValues('.nextSlide', '.currentSlide');
+
+                        _moveToNext();
+                    }
+                }
+
+                function _moveToPrev() {
+                    _decrementCurrentIdx();
+                    _decrementCurrentIdx();
+                    $('.nextSlide').remove();
+                    $('.currentSlide').after(_buildHtmlPart(nextIdx, 'nextSlide'));
+                    $('.nextSlide').css('opacity', 0);
+                    _inheritCssValues('.nextSlide', '.currentSlide');
+
+                    _moveToNext();
+                }
+
+                function _processQueuedAction() {
+                    clearTimeout(_sliderInterval);
+                    switch(_queuedAction) {
+                        case 'next':
+                            _moveToNext();
+                            break;
+
+                        case 'prev':
+                            _moveToPrev();
+                            break;
+
+                        default:
+                            if(_queuedAction) {
+                                if('idx' == _queuedAction.substr(0, 3)) {
+                                    _moveToIndex(_queuedAction.substr(3));
+                                }
+
+                            }
+
+                            break;
+                    }
+
+                    _queuedAction = false;
+                    _sliderInterval = setTimeout(function() {
+                        _moveToNext();
+                    }, timings.sliderDelay);
+                }
+
+                var _sliderInterval = setTimeout(function() {
+                    _moveToNext();
+                }, timings.sliderDelay);
+
+
+                function ShowNextSlideAction() {
+                    if(_isAnimating) {
+                        _queuedAction = 'next';
+                    } else {
+                        clearTimeout(_sliderInterval);
+                        _moveToNext();
+                        _sliderInterval = setTimeout(function() {
+                            _moveToNext();
+                        }, timings.sliderDelay);
+                    }
+                }
+
+                function ShowPrevSlideAction() {
+                    if(_isAnimating) {
+                        _queuedAction = 'prev';
+                    } else {
+                        clearTimeout(_sliderInterval);
+                        _moveToPrev();
+                        _sliderInterval = setTimeout(function() {
+                            _moveToNext();
+                        }, timings.sliderDelay);
+                    }
+                }
+
+                $("#slider .icon-arrow_right").click(function() {
+                    ShowNextSlideAction();
+                });
+
+                $("#slider .icon-arrow_left").click(function() {
+                    ShowPrevSlideAction();
+                });
+
+                $("#slider").on("swipeleft", ShowPrevSlideAction).on("swiperight", ShowNextSlideAction);
+
+            })(sData);
+
+        });
+
+    })(jQuery);
+
+</script>
+
+</body>
+</html>

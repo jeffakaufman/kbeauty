@@ -1,0 +1,110 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2011 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Shopping cart template
+ *
+ * @see Mage_Checkout_Block_Cart
+ */
+?>
+<div class="cart">
+    <div class="page-title title-buttons">
+        <h1 class="text-center"><?php echo $this->__('Shopping Bag') ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('form_before') ?>
+    
+    <div class="headings clearfix">
+        <div class="small-12 medium-5 large-6 columns text-left">Product</div>
+        <div class="small-12 medium-3 large-2 columns text-center">Qty</div>
+        <div class="small-12 medium-2 large-2 columns text-center">Price</div>
+        <div class="small-12 medium-2 large-2 columns text-right">Total</div>
+    </div>
+    <div class="box">
+        <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+            <?php echo $this->getBlockHtml('formkey'); ?>
+            <fieldset>
+                <ul class="cart-list" id="shopping-cart-table">
+                <?php $mergedCells = ($this->helper('tax')->displayCartBothPrices() ? 2 : 1); ?>
+                    <?php foreach($this->getItems() as $_item): ?>
+                    <li class="clearfix" data-equalizer>
+                        <?php echo $this->getItemHtml($_item) ?>
+                    </li>
+                    <?php endforeach ?>
+                    <li class="cart-footer">
+                        <button type="submit" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update Shopping Bag'); ?>" class="button btn-update"><span><span><?php echo $this->__('Update Shopping Bag'); ?></span></span></button>
+                        <!-- <button type="submit" name="update_cart_action" value="empty_cart" title="<?php echo $this->__('Clear Shopping Bag'); ?>" class="button btn-empty" id="empty_cart_button"><span><span><?php echo $this->__('Clear Shopping Cart'); ?></span></span></button> -->
+                        <!--[if lt IE 8]>
+                        <input type="hidden" id="update_cart_action_container" />
+                        <script type="text/javascript">
+                        //<![CDATA[
+                            Event.observe(window, 'load', function()
+                            {
+                                // Internet Explorer (lt 8) does not support value attribute in button elements
+                                $emptyCartButton = $('empty_cart_button');
+                                $cartActionContainer = $('update_cart_action_container');
+                                if ($emptyCartButton && $cartActionContainer) {
+                                    Event.observe($emptyCartButton, 'click', function()
+                                    {
+                                        $emptyCartButton.setAttribute('name', 'update_cart_action_temp');
+                                        $cartActionContainer.setAttribute('name', 'update_cart_action');
+                                        $cartActionContainer.setValue('empty_cart');
+                                    });
+                                }
+
+                            });
+                        //]]>
+                        </script>
+                        <![endif]-->
+                    </li>
+                    <li class="cart-collaterals row">
+                        <div class="hide-for-small medium-8 columns">&nbsp;</div>
+                        <div class="totals small-12 medium-4 columns">
+                            <?php echo $this->getChildHtml('totals'); ?>
+                        </div>
+                    </li>
+                    <li class="cart-collaterals">
+                        <?php if(!$this->hasError()): ?>
+                            <ul class="checkout-types">
+                            <?php echo $this->getChildHtml('coupon'); ?>
+                            <?php foreach ($this->getMethods('methods') as $method): ?>
+                                <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
+                                <li><?php echo $methodHtml; ?></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                        <?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
+                    </li>
+                </ul>
+                <script type="text/javascript">decorateTable('shopping-cart-table')</script>
+            </fieldset>
+        </form>
+    </div>
+    <?php echo $this->getChildHtml('crosssell') ?>
+</div>
+

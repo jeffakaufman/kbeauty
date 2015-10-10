@@ -1,0 +1,166 @@
+/* FOOTER - _footer.scss */
+.footer-container {
+  background: $dark; 
+}
+.footer {
+  margin-top: $base-font-size * 2.5;
+  text-align: center; 
+  //text-transform: uppercase;
+  color: $gold;
+  
+  p {
+    margin: 0;
+  }
+  h4{
+    font-size: $base-font-size;
+    letter-spacing: 0.1rem;
+    margin-bottom:  $base-font-size;
+    color: $gold;
+  }
+  li {
+    display: inline-block;
+    margin: 0.5rem;
+    
+    @media screen and (min-width: 1200px) {
+      margin: 0 1rem;
+    }
+    a:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+  .icons {
+    .icon {
+      font-size: $base-font-size * 1.4;
+      border: 2px solid $gold;
+      margin: 0 7px;
+    }
+    a:hover {
+      color: #fff;
+      .icon {
+        border-color: #fff;
+      }
+    }
+  }
+  .buttons {
+    margin: $base-font-size*1.5 0 $base-font-size 0;
+    padding-left: 12px;
+    .fb-like {
+      display: inline-block;
+    }
+    .sep {
+      margin: 0 1rem;
+      display: inline-block;
+    }
+    iframe {
+      vertical-align: middle; 
+    }
+  }
+  .links {
+    letter-spacing: 0.08rem; 
+    img {
+      padding: 0 40px;
+    }
+    a.logo {
+      display: inline-block;
+      margin: 10px 0 20px 0;
+    }
+    a.logo:first-child {
+      @media #{$medium-up} {
+        border-right: 1px solid $gold;
+      }
+    }
+  }
+  .copyright p, .bottom_links ul {
+    font-size: $base-font-size * 0.7;
+    letter-spacing: 0.2rem; 
+  }
+  .copyright {
+    margin: 1.5rem 0 0.5rem 0;
+    text-transform: uppercase;
+  }
+  .bottom_links {
+    margin: 0.5rem 0 3rem 0;
+    text-transform: uppercase;
+  }
+}
+
+/* Newsletter */
+.footer-newsletter {
+  position: relative;
+  background: $white;
+  border-top: 1px solid $jet;
+  
+  .block-subscribe {
+    margin: 0 auto;
+    padding: 3rem 1rem 3rem 1rem;
+    
+    .block-title {
+      text-transform: uppercase;
+      text-align: center;
+      font-size: $base-font-size;
+    }
+    p {
+      font-weight: 100;
+      font-size: $base-font-size * 1.2;
+    }
+    .intro-field {
+      max-width: 400px;
+      position:relative;
+      margin: 0 auto;
+    }
+    input[type=text], input[type=email] {
+      font-size: $base-font-size * 1.2;
+      padding: 2px 8px;
+      height: auto;
+      letter-spacing: 0.1em;
+      max-width: 400px;
+      margin: 0 auto 1rem auto;
+      vertical-align: middle;
+    }
+    .more-fields {
+      display: none;
+    }
+    .checkbox {
+      margin: 1rem auto;
+      text-align: left;
+      max-width: 400px;
+    }
+    select {
+      font-size: $base-font-size * 1.2;
+      background-color: #fff;
+      text-transform: none;
+      padding: 2px 8px;
+      height: auto;
+      letter-spacing: 0.1em;
+      max-width: 400px;
+      margin: 0 auto 1rem auto;
+    }
+    .button.expand {
+      position: absolute;
+      right: 0;
+      font-size: 0.8em;
+      vertical-align: middle;
+      padding: 2.5px 0;
+      width: 12%;
+    }
+    .button.submit {
+      background: #000;
+      color: #fff;
+      font-size: 0.9rem;
+      width: 150px;
+    }
+    .icon-envelope {
+      font-size: $base-font-size * 1.3;
+      margin-bottom: 0.5rem;
+      @include text-shadow(-1px 1px 14px #aaa);
+    }
+    .validation-advice {
+      max-width: 400px;
+      margin: 0 auto 5px auto;
+    }
+  }
+  .block-subscribe.opened .button.expand {
+    display: none;
+  }
+}

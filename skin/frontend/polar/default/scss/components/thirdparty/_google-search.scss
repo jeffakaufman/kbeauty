@@ -1,0 +1,29 @@
+.gsc-control-cse table {
+        border: 0;
+}
+.gsc-search-box table td {
+        padding: 0;
+}
+.gsc-search-box td.gsc-search-button {
+        min-width: 66px;
+}
+.gsc-control-cse .cse .gsc-search-button input.gsc-search-button-v2, .gsc-search-box input.gsc-search-button-v2 {
+        margin-top: 6px;
+        height: 24px;
+        min-width: 66px;
+}
+.gsc-selected-option-container.gsc-inline-block,
+.gsc-control-cse .gsc-option-menu-container {
+
+        min-width: 104px;
+}
+.gsc-control-cse .gsc-selected-option {
+        min-width: 104px;
+}
+.gsc-control-cse table {
+        margin-bottom: 0;
+}
+.gsc-control-cse table td,
+.gsc-control-cse table th {
+        padding: 0 0 0 8px;
+}

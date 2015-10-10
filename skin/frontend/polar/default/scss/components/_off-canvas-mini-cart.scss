@@ -1,0 +1,327 @@
+/* OFF CANVAS MINI CART - _off-canvas-mini-cart.scss */
+.block-cart {
+  
+  .summary, .actions, li.item .inner {
+    padding: 1rem 1rem 0 1rem;
+  }
+  li.item .quantity .inner {
+    padding: 0;
+  }
+  li.item {
+    list-style-type: none;
+    min-height: 65px;
+    padding: 0;
+    position: relative;
+    .btn-edit {
+      display: none;
+    }
+    .inner {
+      position: relative;
+    }
+  }
+  .checkbox {
+    float: left;
+    margin-right: $base-font-size / 2;
+  }
+  .price-box,
+    p {
+      clear: both;
+      margin-bottom: 0;
+    }
+  .product-details {
+    padding-left: 65px;
+  }
+  .product-name {
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.1em;
+    font-size: $base-font-size * 0.8;
+    a {
+      color: #000;
+    }
+  }
+  .quantity {
+    margin-top: 0.5rem;
+    position:relative;
+    height: 30px;
+    .inner {
+      background: $gold;
+      border: 1px solid $gold;
+      width: 72px;
+      padding: 0;
+    }
+    .icon {
+      color: #1d1d1d;
+      padding: 0 0.3rem;
+      line-height: $base-font-size * 1.5;
+      -webkit-text-stroke: 1px #1d1d1d;
+      &:hover {
+        color: #fff;
+        -webkit-text-stroke: 1px #fff;
+      }
+    }
+    input {
+      width: $base-font-size * 1.6;
+      @include border-radius(3px);
+      background: #1d1d1d;
+      color: white;
+      letter-spacing: -0.05em;
+      height: 24px;
+      font-size: $base-font-size * 0.9;
+    }
+    input,
+    label {
+      line-height: $base-font-size * 1.5;
+    }
+  }
+  .product-image {
+    width: 50px;
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    &:after {
+      content: "";
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  .category {
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: $base-font-size * 0.3;
+    line-height: 1.1em;
+    font-size: $base-font-size * 0.8;
+  }
+  .item-options {
+    font-size: $base-font-size * 0.7;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    .item {
+      margin-bottom: $base-font-size * 0.3;
+    }
+    .label {
+      display: inline-block;
+      font-weight: bold;
+      min-width: 45px;
+      padding-bottom: 0;
+      letter-spacing: 0.1em;
+    }
+    .value {
+      display: inline-block;
+      font-weight: normal; 
+    }
+  }
+  .itemTotal {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    .price {
+      display: block;
+      text-align: right;
+      font-size: $base-font-size * 0.7;
+    }
+  }
+  .remove, .removeItem {
+    text-align: right;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    a { 
+      color: #999;
+      font-size: $base-font-size * 0.5;
+      
+      span {
+        vertical-align: middle;
+      }
+      &:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+      .icon {
+        margin-left: 0.1rem;
+        font-size: $base-font-size * 0.7;
+        text-transform: none;
+      }
+    }
+  }
+  .subtotal {
+    margin: 0; 
+    span {
+      font-size: $base-font-size;
+      width: 50%;
+      display: inline-block;
+    }
+    .label {
+      float: left;
+      text-transform: uppercase;
+      font-weight: bold; 
+      padding: 0; 
+    }
+    .price {
+      text-align: right;
+    }
+  }
+}
+.touch .block-cart .quantity .icon:hover {
+  color: #1d1d1d;
+  -webkit-text-stroke: 1px #1d1d1d;
+}
+.col-right .block-cart {
+  display: none;
+  @media #{$medium-up} {
+    display: block;
+    @include box-shadow(-14px -14px 7px rgba(0,0,0,.08));
+  }
+  @media #{$large-up} {
+    @include box-shadow(-18px -18px 9px rgba(0,0,0,.08));
+  }
+  margin-top: $base-font-size * 4.25;
+  .block-content .items {
+    padding: 1rem;
+    border-bottom: 1px solid $jet;
+  }
+  .product-name a {
+    &:hover {
+      color: $gold;
+    }
+  }
+  .summary {
+    padding: 1rem;
+  }
+  .actions, .block-title {
+    display: none;
+  }
+  .product-image {
+    @media #{$medium-up} {
+      @include box-shadow(-6px -6px 3px rgba(0,0,0,.08));
+      width: 50px;
+    }
+    @media #{$large-up} {
+      @include box-shadow(-10px -10px 5px rgba(0,0,0,.08));
+      width: 80px;
+    }
+  }
+  .product-details {
+    @media #{$medium-up} {
+      padding-left: 65px;
+    }
+    @media #{$large-up} {
+      padding-left: 100px;
+    }
+  }
+  .quantity {
+    .inner {
+      background: #000;
+      border: 1px solid #000;
+    }
+    .icon {
+      padding: 0 0.26rem;
+      color: $almost-white;
+      -webkit-text-stroke: 1px $almost-white;
+      &:hover {
+        color: $gold;
+        -webkit-text-stroke: 1px $gold;
+      }
+    }
+    input {
+      background: $almost-white;
+      color: #000;
+    }
+  }
+  .remove a:hover {
+    color: #000;
+  }
+  .data-table {
+    margin: 1rem;
+    font-size: $base-font-size * 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    float: right;
+    margin: 1.5rem; 
+    td {
+      text-align: right;
+    }
+  }
+}
+.off-canvas-mini-cart {
+  color: $white;
+  .block-title {
+    text-transform: uppercase;
+    text-align: center;
+    font-size: $base-font-size * 0.8;
+    padding: 0 1rem;
+    line-height: 35px;
+    letter-spacing: 0.1em;
+    color: $gold;
+    border-bottom: 1px solid $gold;
+    @media #{$medium-up} {
+      line-height: 86px;
+      padding: 0 1rem;
+    }
+    .icon-delete {
+      position: absolute;
+      right: 1rem;
+      display: none;
+      @media #{$medium-up} {
+        display: block;
+      }
+      &:hover {
+        color: $gold;
+      }
+    }
+  }
+  .product-name a {
+    color: $gold;
+    &:hover {
+      color: #fff;
+    }
+  }
+  .empty {
+    padding: 1rem;
+  }
+  li.item {
+    color: $white;
+    border-bottom: 1px solid $gold;
+  }
+  .item-options .value {
+    color: $gold;
+    }
+  .subtotal .price {
+    color: $gold;
+  }
+  .itemTotal .price {
+    color: $gold;
+  }
+  .remove:hover {
+    color: #fff;
+  }
+  .mini-products-list {
+    margin-bottom: 0;
+  }
+  .actions {
+    text-align: center;
+    padding: 1rem;
+    .button {
+      @include button-style($bg:$buy-color);
+      width: 100%;
+      text-transform: uppercase;
+      background: $gold;
+      border: none;
+      color: $white;
+      font-size: $base-font-size * 0.8;
+      line-height: $base-font-size;
+      padding: 0.8rem 0;
+      height: auto;
+      margin: 0 auto;
+      letter-spacing: 0.2em;
+      &:after {
+        display: none;
+        font-size: $base-font-size;
+        position: absolute;
+        right: 6%;
+        top: 39%;
+      }
+    }
+  }
+}

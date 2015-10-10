@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+	<!--
+
+  When using polarcore as a starter theme (and not a parent theme) you can edit either polarcore.xml or local.xml. We recommend being consistent to avoid confusion.
+
+  However, if you're using polarcore as a parent theme, we recommend only using local.xml and leaving the polarcore.xml alone. Then an eventual upgrade will be easier.
+
+  -->
+  <default>
+
+  	<reference name="head">
+      
+      <action method="addJs"><script>varien/product.js</script></action>
+      <action method="addJs"><script>varien/configurable.js</script></action>
+  		
+      <block type="core/text" name="typekit">
+        <action method="setText"><text><![CDATA[<script src="//use.typekit.net/cbo0das.js"></script>]]></text></action>
+      </block>
+      <block type="core/text" name="typekit2">
+        <action method="setText"><text><![CDATA[<script>try{Typekit.load();}catch(e){}</script>]]></text></action>
+      </block>
+      
+  	</reference>
+    <reference name="before_body_end">
+      <block type="core/template" name="controller_tool_javascript" template="page/html/footer_js.phtml"/>
+    </reference>
+  </default>
+
+  <catalog_ajax_product_view>
+    <reference name="root">
+        <action method="setTemplate"><template>page/quickview.phtml</template></action>
+    </reference>
+    <reference name="head">
+        
+    </reference>
+    <reference name="content">
+      <block type="catalog/product_view" name="product.info" template="catalog/ajax/product/view.phtml">
+      
+            <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
+ 
+            <block type="core/text_list" name="alert.urls" as="alert_urls" translate="label">
+                <label>Alert Urls</label>
+            </block>
+ 
+            <action method="setTierPriceTemplate"><template>catalog/product/view/tierprices.phtml</template></action>
+ 
+            <block type="core/text_list" name="product.info.extrahint" as="extrahint" translate="label">
+                <label>Product View Extra Hint</label>
+            </block>
+ 
+            <block type="catalog/product_view" name="product.info.options.wrapper" as="product_options_wrapper" template="catalog/product/view/options/wrapper.phtml" translate="label">
+                <label>Info Column Options Wrapper</label>
+                <block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+                <block type="catalog/product_view_options" name="product.info.options" as="product_options" template="catalog/product/view/options.phtml">
+                    <action method="addOptionRenderer"><type>text</type><block>catalog/product_view_options_type_text</block><template>catalog/product/view/options/type/text.phtml</template></action>
+                    <action method="addOptionRenderer"><type>file</type><block>catalog/product_view_options_type_file</block><template>catalog/product/view/options/type/file.phtml</template></action>
+                    <action method="addOptionRenderer"><type>select</type><block>catalog/product_view_options_type_select</block><template>catalog/product/view/options/type/select.phtml</template></action>
+                    <action method="addOptionRenderer"><type>date</type><block>catalog/product_view_options_type_date</block><template>catalog/product/view/options/type/date.phtml</template></action>
+                </block>
+ 
+                <block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>
+            </block>
+ 
+            <block type="catalog/product_view" name="product.info.options.wrapper.bottom" as="product_options_wrapper_bottom" template="catalog/product/view/options/wrapper/bottom.phtml" translate="label">
+                <label>Bottom Block Options Wrapper</label>
+                <action method="append"><block>product.info.addtocart</block></action>
+                <action method="append"><block>product.info.addto</block></action>
+            </block>
+ 
+            <block type="core/template_facade" name="product.info.container1" as="container1">
+                <action method="setDataByKey"><key>alias_in_layout</key><value>container1</value></action>
+                <action method="setDataByKeyFromRegistry"><key>options_container</key><key_in_registry>product</key_in_registry></action>
+                <action method="append"><block>product.info.options.wrapper</block></action>
+                <action method="append"><block>product.info.options.wrapper.bottom</block></action>
+            </block>
+ 
+            <block type="core/template_facade" name="product.info.container2" as="container2">
+                <action method="setDataByKey"><key>alias_in_layout</key><value>container2</value></action>
+                <action method="setDataByKeyFromRegistry"><key>options_container</key><key_in_registry>product</key_in_registry></action>
+                <action method="append"><block>product.info.options.wrapper</block></action>
+                <action method="append"><block>product.info.options.wrapper.bottom</block></action>
+            </block>
+ 
+            <action method="unsetCallChild"><child>container1</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
+          <action method="unsetCallChild"><child>container2</child><call>ifEquals</call><if>0</if><key>alias_in_layout</key><key>options_container</key></action>
+ 
+        <!-- Rating (Use Black BG) -->
+        <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/fd_summary-black.phtml</template></action>
+ 
+        <!-- Add to Cart -->
+        <block type="catalog/product_view" name="product.info.addtocart" as="addtocart" template="catalog/product/view/addtocart.phtml"></block>
+ 
+        <!-- Additional Data -->
+        <block type="catalog/product_view_additional" name="product.info.additional" as="product_additional_data"></block>
+      </block>
+    </reference>
+  </catalog_ajax_product_view>
+</layout>

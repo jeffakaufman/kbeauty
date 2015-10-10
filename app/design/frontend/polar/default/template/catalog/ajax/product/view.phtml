@@ -1,0 +1,357 @@
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+    $categories = $_product->getCategoryIds();
+    $listHelper = Mage::helper('colorswatchproductlist');
+?>
+<?php $stockItem = $_product->getStockItem(); ?>
+<?php $out_of_stock_message = $_product->getData('out_of_stock_message'); ?>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div class="product-essential product-<?php echo $_product->getId() ?><?php if ($stockItem->getIsInStock()) echo ' in-stock'; else echo ' out-of-stock'; ?>">
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form<?php echo $_product->getId() ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        <div class="row">
+            <div class="small-12 medium-5 large-7 columns product-img-box">
+                <div class="info show-for-small text-center">
+                    <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
+                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                       <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />
+                        <?php echo $this->getChildHtml('product_type_data') ?>
+                    </div>
+                    <?php if ($_product->getShortDescription()):?>
+                    <div class="short-description">
+                        <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></div>
+                    </div>
+                    <?php endif;?>
+                </div>
+                <?php echo $this->getChildHtml('media') ?>
+            </div>
+            <div class="small-12 medium-7 large-5 columns product-shop">
+                <div class="info hide-for-small">
+                    <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                    <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
+                    <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+                       <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />
+                        <?php echo $this->getChildHtml('product_type_data') ?>
+                    </div>
+                    <?php if ($_product->getShortDescription()):?>
+                    <div class="short-description">
+                        <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></div>
+                    </div>
+                    <?php endif;?>
+                </div>
+                
+
+                <?php if ($this->canEmailToFriend()): ?>
+                    <!-- <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p> -->
+                <?php endif; ?>
+
+                <?php if ($_product->getRatingSummary() && $_product->getRatingSummary()->getReviewsCount()): ?>
+                    <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" style="display: none;">
+                        <meta itemprop="ratingValue" content="<?php echo ceil($_product->getRatingSummary()->getRatingSummary() / 20) ?>" />
+                        <meta itemprop="reviewCount" content="<?php echo $_product->getRatingSummary()->getReviewsCount() ?>" />
+                    </div>
+                <?php endif;?>
+
+                <?php echo $this->getChildHtml('alert_urls') ?>
+                <?php /*echo $this->getTierPriceHtml()*/ ?>
+                <?php echo $this->getChildHtml('extrahint') ?>
+
+                <div class="product-options" id="product-options-wrapper">
+                    <dl class="last">
+                        <dt><label>Color</label></dt>
+                        <dd><div class="color-swatch-wrapper"><?php $listHelper->showSwatches($_product); ?></div></dd>
+                    </dl>
+                </div>
+
+                <?php //if ($_product->isSaleable() && $this->hasOptions()):?>
+                    <?php //echo $this->getChildChildHtml('container1', '', true, true) ?>
+                <?php //endif;?>
+
+                <?php if ($_product->isSaleable()): ?>
+                    <?php echo $this->getChildHtml('addtocart') ?>
+                <?php endif; ?>
+
+                <?php /*$buttonTitle = $this->__('Add to Bag'); ?>
+                <?php if($_product->isSaleable()): ?>
+                    <div class="quantity">
+                        <?php if(!$_product->isGrouped()): ?>
+                        <div class="inner">
+                            <label for="qty"><?php echo $this->__('Qty:') ?></label>
+                            <span class="icon icon-minus"></span>
+                            <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+                            <span class="icon icon-plus"></span>
+                        </div>
+                        <?php endif; ?>
+
+                    </div>
+                    <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+                    <div class='ajax_loader' style="display:none; text-align: center;"><img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif')?>'/></div>
+                    <div class="status_message"></div>
+                <?php endif;*/ ?>
+                <?php if (!$stockItem->getIsInStock()) {
+                    if ($out_of_stock_message) echo '<div class="out_of_stock_message">'.$out_of_stock_message.'</div>';
+                    else echo '<div class="out_of_stock_message">Out of stock</div>';
+                } ?>
+                <button type="button" title="<?php echo $this->__('MORE DETAILS') ?>" class="button btn-more" onclick="setLocation('<?php echo $_product->getProductUrl() ?>')"><span><span><?php echo $this->__('MORE DETAILS') ?></span></span></button>
+
+                <?php if ($this->helper('wishlist')->isAllow()) : ?>
+                    <div class="actions">
+                        <?php if ($this->helper('wishlist')->isAllow()) : ?><a href="<?php echo $this->getAddToWishlistUrl($_product) ?>" class="link-wishlist" onclick="productAddToWishlistForm.submit(this, this.href); return false;"><span class="icon-heart"></span> <?php echo $this->__('Add to Wishlist') ?></a><?php endif;?>
+                        <div class="share">
+                            <span><?php echo $this->__('Share') ?></span>
+                            <?php if ($this->canEmailToFriend()): ?>
+                            <a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" class="email" title="Email"><span class="icon icon-envelope"></span></a>
+                            <?php endif; ?>
+                            <a href="javascript:void(0)" onclick="bit_url('<?php echo Mage::registry('product')->getProductUrl(); ?>')" class="twitter" title="Share on Twitter"><span class="icon icon-twitter"></span></a>
+                            <a href="https://pinterest.com/pin/create/bookmarklet/?media=<?php echo urlencode($this->helper('catalog/image')->init($_product, 'image')) ?>&url=<?php echo urlencode(Mage::registry('product')->getProductUrl()); ?>&description=<?php echo urlencode(Mage::app()->getStore()->getName() . ' ' . $_helper->productAttribute($_product, $_product->getName(), 'name')) ?>
+    " class="pinterest" title="Share on Pinterest"><span class="icon icon-pinterest"></span></a>
+                            <a href="http://www.facebook.com/sharer.php?s=100&p[url]=<?php echo urlencode(Mage::registry('product')->getProductUrl()); ?>" class="facebook" title="Share on Facebook"><span class="icon icon-facebook"></span></a>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                    <?php //echo $this->getChildChildHtml('container2', '', true, true) ?>
+                <?php endif;?>
+
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    function bit_url(url) { 
+        var url=url;
+        var username="kbeauty"; // bit.ly username
+        var key="R_afd68d6b20eb4a3f8326c2bd1e5d6d9a";
+        jQuery.ajax({
+            url:"http://api.bit.ly/v3/shorten",
+            data:{longUrl:url,apiKey:key,login:username},
+            dataType:"jsonp",
+            success:function(v) {
+                jQuery('.share .twitter').attr('data-url',v.data.url);
+            },
+            complete:function() {
+                var newurl = jQuery('.share .twitter').attr('data-url');
+                link_twitter(newurl);
+            }
+        });
+    }
+    function link_twitter(url) {
+        
+        window.open('http://twitter.com/share?url='+url+'&text=Love%20Kardashian%20Beauty%20<?php echo urlencode($_helper->productAttribute($_product, $_product->getName(), 'name')) ?>%20on%20KBeauty.com%20@kbeautyofficial%20&hashtags=DashOfGlam',"share","toolbar=no, scrollbars=no, resizable=yes, width=700, height=400");
+        
+    }
+
+    function DropDown(el) {
+        this.dd = el;
+        this.placeholder = this.dd.children('span');
+        this.opts = this.dd.find('ul.dropdown > li');
+        this.val = '';
+        this.index = -1;
+        this.initEvents();
+    }
+    DropDown.prototype = {
+        initEvents : function() {
+            var obj = this;
+
+            obj.dd.on('click', function(event){
+                $(this).toggleClass('active');
+                return false;
+            });
+
+            obj.opts.on('click',function(){
+                var opt = $(this);
+                obj.val = opt.text();
+                obj.index = opt.index();
+                obj.placeholder.text('Gender: ' + obj.val);
+            });
+        },
+        getValue : function() {
+            return this.val;
+        },
+        getIndex : function() {
+            return this.index;
+        }
+    }
+
+    $(function() {
+
+        var dd = new DropDown( $('#dd') );
+
+        $(document).click(function() {
+            // all dropdowns
+            $('.wrapper-dropdown-1').removeClass('active');
+        });
+
+    });
+
+    var productAddToCartForm = new VarienForm('product_addtocart_form<?php echo $_product->getId() ?>');
+    
+    productAddToCartForm.submit = function(button, url) {
+        if (this.validator.validate()) {
+            var form = this.form;
+            var oldUrl = form.action;
+
+            if (url) {
+               form.action = url;
+            }
+            var e = null;
+            
+            if(!url){
+                url = jQuery('#product_addtocart_form<?php echo $_product->getId() ?>').attr('action');
+            }
+            url = url.replace("checkout/cart","ajax/index");
+            url = url.replace("wishlist/index/add","ajax/index/addwish");
+            
+            var data = jQuery('#product_addtocart_form<?php echo $_product->getId() ?>').serialize();
+            //console.log(data);
+            data += '&isAjax=1';
+            //console.log(data);
+            //console.log('test');
+            jQuery('.ajax_loader, .status_message').show();
+            try {
+                jQuery.ajax({
+                      url: url,
+                      dataType: 'json',
+                      type : 'post',
+                      data: data,
+                      success: function(data){
+                            jQuery('.ajax_loader').hide();
+                            jQuery('.status_message').html(data.message);
+                            //alert(data.status + ": " + data.message);
+                            //console.log(data);
+                            if(jQuery('.block-cart') && data.status == 'SUCCESS'){
+                                jQuery('.right-off-canvas-toggle .count').text(data.totalItemsInCart);
+                                jQuery('.right-off-canvas-toggle').click();
+                                //var curQty = (typeof curQty === 'undefined') ? 0 : jQuery('.right-off-canvas-toggle .count').text();
+                                //jQuery('.right-off-canvas-toggle .count').html(parseInt(curQty) + parseInt(data.qty));
+                                //console.log(data.qty);
+                                jQuery('.block-cart').replaceWith(data.sidebar);
+                            }
+                            // if(jQuery('.header .links')){
+                            //     jQuery('.header .links').replaceWith(data.toplink);
+                            // }
+                          if(data.status == 'ERROR' && data.message == 'Please Login First') {
+                              window.scrollTo(0, 0);
+                              jQuery("#loginBtn").click();
+                          }
+                          //quantityChanger();
+                      },
+                      error: function(jqXHR, textStatus, errorThrown ) {
+                            console.log(jqXHR);
+                            console.log(textStatus);
+                            console.log(errorThrown);
+                        }
+                });
+            } catch (e) {
+            }
+            this.form.action = oldUrl;
+            if (e) {
+                throw e;
+            }
+
+            if (button && button != 'undefined') {
+                //button.disabled = true;
+            }
+        }
+    }.bind(productAddToCartForm);
+
+    var productAddToWishlistForm = new VarienForm('product_addtocart_form');
+        productAddToWishlistForm.submit = function(button, url) {
+            if (this.validator.validate()) {
+                var form = this.form;
+                var oldUrl = form.action;
+
+                if (url) {
+                   form.action = url;
+                   url = url.replace("wishlist/index/add","ajax/index/addwish");
+                }
+
+                var e = null;
+                try {
+                    this.form.submit();
+                } catch (e) {
+                }
+                this.form.action = oldUrl;
+                if (e) {
+                    throw e;
+                }
+                jQuery('.ajax_loader').show();
+                if (button && button != 'undefined') {
+                    button.disabled = true;
+                }
+            }
+        }.bind(productAddToWishlistForm);
+
+    /*productAddToCartForm.submitLight = function(button, url){
+        if(this.validator) {
+            var nv = Validation.methods;
+            delete Validation.methods['required-entry'];
+            delete Validation.methods['validate-one-required'];
+            delete Validation.methods['validate-one-required-by-name'];
+            if (this.validator.validate()) {
+                if (url) {
+                    this.form.action = url;
+                }
+                this.form.submit();
+            }
+            Object.extend(Validation.methods, nv);
+        }
+    }.bind(productAddToCartForm);*/
+//]]>
+</script>
+<script type="text/javascript">
+        function initSwatch(productId, attributeId, optionId){
+            
+            if(typeof($$('.product-essential.product-'+productId).first()) == 'undefined'){
+                itemElement = $$('div.item-'+productId).first();
+            }else{
+                itemElement = $$('.product-essential.product-'+productId).first();
+            }
+            
+            if (typeof(itemElement.preloadElement) == 'undefined') {
+                itemElement.preloadElement = document.createElement('DIV');
+				Element.addClassName(itemElement.preloadElement, 'preload-wrapper');
+                Element.setStyle(itemElement, { position:'relative' });
+                Element.setStyle(itemElement.preloadElement, { background:'#111', position:'absolute', top: 0, left: 0, opacity:.1, width:'100%', height:'100%' });
+                itemElement.loadingIMG = document.createElement('IMG');
+				Element.addClassName(itemElement.loadingIMG, 'preload-wrapper-image');
+                Element.setStyle(itemElement.loadingIMG, { top:'45%', left:'45%', position:'absolute', opacity:1 });
+                itemElement.loadingIMG.src = '<?php echo $this->getSkinUrl(); ?>images/colorswatch/colorswatch_loading.gif';
+            }
+            
+            itemElement.appendChild(itemElement.preloadElement);
+            itemElement.appendChild(itemElement.loadingIMG);
+            $('hidden-attribute-'+productId+'-'+attributeId).value = optionId;
+            selection = {};
+            
+            itemElement.select('.hidden-super-attribute-select').each( function(element, index) {
+                attributeIdExec = /hidden-attribute-([\d]+)-([\d]+)/.exec(element.id);
+                selection[attributeIdExec[2]] = element.value ? element.value : false ;
+            });
+            
+            itemElement.ajaxRequest = new Ajax.Request("<?php echo Mage::getUrl('colorswatchproductlist/get/image') ?>", {
+                method:'post',
+                parameters:'attribute_id='+attributeId+'&option_id='+optionId+'&product_id='+productId+'&selection='+Object.toJSON(selection),
+                onComplete: function(attributeId, optionId, transport) {
+                    if(typeof($$('li.item-'+productId).first()) == 'undefined'){
+                        itemElement = $$('div.item-'+productId).first();
+                    }else{
+                        itemElement = $$('.product-essential.product-'+productId).first();
+                    }
+                    itemElement.ajaxRequest = null;
+                    itemElement.removeChild(itemElement.loadingIMG);
+                    itemElement.removeChild(itemElement.preloadElement);
+                    eval(transport.responseText);
+                }.bind(this, attributeId, optionId)
+            });
+        } 
+    </script>

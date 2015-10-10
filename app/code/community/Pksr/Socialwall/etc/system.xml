@@ -1,0 +1,602 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <myconf translate="label">
+            <label>Social Wall</label>
+            <sort_order>0</sort_order>
+        </myconf>
+    </tabs>
+    <sections>
+        <tab1 translate="label" module="adminhtml">
+            <label>General</label>
+            <tab>myconf</tab>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label comment">
+                    <label>General</label>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<active translate="label comment">
+                            <label>Status</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>0</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <stream_days translate="label comment">
+                            <label>Days</label>
+                            <comment>Maximum age of stream items in days (Default 60).</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </stream_days>
+						<stream_limit translate="label comment">
+                            <label>Limit</label>
+                            <comment>Maximum number of results to check/return for each social network (Default 10).</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </stream_limit>
+						 <stream_max translate="label comment">
+                            <label>Max</label>
+                            <comment>Set whether to create the feed based on maximum days or number of results per network.</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>pksr_socialwall/system_config_source_dropdown_values::getMaxOptionArray</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </stream_max>
+						<animation_speed translate="label comment">
+                            <label>Animation Speed</label>
+                            <comment>Speed (in milliseconds) of animation (Default 400).</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </animation_speed>
+                    </fields>
+                </general>
+				<socialwall_facebook translate="label comment">
+                    <label>Facebook </label>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						 <socialwall_active translate="label comment">
+                            <label>Enable/Disable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_active>
+                        <socialwall_id translate="label comment">
+                            <label>Facebook ID</label>
+                            <comment><![CDATA[
+							 *Available Options <br>
+							1. Facebook page wall posts<br>
+    							&nbsp;&nbsp;&nbsp;&nbsp;e.g. '15925638948' <br>
+							2. Facebook page gallery images <br>
+    							&nbsp;&nbsp;&nbsp;&nbsp;e.g. "Preffered Name/15925638948"<br>
+							3. Facebook wall post and page gallery images <br>
+							&nbsp;&nbsp;&nbsp;&nbsp;e.g. "15925638948,Preffered Name/15925638948"
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>54</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_id>
+                    </fields>
+                </socialwall_facebook>
+				<socialwall_twitter translate="label comment">
+                    <label>Twitter </label>
+                    <sort_order>2</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <socialwall_active translate="label comment">
+                            <label>Enable/Disable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_active>
+                        <socialwall_id translate="label comment">
+                            <label>Twitter ID</label>
+                            <comment><![CDATA[
+							 *Available Options <br>
+								1. Tweets from a specific user name<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. "imdb"<br>
+								2. Tweets from a list<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. "/4234233"<br>
+								3. Tweets from a search<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. "#imdb"<br>
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_id>
+						<socialwall_ck translate="label comment">
+                            <label>Consumer key</label>
+                            <comment><![CDATA[
+							 *Consumer key Required <br>
+							 &nbsp;&nbsp;&nbsp;&nbsp;e.g. "BCxajcHp7xoeU1sAGE87teTDb"<br>
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_ck>
+						 <socialwall_cs translate="label comment">
+                            <label>Consumer Secret</label>
+                            <comment><![CDATA[
+							 *Consumer Secret Required <br>
+							 &nbsp;&nbsp;&nbsp;&nbsp;e.g. "bK9shmaky7r1M3xxYNO1uBdjPo9EjpLLzvDo8LdazgDOWUt5Rk"<br>
+							 	]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_cs>
+						<socialwall_at translate="label comment">
+                            <label>Access Token</label>
+                            <comment><![CDATA[
+							 *Access Token Required <br>
+							 &nbsp;&nbsp;&nbsp;&nbsp;e.g. "2927451439-9v7ZMmoM8J4Cb5nkWX2xdErZj59xuwpQrHc4jYA"<br>
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_at>
+						 <socialwall_ats translate="label comment">
+                            <label>Access Token Secret</label>
+                            <comment><![CDATA[
+							 *Access Token Secret Required <br>
+							 &nbsp;&nbsp;&nbsp;&nbsp;e.g. "DqJk0zJa7W6oSCBcdY4h8G6QJCVBELSA7RTA7ayFNa8dX"<br>
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_ats>
+						
+                    </fields>
+                </socialwall_twitter>
+				<socialwall_google translate="label comment">
+                    <label>Google +1 </label>
+                    <sort_order>3</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                         <socialwall_active translate="label comment">
+                            <label>Enable/Disable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_active>
+                        <socialwall_id translate="label comment">
+                            <label>Google +1 ID</label>
+                            <comment><![CDATA[
+							 *Google +1 profile ID <br>
+							 e.g "108591132037249012561"
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_id>   
+						<socialwall_key translate="label comment">
+                            <label>API Key</label>
+                            <comment><![CDATA[
+							 *API Key Required <br>
+							 e.g. "AIzaSyBP21BN7r59KGgjSIuJnS4uxwMqAdxaxb8"<br>
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_key>       
+                    </fields>
+                </socialwall_google>
+				<socialwall_youtube translate="label comment">
+                    <label>YouTube </label>
+                    <sort_order>4</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                       <socialwall_active translate="label comment">
+                            <label>Enable/Disable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_active>
+                        <socialwall_id translate="label comment">
+                            <label>YouTube ID</label>
+                            <comment><![CDATA[
+							 *Available Options <br>
+								1. Videos from a specific user name <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. "movieclipsTRAILERS" <br>
+								2. Videos from a search <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. "#IMDbTV" <br>
+								3. Videos from a playlist <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. "Playlist Title/LLi8e0iOVk1fEOogdfu4YgfA" <br>
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_id>          
+                    </fields>
+                </socialwall_youtube>
+				<socialwall_instagram translate="label comment">
+                    <label>Instagram </label>
+                    <sort_order>5</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <socialwall_active translate="label comment">
+                            <label>Enable/Disable</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>10</sort_order>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_active>
+                        <socialwall_id translate="label comment">
+                            <label>Instagram ID</label>
+                            <comment><![CDATA[
+							 *Available Options <br>								 
+								1. Search based on tags<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. "#imdb"<br>
+								2. User ID, to show latest posts by user start the ID with a "!" followed by the user's profile ID<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. "!274136"<br>
+								3. Location ID, to show latest posts by a location ID start with a "@" followed by the ID<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. "@274136"<br>
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_id>
+						<socialwall_at translate="label comment">
+                            <label>Access Token</label>
+                            <comment><![CDATA[
+							 *Access Token Required <br>
+							 &nbsp;&nbsp;&nbsp;&nbsp;e.g. "339881212.6a7dbba.1a2f2e06fd0e46f18077d43afb67d728"<br>
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_at>
+						<socialwall_ci translate="label comment">
+                            <label>Client Id</label>
+                            <comment><![CDATA[
+							 *Client Id Required <br>
+							 &nbsp;&nbsp;&nbsp;&nbsp;e.g. "6a7dbbae7f004de1a3b428fcceedbdd4"<br>
+							]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </socialwall_ci>
+                    </fields>
+                </socialwall_instagram>
+				<socialwall_rss translate="label comment">
+					<label>Rss</label>
+					<sort_order>6</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						 <socialwall_active translate="label comment">
+							<label>Enable/Disable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_active>
+						<socialwall_id translate="label comment">
+							<label>Rss URL</label>
+							<comment><![CDATA[
+							 *Rss URL required <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. 'http://rss.imdb.com/daily/born/' <br>
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_id>
+					</fields>
+				</socialwall_rss>
+				<socialwall_stumbleupon translate="label comment">
+					<label>Stumbleupon </label>
+					<sort_order>7</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						 <socialwall_active translate="label comment">
+							<label>Enable/Disable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_active>
+						<socialwall_id translate="label comment">
+							<label>Stumbleupon ID</label>
+							<comment><![CDATA[
+							 *Stumbleupon ID required <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. 'techzoneminds' <br>
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_id>
+					</fields>
+				</socialwall_stumbleupon>
+				<socialwall_delicious translate="label comment">
+					<label>Delicious </label>
+					<sort_order>8</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						 <socialwall_active translate="label comment">
+							<label>Enable/Disable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_active>
+						<socialwall_id translate="label comment">
+							<label>Delicious ID</label>
+							<comment><![CDATA[
+							 *Delicious ID required <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. 'techzoneminds' <br>
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_id>
+					</fields>
+				</socialwall_delicious>
+				<socialwall_vimeo translate="label comment">
+					<label>Vimeo </label>
+					<sort_order>9</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						 <socialwall_active translate="label comment">
+							<label>Enable/Disable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_active>
+						<socialwall_id translate="label comment">
+							<label>Vimeo ID</label>
+							<comment><![CDATA[
+							 *Vimeo ID required <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. 'kimpimmel' <br>
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_id>
+					</fields>
+				</socialwall_vimeo>
+				<socialwall_pinterest translate="label comment">
+					<label>Pinterest </label>
+					<sort_order>10</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						 <socialwall_active translate="label comment">
+							<label>Enable/Disable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_active>
+						<socialwall_id translate="label comment">
+							<label>Pinterest ID</label>
+							<comment><![CDATA[
+							 *Pinterest ID required <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. 'techzone' <br>
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_id>
+					</fields>
+				</socialwall_pinterest>
+				<socialwall_flickr translate="label comment">
+					<label>Flickr </label>
+					<sort_order>11</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						 <socialwall_active translate="label comment">
+							<label>Enable/Disable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_active>
+						<socialwall_id translate="label comment">
+							<label>Flickr ID</label>
+							<comment><![CDATA[
+							 *Flickr ID required <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. '132092779@N03' <br>
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_id>
+					</fields>
+				</socialwall_flickr>
+				<socialwall_lastfm translate="label comment">
+					<label>Lastfm </label>
+					<sort_order>12</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						 <socialwall_active translate="label comment">
+							<label>Enable/Disable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_active>
+						<socialwall_id translate="label comment">
+							<label>Lastfm ID</label>
+							<comment><![CDATA[
+							 *Lastfm ID required <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. 'techzoneminds' <br>
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_id>
+					</fields>
+				</socialwall_lastfm>
+				<socialwall_dribbble translate="label comment">
+					<label>Dribbble </label>
+					<sort_order>13</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						 <socialwall_active translate="label comment">
+							<label>Enable/Disable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_active>
+						<socialwall_id translate="label comment">
+							<label>Dribbble ID</label>
+							<comment><![CDATA[
+							 *Dribbble ID required <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. 'creativemints' <br>
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_id>
+					</fields>
+				</socialwall_dribbble>
+				<socialwall_tumblr translate="label comment">
+					<label>Tumblr </label>
+					<sort_order>14</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						 <socialwall_active translate="label comment">
+							<label>Enable/Disable</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+							<source_model>adminhtml/system_config_source_enabledisable</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_active>
+						<socialwall_id translate="label comment">
+							<label>Tumblr ID</label>
+							<comment><![CDATA[
+							 *Tumblr ID required <br>
+								&nbsp;&nbsp;&nbsp;&nbsp;e.g. 'techzoneminds' <br>
+							]]></comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>54</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</socialwall_id>
+					</fields>
+				</socialwall_tumblr>
+				
+            </groups>
+        </tab1>
+    </sections>
+</config>

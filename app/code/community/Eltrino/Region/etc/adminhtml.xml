@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!--
+
+    Remove or Change Displayed States and Regions
+
+    LICENSE
+
+    This source file is subject to the Eltrino LLC EULA
+    that is bundled with this package in the file LICENSE_EULA.txt.
+    It is also available through the world-wide-web at this URL:
+    http://eltrino.com/license-eula.txt
+    If you did not receive a copy of the license and are unable to
+    obtain it through the world-wide-web, please send an email
+    to license@eltrino.com so we can send you a copy immediately.
+
+    @category    Eltrino
+    @package     Eltrino_Region
+    @copyright   Copyright (c) 2014 Eltrino LLC. (http://eltrino.com)
+    @license     http://eltrino.com/license-eula.txt  Eltrino LLC EULA
+
+-->
+<config>
+    <menu>
+        <system translate="title" module="eltrino_region">
+            <children>
+                <eltrino_region_management>
+                    <title>Region Management Pro</title>
+                    <sort_order>70</sort_order>
+                    <action>adminhtml/region/index</action>
+                </eltrino_region_management>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <eltrino_region translate="title" module="eltrino_region">
+                                        <title>Region Management Section</title>
+                                    </eltrino_region>
+                                </children>
+                            </config>
+                            <eltrino_region_management translate="title" module="eltrino_region">
+                                <title>Region Management</title>
+                            </eltrino_region_management>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

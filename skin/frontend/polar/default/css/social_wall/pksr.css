@@ -1,0 +1,738 @@
+@charset "utf-8";
+/* Reset */
+.pksr ul, .pksr li {
+	padding: 0; 
+	margin: 0; 
+	list-style: none!important;
+	background: none;
+	overflow: visible !important;
+}
+
+/* Main styles */
+/* Feeds */
+.pksr {
+    color: #444;
+    list-style: none outside none;
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+    opacity: 0;
+}
+@media screen and (min-width: 800px) {
+	.pksr {
+    	width: 800px;
+    }
+}
+@media screen and (min-width: 1200px) {
+	.pksr {
+    	width: 100%;
+    }
+}
+.pksr h1 {
+    width: auto;
+	position: relative;
+}
+.pksr h1, .pksr h2, .pksr h3 {
+    line-height: 1.35em;
+}
+.pksr-content {
+	position: relative;
+	padding: 0;
+}
+.pksr-loading {
+	background: url(../../images/social_images/loading_light.gif) no-repeat 0 0;
+	height: 24px;
+	padding: 6px 0 0 30px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+}
+.pksr-toolbar .pksr-loading {
+	right: 10px;
+	left: auto;
+}
+.stream p {
+	margin: 0;
+	padding: 0;
+}
+
+.stream .pksr-twitter p, .stream .section-intro p {
+	font-size: 14px;
+  	text-transform: uppercase;
+  	letter-spacing: 0.1em;
+  	padding: 5px 0;
+}
+.stream .pksr-twitter p {
+	padding: 15px;
+	text-align: center;
+}
+.stream .pksr-twitter p.with-image {
+	font-size: 12px;
+	text-transform: none;
+	padding: 5px 0;
+	text-align: left;
+	line-height: 1.5em;
+}
+.stream li a {
+	color: #c0af85;
+}
+.stream li {
+	background-color: #FFFFFF;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    font-size: 11px;
+    padding: 0;
+    width: 380px;
+	position: relative;
+	margin: 0 10px 20px 10px;
+	font-family: Arial, sans-serif;
+	line-height: 1.35em;
+	-moz-box-shadow: -10px -10px 5px rgba(0, 0, 0, 0.08);
+  	-webkit-box-shadow: -10px -10px 5px rgba(0, 0, 0, 0.08);
+  	box-shadow: -10px -10px 5px rgba(0, 0, 0, 0.08);
+}
+@media screen and (max-width: 799px) {
+	.stream li {
+		width: 90%;
+		margin: 0 5% 20px 5%;
+	}
+}
+.stream li .inner {
+	overflow: hidden;
+}
+
+.stream li .icon {
+	position: absolute;
+  	right: 10px;
+  	top: 10px;
+  	z-index: 3;
+  	font-size: 16px;
+  	color: #000;
+  	border: 2px solid #000;
+  	padding: 4px 0;
+}
+.stream li .icon:hover {
+	border: 2px solid #c0af85;
+	color: #c0af85;
+}
+.stream li .section-intro {
+    padding: 15px;
+	/*left: 0;
+	bottom: 0;*/
+	position: relative;
+	color: #fff;
+	font-style: normal;
+	font-size: 12px;
+	z-index: 2;
+	text-align: left;
+	color: #000;
+	line-height: 1.5em;
+}
+.stream li .section-intro .dot {
+	color: #c0af85;
+	font-size: 11px;
+	margin: 0 3px;
+}
+.stream li .clear {
+	clear: both;
+}
+
+/* Content blocks */
+
+.stream li .section-intro a {
+	text-decoration: none;
+	color: #c0af85;
+}
+.stream li .section-intro a:hover {
+	text-decoration: underline;
+	color: #000
+}
+.stream li .section-intro a.post_time {
+	color: #999;
+}
+.stream li .section-title {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 3px;
+}
+.stream li .section-title a {
+	color: #c0af85;
+}
+.stream li .section-title a:hover {
+	color: #000;
+}
+.stream li .section-thumb {
+	margin: 0 0 10px 0;
+}
+.stream li .section-thumb img {
+	width: 100%;
+}
+.stream li .section-intro .section-text {
+	display: block;
+	letter-spacing: 0.1em;
+	text-align: left;
+  	padding: 5px 0;
+}
+.stream li .section-text br {
+	display: block;
+}
+.stream li .section-user {
+	clear: both;
+	display: block;
+	margin: 0 0 5px 0;
+	font-size: 14px;
+	display: block;
+	text-align: left;
+	line-height: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+}
+@media screen and (max-width: 640px) {
+	.stream li .section-user {
+		margin-top: 0.5em;
+	}
+}
+.stream li .section-user a {
+	color: #000;
+}
+.stream li .meta {
+	display: block;
+	font-size: 90%;
+	color: #999;
+}
+.stream li .meta span {
+	margin: 0 8px 5px 0;
+	display: block;
+	float: left;
+	padding: 0 0 0 15px;
+	line-height: 12px;
+}
+.meta span.shares {
+	background: url(../../images/social_images/shares.png) no-repeat 0 0;
+	padding-left: 20px;
+}
+.meta span.views {
+	background: url(../../images/social_images/views.png) no-repeat 0 0;
+	padding-left: 18px;
+}
+.meta span.likes {
+	background: url(../../images/social_images/likes.png) no-repeat 0 0;
+	padding-left: 16px;
+}
+.meta span.comments {
+	background: url(../../images/social_images/comments.png) no-repeat 0 0;
+}
+.meta span.users {
+	background: url(../../images/social_images/users.png) no-repeat 0 0;
+}
+.meta span.videos {
+	background: url(../../images/social_images/videos.png) no-repeat 0 0;
+	padding-left: 16px;
+}
+.stream li .section-meta {
+	display: block;
+	margin: 0;
+	padding: 0;
+	clear: both;
+}
+.stream li .meta.item-comments {
+	padding: 0 0 0 35px;
+	margin: 0 0 5px 0;
+	min-height: 30px;
+	position: relative;
+	clear: both;
+	line-height: 1.3em;
+}
+.stream li .meta.item-comments img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 30px;
+}
+.stream li .meta.item-likes {
+	padding: 0;
+	width: 100%;
+	overflow: hidden;
+	clear: both;
+	line-height: 1.3em;
+}
+.stream li .meta.item-likes img {
+	float: left;
+	margin: 0 5px 5px 0;
+	width: 30px;
+	border: 1px solid #ddd;
+	padding: 1px;
+	background: #fff;
+}
+.stream li.pksr-error {
+	color: #990000;
+}
+.stream li .section-share {
+	display: block;
+	margin: 0 0 5px 0;
+	padding: 4px 0 0;
+	float: right;
+}
+.stream li .section-share a {
+	display: block;
+	width: 16px;
+	height: 16px;
+	float: left;
+	margin: 0 2px 0 0;
+	background: url(../../images/social_images/share.png) no-repeat 0 0;
+}
+.stream li .section-share a.share-twitter {
+	background-position: 0 -16px;
+}
+.stream li .section-share a.share-reply {
+	background-position: 0 -32px;
+}
+.stream li .section-share a.share-retweet {
+	background-position: 0 -48px;
+}
+.stream li .section-share a.share-favorite {
+	background-position: 0 -64px;
+}
+.stream li .section-share a.share-google {
+	background-position: 0 -80px;
+}
+.stream li .section-share a.share-linkedin {
+	background-position: 0 -96px;
+}
+.stream li .section-share a.share-facebook:hover {
+	background-position: -16px 0;
+}
+.stream li .section-share a.share-twitter:hover {
+	background-position: -16px -16px;
+}
+.stream li .section-share a.share-reply:hover {
+	background-position: -16px -32px;
+}
+.stream li .section-share a.share-retweet:hover {
+	background-position: -16px -48px;
+}
+.stream li .section-share a.share-favorite:hover {
+	background-position: -16px -64px;
+}
+.stream li .section-share a.share-google:hover {
+	background-position: -16px -80px;
+}
+.stream li .section-share a.share-linkedin:hover {
+	background-position: -16px -96px;
+}
+/* Toolbar */
+.pksr-toolbar {
+	padding: 0;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+/* Filter */
+#wall {
+	padding-top: 15px;
+}
+#wall .pksr-toolbar {
+	margin-bottom: 25px;
+}
+.pksr-toolbar .filter {
+	padding: 0;
+	margin: 0 0 15px 0;
+	display: inline-block;
+}
+.pksr-toolbar .filter li {
+	display: inline;
+	background: none;
+	padding: 0;
+	margin: 0;
+}
+.pksr-toolbar .filter .link-all {
+    color: #000;
+    font-size: 14px;
+    height: 21px;
+    line-height: 21px;
+    text-transform:  uppercase;
+    letter-spacing: 0.2em;
+    padding: 4px 6px 0 7px;
+}
+.pksr-toolbar .filter li a {
+	padding: 1px 3px 0 3px;
+	margin: 0 1px 1px 0;
+	display: block;
+	float: left;
+	color: #000;
+	background: #f3f3f3;
+	height: 28px !important;
+}
+.pksr-toolbar .filter li a.iso-active {
+	color: #fff;
+}
+.pksr-toolbar .filter li a:hover, .pksr-toolbar .filter li a.selected {
+	color: #fff;
+	background: #c0af85;
+	text-decoration: none;
+}
+.pksr-toolbar .filter li img {
+	margin: 0;
+	height: 24px;
+}
+/* Controls */
+.pksr .controls {
+	position: absolute;
+	right: 0;
+	top: 7px;
+	height: 22px;
+	padding: 0;
+	z-index: 12;
+}
+.pksr .controls li {
+	display: inline;
+	background: none;
+}
+.pksr .controls a {
+	display: block;
+	width: 22px;
+	height: 22px;
+	float: left;
+	margin: 0 0 0 2px;
+	background: url(../../images/social_images/controls.png) no-repeat 0 0;
+}
+.pksr .controls .prev {
+	background-position: -44px 0;
+}
+.pksr .controls .next {
+	background-position: -66px 0;
+}
+.pksr .controls .play {
+	background-position: 0 0;
+}
+.pksr .controls .pause {
+	background-position: -22px 0;
+}
+.pksr .controls .prev:hover {
+	background-position: -44px -22px;
+}
+.pksr .controls .next:hover {
+	background-position: -66px -22px;
+}
+.pksr .controls .play:hover {
+	background-position: 0 -22px;
+}
+.pksr .controls .pause:hover {
+	background-position: -22px -22px;
+}
+
+/* feeds network specific styles */
+.stream li.pksr-rss .section-intro, .filter .f-rss a:hover {
+	background-color: #FF9800;
+}
+.stream li.pksr-flickr .section-intro, .filter .f-flickr a:hover {
+	background-color: #f90784;
+}
+.stream li.pksr-delicious .section-intro, .filter .f-delicious a:hover {
+	background-color: #3271CB;
+}
+.stream li.pksr-twitter .section-intro, .filter .f-twitter a:hover {
+	/*background-color: #4ec2dc;*/
+}
+.stream li.pksr-facebook .section-intro, .filter .f-facebook a:hover {
+	/*background-color: #3b5998;*/
+}
+.stream li.pksr-google .section-intro, .filter .f-google a:hover {
+	background-color: #2d2d2d;
+}
+.stream li.pksr-youtube .section-intro, .filter .f-youtube a:hover {
+	background-color: #DF1F1C;
+}
+.stream li.pksr-pinterest .section-intro, .filter .f-pinterest a:hover {
+	background-color: #CB2528;
+}
+.stream li.pksr-lastfm .section-intro, .filter .f-lastfm a:hover {
+	background-color: #C90E12;
+}
+.stream li.pksr-dribbble .section-intro, .filter .f-dribbble a:hover {
+	background-color: #F175A8;
+}
+.stream li.pksr-vimeo .section-intro, .filter .f-vimeo a:hover {
+	background-color: #4EBAFF;
+}
+.stream li.pksr-stumbleupon .section-intro, .filter .f-stumbleupon a:hover {
+	background-color: #EB4924;
+}
+.stream li.pksr-deviantart .section-intro, .filter .f-deviantart a:hover {
+	background-color: #EB4924;
+}
+.stream li.pksr-tumblr .section-intro, .filter .f-tumblr a:hover {
+	background-color: #365472;
+}
+.stream li.pksr-instagram .section-intro, .filter .f-instagram a:hover {
+	/*background-color: #413A33;*/
+}
+
+/* Facebook */
+.stream li.pksr-facebook .section-thumb img {
+	width: 75px;
+}
+.stream li.pksr-facebook .inner img {
+	width: 100%;
+}
+.stream li.pksr-facebook .section-text a {
+	
+}
+.stream li.pksr-facebook .section-intro a {
+	
+}
+.stream li.pksr-facebook .meta {
+	display: block;
+	clear: both;
+}
+.stream li.pksr-facebook .meta.item-comments {
+	padding: 0;
+	min-height: auto;
+}
+.stream li.pksr-facebook .meta.item-comments a {
+	display: block;
+	margin: 0 0 2px 0;
+}
+.stream li.pksr-facebook .share-facebook {
+	display: none;
+}
+/* twitter */
+.stream li.pksr-twitter .section-thumb {
+	margin-top: 3px;
+	display: none;
+}
+.stream li.pksr-twitter .section-user {
+	padding: 0;
+	background: none;
+}
+.stream li.pksr-twitter .section-text img {
+	width: 100%;
+}
+.stream li.pksr-twitter a {
+	color: #c0af85;
+	text-decoration: none;
+}
+.stream li.pksr-twitter a:hover {
+	color: #000;
+	text-decoration: underline;
+}
+.stream li.pksr-twitter .section-intro a.post_time {
+	color: #999;
+}
+
+.stream li.pksr-twitter .section-intro span a:hover {
+	text-decoration: underline;
+}
+
+.stream li.pksr-twitter .twitter-user {
+	margin-bottom: 2px;
+	display: block;
+}
+@media screen and (max-width: 640px) {
+	.stream li.pksr-twitter .twitter-user, .section-user {
+		margin-top: 0.5em;
+	}
+}
+.stream li.pksr-twitter .twitter-user a {
+	color: #000;
+	font-size: 14px;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	font-weight: normal;
+	text-decoration: none;
+}
+.stream li.pksr-twitter .twitter-user2 a {
+	color: #c0af85;
+	text-decoration: none;
+}
+.stream li.pksr-twitter .twitter-user a:hover {
+	color: #c0af85;
+}
+.stream li.pksr-twitter .twitter-user a strong{
+	font-weight: normal;
+}
+/* google */
+.stream li.pksr-google .section-title {
+	margin-bottom: 5px;
+}
+.pksr .stream li.pksr-google .section-thumb img {
+	max-width: 192px;
+}
+.stream li.pksr-google .meta span.plusones {
+	padding-left: 0;
+}
+/* rss */
+.stream li.pksr-rss .section-text img {
+	border: 1px solid #ddd;
+	padding: 1px;
+	background: #fff;
+	max-width: 192px;
+}
+/* stumbleupon */
+.pksr .stream li.pksr-stumbleupon .section-title {
+	display: block;
+	clear: both;
+}
+.pksr .stream li.pksr-stumbleupon .section-thumb img {
+	max-width: 192px;
+}
+/* youtube */
+.stream li.pksr-youtube .section-thumb img {
+	max-width: 192px;
+}
+/* vimeo */
+.stream li.pksr-vimeo .section-thumb img {
+	max-width: 192px;
+}
+.pksr .stream li.pksr-vimeo .section-title {
+	display: block;
+	clear: both;
+}
+.stream li.pksr-vimeo .section-text {
+	margin-bottom: 5px;
+}
+.stream li.pksr-vimeo .section-text .meta {
+	padding-top: 5px;
+}
+.stream li.pksr-vimeo .logo {
+	margin-bottom: 3px;
+}
+/* Flickr */
+.stream li.pksr-flickr .section-thumb {
+	margin: 0;
+}
+.stream li.pksr-flickr .section-thumb img{
+	max-width: 192px;
+}
+/* Pinterest */
+.stream li.pksr-pinterest .section-thumb {
+	display: block;
+}
+.stream li.pksr-pinterest .section-text {
+	clear: both;
+}
+.stream li.pksr-pinterest .section-thumb img {
+	width: 190px;
+}
+/* dribbble */
+.stream li.pksr-dribbble .inner img {
+	margin-bottom: 5px;
+	max-width: 192px;
+}
+.stream li.pksr-dribbble .section-title {
+	display: block;
+	clear: both;
+}
+/* lastfm */
+.stream li.pksr-lastfm .section-title {
+	background: url(../../images/social_images/tracks.png) no-repeat 0 0;
+	padding-left: 17px;
+	margin-bottom: 0;
+}
+/* deviantart */
+.stream li.pksr-deviantart .section-thumb {
+	display: block;
+	float: none;
+}
+.stream li.pksr-deviantart .section-thumb img {
+	max-width: 192px;
+}
+/* tumblr */
+.stream li.pksr-tumblr .section-text img {
+	margin: 0 7px 5px 0;
+	float: left;
+	border: 1px solid #ddd;
+	padding: 1px;
+	background: #fff;
+	max-width: 192px;
+}
+.stream li.pksr-tumblr .track {
+	display: block;
+	background: url(../../images/social_images/tracks.png) no-repeat 0 5px;
+	padding: 5px 0 0 17px;
+	margin-bottom: 0;
+}
+/* instagram */
+.stream li.pksr-instagram {
+	
+}
+.stream li.pksr-instagram .section-title {
+	font-weight: normal;
+	clear: both;
+}
+.stream li.pksr-instagram .section-thumb img {
+	width: 100%;
+}
+.stream li.pksr-instagram .meta {
+	clear: both;
+}
+.stream li.pksr-instagram .section-meta .meta .comments, .stream li.pksr-instagram .section-meta .meta .likes {
+	margin: 0 0 5px 0;
+	padding-top: 5px;
+	background-position: 0px 5px;
+	float: none;
+	font-size: 100%;
+	font-weight: bold;
+}
+.pksr-twitter .section-text br {display: none!important;}
+/*isotope */
+.isotope,
+.isotope .isotope-item {
+  /* change duration value to whatever you like */
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:         top, left, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+/* CSS Document */
+
+#dcssb-float.dc-social-float .dc-social-float-content {box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4); border:none!important;}
+#dcssb-float.dc-social-float .dc-social-float-content {border-radius: 0px!important; -webkit-border-radius: 0px!important;}
+.stream li.pksr-youtube .section-title {clear: both; display: block; padding: 5px 0 0;}
+#pksr-filter>li a:first{height:auto !important}
+.f-facebook a.iso-active{background-color:#3b5998 !important;}
+.f-twitter a.iso-active{background-color:#4ec2dc !important;}
+.f-google a.iso-active{background-color:#2d2d2d !important;}
+.f-rss a.iso-active{background-color:#FF9800 !important;}
+.f-flickr a.iso-active{background-color:#f90784 !important;}
+.f-delicious a.iso-active{background-color:#3271CB !important;}
+.f-youtube a.iso-active{background-color:#DF1F1C !important;}
+.f-pinterest a.iso-active{background-color:#CB2528 !important;}
+.f-lastfm a.iso-active{background-color:#C90E12 !important;}
+.f-dribbble a.iso-active{background-color:#F175A8 !important;}
+.f-vimeo a.iso-active{background-color:#4EBAFF !important;}
+.f-deviantart a.iso-active{background-color:#607365 !important;}
+.f-tumblr a.iso-active{background-color:#365472 !important;}
+.f-instagram a.iso-active{background-color:#413A33 !important;}
+.f-stumbleupon a.iso-active{background-color:#EB4924 !important;}

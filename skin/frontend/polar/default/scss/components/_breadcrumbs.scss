@@ -1,0 +1,70 @@
+/* BREADCRUMBS - _breadcrumbs.scss */
+nav.breadcrumbs {
+  clear: both; /* FireFox fix */
+  line-height: $base-font-size * 1.5;
+  display: none; 
+  letter-spacing: 0.1em;
+  overflow: hidden;
+  position: relative;
+  padding: 1rem $column-gutter / 2;
+  
+  & > * {
+    font-size: $base-font-size * 0.7;
+    text-transform: uppercase;
+    color: $black;
+    &.current {
+      color: #9d9d9d;
+    }
+    &:before {
+      font-size: $base-font-size * 0.7;
+      content: ' / ';
+      top: -1px;
+    }
+  }
+  & > a {
+    display:none;
+    float: none;
+  }
+  & > a:nth-last-child(2),
+  & > a:last-child {
+    display: inline;
+  }
+  & > a:nth-last-child(2):before {
+    display: none;
+  }
+  a:hover,
+  a:active,
+  a:focus {
+    text-decoration: none;
+    color: $gold;
+  }
+  @media #{$medium-up} {
+    display: block; 
+    & > a {
+      display:inline-block;
+      float: left;
+    }
+    & > a:nth-last-child(2),
+    & > a:last-child {
+      display: inline-block;
+    }
+    & > a:nth-last-child(2):before {
+      display: inline;
+    }
+  }
+}
+.fullwidth > nav.breadcrumbs {
+  @media #{$large-up} {
+    margin-left: $base-font-size * 0.75;
+    margin-right: $base-font-size * 0.75;
+  }
+}
+
+  
+  
+  /*& > * {
+    
+  }
+  & > *.current {
+    color: #9d9d9d;
+  }*/

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<layout>
+  <adminhtml_sliderdata_index>
+    <reference name="content">
+      <block type="sliderdata/adminhtml_sliderdata" name="sliderdata" />
+    </reference>
+  </adminhtml_sliderdata_index>
+
+  <adminhtml_sliderdata_edit>
+    <reference name="content">
+      <block type="sliderdata/adminhtml_sliderdata_edit" name="sliderdata_edit" />
+    </reference>
+  </adminhtml_sliderdata_edit>
+
+</layout>

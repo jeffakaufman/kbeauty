@@ -1,0 +1,33 @@
+// All default components are collected here for one easy @import url(
+@import "components/base",
+        "components/message",
+        "components/table",
+        "components/structural",
+        "components/top-line",
+        "components/top-cart",
+        "components/off-canvas",
+        "components/off-canvas-search",
+        "components/off-canvas-menu",
+        "components/off-canvas-mini-cart",
+        "components/sidebar",
+        "components/header",
+        "components/footer",
+        "components/navigation",
+        "components/navigation-vertical",
+        "components/std",
+        "components/form",
+        "components/icons",
+        "components/breadcrumbs",
+        "components/products-list",
+        "components/price",
+        "components/product",
+        "components/product-tabs",
+        "components/tag",
+        "components/review",
+        "components/cart",
+        "components/checkout",
+        "components/wishlist",
+        "components/account";
+
+// Third party
+@import "components/thirdparty/google-search";

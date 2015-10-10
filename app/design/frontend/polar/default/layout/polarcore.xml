@@ -1,0 +1,625 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+            <action method="setIsHandle">
+                <applied>1</applied>
+            </action>
+            
+          <!-- Off canvas blocks, left and right -->
+          <block type="page/html_header" name="off_canvas_left" as="off_canvas_left" template="page/html/off-canvas-left.phtml">
+            
+            <block type="core/template" name="top.search.mobile" as="topSearch-mobile" template="catalogsearch/form.mini-mobile.phtml">
+                <action method="setIdTag"><value>mobile</value></action>
+            </block>
+
+            <block type="page/html_topmenu" name="catalog.topnav.mobile" as="topMenu-mobile" template="page/html/topmenu-mobile.phtml">
+                <block type="cms/block" name="polar.main.menu.mobile">
+                    <action method="setBlockId"><value>polar-main-menu</value></action>
+                </block>
+                <block type="cms/block" name="polar.nav.before.mobile">
+                    <action method="setBlockId"><value>polar-nav-before</value></action>
+                </block>
+                <block type="cms/block" name="polar.nav.after.mobile">
+                    <action method="setBlockId"><value>polar-nav-after</value></action>
+                </block>
+            </block>
+
+            <block type="newsletter/subscribe" name="left_newsletter" before="-" template="newsletter/subscribe_sidebar.phtml" />
+         </block>
+
+         <block type="page/html_header" name="off_canvas_right" as="off_canvas_right" template="page/html/off-canvas-right.phtml">
+            
+            <block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml" before="-">
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>
+                <block type="core/text_list" name="cart_sidebar.extra_actions" as="extra_actions" translate="label" module="checkout">
+                    <label>Shopping Cart Sidebar Extra Actions</label>
+                </block>
+            </block>
+            <!-- <block type="checkout/cart_sidebar" name="cart_sidebar" as="cart_sidebar" template="checkout/cart/sidebar.phtml"/> --> <!-- sidebar.phtml to keep it compatible with modules (not header.phtml which would be more semantic) -->
+            <!-- <block type="checkout/cart_sidebar" name="cart_sidebar-mobile" as="cart_sidebar-mobile" template="checkout/cart/sidebar-mobile.phtml"/> --> <!-- different placement and other markup on mobile -->
+
+
+         </block>
+
+            
+        </reference>
+
+
+        <reference name="catalog.topnav">
+
+            <block type="cms/block" name="polar.main.menu">
+                <action method="setBlockId"><value>polar-main-menu</value></action>
+            </block>
+            <block type="cms/block" name="polar.nav.before">
+                <action method="setBlockId"><value>polar-nav-before</value></action>
+            </block>
+            <block type="cms/block" name="polar.nav.after">
+                <action method="setBlockId"><value>polar-nav-after</value></action>
+            </block>
+
+        </reference>
+
+        <reference name="head">
+            <!-- Add jQuery. It's called further down in this file. -->
+            <action method="addItem"><type>skin_js</type><name>js/jquery.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.easing.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/jquery.backgroundpos.min.js</name><params/></action>
+
+            <!-- Set jQuery in noConflict() mode. -->
+            <action method="addItem"><type>skin_js</type><name>js/jquery.noconflict.js</name><params/></action>
+
+            <!-- Load Foundation.js to be able to use all the Foundation glory -->
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.js</name><params/></action>
+
+            <!-- We need Modernizr -->
+            <action method="addItem"><type>skin_js</type><name>js/custom.modernizr.js</name><params/></action>
+
+            <!-- Foundation JS plugins. Add what you need to your local.xml. Belongs in <reference name="head">. Remember to include the CSS components associated with the plugin. -->
+
+            <!-- <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.tab.js</name><params/></action> --> <!-- For tabs on product page -->
+
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.offcanvas.js</name><params/></action>
+
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.clearing.js</name><params/></action> <!-- Product image zoom and gallery -->
+
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.equalizer.js</name><params/></action>
+
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.accordion.js</name><params/></action>
+
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.reveal.js</name><params/></action>
+            <!--
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.abide.js</name><params/></action>
+            
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.alert.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.clearing.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.dropdown.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.interchange.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.joyride.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.magellan.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.orbit.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.slider.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.tooltip.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>foundation/js/foundation/foundation.topbar.js</name><params/></action>
+
+            -->
+
+            <action method="addItem"><type>skin_js</type><name>js/overthrow.js</name><params/></action>
+
+
+            <!-- Our own JS, contains basically the show/hide function used on mobile and JS required for the dropdown cart to work. -->
+            <action method="addItem"><type>skin_js</type><name>js/polar.js</name><params/></action>
+
+            <!-- Loaded separatly to speed things up slightly -->
+            <action method="addItem"><type>skin_css</type><name>fonts/fonts.css</name><params/></action>
+
+            <!-- For small custom changes, edit custom.css -->
+            <action method="addCss"><stylesheet>css/custom.css</stylesheet></action>
+
+            <action method="addItem"><type>skin_css</type><name>css/touchcarousel.css</name><params/></action>
+              <action method="addItem"><type>skin_js</type><name>js/jquery.touchcarousel-1.2.min.js</name><params/></action>
+
+              <action method="addItem"><type>skin_css</type><name>css/cs-select.css</name><params/></action>
+              <action method="addItem"><type>skin_js</type><name>js/classie.js</name><params/></action>
+              <action method="addItem"><type>skin_js</type><name>js/selectFx.js</name><params/></action>
+              <!-- <action method="addItem"><type>skin_js</type><name>js/jquery.form.min.js</name><params/></action> -->
+
+              <!-- <action method="addItem"><type>skin_css</type><name>css/flexslider.css</name><params/></action>
+              <action method="addItem"><type>skin_js</type><name>js/jquery.flexslider-min.js</name><params/></action> -->
+
+              <action method="addItem"><type>skin_js</type><name>js/device.min.js</name><params/></action>
+
+              <action method="addItem"><type>skin_js</type><name>js/custom_head.js</name><params/></action>
+
+        </reference>
+
+        <reference name="after_body_start">
+
+          <!-- Load Foundation jQuery when the DOM is done loading. -->
+          <block type="core/text" name="foundation_load"><action method="setText"><text><![CDATA[
+            <script type="text/javascript">
+                jQuery(document).ready(function(){
+                    jQuery(document).foundation(function (response) {
+                        console.log(response.errors);
+                    });
+                });
+            </script>
+          ]]></text></action></block>
+          
+          <block type="core/text" name="facebook_sdk"><action method="setText"><text><![CDATA[
+            <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=235468389807927";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+           ]]></text></action></block>
+
+        </reference>
+
+        <reference name="header">
+            <block type="core/template" name="top.search.mobile" as="topSearch-mobile" template="catalogsearch/form.mini-mobile.phtml">
+                <action method="setIdTag"><value>mobile</value></action>
+            </block>
+            <!-- Adds a cart to the header and removes the link in customer center links: -->
+            <!-- <block type="checkout/cart_sidebar" name="cart_header" template="checkout/cart/sidebar.phtml"/> --> <!-- sidebar.phtml to keep it compatible with modules (not header.phtml which would be more semantic) -->
+            <!-- <block type="checkout/cart_sidebar" name="cart_header-mobile" template="checkout/cart/sidebar-mobile.phtml"/> --> <!-- different placement and other markup on mobile -->
+
+            <!-- <remove name="checkout_cart_link" />
+ -->
+        </reference>
+
+        <reference name="right">
+
+            <!-- Get out of here, callout, you're drunk. -->
+            <remove name="right.permanent.callout" />
+
+            <!-- <remove name="cart_sidebar" /> -->
+
+            <!-- «Poll as a core future is a good idea» - Said Nobody, Ever -->
+            <remove name="right.poll" />
+
+            <remove name="paypal.partner.right.logo" />
+
+        </reference>
+
+        <reference name="left">
+
+            <!-- Get out of here, callout, you're drunk. -->
+            <remove name="left.permanent.callout" />
+
+            <!-- We would like to use the left column for product specific actions such as filtering, so we remove the newsletter -->
+            <remove name="left.newsletter" />
+
+        </reference>
+
+        <reference name="footer">
+            
+            <!-- Add Newsletter to footer. We usually hardcode the newsletter to the polar-footer static block, but here it's added by xml -->
+            <block type="newsletter/subscribe" name="footer.newsletter" before="-" template="newsletter/subscribe.phtml" />
+
+        </reference>
+
+        <reference name="top.links">
+            <action method="setTemplate"><template>page/html/top-links.phtml</template></action>
+        </reference>
+
+        
+
+    </default>
+
+    <customer_account_edit translate="label">
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left-account-settings.phtml</template></action>
+        </reference>
+        <reference name="left">
+            <remove name="customer_account_navigation"/>
+            <remove name="customer_account_dashboard_hello"/>
+            <remove name="customer_account_dashboard_info"/>
+            <remove name="customer_account_dashboard_address"/>
+            <remove name="customer_account_dashboard_newsletter"/>
+            <!-- <remove name="tokenbase_manage_authnetcim_cards"/> -->
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <action method="insert"><blockName>customer_edit</blockName></action>
+            <block type="customer/newsletter" name="customer_newsletter">
+                <block type="page/html_wrapper" name="customer.newsletter.form.before" as="form_before" translate="label">
+                    <label>Newsletter Subscription Form Before</label>
+                    <action method="setMayBeInvisible"><value>1</value></action>
+                </block>
+            </block>
+
+            <block type="tokenbase/customer_cards" name="tokenbase_manage_authnetcim_cards" as="tokenbase_customer_method_left" template="paradoxlabs/tokenbase/customer/cards_edit.phtml" />
+            
+        </reference>
+        <reference name="my.account.wrapper">
+            <action method="unsetChild"><name>customer_edit</name></action>
+            <block type="customer/address_edit" name="customer_address_edit" template="customer/address/edit.phtml"/>
+        </reference>
+    </customer_account_edit>
+    <!-- Let's get those customer account links under control! Here we unset the entire menu, and then add the links we would like to keep. All those disabled are commented out. Add them to your local.xml -->
+    <customer_account>
+        <remove name="catalog.polar.vertnav" />
+        <remove name="catalog.compare.sidebar" />
+        <remove name="sale.reorder.sidebar"/>
+        <remove name="customer_account_dashboard_newsletter"/>
+        <remove name="customer_account_navigation"/>
+        
+        <reference name="off_canvas_right">
+            <action method="insert"><blockName>cart_sidebar</blockName></action>
+        </reference>
+        <reference name="left">
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+        </reference>
+    </customer_account>
+
+    <customer_address_index translate="label">
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </customer_address_index>
+
+    <customer_account_index>
+        <reference name="left">
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <block type="customer/account_dashboard_hello" name="customer_account_dashboard_hello" as="hello" template="customer/account/dashboard/hello.phtml"/>
+            <block type="customer/account_dashboard_info" name="customer_account_dashboard_info" as="info" template="customer/account/dashboard/info.phtml"/>
+            <block type="customer/account_dashboard_address" name="customer_account_dashboard_address" as="address" template="customer/account/dashboard/address.phtml"/>
+            <block type="tokenbase/customer_cards" name="tokenbase_manage_authnetcim_cards" as="tokenbase_customer_method_left" template="paradoxlabs/tokenbase/customer/cards.phtml" />
+        </reference>
+        <reference name="content">
+            <block type="sales/order_recent" name="order_recent" as="top" template="sales/order/recent.phtml"/>
+            <block type="wishlist/customer_wishlist" name="customer.wishlist" template="wishlist/dashboard.phtml">
+                <action method="setTitle" translate="title">
+                    <title>My Wishlist</title>
+                </action>
+                <block type="wishlist/customer_wishlist_items" name="customer.wishlist.items" as="items" template="wishlist/item/list_short.phtml">
+                    <block type="wishlist/customer_wishlist_item_column_image" name="customer.wishlist.item.image" template="wishlist/item/column/image.phtml" />
+                    <block type="wishlist/customer_wishlist_item_column_comment" name="customer.wishlist.item.info" template="wishlist/item/column/info.phtml"/>
+                    <block type="wishlist/customer_wishlist_item_column_cart" name="customer.wishlist.item.cart" template="wishlist/item/column/cart.phtml">
+                        <block type="wishlist/customer_wishlist_item_options" name="customer.wishlist.item.options" />
+                    </block>
+                    <block type="wishlist/customer_wishlist_item_column_remove" name="customer.wishlist.item.remove" template="wishlist/item/column/remove.phtml" />
+                </block>
+                <block type="core/text_list" name="customer.wishlist.buttons" as="control_buttons">
+                    <block type="wishlist/customer_wishlist_button" name="customer.wishlist.button.share" template="wishlist/button/share.phtml" />
+                    <block type="wishlist/customer_wishlist_button" name="customer.wishlist.button.toCart" template="wishlist/button/tocart.phtml" />
+                    <block type="wishlist/customer_wishlist_button" name="customer.wishlist.button.update" template="wishlist/button/update.phtml" />
+                </block>
+            </block>
+        </reference>
+    </customer_account_index>
+
+    <checkout_cart_index translate="label">
+        <reference name="content">
+            <block type="customer/login" name="persistent.customer.form.login">
+                <block type="checkout/cart_shipping" name="checkout.cart.shipping" as="shipping" template="checkout/cart/shipping.phtml"/>
+                <block type="core/template" name="customer_form_login" as="login" template="persistent/customer/form/login.phtml"/>
+            </block>
+        </reference>
+        <remove name="checkout.cart.methods.multishipping"/>
+        <reference name="customer_form_login">
+            <action method="setTemplate"><template>persistent/checkout/onepage/login.phtml</template></action>
+            <block type="persistent/form_remember" name="persistent.remember.me" template="persistent/remember_me.phtml" />
+            <block type="core/template" name="persistent.remember.me.tooltip" template="persistent/remember_me_tooltip.phtml" />
+        </reference>
+        <!-- <reference name="customer_form_login">
+            <action method="setTemplate"><template>persistent/customer/form/login.phtml</template></action>
+            <block type="persistent/form_remember" name="persistent.remember.me" template="persistent/remember_me.phtml" />
+            <block type="core/template" name="persistent.remember.me.tooltip" template="persistent/remember_me_tooltip.phtml" />
+        </reference> -->
+    </checkout_cart_index>
+
+    <checkout_onepage_index translate="label">
+        <reference name="content">
+            <action method="insert"><blockName>checkout.progress.wrapper</blockName></action>
+        </reference>
+        <reference name="right">
+            <action method="unsetChild"><name>checkout.progress.wrapper</name></action>
+            <block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/onepage/sidebar.phtml" before="-">
+                <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/cart.phtml</template></action>
+                <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/cart.phtml</template></action>
+                <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/cart.phtml</template></action>
+                <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+            </block>
+            <!-- <block type="checkout/cart_coupon" name="checkout.cart.coupon" as="coupon" template="checkout/cart/coupon.phtml"/> -->
+        </reference>
+        <block type="checkout/onepage_login" name="checkout.onepage.login" as="login" template="checkout/onepage/login.phtml">
+            <block type="page/html_wrapper" name="checkout.onepage.login.before" as="login_before" translate="label">
+                <label>Login/Registration Before</label>
+                <action method="setMayBeInvisible"><value>1</value></action>
+            </block>
+        </block>
+    </checkout_onepage_index>
+
+    <checkout_onepage_paymentmethod>
+
+        <block type="checkout/onepage_payment_methods" name="root" output="toHtml" template="checkout/onepage/payment/methods.phtml">
+            <action method="setMethodFormTemplate"><method>purchaseorder</method><template>payment/form/purchaseorder.phtml</template></action>
+        </block>
+        
+    </checkout_onepage_paymentmethod>
+
+    <checkout_onepage_review>
+        <block type="checkout/onepage_review_info" name="root" output="toHtml" template="checkout/onepage/review/info.phtml">
+            <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+            <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+            <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">
+                <label>Items Before</label>
+            </block>
+
+            <block type="core/text_list" name="checkout.onepage.review.info.items.after" as="items_after" translate="label">
+                <label>Items After</label>
+            </block>
+            <block type="checkout/agreements" name="checkout.onepage.agreements" as="agreements" template="checkout/onepage/agreements.phtml"/>
+            <block type="core/template" name="checkout.onepage.review.button" as="button" template="checkout/onepage/review/button.phtml"/>
+            
+        </block>
+    </checkout_onepage_review>
+
+    <customer_paymentinfo_index_authnetcim>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <action method="unsetChild"><name>tokenbase_customer_method_left</name></action>
+        <action method="unsetChild"><name>cart_sidebar</name></action>
+        <reference name="left">
+            <action method="insert"><blockName>tokenbase_customer_method_left</blockName></action>
+        </reference>
+    </customer_paymentinfo_index_authnetcim>
+
+    <customer_paymentinfo_index_authnetcim_ach>
+        <action method="unsetChild"><name>cart_sidebar</name></action>
+    </customer_paymentinfo_index_authnetcim_ach>
+
+    <customer_paymentinfo_ajaxload_authnetcim>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </customer_paymentinfo_ajaxload_authnetcim>
+
+    <sales_order_history>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right-my-orders.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <action method="unsetChild"><name>sales.order.history</name></action>
+            
+            <block type="sales/order_recent" name="order_recent" as="top" template="sales/order/recent.phtml"/>
+        </reference>
+        <reference name="right">
+            <action method="insert"><blockName>sales.order.history</blockName></action>
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <remove name="right.reports.product.viewed" />
+            <remove name="wishlist_sidebar"/>
+        </reference>
+        <reference name="off_canvas_right">
+            <action method="insert"><blockName>cart_sidebar</blockName></action>
+        </reference>
+    </sales_order_history>
+
+    <sales_order_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right-my-orders.phtml</template></action>
+        </reference>
+        <remove name="order_recent"/>
+        <reference name="content">
+
+        </reference>
+        <reference name="right">
+            <block type="sales/order_history" name="sales.order.history">
+                <block type="core/text_list" name="sales.order.history.info" as="info" translate="label">
+                    <label>Order History Info</label>
+                </block>
+            </block>
+            <action method="unsetChild"><name>cart_sidebar</name></action>
+            <remove name="wishlist_sidebar"/>
+            <remove name="right.reports.product.viewed" />
+        </reference>
+        <reference name="off_canvas_right">
+            <action method="insert"><blockName>cart_sidebar</blockName></action>
+        </reference>
+    </sales_order_view>
+
+    <gomage_checkout_onepage_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column-checkout.phtml</template></action>
+        </reference>
+    </gomage_checkout_onepage_index>
+
+    <checkout_onepage_success>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </checkout_onepage_success>
+
+    <wishlist_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <remove name="customer_account"/>
+                <!-- <action method="unsetChild"><name>customer.wishlist.item.cart</name></action> -->
+                <!-- <remove name="customer.wishlist.item.cart"/> -->
+    </wishlist_index_index>
+    <wishlist_index_share>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <remove name="customer_account"/>
+    </wishlist_index_share>
+    <!-- <wishlist_index_index>
+        <update handle="customer_account" />
+        <reference name="my.account.wrapper">
+            <block type="wishlist/customer_wishlist" name="customer.wishlist" template="wishlist/view.phtml">
+                <action method="setTitle" translate="title">
+                    <title>My Wishlist</title>
+                </action>
+                <block type="wishlist/customer_wishlist_items" name="customer.wishlist.items" as="items" template="wishlist/item/list.phtml">
+                    <block type="wishlist/customer_wishlist_item_column_image" name="customer.wishlist.item.image" template="wishlist/item/column/image.phtml" />
+                    <block type="wishlist/customer_wishlist_item_column_comment" name="customer.wishlist.item.info" template="wishlist/item/column/info.phtml">
+                        <action method="setTitle" translate="title">
+                            <title>Product Details and Comment</title>
+                        </action>
+                    </block>
+                    <block type="wishlist/customer_wishlist_item_column_cart" name="customer.wishlist.item.cart" template="wishlist/item/column/cart.phtml">
+                        <action method="setTitle" translate="title">
+                            <title>Add to Cart</title>
+                        </action>
+                        <block type="wishlist/customer_wishlist_item_options" name="customer.wishlist.item.options" />
+                    </block>
+                    <block type="wishlist/customer_wishlist_item_column_remove" name="customer.wishlist.item.remove" template="wishlist/item/column/remove.phtml" />
+                </block>
+                <block type="core/text_list" name="customer.wishlist.buttons" as="control_buttons">
+                    <block type="wishlist/customer_wishlist_button" name="customer.wishlist.button.share" template="wishlist/button/share.phtml" />
+                </block>
+            </block>
+        </reference>
+        <reference name="right">
+            <action method="unsetChild"><name>wishlist_customer_sidebar</name></action>
+        </reference>
+    </wishlist_index_index> -->
+
+    <contacts_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </contacts_index_index>
+
+    <catalog_product_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+        </reference>
+        <reference name="content">
+
+          <!-- Nobody has ever requested the ability to tag. -->
+          <remove name="product_tag_list" />
+
+        </reference>
+        <reference name="product.info">
+
+          <!-- Add the review form to the product page directly. -->
+          <!-- <block type="review/product_view_list" name="product.info.product_review" as="product_review" template="review/product/view/list.phtml">
+              <block type="review/form" name="product.review.form" as="review_form"/>
+          </block> -->
+
+          <!-- Set number of columns in the related products block -->
+          <block type="catalog/product_list_related" name="catalog.product.related" as="related" template="catalog/product/list/related.phtml">
+            <action method="setColumnCount"><columns>6</columns></action>
+          </block>
+        </reference>
+        <remove name="product.clone_prices" />
+        <remove name="product.info.addto" />
+    </catalog_product_view>
+
+    <customer_logged_out>
+        <reference name="top.links">
+            <action method="removeLinkByUrl"><url helper="customer/getLoginUrl"/></action>
+        </reference>
+    </customer_logged_out>
+
+    <!-- Let's give all product listing pages 2-columns-left to eliminate the expensive third, right column -->
+    <catalog_category_default>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+        </reference>
+        <reference name="product_list">
+            <action method="setColumnCount"><columns>4</columns></action>
+            <block type="cms/block" name="polar.sale.item">
+                <action method="setBlockId"><value>polar-sale-item</value></action>
+            </block>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="product_list">
+            <action method="setColumnCount"><columns>4</columns></action>
+        </reference>
+    </catalog_category_layered>
+    <catalogsearch_result_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
+        </reference>
+        <reference name="search_result_list">
+            <action method="setColumnCount"><columns>3</columns></action>
+        </reference>
+    </catalogsearch_result_index>
+    <catalogsearch_advanced_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="search_result_list">
+            <action method="setColumnCount"><columns>4</columns></action>
+        </reference>
+    </catalogsearch_advanced_index>
+    <catalogsearch_advanced_result>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="search_result_list">
+            <action method="setColumnCount"><columns>4</columns></action>
+        </reference>
+    </catalogsearch_advanced_result>
+
+    <!-- Even though we have removed tags, it's nice to be prepared if somebody activates it -->
+    <tag_product_list>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="search_result_list">
+            <action method="setColumnCount"><columns>4</columns></action>
+        </reference>
+    </tag_product_list>
+
+    <!-- Add product type class to body -->
+    <PRODUCT_TYPE_bundle>
+        <reference name="root">
+            <action method="addBodyClass"><classname>bundle-product</classname></action>
+        </reference>
+    </PRODUCT_TYPE_bundle>
+    <PRODUCT_TYPE_configurable>
+        <reference name="root">
+            <action method="addBodyClass"><classname>configurable-product</classname></action>
+        </reference>
+    </PRODUCT_TYPE_configurable>
+    <PRODUCT_TYPE_simple>
+        <reference name="root">
+            <action method="addBodyClass"><classname>simple-product</classname></action>
+        </reference>
+    </PRODUCT_TYPE_simple>
+    <PRODUCT_TYPE_grouped>
+        <reference name="root">
+            <action method="addBodyClass"><classname>grouped-product</classname></action>
+        </reference>
+    </PRODUCT_TYPE_grouped>
+
+    <sendfriend_product_send translate="label">
+        <label>Catalog Product Email to a Friend</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </sendfriend_product_send>
+
+    <sales_email_order_items>
+        <block type="sales/order_email_items" name="items" template="email/order/items.phtml">
+            <action method="addItemRender"><type>default</type><block>sales/order_email_items_order_default</block><template>email/order/items/order/default.phtml</template></action>
+            <action method="addItemRender"><type>grouped</type><block>sales/order_email_items_order_grouped</block><template>email/order/items/order/default.phtml</template></action>
+            <block type="sales/order_totals" name="order_totals" template="sales/order/totals.phtml">
+                <action method="setLabelProperties"><value>align="right"</value></action>
+                <action method="setValueProperties"><value>align="right" width="60"</value></action>
+                <block type="tax/sales_order_tax" name="tax" template="tax/order/tax.phtml">
+                    <action method="setIsPlaneMode"><value>1</value></action>
+                </block>
+            </block>
+        </block>
+        <block type="core/text_list" name="additional.product.info" />
+    </sales_email_order_items>
+</layout>

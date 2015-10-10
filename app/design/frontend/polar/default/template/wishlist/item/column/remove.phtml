@@ -1,0 +1,45 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+$item = $this->getItem();
+$product = $item->getProduct();
+?>
+<div class="total small-12 medium-3 large-2 columns text-right">
+	<div class="add">
+	<?php if ($product->isSaleable()): ?>
+	    <a title="<?php echo $this->__('Add to my Bag') ?>" href="javascript:void(0)" onclick="addWItemToCart(<?php echo $item->getId()?>);"><?php echo $this->__('Add to my Bag') ?></a>
+	<?php else: ?>
+	    <?php if ($product->getIsSalable()): ?>
+	        <p class="availability in-stock"><span><?php echo $this->__('In stock') ?></span></p>
+	    <?php else: ?>
+	        <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+	    <?php endif; ?>
+	<?php endif; ?>
+	</div>
+	<div class="remove">
+	<a href="<?php echo $this->getItemRemoveUrl($this->getItem()); ?>" title="<?php echo $this->__('Remove Item') ?>"><span><?php echo $this->__('Remove');?></span><span class="icon icon-delete"></span></a>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Valkyrie_Press>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Valkyrie_Press>
+    </modules>
+</config>
+

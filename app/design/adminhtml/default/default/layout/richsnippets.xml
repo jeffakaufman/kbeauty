@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <richsnippets_adminhtml_richsnippets_index>
+        <reference name="content">
+            <block type="richsnippets/adminhtml_richsnippets" name="richsnippets" />
+        </reference>
+    </richsnippets_adminhtml_richsnippets_index>
+</layout>

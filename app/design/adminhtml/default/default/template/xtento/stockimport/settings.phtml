@@ -1,0 +1,86 @@
+<?php
+$model = Mage::registry('stock_import_profile');
+$configuration = new Varien_Object($model->getConfiguration());
+?>
+<div class="entry-edit">
+    <?php echo $this->getFormHtml(); ?>
+    <div class="entry-edit-head">
+        <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Filter: Include or exclude products from importing') ?></h4>
+
+        <div class="form-buttons"></div>
+    </div>
+    <div class="fieldset fieldset-wide" id="base_fieldset">
+        <div class="hor-scroll">
+            <div class="grid" id="grid_filters" style="position:relative;">
+                <?php for ($i=1; $i <= Xtento_StockImport_Model_Import_Entity_Stock::$maxImportFilterCount; $i++): ?>
+                <?php
+                    $filterConfig = new Varien_Object($configuration->getData('import_filter_'.$i));
+                ?>
+                <strong>Filter <?php echo $i?></strong>
+                <table cellpadding="0" cellspacing="0" class="border" style="margin-top: 1px; margin-bottom: 5px;">
+                    <tbody>
+
+                    <tr class="headings" id="headings_filters">
+                        <th><?php echo $this->__('Include/Exclude')?></th>
+                        <th><?php echo $this->__('Product Attribute')?></th>
+                        <th><?php echo $this->__('Condition')?></th>
+                        <th><?php echo $this->__('Value')?></th>
+                        <th></th>
+                    </tr>
+                    <tr id="x">
+                        <td>
+                            <select id="import_filter_<?php echo $i?>_filter" name="import_filter_<?php echo $i?>[filter]" class="select" style="width: 99.9%">
+                                <option value=""<?php if ($filterConfig->getFilter() !== 'exclude' && $filterConfig->getFilter() !== 'include_only'){ echo ' selected="selected"';}?>><?php echo $this->__('--- No filter selected ---')?></option>
+                                <option value="exclude"<?php if ($filterConfig->getFilter() == 'exclude'){ echo ' selected="selected"';}?>><?php echo $this->__('Exclude products where...')?></option>
+                                <option value="include_only"<?php if ($filterConfig->getFilter() == 'include_only'){ echo ' selected="selected"';}?>><?php echo $this->__('Include only products where...')?></option>
+                            </select></td>
+                        <td>
+                            <select id="import_filter_<?php echo $i?>_attribute" name="import_filter_<?php echo $i?>[attribute]" class="select" style="width: 99.9%">
+                                <option value=""<?php if ($filterConfig->getAttribute() == ''){ echo ' selected="selected"';}?>><?php echo $this->__('--- No attribute selected ---')?></option>
+                                <?php
+                                $productAttributes = Mage::getResourceModel('catalog/product_attribute_collection')
+                                    ->setOrder('main_table.frontend_label', 'asc')
+                                    ->load();
+                                foreach ($productAttributes as $productAttribute) {
+                                    if ($productAttribute->getFrontendLabel()) {
+                                        echo sprintf('<option value="%s"%s>%s [%s]</option>', $productAttribute->getAttributeCode(), ($filterConfig->getAttribute() == $productAttribute->getAttributeCode()) ? ' selected="selected"' : '', $productAttribute->getFrontendLabel(), $productAttribute->getAttributeCode());
+                                    }
+                                }
+                                ?>
+                            </select></td>
+                        </td>
+                        <td>
+                            <select id="import_filter_<?php echo $i?>_condition" name="import_filter_<?php echo $i?>[condition]" class="select" style="width: 99.9%">
+                                <option value=""<?php if ($filterConfig->getCondition() == ''){ echo ' selected="selected"';}?>><?php echo $this->__('--- No condition selected ---')?></option>
+                                <option value="eq"<?php if ($filterConfig->getCondition() == 'eq'){ echo ' selected="selected"';}?>><?php echo $this->__('is (==)')?></option>
+                                <option value="neq"<?php if ($filterConfig->getCondition() == 'neq'){ echo ' selected="selected"';}?>><?php echo $this->__('is not (!=)')?></option>
+                                <option value="gteq"<?php if ($filterConfig->getCondition() == 'gteq'){ echo ' selected="selected"';}?>><?php echo $this->__('equals or greater than (&gt;=)')?></option>
+                                <option value="lteq"<?php if ($filterConfig->getCondition() == 'lteq'){ echo ' selected="selected"';}?>><?php echo $this->__('equals or less than (&lt;=)')?></option>
+                                <option value="gt"<?php if ($filterConfig->getCondition() == 'gt'){ echo ' selected="selected"';}?>><?php echo $this->__('greater than (&gt;)')?></option>
+                                <option value="lt"<?php if ($filterConfig->getCondition() == 'lt'){ echo ' selected="selected"';}?>><?php echo $this->__('less than (&lt;)')?></option>
+                                <option value="like"<?php if ($filterConfig->getCondition() == 'like'){ echo ' selected="selected"';}?>><?php echo $this->__('contains')?></option>
+                                <option value="nlike"<?php if ($filterConfig->getCondition() == 'nlike'){ echo ' selected="selected"';}?>><?php echo $this->__('does not contain')?></option>
+                            </select></td>
+                        </td>
+                        <td>
+                            <input type="text" id="import_filter_<?php echo $i?>_value" name="import_filter_<?php echo $i?>[value]" value="<?php echo $filterConfig->getValue()?>" class="input-text" style="width: 98%;">
+                        </td>
+                        <td>
+                            <button onclick="$('import_filter_<?php echo $i?>_value').value='';$('import_filter_<?php echo $i?>_condition').value='';$('import_filter_<?php echo $i?>_attribute').value='';$('import_filter_<?php echo $i?>_filter').value='';" class="scalable delete" type="button">
+                                <span><?php echo $this->__('Reset Filter')?></span></button>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <?php endfor; ?>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+    #grid_filters .scalable {
+        width: 100%;
+    }
+</style>
+<?php echo $this->getChildHtml('form_after'); ?>

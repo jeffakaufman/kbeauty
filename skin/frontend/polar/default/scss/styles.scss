@@ -1,0 +1,971 @@
+@charset "UTF-8";
+
+// Polar/default. We need to import a bit more here than in a child theme (which only needs _settings.scss).
+
+// Include all of the foundation global elements that are needed to work with any of the other files.
+@import "settings"; // All Polar settings
+
+@import "foundation-components"; // All Foundation components
+@import "components"; // All Polar components
+
+
+.cms-home {
+
+	h2 {
+		text-transform: uppercase;
+		font-weight: bold;
+		text-align: center;  
+		margin: 2rem 0;
+		letter-spacing: 0.4em;
+	}
+	#faves h2 {
+		margin-top: 3rem;
+	}
+	#bestsellers h2 {
+		color: $gold;
+		margin-top: 0;
+	}
+	.main-container .main {
+		padding-bottom: 0;
+	}
+}
+#morePlus {
+	position:relative;
+	z-index: 5;
+	text-align: center;
+	&.active {
+		margin-bottom: 2rem;
+	}
+	.icon {
+		color: $white;
+		font-size: $base-font-size * 1.5;
+		padding: 0.5rem;
+		-webkit-border-radius: 50%;
+		-moz-border-radius: 50%;
+		border-radius: 50%;
+		background-color: $gold;
+		cursor: pointer;
+		&:hover {
+			background: $jet;
+		}
+	}
+}
+body.overlay {
+	overflow: hidden;
+}
+#overlay {
+    position: fixed;
+    overflow-y: auto;
+    z-index: 9999999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+    opacity: 0;
+    text-align: center;
+    .container {
+    	display: inline-block;
+    	padding: 5%;
+    	width: 90%;
+    }
+    .window {
+    	width: 90%;
+    	min-height: 560px;
+    	margin: 5% auto;
+    	background: rgba(255,255,255,1);
+    	border: 1px solid $jet;
+    	overflow-y: auto;
+    	position: relative;
+    	max-width: 800px;
+    	@media #{$medium-up} {
+    		width: 60%;
+    	}
+    }
+    #closeBtn {
+	    font-size: $base-font-size * 1;
+	    color: $black;
+	    position: absolute;
+	    top: 0;
+  		right: 0;
+	    cursor: pointer;
+	    padding: 0.75em;
+	    @media #{$medium-up} {
+	    	padding: 1.5em;
+	    }
+	    &:hover {
+	    	color: $gold;
+	    }
+	}
+    .arrow {
+      position: absolute;
+      top: 50%;
+      margin-top: -15px;
+      font-size: 30px;
+      background: #fff;
+      cursor: pointer;
+      @media #{$large-up} {
+        margin-top: -30px;
+        font-size: 40px;
+      }
+      &:hover {
+        color: $gold;
+      }
+      &:before, &:after {
+        margin: 0;
+      }
+    }
+    .icon-arrow_left {
+      left: 0;
+    }
+    .icon-arrow_right {
+      right: 0;
+    }
+    .page-title {
+    	text-align: center;
+    }
+}
+div.AuthorizeNetSeal {
+	padding: $base-font-size * 2 !important; 
+	width: auto !important; 
+	display: inline;
+	img {
+		width: 60px;
+	}
+}
+#trustwaveSealImage {
+	width: 80px;
+	margin-top: 5px;
+}
+@media #{$large-up} {
+	div.AuthorizeNetSeal {
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
+	#trustwaveSealImage {
+		position: absolute;
+    	right: 120px;
+    	bottom: 33px;
+    }
+}
+.reveal-modal {
+	text-align: center;
+	width: 50%;
+	left: 25%;
+
+	@media #{$medium-up} {
+		padding: $base-font-size * 4;
+	}
+	h3 {
+		text-transform: uppercase;
+	    font-weight: bold;
+	    text-align: center;
+	    margin: $base-font-size 0;
+	    letter-spacing: 0.2em;
+	    
+	    @media #{$small-only} {
+			font-size: $base-font-size;
+		}
+	}
+	.close-reveal-modal {
+		color: #fff;
+		font-size: $base-font-size * 1;
+		font-weight: bold;
+		line-height: normal; 
+		position: relative;
+		top: auto;
+		right: auto;
+		text-transform: uppercase;
+		letter-spacing: 0.2em;
+		display: inline-block;
+		background: #000;
+		padding: $base-font-size * 0.5 0;
+		
+		@media #{$medium-up} {
+			font-size: $base-font-size * 1.2;
+			padding: $base-font-size * 0.5 $base-font-size * 2.125;
+		}
+		&:hover {
+			background: $gold;
+			border-color: $gold;
+			
+		}
+	}
+}
+
+/*#slider {
+	width: 100%;
+	min-height: 300px;
+	overflow: hidden;
+	opacity: 0;
+	position: relative;
+	max-width: $base-font-size * 75; 
+	margin:0 auto;
+	@media #{$medium-only} {
+		min-height: 200px;
+	}
+	@media #{$large-up} {
+		min-height: 400px;
+	}
+	
+	&:before {
+		content: '';
+	}
+	.container {
+		content: '';
+	    height: 100%;
+	    vertical-align: middle;
+	    position: relative;
+	    max-width: 1600px;
+	    margin: 0;
+	    @media #{$medium-up} {
+			max-height: 500px;
+		}
+	}
+	ul {
+		margin: 0;
+		@media #{$medium-up} {
+			max-height: 540px;
+		}
+	}
+	li {
+		padding: 20px 0;
+		width: 100%;
+		list-style: none;
+		background-size: contain;
+		background-repeat: no-repeat;
+		height: 100%;
+		position: relative;
+		right: 0;
+		@media #{$medium-up} {
+			max-height: 540px;
+		}
+		&.nextSlide {margin-top:-100%;}
+	}
+	.arrow {
+		position: absolute;
+		font-size: $base-font-size * 2;
+		padding: 0.15em 0;
+		background: #fff;
+		color: #000;
+		position: absolute;
+		top: 50%;
+		z-index: 1000;
+		display: none;
+		margin-top: -30px;
+		cursor: pointer;
+		&.icon-arrow_left {
+			left: 0;
+		}
+		&.icon-arrow_right {
+			right: 0;
+		}
+		&:hover {
+			color: #fff;
+			background: $gold;
+		}
+	}
+	&:hover .arrow {
+		display: inline-block;
+	}
+	.text {
+		position: relative;
+		width: 90%;
+		margin: 0 auto;
+		text-align: center;
+		display: block;
+  		vertical-align: middle;
+  		
+  		.title {
+  			font-weight: bold;
+			font-size: $base-font-size * 2;
+			letter-spacing: 0.4em;
+			text-transform: uppercase;
+			line-height: 1.2em;
+  		}
+  		.subtitle {
+  			letter-spacing: 0.4em;
+		  	font-size: $base-font-size * 1.1;
+		  	line-height: 1.2em;
+		  	text-transform: uppercase;
+  		}
+  		.action {
+  			display: block; margin: 0; width:100%; height:100%;
+  		}
+  		.action a {
+  			display: block; margin: 0; width:100%; height:100%; padding: 0; letter-spacing: 0.2em; font-weight: bold; color: #000; font-size: $base-font-size * 1.1; text-transform: uppercase;
+			&:hover {
+				text-decoration: none;
+				background: $gold;
+			}
+  		}
+  		@media #{$medium-up} {
+	  		margin: auto;
+	  		width: 42%;
+	  		left: 5%;
+			top: 0;
+			right: 53%;
+			bottom: 0;
+	  		display: inline-block;
+			.title {
+				font-size: $base-font-size * 1.6;
+			}
+			.subtitle {
+				letter-spacing: 0.3em;
+		  		font-size: $base-font-size * 1;
+			}
+			.action a {
+				font-size: $base-font-size * 1;
+			}
+  		}
+  		@media #{$large-up} {
+	  		width: 35%;
+			left: 13%;
+			right: 52%;
+			.title {
+				font-size: $base-font-size * 2;
+			}
+			.subtitle {
+				letter-spacing: 0.4em;
+		  		font-size: $base-font-size * 1.1;
+			}
+			.action a {
+				font-size: $base-font-size * 1.1;
+			}
+  		}
+	}
+	.image {
+		position: relative;
+		display: block;
+		width: 90%;
+		margin: 0 5% 5% 5%;
+		vertical-align: middle;
+		img {
+			//height: 100%;
+			@include box-shadow(-3px 3px 14px #aaa);
+		}
+		@media #{$medium-up} {
+			margin: auto;
+			display: inline-block;
+			width: 37%;
+			top: 0;
+			left: 51%;
+			right: 12%;
+			bottom: 0;
+		}
+	}
+}*/
+
+iframe#twitter-widget-0.twitter-follow-button {
+	
+		position: static !important;
+		visibility: visible !important;
+	  	width: 59px;
+	  	height: 20px;
+	
+}
+
+
+body.category-bronzer-and-highlighter #hero { background-image: url(../images/bronzer-and-highlighter.jpg); }
+body.category-brows #hero { background-image: url(../images/brows.jpg); }
+body.category-cheek-color #hero { background-image: url(../images/cheek-color.jpg); }
+body.category-eyeliner #hero { background-image: url(../images/eyeliner.jpg); }
+body.category-eyeshadow #hero { background-image: url(../images/eyeshadow.jpg); }
+body.category-lashes #hero { background-image: url(../images/lashes.jpg); }
+body.category-lip-color #hero { background-image: url(../images/lip-color.jpg); }
+body.category-lip-gloss #hero { background-image: url(../images/lip-gloss.jpg); }
+body.category-mascara #hero { background-image: url(../images/mascara.jpg); }
+body.category-prime-and-powder #hero { background-image: url(../images/prime-and-powder.jpg); }
+
+body.category-view-all #hero {
+	display: none;
+}
+.no-js #hero {
+	opacity: 1;
+}
+body.checkout-onepage-index .breadcrumbs {
+	padding-left: $base-font-size * 0.75;
+    padding-right: $base-font-size * 0.75;
+	@media #{$large-up} {
+	    padding-left: $base-font-size * 1.5;
+	    padding-right: $base-font-size * 1.5;
+    }
+}
+body.checkout-onepage-index.login {
+	
+	.col-2 li:nth-child(2) input {
+		margin-bottom: 0;
+	}
+	.col-main {
+		width: 100%;
+	}
+	.col-right, .step-title {
+		display: none;
+	}
+}
+
+#hero { 
+	width: 100%;
+	min-height: 300px;
+	overflow: hidden;
+	opacity: 0;
+	position: relative;
+	padding: 20px 0;
+	background-repeat: no-repeat;
+	height: 100%;
+	position: relative;
+	right: 0;
+	border-top: 1px solid $jet;
+	background-size: auto 100%;
+	background-position: 20% center;
+	@media #{$medium-up} {
+		max-height: 540px;
+		background-position: center center;
+	}
+	@media screen and (min-width: 1402px) {
+		background-size: 100% auto;
+	}
+	
+	.text {
+		text-transform: uppercase;
+		width: 80%;
+		margin: 30% auto 0 auto;
+		position: relative;
+		text-align: center;
+		display: block;
+  		vertical-align: middle;
+  		
+  		.title {
+  			font-weight: bold;
+			letter-spacing: 0.4em;
+			text-transform: uppercase;
+			font-size: $base-font-size * 1.2;
+			line-height: 1.5em;
+  			margin-bottom: 1em;
+		}
+		.subtitle {
+			letter-spacing: 0.4em;
+			line-height: 1.2em;
+		  	text-transform: uppercase;
+	  		font-size: $base-font-size * 0.9;
+		}
+
+		@media #{$medium-up} {
+			margin: auto;
+			width: 39%;
+  			left: 15%;
+  			top: 0;
+  			right: 46%;
+  			bottom: 0;
+			display: inline-block;
+			.title {
+				line-height: 1.2em;
+				font-size: $base-font-size * 1.5;
+			}
+			.subtitle {
+				letter-spacing: 0.3em;
+				line-height: 1.2em;
+		  		font-size: $base-font-size * 1.1;
+			}
+		}
+  		
+		@media #{$large-up} {
+			width: 37%;
+  			left: 17%;
+  			right: 46%;
+			margin: auto;
+			.title {
+				font-size: $base-font-size * 2;
+			}
+			.subtitle {
+				letter-spacing: 0.4em;
+		  		font-size: $base-font-size * 1.1;
+			}
+		}
+	}
+}
+
+body.cms-page-view {
+	.breadcrumbs {
+		display: none;
+	}
+}
+
+body.customer-account-edit .page-title.address {
+	display: none;
+}
+
+body.cms-the-kurrent-kourtney, body.cms-the-kurrent-kim, body.cms-the-kurrent-khloe {
+	.main-container {
+		background: url(../images/bg_kurrent_sister.jpg) no-repeat top center #fff;
+		background-size: 150% auto;
+		text-align: center;
+		@media #{$medium-up} {
+			background-size: 100% auto;
+		}
+		.col-main {
+			padding: 0;
+		}
+	}
+	#k-life a {
+		color: $gold;
+	}
+	.page-title {
+		margin-top: $base-font-size * 4;
+		@media #{$medium-up} {
+			margin-top: $base-font-size * 6;
+		}
+	}
+	.subtext {
+		margin: 0 auto 10% auto;
+		font-weight: 100;
+		width: 80%;
+		@media #{$medium-up} {
+			width: 50%;
+		}
+	}
+	.top_image {
+		width: 80%;
+		margin: 30px auto 0 auto;
+		
+		@media #{$medium-up} {
+			width: 35%;
+			margin: 40px 0 10% 5%;
+		}
+		@media only screen and (min-width: 641px) and (max-width: 700px) {
+			margin: 40px 0 18% 5%;
+		}
+		@media #{$large-up} {
+			width: 33%;
+			margin: 60px 0 0 7%;
+		}
+		img {
+			width: 100%;
+			@include box-shadow(-10px -10px 5px rgba(0,0,0,.08));
+		}
+	}
+	.bottom_image {
+		width: 100%;
+		
+		@media #{$medium-up} {
+			float: right;
+			width: 50%;
+			margin: 7% 0 10% 0;
+		}
+		@media #{$large-up} {
+			width: 45%;
+		}
+		img {
+			width: 90%;
+			float: right;
+			@include box-shadow(-10px -10px 5px rgba(0,0,0,.08));
+			@media #{$medium-up} {
+				width: 100%;
+				float: none;
+			}
+		}
+		&:before,
+		&:after {
+		    content: " "; /* 1 */
+		    display: table; /* 2 */
+		}
+
+		&:after {
+		    clear: both;
+		}
+	}
+	.bottom_bg {
+		position: absolute;
+		left: 0;
+		top: 1400px;
+		width: 60%;
+		max-width: 500px;
+		height: 800px;
+		background: url(../images/bg_kurrent_sister2.jpg) no-repeat;
+		background-size: 100% auto;
+		background-position: top right;
+		@media #{$medium-up} {
+			width: 30%;
+		}
+	}
+	.bio {
+		width: 80%;
+  		margin: 40px auto 10% auto;
+  		text-align: left;
+  		font-weight: 100;
+  		letter-spacing: 0.1em; 
+  		background: #fff;
+  		text-align: center;
+  		
+  		@media #{$medium-up} {
+  			float: right;
+  			text-align: left;
+  			width: 40%;
+  			margin: 5% 10% 0 5%;
+  		}
+  		@media only screen and (min-width: 641px) and (max-width: 768px) {
+  			margin: 1% 10% 0 5%;
+  		}
+  		@media #{$large-up} {
+  			width: 35%;
+  			margin: 10% 15% 0 5%;
+  		}
+  		.follow {
+  			font-size: 12px;
+  			margin-top: 20px;
+  			span {
+  				display: block;
+  				margin-bottom: 1rem;
+  				@media #{$medium-up} {
+  					display: inline-block;
+  				}
+  			}
+  			a {
+  				font-size: 14px;
+  				color: #000;
+  				border: 2px solid #000;
+  				margin: 0 5px;
+  				padding: 2px 0;
+  				&:first-child {
+  					margin-left: 15px;
+  				}
+  				span {
+  					display: inline-block;
+  				}
+  				&:hover {
+  					color: $gold;
+  					border: 2px solid $gold;
+  				}
+  			}
+  			.icon {
+  				margin-left: 6px;
+  			}
+  			.icon:before {
+  				margin: 0;
+  			}
+  		}
+	}
+}
+
+body.cms-the-kurrent {
+	.main-container {
+		background: url(../images/bg_kurrent.jpg) no-repeat top center #fff;
+		background-size: 150% auto;
+		text-align: center;
+		@media #{$medium-up} {
+			background-size: 100% auto;
+		}
+		.col-main {
+			padding: 0;
+		}
+	}
+	#k-life a {
+		color: $gold;
+	}
+	.page-title {
+		margin: 3em 0 0 0;
+		@media #{$medium-up} {
+			margin: 4em 0 0 0;
+		}
+		@media #{$large-up} {
+			margin: 6em 0 0 0;
+		}
+	}
+	.subtext {
+		margin: 0 auto;
+		font-weight: 100;
+		width: 80%;
+		letter-spacing: 0.1em;
+		@media #{$medium-up} {
+			width: 50%;
+		}
+	}
+	h5 {
+		letter-spacing: 0.2em;
+  		text-align: center;
+  		margin: 2em auto 2rem auto;
+  		text-transform: uppercase;
+  		@media #{$medium-up} {
+  			margin: 3em auto 3em auto;
+  		}
+  		@media #{$large-up} {
+  			margin: 4em auto 4em auto;
+  		}
+  		@media #{$xlarge-up} {
+  			margin: 5em auto 5em auto;
+  		}
+	}
+	.sisters {
+		width: 100%;
+		margin: 0 auto;
+	   	
+		@media #{$medium-up} {
+			width: 75%;
+		}
+		@media #{$large-up} {
+			width: 65%;
+		}
+		.sister {
+			text-align: center;
+			width: 90%;
+			margin: 0 5% 1em 5%;
+			
+			@media #{$medium-up} {
+				width: 30%;
+				margin: 0 1.5% 1rem 1.5%;
+				float: left;
+			}
+			img {
+				width: 100%;
+				@include box-shadow(-10px -10px 5px rgba(0,0,0,.08));
+			}
+			.button {
+				width: 100%;
+				text-align: center;
+				padding: 0.5625rem 0rem 0.5625rem 0rem;
+				margin: 1rem 0; 
+				@media #{$medium-up} {
+					width: 90%;
+				}
+			}
+		}
+	}
+}
+#sisters-faves .std {
+	max-width: $base-font-size * 75;
+	margin: 0 auto;
+	p {
+		padding-left: 26px;
+		padding-right: 26px;
+		font-size: $base-font-size * 1.2;
+		font-weight: bold;
+	}
+}
+body.cms-about-us {
+	
+	#top {
+		border-bottom: 1px solid $jet;
+		padding: 6rem 0;
+	}
+	.main-container {
+		text-align: center;
+		.row > div {
+			margin: 0 auto;
+		}
+	}
+	#bottom {
+		padding: 4rem 0 0 0;
+		img {
+			@include box-shadow(-10px -10px 5px rgba(0,0,0,.08));
+			width: 100%;
+			margin-bottom: 1rem;
+		}
+	}
+	p {
+		text-align: center;
+		font-weight: 100;
+	}
+}
+body.customer-account-create {
+	.page-title {
+		text-align: center;
+	}
+	.row > div {
+		margin: 0 auto;
+	}
+	.row > div.footer {
+		margin: $base-font-size * 2.5 auto 0 auto;
+	}
+	label span.custom {
+		margin: -5px 10px 0 -40px;
+		position: absolute;
+	}
+}
+body.cms-customer-service .main-container .row > div {
+	margin: 0 auto;
+	float: none;
+}
+body.cms-customer-service .col-main {
+	text-align: center;
+	opacity: 0;
+	.page-title {
+		text-align: center;
+	}
+	.faq {
+		margin-bottom: $base-font-size * 1.5;
+		a:hover, a:active, a:focus {
+			text-decoration: none;
+		}
+		.content {
+			max-height: 0;
+			overflow: hidden;
+			@include transition(max-height 0.5s ease);
+			&.opened {
+				max-height: 1000px;
+			}
+		}
+	}
+	.intro {
+		padding: 0 20% 2rem 20%;
+		p {
+			font-weight: 100;
+		}
+	}
+	.accordion-navigation {
+		&:first-child {
+			border-top: 1px solid $jet;
+		}
+		ol {
+			text-align: left;
+			display: inline-block;
+			margin-bottom: 2rem;
+			@media #{$medium-up} {
+				width: 80%;
+			}
+			@media #{$large-up} {
+				width: 50%;
+			}
+		}
+		h3 {
+			font-size: $base-font-size * 1.3;
+		}
+		table {
+			text-align: left;
+			margin: 0 auto;
+			th {
+				font-weight: normal;
+			}
+			td {
+				vertical-align: top;
+			}
+			td:first-child {
+				padding-right: 20px;
+			}
+		}
+		p {
+			font-weight: 100;
+		}
+		.accordion {
+			border: none;
+		}
+	}
+	.content {
+		max-height: 0;
+		overflow: hidden;
+		@include transition(max-height 1s ease);
+		
+		&.active {
+			padding-top: 0;
+			padding-bottom: 1.5rem;
+			max-height: 5000px;
+			border-bottom: 1px solid $jet;
+		}
+		.inner {
+			max-width: $base-font-size * 65;
+			margin: 0 auto;
+			font-weight: 100;
+			padding: 2rem 0 0 0;
+			
+			@media #{$medium-up} {
+				padding: 2rem 10% 0 10%;
+			}
+		}
+		a {
+			color: #000;
+			text-decoration: underline;
+		}
+	}
+	.accordion-navigation > h2 {
+		background: none;
+		font-size: $base-font-size * 1.6875;
+		font-weight: bold;
+		text-transform: uppercase;
+		line-height: 2em;
+  		text-rendering: optimizeLegibility;
+  		letter-spacing: 0.3em;
+  		border-bottom: 1px solid $jet;
+  		cursor: pointer;
+  		margin: 0;
+  		@media #{$large-up} {
+  			line-height: 3em;
+  		}
+  		&:after {
+  			font-family: 'fontello';
+  			content: '\e801';
+  			margin-left: 10px;
+  			white-space: nowrap;
+  		}
+  		&:hover, &:focus {
+  			//color: $gold;
+  			text-decoration: none;
+  		}
+	}
+	.accordion .accordion-navigation #faqs h3 {
+		text-transform: none;
+		font-weight: normal;
+		font-size: $base-font-size * 1.3;
+		border: none;
+		text-transform: uppercase;
+		// &:after {
+		// 	font-family: 'fontello';
+		// 	content: '\e801';
+		// 	margin-left: 10px;
+		// 	white-space: nowrap;
+		// }
+	}
+	.accordion .accordion-navigation.active {
+		border-bottom: 1px solid $jet;
+		.accordion-navigation.active {
+  			border: none;
+  		}
+	}
+	.accordion-navigation > h2.active:after {
+		font-family: 'fontello';
+		content: '\e810';
+		margin-left: 10px;
+	}
+	.accordion .accordion-navigation .accordion-navigation > a {
+		border: 0;
+	}
+	.accordion .accordion-navigation .accordion-navigation > a:after {
+		content: none;
+	}
+	ul {
+		margin: 0;
+	}
+	#contactus {
+		padding-top: 4rem;
+		p {
+			font-size: $base-font-size * 1.2;
+		}
+	}
+	#sendMessage {
+		display: none;
+		text-align: center;
+		input {
+			background: #fff;
+		}
+		.fieldset {
+			border: none;
+			padding: 0;
+		}
+		.form-list {
+			margin: 0 auto;
+		}
+		.button.open {
+			width: 300px;
+		}
+	}
+}
+
+body.customer-paymentinfo-index {
+	.breadcrumbs {
+		display: none;
+	}
+	.form-list {
+		margin: 0 auto;
+	}
+}
+
+

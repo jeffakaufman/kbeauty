@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+
+    Eltrino News Notification
+
+    LICENSE
+
+    This source file is subject to the Open Software License (OSL 3.0)
+    that is bundled with this package in the file LICENSE_OSL.txt.
+    It is also available through the world-wide-web at this URL:
+    http://opensource.org/licenses/osl-3.0.php
+    If you did not receive a copy of the license and are unable to
+    obtain it through the world-wide-web, please send an email
+    to license@eltrino.com so we can send you a copy immediately.
+
+    @category    Eltrino
+    @package     Eltrino_Pawl
+    @copyright   Copyright (c) 2013 Eltrino LLC. (http://eltrino.com)
+    @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+
+-->
+<config>
+    <modules>
+        <Eltrino_Pawl>
+            <version>1.0.0.0</version>
+        </Eltrino_Pawl>
+    </modules>
+    <global>
+        <models>
+            <eltrino_pawl>
+                <class>Eltrino_Pawl_Model</class>
+            </eltrino_pawl>
+        </models>
+        <helpers>
+            <eltrino_pawl>
+                <class>Eltrino_Pawl_Helper</class>
+            </eltrino_pawl>
+        </helpers>
+    </global>
+    <adminhtml>
+        <events>
+            <controller_action_predispatch>
+                <observers>
+                    <eltrino_pawl>
+                        <class>eltrino_pawl/observer</class>
+                        <method>preDispatch</method>
+                    </eltrino_pawl>
+                </observers>
+            </controller_action_predispatch>
+        </events>
+    </adminhtml>
+    <default>
+        <eltrino_pawl>
+            <news>
+                <enabled>1</enabled>
+                <channels>NEW_RELEASE,PROMO,UPDATES,OTHER_INFO</channels>
+                <url>http://eltrino.com/notification-feed</url>
+                <use_https>0</use_https>
+                <check_frequency>86400</check_frequency>
+            </news>
+        </eltrino_pawl>
+    </default>
+</config>

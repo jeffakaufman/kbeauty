@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <PolarCore_PolarCore>
+            <active>true</active>
+            <codePool>local</codePool>
+        </PolarCore_PolarCore>
+    </modules>
+</config>

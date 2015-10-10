@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Valkyrie_SliderData>
+            <version>0.1.0</version>
+        </Valkyrie_SliderData>
+    </modules>
+
+    <adminhtml>
+        <!-- The <layout> updates allow us to define our block layouts in a seperate file so are aren't messin' with the magento layout files.  -->
+        <layout>
+            <updates>
+                <sliderdata>
+                    <file>slider_data.xml</file>
+                </sliderdata>
+            </updates>
+        </layout>
+        <!-- The <acl> section is for access control. Here we define the pieces where access can be controlled within a role. -->
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <cms>
+                            <slider_data translate="title" module="sliderdata">
+                                <title>Slider Data</title>
+                                <sort_order>2</sort_order>
+                            </slider_data>
+                        </cms>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <admin>
+        <!--
+            Here we are telling the Magento router to look for the controllers in the Super_Awesome_controllers_Adminhtml before we look in the
+            Mage_Adminhtml module for all urls that begin with /admin/controller_name
+         -->
+        <routers>
+            <sliderdata_admin>
+                <use>admin</use>
+                <args>
+                    <module>Valkyrie_SliderData</module>
+                    <frontName>sliderdata_admin</frontName>
+                    <!--<modules>-->
+                        <!--<sliderdata before="Mage_Adminhtml">Valkyrie_SliderData_Adminhtml</sliderdata>-->
+                    <!--</modules>-->
+                </args>
+            </sliderdata_admin>
+        </routers>
+    </admin>
+
+
+    <frontend>
+        <routers>
+            <SliderData>
+                <use>standard</use>
+                <args>
+                    <module>Valkyrie_SliderData</module>
+                    <frontName>sliderdata</frontName>
+                </args>
+            </SliderData>
+        </routers>
+
+        <layout>
+            <updates>
+                <valkyrie_sliderdata module="Valkyrie_SliderData">
+                    <file>valkyrie_sliderdata.xml</file>
+                </valkyrie_sliderdata>
+            </updates>
+        </layout>
+
+    </frontend>
+
+    <global>
+        <events>
+            <sales_order_place_after>
+                <observers>
+<!--
+                    <feed_sales_order_observer>
+                        <class>Wexo_Employee_Model_Observer</class>
+                        <method>sendAdditionalEmail</method>
+                    </feed_sales_order_observer>
+-->
+                </observers>
+            </sales_order_place_after>
+        </events>
+
+        <models>
+            <sliderdata>
+                <class>Valkyrie_SliderData_Model</class>
+                <resourceModel>sliderdata_mysql4</resourceModel>
+            </sliderdata>
+            <sliderdata_mysql4>
+                <class>Valkyrie_SliderData_Model_Mysql4</class>
+                <entities>
+                    <sliderdata>
+                        <table>slider_data_list</table>
+                    </sliderdata>
+                </entities>
+            </sliderdata_mysql4>
+        </models>
+
+        <resources>
+            <sliderdata_setup>
+                <setup>
+                    <module>Valkyrie_SliderData</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </sliderdata_setup>
+            <sliderdata_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </sliderdata_write>
+            <sliderdata_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </sliderdata_read>
+        </resources>
+
+        <blocks>
+            <sliderdata>
+                <class>Valkyrie_SliderData_Block</class>
+            </sliderdata>
+        </blocks>
+
+        <helpers>
+            <sliderdata>
+                <class>Valkyrie_SliderData_Helper</class>
+            </sliderdata>
+        </helpers>
+
+    </global>
+</config>

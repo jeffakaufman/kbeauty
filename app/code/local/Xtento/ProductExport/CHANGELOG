@@ -1,0 +1,301 @@
+Xtento_ProductExport
+
+-------------
+  CHANGELOG
+-------------
+
+===== 1.0.0 =====
+ * Initial stable release
+
+===== 1.0.1 =====
+ + Added ability to export categories [thanks to Thomas Hägi]
+ + Added ability to export parent item [thanks to Thomas Hägi]
+ * Fixed a bug in the event based export
+ * Fixed a bug in the cronjob based export
+ * Certain frontend_input models led to attributes not being exported
+
+===== 1.0.2 =====
+ + Added ability to export _raw field value [thanks to Thomas Hägi]
+ + Increased max_execution_time
+ * Fixed a bug that lead to the saved test product/category ID not being shown for "Show all"/"Test XSL" functionality
+ * Object export history used to determine whether an object has been already exported or not gets filled only if "Export only new objects" is set to "Yes", avoiding unnecessary database load
+
+===== 1.0.3 =====
+ + Added ability to specify whether download should start automatically for manual exports
+ + Added ability to export stock quantity on website_id level if Aitoc Quantity Manager is installed
+ + Added ability to export full product image urls
+ + Added ability to replace the following characters using search/replace in <file> node: " (use "quote" in the search parameter), < (use "lt"), > (use "gt")
+ + Added notice when trying to test the "Show fields available for export function" with a not existing object ID
+ + Enhanced category export
+ * Fixed "Hidden Product Types" filter
+
+===== 1.0.4 =====
+ + Enhanced compatibility with SweetTooth (TBT_Testsweet)
+
+===== 1.0.5 =====
+ + Added variable "final_price" which contains the final product price
+
+===== 1.0.6 =====
+ + Enhanced price/tax fields.
+ + Added min_price, max_price, tier_price, final_price (two for each, one incl tax, one excl tax)
+
+===== 1.0.7 =====
+ * Exported price tweaked again
+ * Removed references to "sales"
+ * Code cleanup
+
+===== 1.0.8 =====
+ + Added "Performance Settings" screen at "Stores and Filters" where only certain attributes can be selected to be exported to speed up the export dramatically for stores with many product attributes/attribute sets
+
+===== 1.0.9 =====
+ + Added ability to select whether a profile should show up at the "Manual Export" screen or not
+
+===== 1.1.0 =====
+ + Added ability to remove html tags from exported data using strip_tags
+ * Fixed a bug that could lead to certain attributs not being exported if attributes are not selected at "Performance Settings"
+
+===== 1.1.1 =====
+ + Added ability to export all product images
+ + Added field original_price to export which contains original product price
+ + Added field attribute_set_name
+ + Added ability to filter items by product type
+ + Enhanced product export filters, category and qty filter added
+ + Enhanced category export
+ * Fixed some typos in the category export GUI
+ * Fixed parent item export
+
+===== 1.1.2 =====
+ + Added ability to export $timestamp variable which contains the current timestamp in correct timezone
+ + Added ability to export tax_class_id_raw
+ * Fixed tax value export that could cause a fatal error
+ * Removed double slash from image URLs
+
+===== 1.1.3 =====
+ * Fixed price/tax calculation for stores which are using the "prices are including tax" setting
+ * Fixed wrong attribute option values being exported (always from the admin store and not the selected store view)
+ * Fixed cronjob export where option values where always from the first store exported
+ * Fixed website filter
+
+===== 1.1.4 =====
+ + Added ability to remove the ___store parameter from product URLs
+ * Fixed exported products URLs
+ * Fixed a bug that exported not the store view product URL when using "Test XSL Template"
+
+===== 1.1.5 =====
+ * Fixed exported product URLs for parent products
+ * Category export values are now dependent of the store view selected
+
+===== 1.1.6 =====
+ + Added ability to export cross-, related- and upsell product IDs *and* SKUs
+ * Cronjob export: Enhanced cronjob export method to deal with other cronjobs better
+ * Fixed test_id field in the profile table so alphanumeric order numbers can be remembered in the Test XSL Template "Test ID" field as well
+
+===== 1.1.7 =====
+ + Added ability to export stock levels of different warehouses (only works if warehouses are separated by stock_id in the cataloginventory_stock_item table)
+ + Added ability to export stock level of all warehouses summed up in the total_stock_qty field (only works if warehouses are separated by stock_id in the cataloginventory_stock_item table)
+
+===== 1.1.8 =====
+ + Added ability to select product attributes to export by "attribute code" in the Performance Settings multi-select
+ * Improved compatibility with the popular "Magento Go" admin theme
+ * Improved check whether database tables have been initialized or not, and if not, show an error message (but no exception)
+
+===== 1.1.9 =====
+ + Improved export of multiselect attributes; individual values can be exported separately now.
+ * Fixed a bug that could lead to the "export conditions" (only export if) filters being lost/removed when exporting
+
+===== 1.2.0 =====
+ + Added ability to export child products of configurable products (XML: child_products/child_product)
+ * Important bugfix for a problem that could cause data/fields to be missing if several profiles are exported in the same execution, for example that's the case with cronjob exports
+
+===== 1.2.1 =====
+ + Added ability to export website_codes field
+ + Added ability to call addProfileFilters in observer_cronjob required for custom cron export scripts
+
+===== 1.2.2 =====
+ + Product export: Added "image" attribute to list of fields to always fetch, as it's not in the normal attribute list
+
+===== 1.2.3 =====
+ * Fixed reference to xtento_orderexport module which would cause the manual export to fail if our order export module wasn't installed.
+
+===== 1.2.4 =====
+ + Internally generated XML is loaded with LIBXML_PARSEHUGE enabled to support huge exports
+
+===== 1.2.5 =====
+ + Added path_name variable on category level that outputs the path to the category
+
+===== 1.2.6 =====
+ + Added Xtento_Product Export_Helper_Xsl class which contains static helper functions which can be called from the XSL Template
+ + Added helper currencyByStore to XSL helper which can be called from the XSL Template
+ + Added store_id to product data export
+
+===== 1.2.7 =====
+ + Added resizeImage helper to Xtento_Product Export_Helper_Xsl
+ * Product cost is loaded using getAttributeRawValue directly to avoid wrong store values in collections
+
+===== 1.2.8 =====
+ + Introduced disable-escaping-fields parameter for xsl:output - specify fields which should not be escaped comma separated (make sure to use disable-output-escaping="yes" and html_entity_decode on the value-of field, too! Example: <xsl:value-of select="php:functionString('html_entity_decode', description)" disable-output-escaping="yes"/>)
+ + Added "product visibility" filter
+ + Added "in stock only" filter
+
+===== 1.2.9 =====
+ * Fixed a bug that could lead to the prices not being including/excluding price correctly
+ * Fixed error: Mage registry key "_singleton/" already exists
+ + Added product_url on category level to get the URL to the product including the category path
+
+===== 1.2.10 =====
+ * Fixed category data export when exporting products, wrong store view (translations, etc.) could be used potentially
+
+===== 1.2.11 =====
+ + Added ability to set store view for category exports to export store view dependent values
+ + Added ability to export qty_pending field which contains total qty of this item in orders with pending/processing status
+
+===== 1.3.0 =====
+ + Added "product status" filter
+ + Added "special_price_active" field (0 or 1), which checks if the special price from/to date range is within the current date.
+ * Important bugfix that could lead to no store view value being retrieved for attributes
+
+===== 1.3.1 =====
+ + Added ability to export associated products of grouped products, node is "child_products"
+ + Added ability to export custom options (slow, unfortunately)
+ + Added Zend_Date GMT Offset fix that can be enabled at System > Configuration > XTENTO > General Configuration > Fixes
+
+===== 1.3.2 =====
+ + Added ability to export child products of bundle products, node is "child_products"
+ ! Added compatibility for Magento CE 1.9.0.0 / EE 1.14.0.0
+
+===== 1.3.3 =====
+ * Fixed category export when exporting products: Categories that were not assigned to the stores root category were exported
+ * Improved profile/destination saving, moved key to be the last parameter, could otherwise lead to POST being empty in some hosting environments
+
+===== 1.3.4 =====
+ + Added ability to export information about bundle_option for bundle child items
+ + Added check before exporting to make sure store_id for the export profile exists, if not raise an exception
+ + Added ability to disable timestamp timezone adjustment
+ * Fixed a bug in Xtento_ProductExport_Helper_Xsl::mb_vsprintf that could lead to wrong values being output
+ * The extension tries to increase the PHP memory_limit automatically if it's below a certain threshold
+
+===== 1.3.5 =====
+ * Fixed variables for email destinations: %content% could contain characters that affect preg_replace; using str_replace now instead
+ * Fixed a problem that could lead to the rule_data (catalog rule) for the current execution/export not being reset
+ * Improved support for third party SMTP extensions, whenever the extension sends an email these should be used now
+
+===== 1.3.6 =====
+ + Added child_price: For child products of configurable products, the correct "child price" can be exported now when looping through child_products/child_product
+
+===== 1.3.7 =====
+ + Added "updated_at" filter in the Stores & Filters tab in the export profile
+ + Added entity_id as exportable field on child_product and parent_item level
+ * Fixed a bug for parent_item image and custom_option exports
+
+===== 1.3.8 =====
+ * When exporting parent_item data, the store view (e.g. translated data) was wrong
+ * Fixed child price export for configurable products
+ * Improved "All fields in a XML file" export performance
+
+===== 1.3.9 =====
+ * Tax is added to special_price field as well now
+ * Various bugfixes and code optimization in license code
+
+===== 1.4.0 =====
+ * Fixed a bug that could lead to the profile being reset to the state when the export was stated. This could be problematic if changes had been made in the meantime.
+ * Improved Net_SFTP class loading for SFTP exports, required in certain server environments
+
+===== 1.4.1 =====
+ * Fixed an important bug that could lead to a database query being committed where it shouldn't have been committed yet.
+
+===== 1.4.2 =====
+ + Added ability to use HTML in email destinations / "E-Mail Text"
+ * Fixed manual export executing twice in some browsers
+
+===== 1.4.3 =====
+ * Fixed wrong product image URLs being exported; sometimes the URL was not store related
+
+===== 1.4.4 =====
+ + Added ability to replace new lines in product attribute values with space/br or remove them
+
+===== 1.4.5 =====
+ * Fixed product image URL not using http/https correctly, depending on URL settings
+
+===== 1.4.6 =====
+ + Increased export speed and reduced memory consumption dramatically when exporting product images
+ * Fixed memory bottleneck in total_stock_qty calculation
+
+===== 1.4.7 =====
+ + Added XSL helper function getProductPriceForCustomerGroup()
+
+===== 1.4.8 =====
+ * Fixed an issue that could lead to 0 objects being exported if multiple stores are selected when exporting from the "Manual Export" screen
+
+===== 1.4.9 =====
+ + Added ability to control what should happen to quotes in fields using the "quotes" attribute on the <file> node. Possible values: remove, double
+ * Handling of admin input for FTP sources/destinations improved, hostname/port/timeout are now validated
+
+===== 1.5.0 =====
+ ! Added compatibility for Magento CE 1.9.1.0 / EE 1.14.1.0
+
+===== 1.5.1 =====
+ + Added ability to export tier prices
+ * FTP connection is closed after files have been saved, for "FTP" destinations.
+
+===== 1.5.2 =====
+ * Fixed fields after tier price fields being exported on a wrong level
+
+===== 1.5.3 =====
+ * Fixed empty category nodes being exported
+
+===== 1.5.4 =====
+ + Added ability to export _raw fields, they don't show up in "Show fields" but all raw values can be exported for fields by appending _raw to the field name.
+
+===== 1.5.5 =====
+ * XSL Template field was able to store only 64 KB of data. This has been increased to 16 MB now. (Refresh cache/flush cache storage after installing upgrade)
+
+===== 1.5.6 =====
+ * Fixed child product data export: Some data such as images may have been missing when exporting child products.
+
+===== 1.5.7 =====
+ * Fixed wrong category_url in some Magento EE versions. [thanks to Thomas Hägi]
+ * Fixed wrong categories being exported that are associated to a different store, and not the selected store. [thanks to Thomas Hägi]
+
+===== 1.5.8 =====
+ * Fixed tier_price export. Some customer groups/qtys may have been missing.
+
+===== 1.5.9 =====
+ + Added index for created_at/profile_id fields in log table to speed up queries
+
+===== 1.6.0 =====
+ + Added link to wiki about ready-to-use templates in the "output format" tab.
+ * Removed htmlspecialchars from XMLWriter to avoid double-encoding of fields.
+
+===== 1.6.1 =====
+ + Added ability to enter multiple email addresses for the "Debug Email" option in the System > XTENTO section. Separate multiple recipients using commas.
+
+===== 1.6.2 =====
+ * Fixed profile saving: "Updated during last X minutes" couldn't be set to "empty"
+
+===== 1.6.3 =====
+ + Added ability to specify customer group for export profiles; prices exported are for the selected customer group.
+
+===== 1.6.4 =====
+ * Improved/restored compatibility with Aoe_Scheduler version 1.0.0 for cron functionality
+
+===== 1.6.5 =====
+ + Added ability to export XSL variable $rootCategoryId which contains the root category ID of the store products are exporting from
+ + Added %timestamp% variable to list of possible variables in the filename.
+ * Increased HHVM compatibility
+
+===== 1.6.6 =====
+ + Added ability to export parent_item/option_parameters_in_url. It will output the parent item product URL with the product options of the simple product you're exporting pre-selected, use like this: concat(parent_item/product_url, '#', parent_item/option_parameters_in_url)
+ * Improved/restored compatibility with older Aoe_Scheduler versions for cron functionality
+
+===== 1.6.7 =====
+ * Improved iconv() conversion if "encoding" attribute is specified in XSL Template, should fix warnings that data couldn't be converted
+ + Added locale attribute to XSL file node to specify locale for iconv()/transliterations: http://support.xtento.com/wiki/Magento_Extensions:Magento_Product_Export_Module#Variables_in_the_.3Cfile.3E_node
+
+===== 1.6.8 =====
+ * Added workaround for a bug in HHVM that led to the filename being empty (or just _bkp), caused by the current() function returning false always.
+
+===== 1.6.9 =====
+ + Added ability to export parent_item/parent_item_id of virtual products
+
+===== 1.7.0 =====
+ * Fixed parent item ID retrieval required for loading the parent item of simple/etc. products. Until now, this sometimes returned deleted product IDs of products that were the parent product of a simple product in the past, but has been deleted since. Now, all possible parent item IDs are checked and only the first existing one is returned.

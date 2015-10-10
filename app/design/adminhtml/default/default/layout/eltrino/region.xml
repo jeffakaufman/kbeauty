@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+
+    Remove or Change Displayed States and Regions
+
+    LICENSE
+
+    This source file is subject to the Eltrino LLC EULA
+    that is bundled with this package in the file LICENSE_EULA.txt.
+    It is also available through the world-wide-web at this URL:
+    http://eltrino.com/license-eula.txt
+    If you did not receive a copy of the license and are unable to
+    obtain it through the world-wide-web, please send an email
+    to license@eltrino.com so we can send you a copy immediately.
+
+    @category    Eltrino
+    @package     Eltrino_Region
+    @copyright   Copyright (c) 2014 Eltrino LLC. (http://eltrino.com)
+    @license     http://eltrino.com/license-eula.txt  Eltrino LLC EULA
+
+-->
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss"><name>eltrino/region.css</name></action>
+        </reference>
+    </default>
+    <adminhtml_customer_edit>
+        <reference name="content">
+            <block type="adminhtml/template" name="eltrino_region_js" template="eltrino/customer/edit/js.phtml"></block>
+        </reference>
+    </adminhtml_customer_edit>
+    <adminhtml_region_index>
+        <reference name="content">
+            <block type="eltrino_region/adminhtml_region" name="eltrino_region_index" />
+        </reference>
+    </adminhtml_region_index>
+    <adminhtml_region_edit>
+        <reference name="content">
+            <block type="eltrino_region/adminhtml_region_edit" name="eltrino_region_edit" />
+        </reference>
+    </adminhtml_region_edit>
+</layout>

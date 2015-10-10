@@ -1,0 +1,94 @@
+/* OFF CANVAS CATEGORIES/MENU - _off-canvas-categories.scss */
+.off-canvas-menu-wrapper ul {
+  display: block;
+  margin: 0;  
+  li {
+    list-style-type: none;
+    position: relative;
+    letter-spacing: 0.1em;
+    @include clearfix();
+    
+    &.account {
+      display: block;
+      @media #{$medium-up} {
+        display: none;
+      }
+    }
+    &.active > a {
+      font-weight: bold;     
+    }
+    &.parent > a:after {
+      content: "\e000";
+      font-family: "polar-icons";
+      vertical-align: middle;
+      float: right;
+      display: block;
+      padding-left: 1em;
+    }
+  }
+  a {
+    display: block;
+    line-height: $base-font-size;
+    padding: .5em 1em;
+    text-transform: uppercase;
+    font-size: $base-font-size * .9;
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+      color: $gold;
+    }
+  }
+  ul { // Sub menus
+    
+  }
+}
+.off-canvas-menu-wrapper > ul {
+  &:last-of-type {
+    a {
+      border-bottom: 0;
+    }
+  }
+}
+
+.off-canvas-menu-wrapper .inlineLinks {
+  text-align: right;
+  border-bottom: 1px solid $jet;
+  background: #FFF; 
+  position: relative;
+  z-index: 5;
+  height: 25px;
+  ul {
+    float: left;
+  }
+  li {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    font-weight: bold;
+    margin: 0 0.5em 0 1em;
+    line-height: 25px;
+    &.open-shop {
+      color: $gold;
+    }
+    a {
+      font-size: 0.7rem;
+      margin: 0;
+      line-height: 1rem;
+      padding: 0;
+    }
+  }
+  .icon {
+    line-height: 25px;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    text-decoration: none; 
+    &.icon-search {
+      font-size: 0.8rem;
+      line-height: 23px; 
+    }
+    &:hover {
+      color: $gold;
+    }
+  }
+}

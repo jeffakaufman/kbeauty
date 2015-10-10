@@ -1,0 +1,93 @@
+/* TOP CART - _top-cart.scss */
+
+/* In top line and below $small (mobile) */
+.move-left .cart-link {
+  background-color: darken($primary-color, 10%);
+}
+.top-cart {
+  float: right;
+  position:relative;
+  &:hover .cart-link,
+  &:active .cart-link,
+  &:focus .cart-link {
+    background-color: darken($primary-color, 10%);
+  }
+  .right-off-canvas-toggle {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  a,
+  a:hover,
+  a:active,
+  a:focus,
+  a:visited {
+   text-decoration: none;
+  }
+  .cart-link {
+    display: block;
+    font-size: $base-font-size;
+    padding: 0 $column-gutter / 2;
+    line-height: $base-font-size * 3;
+  }
+}
+
+/* In main header and above $small */
+.header {
+  .block-cart {
+    position: relative;
+    margin-left: $base-font-size;
+    float: right;
+    .cart-link {
+      @include button($bg: $success-color);
+      @include border-radius($global-radius);
+    }
+  }
+}
+
+/* Cart dropdown - only for larger than $small */
+#mini-cart-wrapper {
+  position: absolute;
+  right: 0;
+  background-color: $white;
+  border: 1px solid $border-color;
+  padding: $base-font-size;
+  z-index: 10;
+  width: $base-font-size * 20;
+  text-align: left;
+  @include border-radius($global-radius);
+  @media #{$medium-up} {
+    width: $base-font-size * 30;
+  }
+  @include box-shadow(0 0 100px $black);
+  ol {
+    list-style-type: none;
+  }
+  .actions {
+    @include clearfix();
+    .button {
+      float: right;
+      margin-bottom: 0;
+      margin-left: $base-font-size;
+    }
+    a:not(.button) {
+      line-height: $base-font-size * 2;
+    }
+    .btn-cart {
+      float: right;
+    }
+  }
+  .close-btn {
+    position: absolute;
+    right: $base-font-size;
+    top: $base-font-size;
+  }
+  .btn-edit {
+    display: none;
+  }
+}

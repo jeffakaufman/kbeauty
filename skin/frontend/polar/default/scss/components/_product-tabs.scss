@@ -1,0 +1,41 @@
+/* PRODUCT TABS - _product-tabs.scss */
+.product-tabs {
+  margin-top: $base-font-size;
+  .std {
+    line-height: $base-line-height;
+  }
+  dl {
+    display: none;
+    @media #{$medium-up} {
+      display: block;
+    }
+  }
+  .tabs {
+    a:hover,
+    a:active,
+    a:focus {
+      text-decoration: none;
+    }
+    .active a {
+      border: 1px solid $border-color;
+      border-bottom: 0;
+    }
+  }
+  .tabs-content {
+    margin-top: -1px;
+  }
+  .content {
+    width: 100%;
+    display: block;
+    @media #{$medium-up} {
+      display: none;
+      border: 1px solid $border-color;
+      padding: $column-gutter / 2;
+    }
+  }
+  .tabs-content > h2 {
+    @media #{$medium-up} {
+      display: none;
+    }
+  }
+}

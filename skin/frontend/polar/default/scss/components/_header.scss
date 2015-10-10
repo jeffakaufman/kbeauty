@@ -1,0 +1,101 @@
+/* HEADER - _header.scss */
+.header-container {
+  position: relative;
+  z-index: 100;
+}
+.header {
+  margin: 0 auto;
+  padding-top: $base-font-size;
+  padding-bottom: $base-font-size;
+  text-align: center;
+  @media #{$medium-up} {
+    padding-top: ($base-font-size * 2);
+    padding-bottom: $base-font-size;
+    text-align: left;
+  }
+  .logo {
+    display: inline-block;
+    font-size: $h1-font-size;
+    line-height: 0;
+    margin: 0 0 $base-font-size * 0.5;
+    @media #{$medium-up} {
+      float: left;
+    }
+    img {
+      height: 2.6rem;
+    }
+  }
+  #search_mini_form_mobile,
+  #search_mini_form {
+    float: right;
+    margin-bottom: 0;
+    width: 100%;
+    clear: none;
+    @media #{$medium-up} {
+      width: auto;
+    }
+  }
+  .form-search {
+    display: block;
+    position: relative;
+    float: right;
+    width: 100%;
+    padding-right: 103px;
+    margin-top: $base-font-size;
+    @media #{$medium-up} {
+      padding-right: 0;
+      margin-top: auto;
+    }
+    input,
+    button {
+      margin-bottom: 0;
+      display: inline-block;
+    }
+    input {
+      float: left;
+      width: 100%;
+      margin-right: $base-font-size;
+      @media #{$medium-up} {
+        width: auto;
+      }
+    }
+    button {
+      float: right;
+      position: absolute;
+      right: 0;
+      top: 0;
+      @media #{$medium-up} {
+        position: relative;
+        right: auto;
+        top: auto;
+      }
+    }
+  }
+}
+.search-autocomplete {
+  display: block;
+  z-index: 80;
+  background-color: $white;
+  color: $primary-color;
+  @include box-shadow(0 0 10px rgba(0,0,0,0.5));
+  ul {
+    margin: 0;
+  }
+  li {
+    list-style-type: none;
+    padding: ($base-font-size / 2) $base-font-size;
+    &:hover,
+    &:active,
+    &:focus {
+      cursor: pointer;
+    }
+    & > span {
+      float: right;
+      display: inline-block;
+      opacity: 0.8;
+    }
+  }
+  .selected {
+    background-color: rgba(0,0,0,0.1);
+  }
+}
