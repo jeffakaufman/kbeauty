@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'havenbeauty'
+set :application, 'kbeauty'
 set :repo_url, "git@github.com:jeffakaufman/#{fetch(:application)}"
 
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
