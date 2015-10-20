@@ -21,5 +21,7 @@ app/etc/config.xml
 app/etc/local.xml
 media/
 
-deploy/
-deploy
+deploy/*
+!deploy/config/deploy/
+!deploy/config/deploy/*.rb
+!deploy/config/*.rb
