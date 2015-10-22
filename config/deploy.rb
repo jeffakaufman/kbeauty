@@ -35,10 +35,14 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 namespace :deploy do
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # We may want to do some custom things here laster 
+  desc "Create media symlink"
+  task :media_symlink do 
+    on roles(:app) do
+      execute "ln -nfs #{shared_path}/media #{current_path}/media"
+      execute "ln -nfs #{shared_path}/config/app/etc/config.xml #{current_path}/app/etc/config.xml"
+      execute "ln -nfs #{shared_path}/config/app/etc/local.xml #{current_path}/app/etc/local.xml"
     end
   end
 
 end
+after 'deploy', 'deploy:media_symlink'
