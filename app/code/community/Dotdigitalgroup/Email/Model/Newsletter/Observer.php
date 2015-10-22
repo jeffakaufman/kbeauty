@@ -18,18 +18,6 @@ class Dotdigitalgroup_Email_Model_Newsletter_Observer
 		$email              = $subscriber->getEmail();
 		$storeId            = $subscriber->getStoreId();
 		$subscriberStatus   = $subscriber->getSubscriberStatus();
-		
-		/* markus June 20th */
-		$firstName = Mage::app()->getRequest()->getParam('firstName');
-		$lastName = Mage::app()->getRequest()->getParam('lastName');
-		$favoriteSister = Mage::app()->getRequest()->getParam('favoriteSister');
-		$subscriber->setDtmFName($firstName);
-		$subscriber->setDtmLName($lastName);
-		$subscriber->setFavoriteSister($favoriteSister);
-		/* END markus June 20th */
-		
-		
-		
 		$websiteId = Mage::app()->getStore($subscriber->getStoreId())->getWebsiteId();
 
 		//check if enabled

@@ -65,6 +65,8 @@ class Valkyrie_SliderData_Adminhtml_SliderDataController extends Mage_Adminhtml_
 
   public function saveAction()
   {
+
+//echo "<pre>";var_dump($_FILES);die();
     if ($data = $this->getRequest()->getPost())
     {
         if(isset($_FILES['desktop_image']['name']) && (file_exists($_FILES['desktop_image']['tmp_name']))) {
@@ -82,9 +84,12 @@ class Valkyrie_SliderData_Adminhtml_SliderDataController extends Mage_Adminhtml_
                 $uploader->save($path, $_FILES['desktop_image']['name']);
 
                 $data['desktop_image'] = self::SLIDER_DATA_IMAGES_DIR .'/desktop/'. $_FILES['desktop_image']['name'];
-
+//var_dump($data);
             } catch(Exception $e) {
 
+//echo "<pre>";
+//var_dump($path);
+//                var_dump($e);
             }
         } else {
 
@@ -121,7 +126,7 @@ class Valkyrie_SliderData_Adminhtml_SliderDataController extends Mage_Adminhtml_
                 unset($data['mobile_image']);
         }
 
-
+//die();
       $model = Mage::getModel('sliderdata/sliderdata');
       $id = $this->getRequest()->getParam('id');
       if ($id) {

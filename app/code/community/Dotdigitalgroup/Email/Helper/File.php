@@ -17,9 +17,8 @@ class Dotdigitalgroup_Email_Helper_File extends Dotdigitalgroup_Email_Helper_Dat
 
     public function __construct()
     {
-        $this->_output_folder = Mage::getBaseDir('var') . DS . 'export' . DS . 'email';
+        $this->_output_folder = 'var' . DS . 'export' . DS . 'email';
         $this->_output_archive_folder = $this->_output_folder . DS . 'archive';
-
         $this->delimiter = ','; // tab character
         $this->enclosure = '"';
     } // end
@@ -115,7 +114,7 @@ class Dotdigitalgroup_Email_Helper_File extends Dotdigitalgroup_Email_Helper_Dat
     public function pathExists($path)
     {
         if (!is_dir($path)) {
-            mkdir($path, 0660, true);
+            mkdir($path, 0777, true);
         } // end
 
         return;
