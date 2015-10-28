@@ -36,11 +36,11 @@
                     <customer_renderer_region>Eltrino_Region_Model_Adminhtml_Customer_Renderer_Region</customer_renderer_region>
                 </rewrite>
             </adminhtml>
-            <customer>
+            <!--<customer>
                 <rewrite>
                     <customer>Eltrino_Region_Model_Customer</customer>
                 </rewrite>
-            </customer>
+            </customer>-->
             <checkout>
                 <rewrite>
                     <type_onepage>Eltrino_Region_Model_Type_Onepage</type_onepage>
