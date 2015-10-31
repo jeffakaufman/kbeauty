@@ -38,7 +38,13 @@ namespace :deploy do
   desc "Create media symlink"
   task :media_symlink do 
     on roles(:app) do
-      execute "ln -nfs #{shared_path}/media #{current_path}/media"
+      if fetch(:stage).match(/prod./)
+        puts "creating media symlink to '/mnt/file1/export/media'"
+        execute "ln -nfs /mnt/file1/export/media #{current_path}/media"
+      else
+        puts "creating media symlink to '#{shared_path}/media'"
+        execute "ln -nfs #{shared_path}/media #{current_path}/media"
+      end
       execute "ln -nfs #{shared_path}/config/app/etc/config.xml #{current_path}/app/etc/config.xml"
       execute "ln -nfs #{shared_path}/config/app/etc/local.xml #{current_path}/app/etc/local.xml"
     end
