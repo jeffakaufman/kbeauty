@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'havenbeauty'
+set :application, 'kbeauty'
 set :repo_url, "git@github.com:jeffakaufman/#{fetch(:application)}"
 
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -35,10 +35,20 @@ ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 namespace :deploy do
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # We may want to do some custom things here laster 
+  desc "Create media symlink"
+  task :media_symlink do 
+    on roles(:app) do
+      if fetch(:stage).match(/prod./)
+        puts "creating media symlink to '/mnt/file1/export/media'"
+        execute "ln -nfs /mnt/file1/export/media #{current_path}/media"
+      else
+        puts "creating media symlink to '#{shared_path}/media'"
+        execute "ln -nfs #{shared_path}/media #{current_path}/media"
+      end
+      execute "ln -nfs #{shared_path}/config/app/etc/config.xml #{current_path}/app/etc/config.xml"
+      execute "ln -nfs #{shared_path}/config/app/etc/local.xml #{current_path}/app/etc/local.xml"
     end
   end
 
 end
+after 'deploy', 'deploy:media_symlink'
