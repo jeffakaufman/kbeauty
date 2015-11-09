@@ -1,24 +1,25 @@
 (function(e) {
+	var access_token = "770199153099219|561etTerfBwO42QmC1_uR_0aKDg";
 	function t(t, n, s, d, y, b, w, E, S, x, T) {
 		var N = e(".stream", y),
 			C = [],
 			k = "",
 			L = 300,
 			A = [],
-			O, M, _, D = b.limit,
 			P = [],
+			O, M, _, D = b.limit,
 			H;
 		frl = "https://ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=" + D + "&callback=?&q=";
 		switch (t) {
 			case "facebook":
 				M = "https://www.facebook.com/KardashianBeauty";
 				var B = n.split("/");
-console.log(n);
-console.log(B);
-console.log(B.length);
-				_ = _ = "https://graph.facebook.com/" + n + "/feed?access_token=770199153099219|561etTerfBwO42QmC1_uR_0aKDg";
+//console.log(n);
+//console.log(B);
+//console.log(B.length);
+				_ = _ = "https://graph.facebook.com/" + n + "/feed?access_token=" + access_token;
 				//_ = _ = B.length > 1 ? "https://graph.facebook.com/" + B[1] + "/photos?fields=id,link,from,name,picture,images,comments&limit=" + D + "&access_token=770199153099219|561etTerfBwO42QmC1_uR_0aKDg": frl + encodeURIComponent("https://www.facebook.com/feeds/page.php?id=" + n + "&format=rss20");
-console.log(_);
+//console.log(_);
 				break;
 			case "twitter":
 				var j = d.url.replace(/\&#038;/gi, "&");
@@ -146,9 +147,10 @@ console.log(_);
 				var v = "";
 				switch (t) {
 					case "facebook":
-						if (B.length > 1) h = h.data;
-						else if (h.responseStatus == 200) h = h.responseData.feed.entries;
-						else v = h.responseDetails;
+						//if (B.length > 1) h = h.data;
+						h = h.data;
+						//else if (h.responseStatus == 200) h = h.responseData.feed.entries;
+						//else v = h.responseDetails;
 
 //console.log(B);
 //console.log(h);
@@ -206,14 +208,16 @@ console.log(_);
 							R = "";
 						switch (t) {
 							case "facebook":
-console.log(B.length);
-								if (B.length > 1) {
+//console.log(B.length);
+								//if (B.length > 1) {
 									n = v.from.id;
+//console.log(n);									
 									var F = new Date;
 									F = F.setFbAlbum(v.created_time);
+
 									var U = c(v.link);
-console.log(v.link);
-console.log(U);
+//console.log(v.link);
+//console.log(U);
 
 									q = B[0] != "" ? B[0] : v.from.name;
 									//k = '<a href="http://www.facebook.com/media/set/?set=' + U[1] + '">' + q + "</a>";
@@ -221,25 +225,49 @@ console.log(U);
 									O = "";
 
                                     var _imgIdx = 2;
-                                    while(_imgIdx > v.images.length - 1) {
-                                        --_imgIdx;
+                                    // while(_imgIdx > v.images.length - 1) {
+                                    //     --_imgIdx;
+                                    // }
+                                    var obj, picture_URL, picture_ID = v.object_id;
+                                    if (picture_ID) {
+                                    	jQuery.ajax({
+											url: "https://graph.facebook.com/v2.0/"+picture_ID+"?access_token="+access_token,
+											dataType: K,
+											success: function(pics) {
+												pics = pics.images;
+												for (var i=0; i<pics.length; i++) {
+												    if ( pics[i].height == '600' ) {
+												        picture_URL = pics[i].source;
+												        break;
+												    }
+												}
+//console.log(picture_URL);
+												//getPicUrl(v.link,picture_URL);
+												P = '<div class="image"><a href="' + v.link + '" target="_blank"><img src="' + picture_URL + '" alt="" /></a></div>';
+											},
+											async: false
+										});
                                     }
-console.log(_imgIdx);
-console.log( v.images[_imgIdx].source);
-									P = '<a href="' + v.images[0].source + '" target="_blank"><img src="' + v.images[0].source + '" alt="" /></a>';
+//console.log(P);
+									//P = '<a href="' + v.images[0].source + '" target="_blank"><img src="' + v.images[0].source + '" alt="" /></a>';
 									//P = '<a href="' + v.link + '"><img src="' + v.images[d.image_width].source + '" alt="" /></a>';
-									if (d.comments > 0 && v.comments) {
+									if (v.message) {
 										h = 0;
-										j += '<span class="meta"><span class="comments">comments</span></span>';
-										e.each(v.comments.data, function(e, t) {
-											if (d.comments > e) {
-												j += '<span class="meta item-comments"><a href="http://facebook.com/' + t.from.id + '">' + t.from.name + "</a>" + t.message + "</span>";
-												e++
-											} else return false
-										})
+										j += '<div class="message">'+v.message+'</div>';
 									}
+									// if (d.comments > 0 && v.comments) {
+									// 	h = 0;
+									// 	j += '<span class="meta"><span class="comments">comments</span></span>';
+									// 	e.each(v.comments.data, function(e, t) {
+									// 		if (d.comments > e) {
+									// 			j += '<span class="meta item-comments"><a href="http://facebook.com/' + t.from.id + '">' + t.from.name + "</a>" + t.message + "</span>";
+									// 			e++
+									// 		} else return false
+									// 	})
+									// }
+//console.log(j);
 									P += j
-								} else P = v[d.text];
+								//} else P = v[d.text];
 								break;
 							case "twitter":
 								F = u(v.created_at);
@@ -604,8 +632,10 @@ console.log( v.images[_imgIdx].source);
 	}
 
 	function c(e) {
-		var t = [],
-			n, r = e.split("?")[1];
+//console.log(e);
+		var t = [],n;
+		if (e) var r = e.split("?")[1];
+//console.log(r);
 		if (r != undefined) {
 			r = r.split("&");
 			for (var i = 0; i < r.length; i++) {

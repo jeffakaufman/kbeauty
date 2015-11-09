@@ -584,7 +584,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 		$('.pksr-toolbar .filter li a').removeClass('selected');
 		if ($(this).hasClass('link-all')) $(this).addClass('selected');
 	});
-	$('.pksr-toolbar .filter li a[rel=instagram]').click();
+	//$('.pksr-toolbar .filter li a[rel=instagram]').click();
 
 	function openSection(hash) {
 		if (!hash) {
