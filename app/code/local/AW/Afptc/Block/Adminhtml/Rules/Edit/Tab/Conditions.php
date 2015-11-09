@@ -19,7 +19,7 @@
  *
  * @category   AW
  * @package    AW_Afptc
- * @version    1.1.11
+ * @version    1.1.12
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -35,7 +35,7 @@ class AW_Afptc_Block_Adminhtml_Rules_Edit_Tab_Conditions extends Mage_Adminhtml_
         $renderer = Mage::getBlockSingleton('adminhtml/widget_form_renderer_fieldset')
             ->setTemplate('promo/fieldset.phtml')
             ->setNewChildUrl($this->getUrl(
-                    'awafptc_admin/adminhtml_rules/newConditionHtml/form/rule_conditions_fieldset'
+                    'adminhtml/awafptc_rules/newConditionHtml/form/rule_conditions_fieldset'
                 )
             )
         ;

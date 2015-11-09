@@ -579,6 +579,13 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
     	}
     });
     //$('body.checkout-onepage-index .buttons-set').appendTo('.col-right');
+
+    $('.pksr-toolbar .filter li a').click(function() {
+		$('.pksr-toolbar .filter li a').removeClass('selected');
+		if ($(this).hasClass('link-all')) $(this).addClass('selected');
+	});
+	$('.pksr-toolbar .filter li a[rel=instagram]').click();
+
 	function openSection(hash) {
 		if (!hash) {
 			//hash = hash.substring(0, hash.indexOf('?'));
@@ -594,21 +601,25 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 					scrollTop: $('#contactus').offset().top
 				}, 500);
 			}, 1000);
-        } else if (!$target.hasClass('active')) {
+			history.pushState("", document.title, window.location.href.replace(/\#(.+)/, '').replace(/http(s?)\:\/\/([^\/]+)/, '') );
+		} else if (!$target.hasClass('active') && hash != '#feed') {
+			console.log('test');
         	$target.prev('h2').addClass('active');
             $target.addClass('active');
             setTimeout(function(){
             	$('.left-off-canvas-toggle').attr('aria-expanded', 'false');
-    	$('body').removeClass('fixed');
+    			$('body').removeClass('fixed');
 		    	$('html,body').animate({
 					scrollTop: $(hash).offset().top - 80
 				}, 1000);
 			}, 1000);
-        }
-        history.pushState("", document.title, window.location.href.replace(/\#(.+)/, '').replace(/http(s?)\:\/\/([^\/]+)/, '') );
+			history.pushState("", document.title, window.location.href.replace(/\#(.+)/, '').replace(/http(s?)\:\/\/([^\/]+)/, '') );
+        } 
 	}
 	var hash = window.location.hash;
-	if (hash) openSection(hash);
+	if (hash) {
+		openSection(hash);
+	}
 
     $('body.cms-customer-service .footer-container .links a, body.cms-customer-service .off-canvas-menu-wrapper a').click(function(e) {
     	$('.exit-off-canvas').click();
@@ -740,12 +751,6 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 	});
 
 	$('body').append('<div id="overlay"></div>');
-
-	$('.pksr-toolbar .filter li a').click(function() {
-		$('.pksr-toolbar .filter li a').removeClass('selected');
-		if ($(this).hasClass('link-all')) $(this).addClass('selected');
-	});
-	$('.pksr-toolbar .filter li a[rel=instagram]').click();
 
 	$('.product-essential .icon-arrow_right').click();
 	$('.product-essential').animate({
@@ -938,8 +943,8 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 
 				$(this).find('.text').height(textHeight).css('position','absolute');
 
-				$(this).find('.big-image.desktop img').css('height','auto');
-				imageHeight = $(this).find('.big-image.desktop img').height();
+				$(this).find('.big-image img').css('height','auto');
+				imageHeight = $(this).find('.big-image img').height();
 				$(this).find('.image').css('position','absolute');
 				imageHeights.push(imageHeight);
 				tallestImage = Math.max.apply( null, imageHeights );
@@ -959,8 +964,8 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 			// 	$(this).css('background-image','url('+$(this).attr('data-desktop')+')').css('height',tallestImage);
 			// });
 			//if (wW <= 1284) {
-				$('.cms-home #slider li .container.desktop, #slider li .image #slider li .image img').css('height',tallestImage);
-				$('#slider li .big-image.desktop img').css('height',tallestImage);
+				$('.cms-home #slider li .container, #slider li .image #slider li .image img').css('height',tallestImage);
+				$('#slider li .big-image img').css('height',tallestImage);
 				$('.cms-home #slider ul, #slider li, #hero').css('height',tallestImage+0);
                 $('#slider li.nextSlide').css('margin-top','-'+(tallestImage+0)+'px');
 			//} else {
@@ -983,28 +988,27 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
             var imageHeights = [], imageHeight, tallestImage;
 
 			$('.cms-home #slider li').each(function() {
-				$(this).find('.container.mobile').each(function() {
+				$(this).find('.container').each(function() {
 					$(this).find('.image').prependTo( $(this) );
 				});
 				$(this).find('.text').css('height','auto').css('position','relative');
-				$(this).find('.container.mobile, .image, .image img').css('position','relative');
+				$(this).find('.container, .image, .image img').css('position','relative');
 
                 $(this).parent().css('height','auto');
 
-                $(this).find('.big-image.mobile img').css('height','auto');
-                imageHeight = $(this).find('.big-image.mobile img').height();
+                $(this).find('.big-image img').css('height','auto');
+                imageHeight = $(this).find('.big-image img').height();
                 $(this).find('.image').css('position','absolute');
                 imageHeights.push(imageHeight);
                 tallestImage = Math.max.apply( null, imageHeights );
 
 
-				$("#slider li, #slider li .container.mobile, #hero").css('height',tallestImage+'px');
+				$("#slider li, #hero").css('height',tallestImage+'px');
 
-//console.log("NEXT TRY::");
 //console.log(wW);
 //console.log($(this).innerHeight());
 //console.log(tallestImage);
-				
+
                 if($(this).hasClass('nextSlide')) {
                     $(this).css('margin-top','-'+tallestImage+'px');
                 } else {

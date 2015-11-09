@@ -19,7 +19,7 @@
  *
  * @category   AW
  * @package    AW_Afptc
- * @version    1.1.11
+ * @version    1.1.12
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */

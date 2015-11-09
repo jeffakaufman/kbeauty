@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- 
+/** 
+ * @package     Cunning_Promoproduct
+ * @Author      Cunningpro (jaydeeppatelse@gmail.com)
+ * @copyright   Copyright (c) 2014 Cunningpro (http://cunningpro.com)
+ * @License     http://cunningpro.com/license-agreement
+ */
+ -->
+<layout version="0.1.0">
+	<checkout_cart_index>
+		<reference name="checkout.cart">
+			<action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>promoproduct/checkout/cart/item/simple.phtml</template></action>
+		</reference>
+	</checkout_cart_index>
+	
+	<checkout_onepage_review>
+		<reference name="root">
+			<action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>promoproduct/checkout/onepage/review/item.phtml</template></action>
+		</reference>
+	</checkout_onepage_review>
+</layout>

@@ -19,7 +19,7 @@
  *
  * @category   AW
  * @package    AW_Afptc
- * @version    1.1.11
+ * @version    1.1.12
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -109,6 +109,7 @@ class AW_All_Model_Feed_Extensions extends AW_All_Model_Feed_Abstract
         'AW_Layerednavigation' => 'http://confluence.aheadworks.com/display/EUDOC/Layered+Navigation',
         'AW_Eventbooking' => 'http://confluence.aheadworks.com/display/EUDOC/Event+Tickets',
         'AW_Storecredit' => 'http://confluence.aheadworks.com/display/EUDOC/Store+Credit+and+Refund',
+        'AW_Coupongenerator' => 'http://confluence.aheadworks.com/display/EUDOC/Quick+Coupon+Generator',
     );
 
     /**

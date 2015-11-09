@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/**
+ * @category   System Configuration
+ * @package    Cunning_Promoproduct
+ * @author     Cunning (jaydeep.cunning@gmail.com)
+ * @Created At  2014-11-05
+ */
+ -->
+<config>
+    <tabs>
+        <cunning translate="label">
+            <label>Cunning</label>
+            <sort_order>100</sort_order>
+        </cunning>
+    </tabs>
+    <sections>
+        <promoproduct_section translate="label">
+            <label>Promotional Product</label>
+            <tab>cunning</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store> 
+            <groups>
+                <promoproduct_group translate="label">
+                    <label>General Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store> 
+                    <fields>                        
+						<promoproduct_enable translate="label">
+                            <label>Enable Promotional Product</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </promoproduct_enable>
+						<apply_customer_group>
+                            <label>Apply To Customer Groups</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>180</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>promoproduct/groupcollection</source_model>
+							<comment>Restrict customer groups to get free products. Only above selected customer groups will get free products.</comment>
+                        </apply_customer_group>
+						<promoproduct_cart_sub_total translate="label">
+                            <label>Cart Sub Total Greater Than Or Equal To</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>200</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </promoproduct_cart_sub_total>
+						<promoproduct_product_ids translate="label">
+                            <label>Promotional Product Ids</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>300</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Ids should be comma separated, Like : 1032,945,4582 </comment>
+                        </promoproduct_product_ids>
+						<promoproduct_product_qty translate="label">
+                            <label>Promotional Product Qty</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>400</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </promoproduct_product_qty>
+                    </fields>
+                </promoproduct_group>
+            </groups>
+        </promoproduct_section>
+    </sections>
+</config>

@@ -182,25 +182,35 @@ class Sashas_CouponGift_Model_Observer
 		$applied_coupon_id=Mage::getModel('sales/quote')->load($quoteObj->getEntityId())->getAppliedRuleIds();
 		if (!$applied_coupon_id)
 			return $this;
- 
-		$rule=Mage::getModel('salesrule/rule')->load($applied_coupon_id);
+		  
+		$applied_coupon_ids_arr=explode(',',$applied_coupon_id);
+		foreach ($applied_coupon_ids_arr as $apr) {
+		    $rule=Mage::getModel('salesrule/rule')->load($apr);
+		    
+		    if ($rule->getSimpleAction()!='coupon_gift')
+		        continue;
+		}
+			 
 		if ($rule->getSimpleAction()!='coupon_gift')
 			return $this;
-		
+		 
 		$gift_product_sku=$rule->getGiftProductSku();
 		$product_id=Mage::getModel('catalog/product')->getIdBySku($gift_product_sku);
 				 				
 		foreach ($observer->getCart()->getItems() as $quote_item) {
-			if( $quote_item->getProductId()==$product_id){
+			if( $quote_item->getProductId()==$product_id){ 
 				$gift_product_item=$quote_item;
-				break;
+				//break;
 				/*Force qty*/
+				 
 				if ($new_info[$gift_product_item->getId()]['qty']>1)
 					$gift_product_item->setQty(1)->save();
 				/*Force qty*/
+				 
 			}
-		}		 
-		
+		}	
+		 
+		//die('remove');
 		/*remove if qty changed*/ 
 		$quoteItemBack=clone $gift_product_item;
 		 

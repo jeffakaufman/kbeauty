@@ -2,7 +2,7 @@
 <config>
     <modules>
         <AW_Afptc>
-            <version>1.1.11</version><platform>ce</platform>
+            <version>1.1.12</version><platform>ce</platform>
         </AW_Afptc>
     </modules>
     <frontend>
@@ -117,13 +117,13 @@
     </frontend>
     <admin>
         <routers>
-            <awafptc_admin>
-                <use>admin</use>
+            <adminhtml>
                 <args>
-                    <module>AW_Afptc</module>
-                    <frontName>awafptc_admin</frontName>
+                    <modules>
+                        <awafptc after="Mage_Adminhtml">AW_Afptc_Adminhtml</awafptc>
+                    </modules>
                 </args>
-            </awafptc_admin>
+            </adminhtml>
         </routers>
     </admin>
     <adminhtml>

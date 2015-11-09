@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * @category   Configuration
+ * @package    Cunning_Promoproduct
+ * @author     Cunning (jaydeep.cunning@gmail.com)
+ * @Created At  2014-11-05
+ */
+ -->
+<config>
+    <modules>
+        <Cunning_Promoproduct>
+            <version>1.0.4</version>
+        </Cunning_Promoproduct>
+    </modules>
+	<global>
+		<helpers>
+			<promoproduct>
+				<class>Cunning_Promoproduct_Helper</class>
+			</promoproduct>
+		</helpers>
+		<models>
+			<promoproduct>
+            	<class>Cunning_Promoproduct_Model</class>                
+            </promoproduct>
+		</models>
+	</global>
+	<frontend>
+		<events>
+			<sales_quote_collect_totals_after>
+                <observers>
+                    <promoproduct_cart_save_after>
+                        <class>Cunning_Promoproduct_Model_Observer</class>
+                        <method>sales_quote_collect_totals_after</method>
+                    </promoproduct_cart_save_after>
+                </observers>
+            </sales_quote_collect_totals_after>
+			<controller_action_predispatch_checkout_cart_add>
+                <observers>
+                    <checkout_cart_add_before>
+                        <class>Cunning_Promoproduct_Model_Observer</class>
+                        <method>checkout_cart_add_before</method>
+                    </checkout_cart_add_before>
+                </observers>
+            </controller_action_predispatch_checkout_cart_add>
+        </events>
+		<layout>
+		  <updates>
+			  <promoproduct>
+				  <file>promoproduct.xml</file>
+			  </promoproduct>                
+		  </updates>
+	  </layout>
+	</frontend>
+	<adminhtml>
+		<acl>
+			<resources>
+				<all>
+					<title>Allow Everything</title>
+				</all>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<promoproduct_section>
+											<title>Promoproduct - All</title>
+										</promoproduct_section>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</adminhtml>
+</config>

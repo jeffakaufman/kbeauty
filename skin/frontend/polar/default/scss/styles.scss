@@ -712,6 +712,15 @@ body.cms-the-kurrent {
 			width: 90%;
 			margin: 0 5% 1em 5%;
 			
+			&:before,
+			&:after {
+			    content: " "; /* 1 */
+			    display: table; /* 2 */
+			}
+			&:after {
+			    clear: both;
+			}
+						
 			@media #{$medium-up} {
 				width: 30%;
 				margin: 0 1.5% 1rem 1.5%;

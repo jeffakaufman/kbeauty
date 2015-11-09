@@ -13,10 +13,12 @@
 			case "facebook":
 				M = "https://www.facebook.com/KardashianBeauty";
 				var B = n.split("/");
-//console.log(n);
-//console.log(B);
-				_ = _ = B.length > 1 ? "https://graph.facebook.com/" + B[1] + "/photos?fields=id,link,from,name,picture,images,comments&limit=" + D : frl + encodeURIComponent("https://www.facebook.com/feeds/page.php?id=" + n + "&format=rss20");
-//console.log(_);
+console.log(n);
+console.log(B);
+console.log(B.length);
+				_ = _ = "https://graph.facebook.com/" + n + "/feed?access_token=770199153099219|561etTerfBwO42QmC1_uR_0aKDg";
+				//_ = _ = B.length > 1 ? "https://graph.facebook.com/" + B[1] + "/photos?fields=id,link,from,name,picture,images,comments&limit=" + D + "&access_token=770199153099219|561etTerfBwO42QmC1_uR_0aKDg": frl + encodeURIComponent("https://www.facebook.com/feeds/page.php?id=" + n + "&format=rss20");
+console.log(_);
 				break;
 			case "twitter":
 				var j = d.url.replace(/\&#038;/gi, "&");
@@ -134,6 +136,7 @@
 				break
 		}
 		var K = t == "twitter" ? "json" : "jsonp";
+//console.log(K);
 		jQuery.ajax({
 			url: _,
 			data: O,
@@ -203,13 +206,14 @@
 							R = "";
 						switch (t) {
 							case "facebook":
+console.log(B.length);
 								if (B.length > 1) {
 									n = v.from.id;
 									var F = new Date;
 									F = F.setFbAlbum(v.created_time);
 									var U = c(v.link);
-//console.log(v.link);
-//console.log(U);
+console.log(v.link);
+console.log(U);
 
 									q = B[0] != "" ? B[0] : v.from.name;
 									//k = '<a href="http://www.facebook.com/media/set/?set=' + U[1] + '">' + q + "</a>";
@@ -220,8 +224,8 @@
                                     while(_imgIdx > v.images.length - 1) {
                                         --_imgIdx;
                                     }
-//console.log(_imgIdx);
-//console.log( v.images[_imgIdx].source);
+console.log(_imgIdx);
+console.log( v.images[_imgIdx].source);
 									P = '<a href="' + v.images[0].source + '" target="_blank"><img src="' + v.images[0].source + '" alt="" /></a>';
 									//P = '<a href="' + v.link + '"><img src="' + v.images[d.image_width].source + '" alt="" /></a>';
 									if (d.comments > 0 && v.comments) {
@@ -690,7 +694,8 @@
 				});
 				e(".section-user a", n).each(function() {
 					e(this).attr("href", t.link);
-					e(this).text(t.name)
+					e(this).text('Kardashian Beauty');
+					//e(this).text(t.name);
 				})
 			}
 		})
@@ -1086,11 +1091,11 @@ jQuery(window).load(function() {
 		window.open(e, "sharer", "toolbar=0,status=0,width=626,height=436");
 		return false
 	});
-	jQuery(".pksr-facebook .section-text a").each(function(e) {
-		var t = jQuery(this).attr("href");
-		var n = decodeURIComponent(t.replace("http://www.facebook.com/l.php?u=", "")).split("&");
-		jQuery(this).attr("href", n[0])
-	});
+	// jQuery(".pksr-facebook .section-text a").each(function(e) {
+	// 	var t = jQuery(this).attr("href");
+	// 	var n = decodeURIComponent(t.replace("http://www.facebook.com/l.php?u=", "")).split("&");
+	// 	jQuery(this).attr("href", n[0])
+	// });
 
     //jQuery("li.pksr-li .inner a").click(function(e) {
     //    e.stopPropagation();

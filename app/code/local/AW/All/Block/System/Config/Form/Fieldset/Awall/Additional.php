@@ -19,7 +19,7 @@
  *
  * @category   AW
  * @package    AW_Afptc
- * @version    1.1.11
+ * @version    1.1.12
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
@@ -37,7 +37,7 @@ class AW_All_Block_System_Config_Form_Fieldset_Awall_Additional extends Mage_Adm
         $html .= "<tr>
             <td class=\"label\"></td>
             <td class=\"value\">
-            <button class=\"scalable\" onclick=\"window.location='" . Mage::getSingleton('adminhtml/url')->getUrl('awall_admin/additional/index') . "'\" type=\"button\">
+            <button class=\"scalable\" onclick=\"window.location='" . Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/awall_additional/index') . "'\" type=\"button\">
                 <span>View Additional info</span>
             </button
             </td>
