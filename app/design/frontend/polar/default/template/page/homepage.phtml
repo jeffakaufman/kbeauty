@@ -1,4 +1,5 @@
 <?php
+
 $_product    = $this->getProduct();
 $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 ?>
@@ -46,7 +47,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 
             <div id="disclaimers-<?php echo $sl->getData('slide_id'); ?>" class="reveal-modal" data-reveal
                  aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-                <h3 id="modalTitle">Read Disclaimer</h3>
+                <h3 id="modalTitle">Disclaimer</h3>
 
                 <p><?php echo $sl->getData('disclaimers_content');?></p>
                 <button class="close-reveal-modal" aria-label="Close" type="button" class="button dark">Close</button>
@@ -71,7 +72,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 #slider { width: 100%; min-height: 300px; opacity: 0; position: relative; margin: 0; }
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
   #slider { overflow: hidden; min-height: 200px; } }
-@media only screen and (min-width: 64.063em) { 
+@media only screen and (min-width: 64.063em) {
   #slider { overflow: hidden; min-height: 400px; } }
 #slider:before { content: ''; }
 #slider .container { content: ''; height: 100%; vertical-align: middle; position: relative; margin: 0; }
@@ -96,7 +97,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 #slider li.currentSlide { z-index:10}
 #slider li.nextSlide { margin-top: -100%; z-index:1}
 #slider .pager { position: absolute; top: 101%; left: 50%; text-align: center; width: 100px; margin-left: -50px; z-index: 100; }
-@media only screen and (min-width: 40.063em) { 
+@media only screen and (min-width: 40.063em) {
     #slider .pager { top: 95%; } }
 #slider .pager .dot { display: inline-block; width: 10px; height: 10px; background: #ccc; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; margin: 0 2px; cursor: pointer; }
 #slider .pager .dot:hover, #slider .pager .dot.active { background: #b2a177; }
@@ -127,7 +128,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     .big-image.desktop, .container.desktop {
         display: none;
     }
-
+#slider .arrow { top: 30%; }
 }
 @media only screen and (min-width: 40.063em){
   #slider .text { margin: auto; width: 42%; left: 5%; top: 0; right: 53%; bottom: 0; display: inline-block; }
@@ -165,7 +166,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     }
 
 }
-@media only screen and (min-width: 40.063em) { 
+@media only screen and (min-width: 40.063em) {
   #slider .image { margin: auto; display: inline-block; width: 37%; top: 0; left: 51%; right: 12%; bottom: 0; }
     #slider .container.desktop .action a.pop { bottom: 5px; left:10px; text-align: left; font-size: 1.1rem; display:block; width: 100px; height: 30px; text-decoration: none;}
     #slider .container.desktop .action a.pop:hover {text-decoration: none;}

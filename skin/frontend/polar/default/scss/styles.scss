@@ -9,6 +9,7 @@
 @import "components"; // All Polar components
 
 html, body { height: auto; }
+html.empty { height: 100%; }
 
 .cms-home {
 

@@ -1,0 +1,159 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/**
+ * Shoping cart sidebar
+ *
+ * @see Mage_Checkout_Block_Cart_Sidebar
+ */
+
+?>
+<?php if ($this->getIsNeedToDisplaySideBar()):?>
+<div class="block block-cart">
+    <?php $_cartQty = $this->getSummaryCount() ?>
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Shopping Bag') ?></span></strong>
+    </div>
+    <div class="block-content">
+        <?php $_items = $this->getRecentItems() ?>
+        <?php if(count($_items)): ?>
+            <div class="items">
+                <ol class="mini-products-list">
+                <?php foreach($_items as $_item): ?>
+                    <?php echo $this->getItemHtml($_item) ?>
+                <?php endforeach; ?>
+                </ol>
+                <script type="text/javascript">decorateList('cart-sidebar', 'none-recursive')</script>
+            </div>
+        <?php else: ?>
+            <div class="items">
+                <p class="empty"><?php echo $this->__('You have no items in your shopping bag.') ?></p>
+            </div>
+        <?php endif ?>
+
+        <?php if ($_cartQty>0): ?>
+            <div class="summary">
+                <p class="subtotal">
+                    <?php if ($this->canApplyMsrp()): ?>
+                        <span class="map-cart-sidebar-total"><?php echo $this->__('ORDER TOTAL WILL BE DISPLAYED BEFORE YOU SUBMIT THE ORDER'); ?></span>
+                    <?php else: ?>
+                        <span class="label"><?php echo $this->__('Subtotal') ?></span> <?php echo Mage::helper('checkout')->formatPrice($this->getSubtotal()) ?>
+                        <?php if ($_subtotalInclTax = $this->getSubtotalInclTax()): ?>
+                            <br />(<?php echo Mage::helper('checkout')->formatPrice($_subtotalInclTax) ?> <?php echo Mage::helper('tax')->getIncExcText(true) ?>)
+                        <?php endif; ?>
+                    <?php endif; ?>
+                </p>
+            </div>
+        <?php endif ?>
+        <?php if($_cartQty): ?>
+            <div class="actions">
+                <?php echo $this->getChildHtml('extra_actions') ?>
+                <?php $customer_data=Mage::getSingleton('customer/session')->isLoggedIn(); ?>
+                <?php //if ($customer_data): ?>
+                <button type="button" title="<?php echo $this->__('Checkout') ?>" class="button btn-checkout" onclick="setLocation('/checkout/cart/')"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+                <?php /*else: ?>
+                <button type="button" title="<?php echo $this->__('Checkout') ?>" class="button btn-checkout" onclick="getLoginFormFromSidebar()"><span><span><?php echo $this->__('Checkout') ?></span></span></button>
+                <?php endif;*/ ?>
+            </div>
+        <?php endif ?>
+        </div>
+</div>
+<?php endif;?>
+
+<div id="ajaxJS"></div>
+<script type="text/javascript">
+
+    jQuery('.off-canvas-mini-cart .quantity .icon-minus').click(function() {
+        var id = jQuery(this).attr('data-id');
+        var curValue = parseInt(jQuery(this).next('input.qty').val());
+        if (curValue != 1) var newValue = curValue-1;
+        else newValue = 1;
+        jQuery(this).next('input.qty').val(newValue);
+        updateCart(id,newValue);
+        if (jQuery(this).hasClass('cartPage') || jQuery(this).hasClass('onepage')) jQuery('#cart['+id+'][qty]').val(newValue);
+        if (jQuery(this).hasClass('sidebar')) jQuery('#cart'+id+', #cart_onepage'+id).val(newValue);
+    });
+    jQuery('.off-canvas-mini-cart .quantity .icon-plus').click(function() {
+        var id = jQuery(this).attr('data-id');
+        var curValue = jQuery(this).prev('input.qty').val();
+        var newValue = parseInt(curValue) + 1;
+        jQuery(this).prev('input.qty').val(newValue);
+        if (jQuery(this).hasClass('cartPage') || jQuery(this).hasClass('onepage')) jQuery('#cart['+id+'][qty]').val(newValue);
+        if (jQuery(this).hasClass('sidebar')) jQuery('#cart'+id+', #cart_onepage'+id).val(newValue);
+        updateCart(id,newValue);
+        alert(newValue);
+    });
+    jQuery('.removeItem a').click(function(e) {
+        e.preventDefault();
+        var id = jQuery(this).parent().attr('data-id');
+        //console.log('id '+id);
+        var curValue = jQuery('#cart['+id+'][qty]').val();
+        var curQty = jQuery('.right-off-canvas-toggle .count').text();
+        jQuery('.right-off-canvas-toggle .count').html(parseInt(curQty) - parseInt(curValue));
+        jQuery('.mini-products-list .item-'+id).remove();
+        jQuery('.cart-list .item-'+id).remove();
+        updateCart(id,0);
+    });
+    jQuery('.quantity .qty').each(function() {
+        var elem = jQuery(this);
+        elem.data('oldVal', elem.val());
+
+        elem.bind("propertychange change click keyup input paste", function(event){
+            if (elem.data('oldVal') != elem.val()) {
+                elem.data('oldVal', elem.val());
+                var id = jQuery(this).attr('data-id');
+                jQuery('#cart'+id+', #cart_onepage'+id).val(elem.val());
+                updateCart(id,elem.val());
+            }
+        });
+    });
+    
+    function updateCart(productId, qty) {
+        jQuery.ajax({
+            type: "POST",
+            dataType: "HTML",
+            data: { productId : productId, qty : qty },
+//            url: "/scripts/ajax.php?productId=" + productId + "&qty=" + qty,
+            url: "/index.php/checkout/cart/update",
+            success: function (data) {
+//                console.log(data);
+                finishAjax('ajaxJS', escape(data));
+            },
+            error: function(data){
+            }
+        });
+    }
+    function finishAjax(id, data){
+        jQuery('#'+id).html(unescape(data));
+        updateTotals();
+    }
+    
+    function finishAjax2(id, data){
+        jQuery('#'+id).html(unescape(data));
+        addTax();
+    }
+
+</script>

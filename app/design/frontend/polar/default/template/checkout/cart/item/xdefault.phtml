@@ -124,13 +124,11 @@ $parentProduct = Mage::getModel('catalog/product')->load($parentIds[0]);
     </div>*/ ?>
     <div class="quantityCol small-8 medium-3 large-2 columns" data-equalizer-watch>
         <div class="quantity">
-		<?php if($_item->getCalculationPrice() !=''): ?>
             <div class="inner">
                 <span class="icon icon-minus cartPage" data-id="<?php echo $_item->getId() ?>"></span>
                 <input name="cart[<?php echo $_item->getId() ?>][qty]" id="cart<?php echo $_item->getId() ?>" value="<?php echo $this->getQty() ?>" size="4" title="<?php echo $this->__('Qty') ?>" class="input-text qty" maxlength="2" data-id="<?php echo $_item->getId() ?>" />
                 <span class="icon icon-plus cartPage" data-id="<?php echo $_item->getId() ?>"></span>
             </div>
-			<?php endif; ?>
         </div>
     </div>
     

@@ -584,7 +584,11 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 		$('.pksr-toolbar .filter li a').removeClass('selected');
 		if ($(this).hasClass('link-all')) $(this).addClass('selected');
 	});
-	//$('.pksr-toolbar .filter li a[rel=instagram]').click();
+	$('.pksr-toolbar .filter li a[rel=instagram]').click();
+
+	$('.block-subscribe .button.expand').click(function() {
+		$('#adwords').css('display','block');
+	});
 
 	function openSection(hash) {
 		if (!hash) {
@@ -603,7 +607,6 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 			}, 1000);
 			history.pushState("", document.title, window.location.href.replace(/\#(.+)/, '').replace(/http(s?)\:\/\/([^\/]+)/, '') );
 		} else if (!$target.hasClass('active') && hash != '#feed') {
-			console.log('test');
         	$target.prev('h2').addClass('active');
             $target.addClass('active');
             setTimeout(function(){
@@ -943,8 +946,8 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 
 				$(this).find('.text').height(textHeight).css('position','absolute');
 
-				$(this).find('.big-image img').css('height','auto');
-				imageHeight = $(this).find('.big-image img').height();
+				$(this).find('.big-image.desktop img').css('height','auto');
+				imageHeight = $(this).find('.big-image.desktop img').height();
 				$(this).find('.image').css('position','absolute');
 				imageHeights.push(imageHeight);
 				tallestImage = Math.max.apply( null, imageHeights );
@@ -996,13 +999,13 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 
                 $(this).parent().css('height','auto');
 
-                $(this).find('.big-image img').css('height','auto');
-                imageHeight = $(this).find('.big-image img').height();
+                $(this).find('.big-image.mobile img').css('height','auto');
+                imageHeight = $(this).find('.big-image.mobile img').height();
                 $(this).find('.image').css('position','absolute');
                 imageHeights.push(imageHeight);
                 tallestImage = Math.max.apply( null, imageHeights );
 
-
+//console.log(imageHeight);
 				$("#slider li, #hero").css('height',tallestImage+'px');
 
 //console.log(wW);

@@ -108,17 +108,16 @@
         </div><!-- .item-options -->
 
         <div class="quantity">
-		<?php if($_item->getCalculationPrice() !=''): ?>
             <div class="inner">
-                <form id="checkoutForm<?php echo $_item->getId() ?>" action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+                <form id="form<?php echo $_item->getId() ?>" action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
                     <?php echo $this->getBlockHtml('formkey'); ?>
-                    <span class="icon icon-minus onepage" data-id="<?php echo $_item->getId() ?>"></span>
+                    <span class="icon icon-minus sidebar" data-id="<?php echo $_item->getId() ?>"></span>
                     <!-- <input name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="4" title="<?php echo $this->__('Qty') ?>" class="input-text qty" maxlength="12" /> -->
-                    <input name="cart[<?php echo $_item->getId() ?>][qty]" id="cart_onepage<?php echo $_item->getId() ?>" value="<?php echo $this->getQty() ?>" size="4" title="<?php echo $this->__('Qty') ?>" class="input-text qty" maxlength="2" />
-                    <span class="icon icon-plus onepage" data-id="<?php echo $_item->getId() ?>"></span>
+                    <input name="cart[<?php echo $_item->getId() ?>][qty]" id="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="4" title="<?php echo $this->__('Qty') ?>" class="input-text qty" maxlength="2" data-id="<?php echo $_item->getId() ?>" />
+                    <span class="icon icon-plus sidebar" data-id="<?php echo $_item->getId() ?>"></span>
                 </form>
             </div>
-        <?php endif; ?>
+        
 
             <?php if ($canApplyMsrp): ?>
 
@@ -135,7 +134,7 @@
                 <?php } else if ($_item->getQty() == 1) { ?>
                     <?php echo $this->helper('checkout')->formatPrice($_item->getCalculationPrice()) ?>
                 <?php } else { ?>
-                    <?php echo '<span class="price">$' . $this->getQty() * $_item->getCalculationPrice() . '</span>'; ?>
+                    <?php echo '<span class="price">' . $this->helper('checkout')->formatPrice($this->getQty() * $_item->getCalculationPrice()) . '</span>'; ?>
                 <?php } ?>
                 <?php if (Mage::helper('weee')->getApplied($_item)): ?>
                     <br />
@@ -201,7 +200,7 @@
             <?php endif; //Can apply MSRP ?>
         </div>
         
-        <div class="removeItem"><a href="<?php echo $this->getDeleteUrl() ?>"><span><?php echo $this->__('Remove') ?></span><span class="icon icon-delete"></span></a></div>
+        <div class="removeItem" data-id="<?php echo $_item->getId() ?>"><a href="<?php echo $this->getDeleteUrl() ?>"><span><?php echo $this->__('Remove') ?></span><span class="icon icon-delete"></span></a></div>
 
         
         </div>

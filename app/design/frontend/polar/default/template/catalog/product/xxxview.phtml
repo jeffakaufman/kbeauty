@@ -52,18 +52,11 @@
             <div class="small-12 medium-5 large-7 columns product-img-box">
                 <div class="info show-for-small text-center">
                     <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
-                    <?php if($_product->isAvailable()): ?>
-                    <div class="no-display" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                         <span itemprop="price"><?php echo Mage::helper('core')->currency($_product->getFinalPrice()); ?></span>
-                         <link itemprop="availability" href="http://schema.org/InStock" />
-                    </div>
-                    <?php endif; ?>
                     <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
-                    <!-- removed because of schema.org bug
                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                        <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />
                         <?php echo $this->getChildHtml('product_type_data') ?>
-                    </div> -->
+                    </div>
                     <?php if ($_product->getShortDescription()):?>
                     <div class="short-description">
                         <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></div>
@@ -76,11 +69,10 @@
                 <div class="info hide-for-small">
                     <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
                     <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
-                    <!-- removed because of schema.org bug
                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
                        <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />
                         <?php echo $this->getChildHtml('product_type_data') ?>
-                    </div> -->
+                    </div>
                     <?php if ($_product->getShortDescription()):?>
                     <div class="short-description">
                         <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></div>
@@ -241,7 +233,7 @@
                 }
 
                 if (button && button != 'undefined') {
-                    /*button.disabled = true;*/
+                    button.disabled = true;
                 }
             }
         }.bind(productAddToCartForm);

@@ -108,7 +108,6 @@
         </div><!-- .item-options -->
 
         <div class="quantity">
-		<?php if($_item->getCalculationPrice() !=''): ?>
             <div class="inner">
                 <form id="checkoutForm<?php echo $_item->getId() ?>" action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
                     <?php echo $this->getBlockHtml('formkey'); ?>
@@ -118,7 +117,7 @@
                     <span class="icon icon-plus onepage" data-id="<?php echo $_item->getId() ?>"></span>
                 </form>
             </div>
-        <?php endif; ?>
+        
 
             <?php if ($canApplyMsrp): ?>
 
