@@ -2,8 +2,8 @@
 
 /**
  * Product:       Xtento_XtCore (1.1.7)
- * ID:            fCw98dfDR6EH4ugjSph2lInidzBeO0hRoSkwlirUWoA=
- * Packaged:      2015-06-20T16:59:02+00:00
+ * ID:            9Hiec+sXo9Z8XvyLsrsgPILEHN0W5+Sn/0xZtemTYL0=
+ * Packaged:      2015-11-13T21:34:24+00:00
  * Last Modified: 2013-10-30T18:32:49+01:00
  * File:          app/code/local/Xtento/XtCore/Model/Observer/Cron.php
  * Copyright:     Copyright (c) 2015 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.

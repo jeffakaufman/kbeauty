@@ -61,9 +61,9 @@
                     <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
                     <!-- removed because of schema.org bug
                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                       <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />
+                       <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />-->
                         <?php echo $this->getChildHtml('product_type_data') ?>
-                    </div> -->
+                    <!--</div> -->
                     <?php if ($_product->getShortDescription()):?>
                     <div class="short-description">
                         <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></div>
@@ -76,11 +76,11 @@
                 <div class="info hide-for-small">
                     <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
                     <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
-                    <!-- removed because of schema.org bug
+                    <!-- removed because of schema.org bug 
                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                       <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />
+                       <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />-->
                         <?php echo $this->getChildHtml('product_type_data') ?>
-                    </div> -->
+                    <!-- </div>-->
                     <?php if ($_product->getShortDescription()):?>
                     <div class="short-description">
                         <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></div>
