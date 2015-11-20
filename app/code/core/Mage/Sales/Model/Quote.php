@@ -289,37 +289,53 @@ class Mage_Sales_Model_Quote extends Mage_Core_Model_Abstract
          *      base_to_global & base_to_quote/base_to_order - must be used instead
          */
 
+//echo "Q200<br />";
         $globalCurrencyCode  = Mage::app()->getBaseCurrencyCode();
+//echo "Q201<br />";
         $baseCurrency = $this->getStore()->getBaseCurrency();
+//echo "Q202<br />";
 
         if ($this->hasForcedCurrency()){
+//echo "Q203<br />";
             $quoteCurrency = $this->getForcedCurrency();
         } else {
+//echo "Q204<br />";
             $quoteCurrency = $this->getStore()->getCurrentCurrency();
         }
+//echo "Q205<br />";
 
         $this->setGlobalCurrencyCode($globalCurrencyCode);
+//echo "Q206<br />";
         $this->setBaseCurrencyCode($baseCurrency->getCode());
+//echo "Q207<br />";
         $this->setStoreCurrencyCode($baseCurrency->getCode());
+//echo "Q208<br />";
         $this->setQuoteCurrencyCode($quoteCurrency->getCode());
 
+//echo "Q209<br />";
         //deprecated, read above
         $this->setStoreToBaseRate($baseCurrency->getRate($globalCurrencyCode));
+//echo "Q210<br />";
         $this->setStoreToQuoteRate($baseCurrency->getRate($quoteCurrency));
-
+//echo "Q211<br />";
         $this->setBaseToGlobalRate($baseCurrency->getRate($globalCurrencyCode));
+//echo "Q212<br />";
         $this->setBaseToQuoteRate($baseCurrency->getRate($quoteCurrency));
-
+//echo "Q213<br />";
         if (!$this->hasChangedFlag() || $this->getChangedFlag() == true) {
+//echo "Q214<br />";
             $this->setIsChanged(1);
+//echo "Q215<br />";
         } else {
             $this->setIsChanged(0);
         }
-
+//echo "Q216<br />";
         if ($this->_customer) {
+//echo "Q217<br />";
             $this->setCustomerId($this->_customer->getId());
+//echo "Q218<br />";
         }
-
+//echo "Q219 -- {$this->_eventPrefix}<br />";
         parent::_beforeSave();
     }
 
@@ -359,8 +375,12 @@ class Mage_Sales_Model_Quote extends Mage_Core_Model_Abstract
         else {
             $customerId = (int) $customer;
         }
+
+//echo "Q1 -- {$customerId}<br />";
         $this->_getResource()->loadByCustomerId($this, $customerId);
+//echo "Q2<br />";
         $this->_afterLoad();
+//echo "Q3<br />";
         return $this;
     }
 
@@ -1963,6 +1983,7 @@ class Mage_Sales_Model_Quote extends Mage_Core_Model_Abstract
         if ($this->_preventSaving) {
             return $this;
         }
+
         return parent::save();
     }
 }

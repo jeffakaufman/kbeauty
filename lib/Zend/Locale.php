@@ -43,12 +43,14 @@ class Zend_Locale
         'ha_NG'  => 'ha_Latn_NG',
         'kk_KZ'  => 'kk_Cyrl_KZ',
         'ks_IN'  => 'ks_Arab_IN',
+
         'mn_MN'  => 'mn_Cyrl_MN',
         'ms_BN'  => 'ms_Latn_BN',
         'ms_MY'  => 'ms_Latn_MY',
         'ms_SG'  => 'ms_Latn_SG',
         'pa_IN'  => 'pa_Guru_IN',
         'pa_PK'  => 'pa_Arab_PK',
+        
         'shi_MA' => 'shi_Latn_MA',
         'sr_BA'  => 'sr_Latn_BA',
         'sr_ME'  => 'sr_Latn_ME',

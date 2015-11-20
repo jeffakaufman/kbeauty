@@ -988,3 +988,6 @@ final class Mage
         self::$_isDownloader = $flag;
     }
 }
+
+
+// Varien_Profiler::enable();

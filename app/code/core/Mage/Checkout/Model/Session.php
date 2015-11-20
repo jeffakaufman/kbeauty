@@ -204,33 +204,54 @@ class Mage_Checkout_Model_Session extends Mage_Core_Model_Session_Abstract
         if (!Mage::getSingleton('customer/session')->getCustomerId()) {
             return $this;
         }
-
+//echo "X1<br />";
         Mage::dispatchEvent('load_customer_quote_before', array('checkout_session' => $this));
+//echo "X2<br />";
 
+
+        $t = $customerQuote = Mage::getModel('sales/quote');
+//echo "X2.1<br />";
+        $aId = Mage::app()->getStore()->getId();
+//echo "X2.2 -- {$aId}<br />";
+        $cId = Mage::getSingleton('customer/session')->getCustomerId();
+//echo "X2.3 -- {$cId}<br />";
+
+        $t->setStoreId($aId);
+//echo "X2.4<br />";
+        $t->loadByCustomer($cId);
+//echo "X2.5<br />";
         $customerQuote = Mage::getModel('sales/quote')
             ->setStoreId(Mage::app()->getStore()->getId())
             ->loadByCustomer(Mage::getSingleton('customer/session')->getCustomerId());
-
+//echo "X3<br />";
         if ($customerQuote->getId() && $this->getQuoteId() != $customerQuote->getId()) {
+//echo "X4<br />";
             if ($this->getQuoteId()) {
+//echo "X5<br />";
                 $customerQuote->merge($this->getQuote())
                     ->collectTotals()
                     ->save();
+//echo "X6<br />";
             }
-
+//echo "X7<br />";
             $this->setQuoteId($customerQuote->getId());
-
+//echo "X8<br />";
             if ($this->_quote) {
+//echo "X9<br />";
                 $this->_quote->delete();
             }
             $this->_quote = $customerQuote;
         } else {
+//echo "X10<br />";
             $this->getQuote()->getBillingAddress();
+//echo "X11<br />";
             $this->getQuote()->getShippingAddress();
+//echo "X12<br />";
             $this->getQuote()->setCustomer(Mage::getSingleton('customer/session')->getCustomer())
                 ->setTotalsCollectedFlag(false)
                 ->collectTotals()
                 ->save();
+//echo "X13<br />";
         }
         return $this;
     }

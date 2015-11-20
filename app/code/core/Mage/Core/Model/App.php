@@ -1297,9 +1297,23 @@ class Mage_Core_Model_App
                 $observer = new Varien_Event_Observer();
             }
 
+//if($eventName == 'customer_login') {
+//    echo "<pre>";
+//    var_dump($events[$eventName]['observers']);
+//    echo "</pre>";
+//}
+
+
             foreach ($events[$eventName]['observers'] as $obsName=>$obs) {
                 $observer->setData(array('event'=>$event));
                 Varien_Profiler::start('OBSERVER: '.$obsName);
+
+//if($eventName == 'customer_login') {
+//    echo "<pre>";
+//    var_dump($obs);
+//    echo "</pre>";
+//}
+
                 switch ($obs['type']) {
                     case 'disabled':
                         break;

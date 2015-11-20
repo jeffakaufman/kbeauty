@@ -887,6 +887,7 @@ class Dotdigitalgroup_Email_Helper_Data extends Mage_Core_Helper_Abstract
             }
             //ip address
             $ipAddress = Mage::helper('core/http')->getRemoteAddr();
+            Mage::log('ip address: '. $ipAddress, null, 'ipLogForEdc.log', true);
 
             if(in_array($ipAddress, $ipArray)) {
                 return true;

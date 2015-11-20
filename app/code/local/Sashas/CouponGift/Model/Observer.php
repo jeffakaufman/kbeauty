@@ -142,7 +142,10 @@ class Sashas_CouponGift_Model_Observer
 	}
 	
 	public function RemoveCoupon(Varien_Event_Observer $observer) {
-	    
+
+		if (Mage::app()->getRequest()->getModuleName()!=='checkout')
+			return $this;
+
 	     /*Validate*/
 	    if ( Mage::app()->getRequest()->getParam('remove') != 1) {
 		    $quote=$observer->getQuote();

@@ -207,12 +207,15 @@ class Mage_Customer_Model_Session extends Mage_Core_Model_Session_Abstract
      */
     public function login($username, $password)
     {
+//echo "S1<br />";
         /** @var $customer Mage_Customer_Model_Customer */
         $customer = Mage::getModel('customer/customer')
             ->setWebsiteId(Mage::app()->getStore()->getWebsiteId());
-
+//echo "S2<br />";
         if ($customer->authenticate($username, $password)) {
+//echo "S3<br />";
             $this->setCustomerAsLoggedIn($customer);
+//echo "S4<br />";
             return true;
         }
         return false;
@@ -220,9 +223,13 @@ class Mage_Customer_Model_Session extends Mage_Core_Model_Session_Abstract
 
     public function setCustomerAsLoggedIn($customer)
     {
+//echo "S10<br />";
         $this->setCustomer($customer);
+//echo "S11<br />";
         $this->renewSession();
+//echo "S12<br />";
         Mage::dispatchEvent('customer_login', array('customer'=>$customer));
+//echo "S13<br />";
         return $this;
     }
 
