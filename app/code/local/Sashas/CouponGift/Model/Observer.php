@@ -273,5 +273,47 @@ class Sashas_CouponGift_Model_Observer
 		
 		return $this;
 	}
+	
+	public function RemovefromCart(Varien_Event_Observer $observer) {
+	    $removed_quote_item=$observer->getQuoteItem();
+	    $removed_product_id=$removed_quote_item->getProductId();
+	    $cart=Mage::getModel('checkout/cart');
+	     
+	     
+	     
+	    $quoteObj = Mage::getModel('checkout/cart')->getQuote();
+	    $applied_coupon_id=Mage::getModel('sales/quote')->load($quoteObj->getEntityId())->getAppliedRuleIds();
+	
+	    if (!$applied_coupon_id)
+	        return $this;
+	     
+	    $rule=Mage::getModel('salesrule/rule')->load($applied_coupon_id);
+	    if ($rule->getSimpleAction()!='coupon_gift')
+	        return $this;
+	     
+	    $gift_product_sku=$rule->getGiftProductSku();
+	    $product_id=Mage::getModel('catalog/product')->getIdBySku($gift_product_sku);
+	
+	    if ($removed_product_id==$product_id)
+	        return $this;
+	     
+	    $quoteObj->setTotalsCollectedFlag(false)->collectTotals()->save();
+	    if ($cart->getQuote()->getAppliedRuleIds()) {
+	        return $this;
+	    } else {
+	        foreach ( $quoteObj->getAllItems() as $quote_item) {
+	            if( $quote_item->getProductId()==$product_id){
+	                 
+	                $quote_item->isDeleted(true);
+	                $quoteObj->removeItem($quote_item->getId())->save();
+	                $quoteObj->save();
+	                break;
+	            }
+	        }
+	    }
+	
+	    return $this;
+	     
+	}
 	 
 }

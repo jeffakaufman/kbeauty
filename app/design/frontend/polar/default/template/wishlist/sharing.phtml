@@ -27,6 +27,28 @@
 <div class="page-title text-center">
     <h1><?php echo $this->__('Share Your Wishlist') ?></h1>
 </div>
+
+<div id="share-wishlist-select-type">
+    <div class="fieldset">
+        <h2 class="legend"><?php echo $this->__('Select From Below') ?></h2>
+    </div>
+    <div class="share-icons">
+        <div class="share-icon">
+            <a id="share-wishlist-share-facebook" href="#" onclick="return false;"><div class="share-image"></div><div class="share-caption">Facebook</div></a>
+        </div>
+        <div class="share-icon">
+            <a id="share-wishlist-share-twitter" href="https://twitter.com/intent/tweet?text=I%27ve+got+a+wishlist%21&url=https%3A%2F%2Fkbeauty.com%2F"><div class="share-image"></div><div class="share-caption">Twitter</div></a>
+        </div>
+        <div class="share-icon">
+            <a id="share-wishlist-share-email" href="#" onclick="return false;"><div class="share-image"></div><div class="share-caption">Email</div></a>
+        </div>
+        <div class="clear:both;"></div>
+    </div>
+</div>
+<div id="share-wishlist-email" style="display: none;">
+<div class="share-email-back-button">
+    <a href="#">&lt; Back</a>
+</div>
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 <form action="<?php echo $this->getSendUrl() ?>" id="form-validate" method="post">
     <div class="fieldset">
@@ -61,6 +83,8 @@
         <button type="submit" title="<?php echo $this->__('Share Wishlist') ?>" class="button dark"><span><span><?php echo $this->__('Share Wishlist') ?></span></span></button>
     
 </form>
+</div>
+
 <script type="text/javascript">
 //<![CDATA[
 Validation.addAllThese([

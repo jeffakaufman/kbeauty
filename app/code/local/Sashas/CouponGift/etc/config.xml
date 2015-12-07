@@ -68,6 +68,14 @@
 					</coupongift_cart_update_item>
 				</observers>				
 			</checkout_cart_update_items_after> 		
+			 <sales_quote_remove_item>
+				<observers>
+					<coupongift_cart_product_remove>
+						<class>coupongift/observer</class>
+						<method>RemovefromCart</method>
+					</coupongift_cart_product_remove>
+				</observers>
+			</sales_quote_remove_item>				
 		</events> 	                       
 	</global>
 	<frontend>

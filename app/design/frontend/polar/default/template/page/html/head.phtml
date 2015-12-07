@@ -36,7 +36,7 @@
 <meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
 <meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
 <meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
-
+<meta name="bitly-verification" content="f4b036dcaf8e"/>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge" /> <!-- Disable compatibility mode in IE -->
 
 <?php if(Mage::registry('current_product')): ?>
@@ -51,6 +51,7 @@
 	 <meta name="twitter:title" content="<?php echo Mage::app()->getStore()->getName(); ?> | <?php echo ($product->getName()); ?>"/>
 	 <meta name="twitter:description" content="Get your hands on some glam! Check out <?php echo ($product->getName()); ?><?php //echo strip_tags(($product->getShortDescription())); ?> on KBeauty.com"/>
 	 <meta name="twitter:image" content="<?php echo $this->helper('catalog/image')->init($product, 'image');?>"/>
+	 <meta name="twitter:url" content="<?php echo Mage::registry('product')->getProductUrl();?>"/>
 <?php elseif(Mage::registry('current_category')): ?>
 	 <meta property="og:title" content="<?php echo Mage::app()->getStore()->getName(); ?> | <?php echo $this->getTitle() ?>" />
 	 <meta property="og:type" content="product.group" />

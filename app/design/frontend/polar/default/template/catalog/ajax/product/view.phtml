@@ -132,7 +132,7 @@
         var username="kbeauty"; // bit.ly username
         var key="R_afd68d6b20eb4a3f8326c2bd1e5d6d9a";
         jQuery.ajax({
-            url:"http://api.bit.ly/v3/shorten",
+            url:"https://api-ssl.bit.ly/v3/shorten",
             data:{longUrl:url,apiKey:key,login:username},
             dataType:"jsonp",
             success:function(v) {
@@ -146,7 +146,7 @@
     }
     function link_twitter(url) {
         
-        window.open('http://twitter.com/share?url='+url+'&text=Love%20Kardashian%20Beauty%20<?php echo urlencode($_helper->productAttribute($_product, $_product->getName(), 'name')) ?>%20on%20KBeauty.com%20@kbeautyofficial%20&hashtags=DashOfGlam',"share","toolbar=no, scrollbars=no, resizable=yes, width=700, height=400");
+        window.open('http://twitter.com/intent/tweet?url='+url+'&text=Love%20Kardashian%20Beauty%20<?php echo urlencode($_helper->productAttribute($_product, $_product->getName(), 'name')) ?>%20on%20KBeauty.com%20@kbeautyofficial%20&hashtags=DashOfGlam',"share","toolbar=no, scrollbars=no, resizable=yes, width=700, height=400");
         
     }
 
@@ -259,7 +259,7 @@
             }
 
             if (button && button != 'undefined') {
-                //button.disabled = true;
+                button.disabled = true;
             }
         }
     }.bind(productAddToCartForm);

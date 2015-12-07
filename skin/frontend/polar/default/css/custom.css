@@ -1,1 +1,72 @@
 /* When customizing the theme without Sass you should edit this file. Can be removed if not used. */
+
+.fb_dialog {
+    z-index: 99999999!important;
+}
+
+.share-icons {
+    padding-left:20px;
+}
+
+.share-icons .share-icon {
+    float:left;
+    margin-left: 70px;
+}
+
+.share-icons .share-icon a {
+    display:block;
+}
+
+.share-icons .share-icon a .share-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color:white;
+    /*border-radius:20px;*/
+}
+
+.share-icons .share-icon a:hover .share-image {
+    background-color:#ddd;
+}
+
+.share-icons .share-icon a .share-caption {
+    text-align: center;
+    color: black;
+}
+
+
+.share-icons {
+    margin-top:70px;
+}
+
+.share-icons .share-icon a:hover {
+}
+
+
+.share-icons .share-icon a#share-wishlist-share-facebook .share-image {
+    background-image: url("../images/share-facebook.png");
+    width: 100px;
+    height:102px;
+}
+
+.share-icons .share-icon a#share-wishlist-share-twitter .share-image {
+    background-image: url("../images/share-twitter.png");
+    width: 100px;
+    height:102px;
+}
+
+.share-icons .share-icon a#share-wishlist-share-email .share-image {
+    background-image: url("../images/share-email.png");
+    /*background-position-y: -19px;*/
+    width: 100px;
+    height:102px;
+}
+
+.share-email-back-button {
+    position: absolute;
+    left: 14px;
+    top: 10px;
+}
+
+.share-email-back-button a {
+    color:black;
+}

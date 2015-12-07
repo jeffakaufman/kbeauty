@@ -122,7 +122,6 @@ Checkout.prototype = {
     },
 
     gotoSection: function (section, reloadProgressBlock) {
-
         if (reloadProgressBlock) {
             this.reloadProgressBlock(this.currentStep);
         }
@@ -223,6 +222,7 @@ Checkout.prototype = {
         console.log('test');
             this.currentStep = 'shipping';
         this.gotoSection('shipping_method', true);
+
         //this.accordion.openNextSection(true);
     },
 
@@ -277,6 +277,9 @@ Checkout.prototype = {
         }
 
         if (response.goto_section) {
+            if(response.goto_section == 'shipping_method') {
+              shippingMethod.init();
+            }
             this.gotoSection(response.goto_section, true);
             return true;
         }
@@ -394,6 +397,7 @@ Billing.prototype = {
      There are 3 options: error, redirect or html with shipping options.
      */
     nextStep: function(transport){
+// console.log(transport.responseText)      ;
         if (transport && transport.responseText){
             try{
                 response = eval('(' + transport.responseText + ')');
@@ -601,6 +605,14 @@ ShippingMethod.prototype = {
         this.validator = new Validation(this.form);
         this.onSave = this.nextStep.bindAsEventListener(this);
         this.onComplete = this.resetLoadWaiting.bindAsEventListener(this);
+    },
+
+    init: function() {
+        jQuery(".shipment-methods dd li label strong span.price").each(function(pr) {
+            if(jQuery(this)[0].innerText == '$0.00') {
+                jQuery(jQuery(this).parent().parent().parent().find("input")[0]).prop("checked", true);
+            }
+        });
     },
 
     validate: function() {

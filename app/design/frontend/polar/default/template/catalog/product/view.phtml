@@ -52,18 +52,12 @@
             <div class="small-12 medium-5 large-7 columns product-img-box">
                 <div class="info show-for-small text-center">
                     <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
-                    <?php if($_product->isAvailable()): ?>
-                    <div class="no-display" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                         <span itemprop="price"><?php echo Mage::helper('core')->currency($_product->getFinalPrice()); ?></span>
-                         <link itemprop="availability" href="http://schema.org/InStock" />
-                    </div>
-                    <?php endif; ?>
                     <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
-                    <!-- removed because of schema.org bug
                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                       <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />-->
+                       <meta itemprop="price" content="<?php echo $_product->getFinalPrice() ?>" />
+                       
                         <?php echo $this->getChildHtml('product_type_data') ?>
-                    <!--</div> -->
+                    </div>
                     <?php if ($_product->getShortDescription()):?>
                     <div class="short-description">
                         <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></div>
@@ -76,11 +70,10 @@
                 <div class="info hide-for-small">
                     <h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
                     <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
-                    <!-- removed because of schema.org bug 
                     <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                       <meta itemprop="priceCurrency" content="<?php echo Mage::app()->getStore()->getCurrentCurrencyCode(); ?>" />-->
+                       <meta itemprop="price" content="<?php echo $_product->getFinalPrice() ?>" />
                         <?php echo $this->getChildHtml('product_type_data') ?>
-                    <!-- </div>-->
+                    </div>
                     <?php if ($_product->getShortDescription()):?>
                     <div class="short-description">
                         <div class="std" itemprop="description"><?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?></div>
@@ -160,7 +153,7 @@
         var username="kbeauty"; // bit.ly username
         var key="R_afd68d6b20eb4a3f8326c2bd1e5d6d9a";
         jQuery.ajax({
-            url:"http://api.bit.ly/v3/shorten",
+            url:"https://api-ssl.bit.ly/v3/shorten",
             data:{longUrl:url,apiKey:key,login:username},
             dataType:"jsonp",
             success:function(v) {
@@ -174,7 +167,7 @@
     }
     function link_twitter(url) {
         
-        window.open('http://twitter.com/share?url='+url+'&text=Love%20Kardashian%20Beauty%20<?php echo urlencode($_helper->productAttribute($_product, $_product->getName(), 'name')) ?>%20on%20KBeauty.com%20@kbeautyofficial%20&hashtags=DashOfGlam',"share","toolbar=no, scrollbars=no, resizable=yes, width=700, height=400");
+        window.open('http://twitter.com/intent/tweet?url='+url+'&text=Love%20Kardashian%20Beauty%20<?php echo urlencode($_helper->productAttribute($_product, $_product->getName(), 'name')) ?>%20on%20KBeauty.com%20@kbeautyofficial%20&hashtags=DashOfGlam',"share","toolbar=no, scrollbars=no, resizable=yes, width=700, height=400");
         
     }
     
@@ -241,7 +234,7 @@
                 }
 
                 if (button && button != 'undefined') {
-                    /*button.disabled = true;*/
+                    //button.disabled = true;
                 }
             }
         }.bind(productAddToCartForm);
@@ -268,7 +261,7 @@
                 }
                 jQuery('.ajax_loader').show();
                 if (button && button != 'undefined') {
-                    button.disabled = true;
+                    //button.disabled = true;
                 }
             }
         }.bind(productAddToWishlistForm);
