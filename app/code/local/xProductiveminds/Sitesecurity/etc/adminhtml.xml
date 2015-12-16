@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <productiveminds translate="title" module="sitesecurity">
+            <children>
+            	<sitesecurity module="sitesecurity">
+			    	<title>Site Security</title>
+			    	<sort_order>20</sort_order>
+			   		<children>
+			   			<new translate="title" module="sitesecurity">
+		                    <title>Add a New Blacklist</title>
+		                    <sort_order>10</sort_order>
+		                    <action>sitesecurity_admin/adminhtml_blacklist/new</action>
+		                </new>
+		                <blacklist translate="title" module="sitesecurity">
+		                    <title>Manage Blacklisted IPs</title>
+		                    <sort_order>20</sort_order>
+		                    <action>sitesecurity_admin/adminhtml_blacklist/index</action>
+		                </blacklist>
+		                <country translate="title" module="sitesecurity">
+		                    <title>Manage Countries...</title>
+		                    <sort_order>30</sort_order>
+		                    <action>sitesecurity_admin/adminhtml_country/index</action>
+		                    <children><!-- hidden since only supporting Magento countries
+		                    	<country_new translate="title" module="sitesecurity">
+				                    <title>Add a New Country</title>
+				                    <sort_order>10</sort_order>
+				                    <action>sitesecurity_admin/adminhtml_country/new</action>
+				                </country_new> -->
+				            	<country_country translate="title" module="sitesecurity">
+				                    <title>Manage Countries</title>
+				                    <sort_order>20</sort_order>
+				                    <action>sitesecurity_admin/adminhtml_country/index</action>
+				                </country_country>
+				                <countrycat_new translate="title" module="sitesecurity">
+				                    <title>Add a New Continent / Group</title>
+				                    <sort_order>30</sort_order>
+				                    <action>sitesecurity_admin/adminhtml_countrycat/new</action>
+				                </countrycat_new>
+				                <countrycat translate="title" module="sitesecurity">
+				                    <title>Manage Continents / Groups</title>
+				                    <sort_order>40</sort_order>
+				                    <action>sitesecurity_admin/adminhtml_countrycat/index</action>
+				                </countrycat>
+				           	</children>
+		                </country>
+			   			<denied_requests translate="title" module="sitesecurity">
+		                    <title>Manage Site Visitors</title>
+		                    <sort_order>40</sort_order>
+		                    <action>sitesecurity_admin/adminhtml_visitor/index</action>
+		                </denied_requests>
+		                <visitors translate="title" module="sitesecurity">
+		                    <title>Manage Blocked Attempts</title>
+		                    <sort_order>50</sort_order>
+		                    <action>sitesecurity_admin/adminhtml_sitesecure/index</action>
+		                </visitors>
+		                <settings translate="title" module="sitesecurity">
+		                    <title>Settings</title>
+		                    <sort_order>60</sort_order>
+		                    <action>adminhtml/system_config/edit/section/sitesecurity_sectns</action>
+		                </settings>
+			    	</children>
+		   		</sitesecurity>
+            </children>
+        </productiveminds>
+    </menu>
+	<acl>
+	    <resources>
+	        <admin>
+	            <children>
+	                <system>
+	                    <children>
+	                        <config>
+	                            <children>
+	                                <sitesecurity_sectns translate="title" module="sitesecurity">
+	                                    <title>Productiveminds Sitesecurity</title>
+	                                </sitesecurity_sectns>
+	                            </children>
+	                        </config>
+	                    </children>
+	                </system>
+	            </children>
+	        </admin>
+	    </resources>
+	</acl>
+ </config>

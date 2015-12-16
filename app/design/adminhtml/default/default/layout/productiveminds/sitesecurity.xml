@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+    </default>
+    <adminhtml_sales_order_view>
+        <reference name="content">
+            <block type="core/template" name="sitesecurity_order_ip" template="productiveminds/sitesecurity/sales/order/view/ip.phtml"/>
+        </reference>
+    </adminhtml_sales_order_view>
+    <adminhtml_adminhtml_country_index>
+        <reference name="content">
+            <block type="sitesecurity/adminhtml_country" name="sitesecurity_country" template="productiveminds/sitesecurity/country.phtml" />
+        </reference>
+    </adminhtml_adminhtml_country_index>
+    <adminhtml_adminhtml_countrycat_index>
+        <reference name="content">
+            <block type="sitesecurity/adminhtml_countrycat" name="sitesecurity_country_cat" template="productiveminds/sitesecurity/countrycat.phtml" />
+        </reference>
+    </adminhtml_adminhtml_countrycat_index>
+    <adminhtml_adminhtml_blacklist_index>
+        <reference name="content">
+            <block type="sitesecurity/adminhtml_blacklist" name="sitesecurity_blacklist" template="productiveminds/sitesecurity/blacklist.phtml" />
+        </reference>
+    </adminhtml_adminhtml_blacklist_index>
+    <adminhtml_adminhtml_sitesecure_index>
+        <reference name="content">
+            <block type="sitesecurity/adminhtml_sitesecure" name="sitesecurity_sitesecure" template="productiveminds/sitesecurity/sitesecure.phtml" />
+        </reference>
+    </adminhtml_adminhtml_sitesecure_index>
+</layout>

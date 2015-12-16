@@ -1,0 +1,38 @@
+<?php
+$order = Mage::registry('current_order');
+
+if (!$order) {
+    return;
+}
+
+$pms_sitesecurity_ip = $order->getPmsSitesecurityIp();
+if (!$pms_sitesecurity_ip) {
+    return;
+}
+
+?>
+<div class="box-left" id="pms_sitesecurity_ip">
+    <div class="entry-edit">
+        <div class="entry-edit-head">
+            <h4 class="icon-head head--comment"><?php echo $this->__('Customer IP Address') ?></h4>
+        </div>
+        <fieldset>
+            <?php echo $this->escapeHtml(long2ip($pms_sitesecurity_ip)) ?> - 
+            <a href="<?php echo Mage::helper("adminhtml")->getUrl('sitesecurity_admin/adminhtml_blacklist/blacklistipfromorder', array('ip' => $pms_sitesecurity_ip)) ;?>">
+            	Block IP address
+            </a>
+        </fieldset>
+    </div>
+</div>
+
+<script type="text/javascript">
+document.observe('dom:loaded', function() {
+    var div = $('sales_order_view_tabs_order_info_content').down('div');
+    div.insert({
+        bottom: $('pms_sitesecurity_ip')
+    });
+    div.insert({
+        bottom: '<div class="clear"></div>'
+    });
+});
+</script>

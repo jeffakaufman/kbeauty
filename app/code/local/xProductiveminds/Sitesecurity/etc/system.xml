@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <sections>
+	<sitesecurity_sectns translate="label" module="sitesecurity">
+        <label>Productiveminds Sitesecurity</label>
+	        <tab>productive_minds</tab>
+        <frontend_type>text</frontend_type>
+        <sort_order>20</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+		<groups>
+        	<sitesecurity_grps translate="label">
+            <label>General Options</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>10</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <expanded>0</expanded>
+	            <fields>
+	            	<enabled>
+	                     <label>Enabled</label>
+	                     <frontend_type>select</frontend_type>
+	                     <source_model>adminhtml/system_config_source_yesno</source_model>
+	                     <sort_order>10</sort_order>
+	                     <show_in_default>1</show_in_default>
+	                     <show_in_website>1</show_in_website>
+	                     <show_in_store>1</show_in_store>
+	                 </enabled>
+	                 <prevented_attempts>
+						<label>Total number of suspicious requests that has been prevented</label>
+						<frontend_type>label</frontend_type>
+						<sort_order>20</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>0</show_in_website>
+						<show_in_store>0</show_in_store>
+					</prevented_attempts>
+	                 <exempted_ips>
+						<label>List of exempted IP addresses</label>
+						<frontend_type>textarea</frontend_type>
+						<sort_order>30</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>Enter only 1 IP address in 1 line. That is, click the enter button after each IP address.</comment>
+					</exempted_ips>
+					<crawler_agents>
+						<label>List of Known Website Crawlers</label>
+						<frontend_type>textarea</frontend_type>
+						<sort_order>40</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>Separate crawlers with a comma ',' - this extension will not be ativated when these crawlers crawl your site.</comment>
+					</crawler_agents>
+	                 <email_daily_report translate="label comment">
+	                    <label>Send a daily summary of denied attempts.</label>
+	                    <comment><![CDATA[Set to 'yes' to send email daily at about 7am - add emails configs below]]></comment>
+	                    <frontend_type>select</frontend_type>
+	                    <source_model>adminhtml/system_config_source_yesno</source_model>
+	                    <sort_order>50</sort_order>
+	                    <show_in_default>1</show_in_default>
+	                    <show_in_website>1</show_in_website>
+	                    <show_in_store>1</show_in_store>
+	                </email_daily_report>
+					<email_recipient translate="label comment">
+	                   <label>Email Recipient(s)</label>
+	                   <comment><![CDATA[Separate multiple with a comma ',' - e.g: one@example.com, two@example.com]]></comment>
+	                   <frontend_type>text</frontend_type>
+	                   <sort_order>60</sort_order>
+	                   <show_in_default>1</show_in_default>
+	                   <show_in_website>1</show_in_website>
+	                   <show_in_store>1</show_in_store>
+	               </email_recipient>
+	               <email_template translate="label">
+	                   <label>Email Template</label>
+	                   <frontend_type>select</frontend_type>
+	                   <source_model>adminhtml/system_config_source_email_template</source_model>
+	                   <sort_order>70</sort_order>
+	                   <show_in_default>1</show_in_default>
+	                   <show_in_website>1</show_in_website>
+	                   <show_in_store>1</show_in_store>
+	               </email_template>
+	               <email_sender translate="label">
+	                   <label>Email Sender</label>
+	                   <frontend_type>select</frontend_type>
+	                   <source_model>adminhtml/system_config_source_email_identity</source_model>
+	                   <sort_order>80</sort_order>
+	                   <show_in_default>1</show_in_default>
+	                   <show_in_website>1</show_in_website>
+	                   <show_in_store>1</show_in_store>
+	               </email_sender>
+	            </fields>
+        	</sitesecurity_grps>
+        	<acl_xss translate="label">
+	            <label>XSS Security Options</label>
+	            <frontend_type>text</frontend_type>
+	            <sort_order>20</sort_order>
+	            <show_in_default>1</show_in_default>
+	            <show_in_website>1</show_in_website>
+	            <show_in_store>1</show_in_store>
+	            <fields>
+	                 <xss_queries>
+						<label>List of Known XSS Queries</label>
+						<frontend_type>textarea</frontend_type>
+						<sort_order>10</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>Enter only 1 XSS query per line. That is, click the enter button after each XSS query.</comment>
+					</xss_queries>
+					<xss_action_heading translate="label">
+		               	<label>Destination for diallowed XSS requests</label>
+		               	<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		               	<sort_order>20</sort_order>
+		               	<show_in_default>1</show_in_default>
+		              	<show_in_website>1</show_in_website>
+		               	<show_in_store>1</show_in_store>
+		            </xss_action_heading>
+	            	<xss_action_type>
+	                     <label>Message to show when an XSS request is prevented</label>
+	                     <comment><![CDATA[Choose to show a CMS page, CMS block or just a blank page. <br/>It defaults to a 'blank page']]></comment>
+	                     <frontend_type>select</frontend_type>
+	          			 <source_model>sitesecurity/system_config_source_action</source_model>
+	                     <sort_order>30</sort_order>
+	                     <show_in_default>1</show_in_default>
+	                     <show_in_website>1</show_in_website>
+	                     <show_in_store>1</show_in_store>
+	                 </xss_action_type>
+	                 <xss_action_cmspage>
+	                     <label>CMS Page for XSS</label>
+	                     <comment><![CDATA[Choose a CMS page to show when an XSS request is blacklisted]]></comment>
+	                     <frontend_type>select</frontend_type>
+	                     <source_model>sitesecurity/system_config_source_cmspage</source_model>
+	                     <sort_order>40</sort_order>
+	                     <show_in_default>1</show_in_default>
+	                     <show_in_website>1</show_in_website>
+	                     <show_in_store>1</show_in_store>
+						 <depends><xss_action_type>cmspage</xss_action_type></depends>
+	                 </xss_action_cmspage>
+	                 <xss_action_url>
+	                     <label>A URL</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>50</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[Enter a full URL please. That is, it must start with http://]]></comment>
+						<depends><xss_action_type>url</xss_action_type></depends>
+	                 </xss_action_url>
+	            </fields>
+	        </acl_xss>
+	        <acl_injection translate="label">
+	            <label>Form Injection Security Options</label>
+	            <frontend_type>text</frontend_type>
+	            <sort_order>30</sort_order>
+	            <show_in_default>1</show_in_default>
+	            <show_in_website>1</show_in_website>
+	            <show_in_store>1</show_in_store>
+	            <fields>
+	                 <injection_queries>
+						<label>List of Known Injection Queries</label>
+						<frontend_type>textarea</frontend_type>
+						<sort_order>10</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment>Enter only 1 Injection query per line. That is, click the enter button after each Injection query.</comment>
+					</injection_queries>
+					<injection_action_heading translate="label">
+		               	<label>Destination for diallowed Injection requests</label>
+		               	<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		               	<sort_order>20</sort_order>
+		               	<show_in_default>1</show_in_default>
+		              	<show_in_website>1</show_in_website>
+		               	<show_in_store>1</show_in_store>
+		            </injection_action_heading>
+	            	<injection_action_type>
+	                     <label>Message to show when an Injection request is prevented</label>
+	                     <comment><![CDATA[Choose to show a CMS page, CMS block or just a blank page. <br/>It defaults to a 'blank page']]></comment>
+	                     <frontend_type>select</frontend_type>
+	          			 <source_model>sitesecurity/system_config_source_action</source_model>
+	                     <sort_order>30</sort_order>
+	                     <show_in_default>1</show_in_default>
+	                     <show_in_website>1</show_in_website>
+	                     <show_in_store>1</show_in_store>
+	                 </injection_action_type>
+	                 <injection_action_cmspage>
+	                     <label>CMS Page for Injection</label>
+	                     <comment><![CDATA[Choose a CMS page to show when an Injection request is blacklisted]]></comment>
+	                     <frontend_type>select</frontend_type>
+	                     <source_model>sitesecurity/system_config_source_cmspage</source_model>
+	                     <sort_order>40</sort_order>
+	                     <show_in_default>1</show_in_default>
+	                     <show_in_website>1</show_in_website>
+	                     <show_in_store>1</show_in_store>
+						 <depends><injection_action_type>cmspage</injection_action_type></depends>
+	                 </injection_action_cmspage>
+	                 <injection_action_url>
+	                     <label>A URL</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>50</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[Enter a full URL please. That is, it must start with http://]]></comment>
+						<depends><injection_action_type>url</injection_action_type></depends>
+	                 </injection_action_url>
+	            </fields>
+	        </acl_injection>
+	        <acl_country translate="label">
+	            <label>Blacklisted Country Options</label>
+	            <frontend_type>text</frontend_type>
+	            <sort_order>40</sort_order>
+	            <show_in_default>1</show_in_default>
+	            <show_in_website>1</show_in_website>
+	            <show_in_store>1</show_in_store>
+	            <fields>
+	                 <blacklisted_country_action_heading translate="label">
+		               	<label>Destination for a blacklisted country</label>
+		               	<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		               	<sort_order>10</sort_order>
+		               	<show_in_default>1</show_in_default>
+		              	<show_in_website>1</show_in_website>
+		               	<show_in_store>1</show_in_store>
+		            </blacklisted_country_action_heading>
+	            	<blacklisted_country_action_type>
+	                     <label>Message to show a visitor in a blacklisted country</label>
+	                     <comment><![CDATA[Choose to show a CMS page, CMS block or just a blank page. <br/>It defaults to a 'blank page']]></comment>
+	                     <frontend_type>select</frontend_type>
+	                     <source_model>sitesecurity/system_config_source_action</source_model>
+	                     <sort_order>20</sort_order>
+	                     <show_in_default>1</show_in_default>
+	                     <show_in_website>1</show_in_website>
+	                     <show_in_store>1</show_in_store>
+	                 </blacklisted_country_action_type>
+	                 <blacklisted_country_action_cmspage>
+	                     <label>CMS Page for a blacklisted country</label>
+	                     <comment><![CDATA[Choose a CMS page to show a visitor in a blacklisted country]]></comment>
+	                     <frontend_type>select</frontend_type>
+	                     <source_model>sitesecurity/system_config_source_cmspage</source_model>
+	                     <sort_order>30</sort_order>
+	                     <show_in_default>1</show_in_default>
+	                     <show_in_website>1</show_in_website>
+	                     <show_in_store>1</show_in_store>
+						 <depends><blacklisted_country_action_type>cmspage</blacklisted_country_action_type></depends>
+	                 </blacklisted_country_action_cmspage>
+	                 <blacklisted_country_action_url>
+	                     <label>A URL</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>40</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[Enter a full URL please. That is, it must start with http://]]></comment>
+						<depends><blacklisted_country_action_type>url</blacklisted_country_action_type></depends>
+	                 </blacklisted_country_action_url>
+	            </fields>
+	        </acl_country>
+	        <acl_ipaddress translate="label">
+	            <label>Blacklisted IP Address Options</label>
+	            <frontend_type>text</frontend_type>
+	            <sort_order>50</sort_order>
+	            <show_in_default>1</show_in_default>
+	            <show_in_website>1</show_in_website>
+	            <show_in_store>1</show_in_store>
+	            <fields>
+	                 <blacklisted_ip_action_heading translate="label">
+		               	<label>Destination for a blacklisted IP address</label>
+		               	<frontend_model>adminhtml/system_config_form_field_heading</frontend_model>
+		               	<sort_order>10</sort_order>
+		               	<show_in_default>1</show_in_default>
+		              	<show_in_website>1</show_in_website>
+		               	<show_in_store>1</show_in_store>
+		            </blacklisted_ip_action_heading>
+	            	<blacklisted_ip_action_type>
+	                     <label>Message to show when an user of a blacklisted IP address visits</label>
+	                     <comment><![CDATA[Choose to show a CMS page, CMS block or just a blank page. <br/>It defaults to a 'blank page']]></comment>
+	                     <frontend_type>select</frontend_type>
+	                     <source_model>sitesecurity/system_config_source_action</source_model>
+	                     <sort_order>20</sort_order>
+	                     <show_in_default>1</show_in_default>
+	                     <show_in_website>1</show_in_website>
+	                     <show_in_store>1</show_in_store>
+	                 </blacklisted_ip_action_type>
+	                 <blacklisted_ip_action_cmspage>
+	                     <label>CMS Page for a blacklisted IP address</label>
+	                     <comment><![CDATA[Choose a CMS page to show when a visitor whose IP address has been blacklisted]]></comment>
+	                     <frontend_type>select</frontend_type>
+	                     <source_model>sitesecurity/system_config_source_cmspage</source_model>
+	                     <sort_order>30</sort_order>
+	                     <show_in_default>1</show_in_default>
+	                     <show_in_website>1</show_in_website>
+	                     <show_in_store>1</show_in_store>
+						 <depends><blacklisted_ip_action_type>cmspage</blacklisted_ip_action_type></depends>
+	                 </blacklisted_ip_action_cmspage>
+	                 <blacklisted_ip_action_url>
+	                     <label>A URL</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>40</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[Enter a full URL please. That is, it must start with http://]]></comment>
+						<depends><blacklisted_ip_action_type>url</blacklisted_ip_action_type></depends>
+	                 </blacklisted_ip_action_url>
+	            </fields>
+	        </acl_ipaddress>
+        	<geo_ip translate="label">
+	            <label>Geolocation (GeoIP)</label>
+	            <frontend_type>text</frontend_type>
+	            <sort_order>60</sort_order>
+	            <show_in_default>1</show_in_default>
+	            <show_in_website>1</show_in_website>
+	            <show_in_store>1</show_in_store>
+	            <fields>
+	                <country translate="label">
+	                    <label>Enable Country Detection</label>
+	                    <frontend_type>select</frontend_type>
+	                    <source_model>adminhtml/system_config_source_yesno</source_model>
+	                    <sort_order>10</sort_order>
+	                    <show_in_default>1</show_in_default>
+	                    <show_in_website>1</show_in_website>
+	                    <show_in_store>1</show_in_store>
+	                </country>
+	                <country_file translate="label comment">
+	                    <label>GeoIp filename</label>
+	                    <comment><![CDATA[<a href='http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz' title='Download GeoIP database'>Download</a> and unzip file under the '<MAGETO_ROOT>/lib/Productiveminds/MaxMind/data' folder if you don't have it]]></comment>
+	                    <frontend_type>text</frontend_type>
+	                    <sort_order>20</sort_order>
+	                    <show_in_default>1</show_in_default>
+	                    <show_in_website>1</show_in_website>
+	                    <show_in_store>1</show_in_store>
+	                </country_file>
+	            </fields>
+	        </geo_ip>
+    	</groups>
+    </sitesecurity_sectns>
+    </sections>
+</config>

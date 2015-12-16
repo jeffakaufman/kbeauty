@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+	<default/>
+	 <productivemindscore_admin_adminhtml_support_new>
+	 	<reference name="messages">
+            <action method="addNotice" translate="message">
+                <message>
+                	The support ticket will be sent to the ProductiveMinds support - support@productiveminds.com.
+                	Please provide detailed information to help us understand the problems you are experiencing or the request.
+                	This email will enclose your system configurations such as Magento details and application server - 
+                	these details will help speed up our diagnosis of your system, hence a quick response.
+                </message>
+            </action>
+        </reference>
+    </productivemindscore_admin_adminhtml_support_new>
+</layout>

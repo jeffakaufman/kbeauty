@@ -77,7 +77,7 @@ require_once $mageFilename;
 $_SERVER['MAGE_IS_DEVELOPER_MODE'] = true;
 
 if (isset($_SERVER['MAGE_IS_DEVELOPER_MODE'])) {
-    Mage::setIsDeveloperMode(true);
+   Mage::setIsDeveloperMode(true);
 }
 
 // XXX LC put this in for error reporting
