@@ -24,23 +24,14 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
+
 <?php $_shipment=$this->getShipment() ?>
 <?php $_order=$this->getOrder() ?>
 <?php if ($_shipment && $_order && $_shipment->getAllTracks()): ?>
-<table cellspacing="0" cellpadding="0" border="0" width="100%">
-    <thead>
-        <tr>
-            <th align="left" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px"><?php echo $this->__('Shipped By') ?></th>
-            <th align="center" bgcolor="#EAEAEA" style="font-size:13px; padding:3px 9px"><?php echo $this->__('Tracking Number') ?></th>
-        </tr>
-    </thead>
-    <tbody>
+    <p>
     <?php $i=0; foreach ($_shipment->getAllTracks() as $_item): $i++ ?>
-        <tr>
-            <td align="left" valign="top" style="padding:3px 9px"><?php echo $this->escapeHtml($_item->getTitle()) ?></td>
-            <td align="center" valign="top" style="padding:3px 9px"><?php echo $this->escapeHtml($_item->getNumber()) ?></td>
-        </tr>
+        <strong><?php echo $this->__('SHIPPED BY:') ?> <?php echo $this->escapeHtml($_item->getTitle()) ?></strong><br>
+        <strong><?php echo $this->__('TRACKING NUMBER:') ?> <?php echo $this->escapeHtml($_item->getNumber()) ?></strong>
     <?php endforeach ?>
-    </tbody>
-</table>
+    </p>
 <?php endif; ?>

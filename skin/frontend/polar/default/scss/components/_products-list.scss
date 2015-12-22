@@ -34,8 +34,10 @@
   line-height: $paragraph-line-height;
 }
 body.catalog-category-view .category-products, body.catalogsearch-result-index .category-products {
-  padding-top: $base-font-size * 3;
   position: relative;
+  @media #{$medium-up} {
+    padding-top: $base-font-size * 5;
+  }
   @media #{$large-up} {
     padding-top: $base-font-size * 5;
   }

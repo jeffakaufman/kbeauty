@@ -54,7 +54,7 @@ NOTE: Regarding styles - if we leave it this way, we'll move it to boxes.css
 <?php
     $this->setDateInput('m',
         '<div class="dob-month">
-             <input type="text" id="' . $this->getFieldId('month') . '" name="' . $this->getFieldName('month') . '" value="' . $this->getMonth()  . '" placeholder="MM" onkeyup="moveOnMax(this,\'day\')" maxlength="2" title="' . $this->__('Month')  . '" class="dob-month input-text validate-custom" ' . $this->getFieldParams()  . ' />
+             <input type="text" pattern="[0-9]*" id="' . $this->getFieldId('month') . '" name="' . $this->getFieldName('month') . '" value="' . $this->getMonth()  . '" placeholder="MM" onkeyup="moveOnMax(this,\'day\')" maxlength="2" title="' . $this->__('Month')  . '" class="dob-month input-text validate-custom" ' . $this->getFieldParams()  . ' />
          </div>'
     );
 
@@ -66,7 +66,7 @@ NOTE: Regarding styles - if we leave it this way, we'll move it to boxes.css
 
     $this->setDateInput('y',
         '<div class="dob-year">
-             <input type="text" id="' . $this->getFieldId('year') . '" name="' . $this->getFieldName('year') . '" value="' . str_replace("1900", "", $this->getYear())  . '" placeholder="YYYY" maxlength="4" title="' . $this->__('Year')  . '" class="dob-year input-text validate-custom" ' . $this->getFieldParams()  . ' />
+             <input type="text" id="' . $this->getFieldId('year') . '" name="' . $this->getFieldName('year') . '" value="' . $this->getYear()  . '" placeholder="YYYY" maxlength="4" title="' . $this->__('Year')  . '" class="dob-year input-text validate-custom" ' . $this->getFieldParams()  . ' />
          </div>'
     );
 ?>

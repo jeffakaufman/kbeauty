@@ -414,9 +414,10 @@ body.checkout-onepage-index.login {
 
 #hero { 
 	width: 100%;
-	min-height: 300px;
+	min-height: 220px;
 	overflow: hidden;
 	opacity: 0;
+	display: table;
 	position: relative;
 	padding: 20px 0;
 	background-repeat: no-repeat;
@@ -427,6 +428,7 @@ body.checkout-onepage-index.login {
 	background-size: auto 100%;
 	background-position: 20% center;
 	@media #{$medium-up} {
+		display: block;
 		max-height: 540px;
 		background-position: center center;
 	}
@@ -436,12 +438,11 @@ body.checkout-onepage-index.login {
 	
 	.text {
 		text-transform: uppercase;
-		width: 80%;
-		margin: 30% auto 0 auto;
+		display: table-cell;
 		position: relative;
 		text-align: center;
-		display: block;
   		vertical-align: middle;
+  		padding: 0 25%;
   		
   		.title {
   			font-weight: bold;
@@ -466,6 +467,7 @@ body.checkout-onepage-index.login {
   			right: 46%;
   			bottom: 0;
 			display: inline-block;
+			padding: 0;
 			.title {
 				line-height: 1.2em;
 				font-size: $base-font-size * 1.5;

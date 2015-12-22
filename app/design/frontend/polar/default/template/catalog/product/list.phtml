@@ -48,7 +48,7 @@
     <?php $_columnCount = 3; ?>
     <?php $row = 0; $i=0; ?>
     <?php foreach ($_productCollection as $_product): ?>
-        <?php if ($i% $_columnCount==0): ?>
+        <?php if ($i% $_columnCount==0 && $_product->getTypeId() == "configurable"): ?>
           <div id="group<?php echo $row ?>" class="row group lazy" data-group="<?php echo $row ?>">
             <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" data-equalizer>
         <?php endif ?>
@@ -82,7 +82,7 @@
         <?php $i++; 
         } ?>
 
-        <?php if ($i % $_columnCount==0) { ?>
+        <?php if ($i % $_columnCount==0 && $_product->getTypeId() == "configurable") { ?>
           <?php $row++ ?>
             </ul>
           </div>

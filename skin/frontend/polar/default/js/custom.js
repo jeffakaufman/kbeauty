@@ -883,144 +883,6 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 		}, 1000).prepend('<div class="window"><div id="closeBtn"><span class="icon-delete"></span></div><div class="container"></div></div>');
             
 		$('#overlay .container').load( url + ' .my-account', function(data) {
-
-			function _prepareItemsList() {
-				var _description = "";
-
-				function __prepareProductName(_input) {
-					/*
-					 var _limit = 79;
-					 //var _nbsp = String.fromCharCode(160);
-					 var _nbsp = "\xA0&160;";
-					 _input = _input.replace(" ", _nbsp);
-					 var _diff = _limit - _input.length;
-					 console.log(_diff);
-					 for(var i=0; i< _diff; i++ ) {
-					 _input += _nbsp;
-					 }
-
-					 _input += " ";
-					 console.log(_input);
-					 */
-					return _input;
-				}
-
-
-				$("#wishlist-list .product-name a").each(function(idx) {
-
-
-					//&#10;
-					//HTML Hexadecimal: &#x0A;
-					//Java Hexadecimal: \u000A (Common To Javascript)
-					//URL Hexadecimal: %0A
-					_description += ((idx > 0 ? ", " : "")+__prepareProductName(this.innerHTML));
-				});
-
-				//_description += "Hi!!!";
-
-
-				return _description;
-			}
-
-
-			$("#share-wishlist-share-twitter").attr("href", "https://twitter.com/intent/tweet?text=I%27ve+got+a+wishlist%21+:+"+encodeURIComponent(_prepareItemsList()))+"&url="+encodeURIComponent("https://kbeauty.com/");
-
-			//"https://twitter.com/intent/tweet?text=I%27ve+got+a+wishlist%21&url=https%3A%2F%2Fkbeauty.com%2F";
-			$("#share-wishlist-share-email").click(function(e) {
-				e.preventDefault();
-
-				$('#share-wishlist-select-type').hide();
-				$('#share-wishlist-email').fadeIn('fast');
-			});
-
-			$(".share-email-back-button a").click(function(e) {
-				e.preventDefault();
-
-				$('#share-wishlist-email').hide();
-				$('#share-wishlist-select-type').fadeIn('fast');
-			});
-
-/*
-			twttr.widgets.createShareButton(
-				"https:\/\/dev.twitter.com\/web\/tweet-button",
-				document.getElementById("share-wishlist-share-twitter"),
-				{
-					//size: "large",
-					via: "twitterdev",
-					related: "twitterapi,twitter",
-					text: "custom share text",
-					hashtags: "example,demo"
-				}
-			);
-*/
-/*
- <a href="https://twitter.com/share" class="twitter-share-button"{count} data-via="kbeautyofficial">Tweet</a>
- <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
- */
-
-
-			$("#share-wishlist-share-facebook").click(function(e) {
-				e.preventDefault();
-
-
-				var _description = _prepareItemsList();
-
-				var requestObj = {
-					method: 'feed',
-					//app_id: 235468389807927,
-					app_id: 770199153099219,
-					//display: 'dialog',
-					link: 'http://kardashianbeauty.hellojrdev.com/',
-            picture: 'http://kardashianbeauty.hellojrdev.com/media/wysiwyg/images/khloe2.jpg',
-//					picture: $scope.videoInfo.thumbnailUrl,
-					//source: $scope.videoInfo.videoUrl,
-					source: '',
-					name: "YEAH!!!",
-					caption: "Take A Look",
-					description: _description,
-//            redirect_uri: '<?php echo $canvasUrl; ?>Spanish/',
-					ref: "Public"
-				};
-
-//console.log(requestObj);
-
-				function _fbShare(error, response) {
-
-					if(error) {
-						console.log("FB Error");
-						console.log(error);
-						return;
-					}
-
-					console.log(response);
-
-					FB.ui(requestObj, function(response){
-						$(".fb_dialog").css("z-index", "10000000!important");
-						console.log(response);
-					});
-
-				}
-
-				FB.getLoginStatus(function(response) {
-					if (response.status == 'connected') {
-						FB.api('/me', function(response) {
-							_fbShare(null, response);
-						});
-					} else if (response.status == 'not_authorized') {
-						FB.login(function(response) {
-							if (response.authResponse) {
-								FB.api('/me', function(response) {
-									_fbShare(null, response);
-								});
-							} else {
-								_fbShare(response.error, null);
-							}
-						});
-					}
-				});
-
-			});
-
             $('#overlay #closeBtn').click(function() {
 				$('body').removeClass('overlay');
 				$('#overlay').animate({
@@ -1046,7 +908,6 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 		}, 1000).prepend('<div class="window"><div id="closeBtn"><span class="icon-delete"></span></div><div class="container"></div></div>');
             
 		$('#overlay .container').load( url + ' .col-main', function(data) {
-
             $('#overlay #closeBtn').click(function() {
 				$('body').removeClass('overlay');
 				$('#overlay').animate({
@@ -1085,8 +946,8 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 
 				$(this).find('.text').height(textHeight).css('position','absolute');
 
-				$(this).find('.big-image.desktop img').css('height','auto');
-				imageHeight = $(this).find('.big-image.desktop img').height();
+				$(this).find('.big-image img').css('height','auto');
+				imageHeight = $(this).find('.big-image img').height();
 				$(this).find('.image').css('position','absolute');
 				imageHeights.push(imageHeight);
 				tallestImage = Math.max.apply( null, imageHeights );
@@ -1120,6 +981,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 			}, 1000);
 
 			var categoryTextHeight = $('#hero .text').outerHeight();
+			console.log(categoryTextHeight);
 			$('#hero .text').height(categoryTextHeight).css('position','absolute');
 
 		} else {
@@ -1138,14 +1000,14 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 
                 $(this).parent().css('height','auto');
 
-                $(this).find('.big-image.mobile img').css('height','auto');
-                imageHeight = $(this).find('.big-image.mobile img').height();
+                $(this).find('.big-image img').css('height','auto');
+                imageHeight = $(this).find('.big-image img').height();
                 $(this).find('.image').css('position','absolute');
                 imageHeights.push(imageHeight);
                 tallestImage = Math.max.apply( null, imageHeights );
 
-//console.log(imageHeight);
-				$("#slider li, #hero").css('height',tallestImage+'px');
+
+				$("#slider li").css('height',tallestImage+'px');
 
 //console.log(wW);
 //console.log($(this).innerHeight());
@@ -1159,9 +1021,10 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 
 			});
 			$('#hero').each(function() {
-				tallestImage = wW;
-				$(this).css('height',tallestImage);
-
+				if (wW > 641) {
+					tallestImage = wW;
+					$(this).css('height',tallestImage);
+				}
                 if($(this).hasClass('nextSlide')) {
                     $(this).css('margin-top','-'+(tallestImage)+'px');
                 } else {
