@@ -442,7 +442,7 @@ body.checkout-onepage-index.login {
 		position: relative;
 		text-align: center;
   		vertical-align: middle;
-  		padding: 0 25%;
+  		padding: 0 20%;
   		
   		.title {
   			font-weight: bold;
@@ -451,12 +451,14 @@ body.checkout-onepage-index.login {
 			font-size: $base-font-size * 1.2;
 			line-height: 1.5em;
   			margin-bottom: 1em;
+  			margin-right: 15px;
 		}
 		.subtitle {
 			letter-spacing: 0.4em;
 			line-height: 1.2em;
 		  	text-transform: uppercase;
 	  		font-size: $base-font-size * 0.9;
+	  		margin-right: 15px;
 		}
 
 		@media #{$medium-up} {

@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Valkyrie_Catimage>
+            <version>0.1.1</version>
+        </Valkyrie_Catimage>
+    </modules>
+
+
+
+
+    <adminhtml>
+        <layout>
+            <updates>
+                <sliderdata>
+                    <file>catimage.xml</file>
+                </sliderdata>
+            </updates>
+        </layout>
+
+    </adminhtml>
+
+    <admin>
+        <!--
+            Here we are telling the Magento router to look for the controllers in the Super_Awesome_controllers_Adminhtml before we look in the
+            Mage_Adminhtml module for all urls that begin with /admin/controller_name
+         -->
+        <routers>
+        </routers>
+    </admin>
+
+
+    <frontend>
+        <routers>
+        </routers>
+
+        <layout>
+        </layout>
+
+    </frontend>
+
+    <global>
+        <events>
+        </events>
+
+        <models>
+            <catimage>
+                <class>Valkyrie_Catimage_Model</class>
+                <resourceModel>catimage_mysql4</resourceModel>
+            </catimage>
+            <catimage_mysql4>
+                <class>Valkyrie_Catimage_Model_Mysql4</class>
+            </catimage_mysql4>
+        </models>
+
+        <resources>
+            <catimage_setup>
+                <setup>
+                    <module>Valkyrie_Catimage</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </catimage_setup>
+            <catimage_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </catimage_write>
+            <catimage_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </catimage_read>
+        </resources>
+
+        <blocks>
+            <catimage>
+                <class>Valkyrie_Catimage_Block</class>
+            </catimage>
+        </blocks>
+
+
+        <helpers>
+            <catimage>
+                <class>Valkyrie_Catimage_Helper</class>
+            </catimage>
+        </helpers>
+
+        <adminhtml_catalog_category_edit>
+            <reference name="head">
+                <action method="addJs"><script>jscolor/jscolor.js</script></action>
+            </reference>
+        </adminhtml_catalog_category_edit>
+
+    </global>
+</config>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Aitoc_Aitreports>
+            <version>1.0.12</version>
+            <platform>community</platform>
+        </Aitoc_Aitreports>
+    </modules>
+
+    <global>
+        <models>
+            <aitreports>
+                <class>Aitoc_Aitreports_Model</class>
+                <resourceModel>aitreports_mysql4</resourceModel>
+            </aitreports>
+            
+            <aitreports_mysql4>
+                <class>Aitoc_Aitreports_Model_Mysql4</class>
+                <entities>
+                    <export>
+                        <table>aitreports_export</table>
+                    </export>
+                    <export_order>
+                        <table>aitreports_export_order</table>
+                    </export_order>
+                    <profile>
+                        <table>aitreports_profile</table>
+                    </profile>
+                    <citiesdma>
+                        <table>aitreports_citiesdma_regions</table>
+                    </citiesdma>
+                </entities>
+            </aitreports_mysql4>
+        </models>
+
+        <blocks>
+            <aitreports>
+                <class>Aitoc_Aitreports_Block</class>
+            </aitreports>
+        </blocks>
+
+        <helpers>
+            <aitreports><class>Aitoc_Aitreports_Helper</class></aitreports>
+        </helpers>
+
+		<resources>
+			<aitreports_setup>
+				<setup>
+ 				   <module>Aitoc_Aitreports</module>
+				</setup>
+				<connection>
+				    <use>core_setup</use>
+				</connection>
+			</aitreports_setup>
+			<aitreports_write>
+				<connection>
+				    <use>core_write</use>
+				</connection>
+			</aitreports_write>
+			<aitreports_read>
+				<connection>
+				    <use>core_read</use>
+				</connection>
+			</aitreports_read>
+		</resources>
+
+        <events>
+        </events>
+        <template>
+            <email>
+                <aitreports_template translate="label" module="aitreports">
+                    <label>Smart Reports</label>
+                    <file>aitreports_export.html</file>
+                    <type>html</type>
+                </aitreports_template>
+            </email>
+        </template>
+    </global>
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <aitreports after="Mage_Adminhtml">Aitoc_Aitreports_Adminhtml</aitreports>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <adminhtml>
+        <layout>
+             <updates>
+                  <aitreports>
+                        <file>aitreports.xml</file>
+                  </aitreports>
+             </updates>
+        </layout>
+        
+        <translate>
+            <modules>
+                <Aitoc_Aitreports>
+                    <files>
+                        <default>Aitoc_Aitreports.csv</default> 
+                    </files>
+                </Aitoc_Aitreports>
+            </modules>
+        </translate>
+
+        <menu>
+            <report>
+                <children>
+                    <aitreports translate="title" module="aitreports">
+                        <title>Aitoc Smart Reports</title>
+                        <action>adminhtml/aitreports_index</action>
+                    </aitreports>
+                </children>
+            </report>
+        </menu>
+        
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <report>
+                            <children>
+                                <aitreports>
+                                    <title>Aitoc Smart Reports</title>
+                                </aitreports>
+                            </children>
+                        </report>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <crontab>
+        <jobs>
+            <aitreports_export_orders>
+                <schedule><cron_expr>*/3 * * * *</cron_expr></schedule>
+                <run><model>aitreports/observer::cronExport</model></run>
+            </aitreports_export_orders>
+            <aitreports_processor>
+                <schedule><cron_expr>* * * * *</cron_expr></schedule>
+                <run><model>aitreports/processor::run</model></run>
+            </aitreports_processor>
+        </jobs> 
+    </crontab>
+
+    <frontend>
+    </frontend>
+
+    <default>
+    </default>
+</config>

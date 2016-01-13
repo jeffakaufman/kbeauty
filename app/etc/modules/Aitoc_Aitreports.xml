@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Aitoc_Aitreports>
+            <active>true</active>
+            <codePool>local</codePool>
+            <self_name>Smart Reports</self_name>
+            <priority>1013</priority>
+            <aitdepends>
+                <Aitoc_Common/>
+            </aitdepends>
+        </Aitoc_Aitreports>
+    </modules>
+</config>

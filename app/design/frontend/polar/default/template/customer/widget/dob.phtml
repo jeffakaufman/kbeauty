@@ -60,13 +60,13 @@ NOTE: Regarding styles - if we leave it this way, we'll move it to boxes.css
 
     $this->setDateInput('d',
         '<div class="dob-day">
-             <input type="text" id="' . $this->getFieldId('day') . '" name="' . $this->getFieldName('day') . '" value="' . $this->getDay() . '"placeholder="DD" onkeyup="moveOnMax(this,\'year\')" maxlength="2" title="' . $this->__('Day') . '" class="dob-day input-text validate-custom" ' . $this->getFieldParams() . ' />
+             <input type="text" pattern="[0-9]*" id="' . $this->getFieldId('day') . '" name="' . $this->getFieldName('day') . '" value="' . $this->getDay() . '"placeholder="DD" onkeyup="moveOnMax(this,\'year\')" maxlength="2" title="' . $this->__('Day') . '" class="dob-day input-text validate-custom" ' . $this->getFieldParams() . ' />
          </div>'
     );
 
     $this->setDateInput('y',
         '<div class="dob-year">
-             <input type="text" id="' . $this->getFieldId('year') . '" name="' . $this->getFieldName('year') . '" value="' . $this->getYear()  . '" placeholder="YYYY" maxlength="4" title="' . $this->__('Year')  . '" class="dob-year input-text validate-custom" ' . $this->getFieldParams()  . ' />
+             <input type="text" pattern="[0-9]*" id="' . $this->getFieldId('year') . '" name="' . $this->getFieldName('year') . '" value="' . $this->getYear()  . '" placeholder="YYYY" maxlength="4" title="' . $this->__('Year')  . '" class="dob-year input-text validate-custom" ' . $this->getFieldParams()  . ' />
          </div>'
     );
 ?>

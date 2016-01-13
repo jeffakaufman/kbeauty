@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <menu>
+        <report>
+            <children>
+                <aitreports translate="title" module="aitreports">
+                    <title>Aitoc Smart Reports</title>
+                    <action>adminhtml/aitreports_index</action>
+                </aitreports>
+            </children>
+        </report>
+    </menu>
+        
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <report>
+                        <children>
+                            <aitreports>
+                                <title>Aitoc Smart Reports</title>
+                            </aitreports>
+                        </children>
+                    </report>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

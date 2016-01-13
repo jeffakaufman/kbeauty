@@ -88,6 +88,36 @@ class Valkyrie_SliderData_Block_Adminhtml_SliderData_Edit_Form extends Mage_Admi
       'after_element_html' => '<small>Sort order for forms</small>',
     ));
 
+    $fieldset->addField('active', 'select', array(
+      'label'     => Mage::helper('sliderdata')->__('Status'),
+      'name'      => 'active',
+        'values' => array('0' => 'Inactive', '1' => 'Active'),// - See more at: http://excellencemagentoblog.com/blog/2011/11/02/magento-admin-form-field/#sthash.cgXepzMc.dpuf
+//      'class'     => 'validate-digits',
+//      'after_element_html' => '<small>Sort order for forms</small>',
+    )); //->setIsChecked((bool)$data['active']);
+//var_dump($data);
+
+//      $data['active'] = "1";
+
+
+      $fieldset->addField('active_from', 'date', array(
+          'label'     => Mage::helper('sliderdata')->__('Date Start'),
+          'name'      => 'active_from',
+          'class'     => 'validate-date',
+          'after_element_html' => '<small>Select Date</small>',
+          'image'     => $this->getSkinUrl('images/grid-cal.gif'),
+
+          'format' => "MMM d, y",
+      ));
+      $fieldset->addField('active_to', 'date', array(
+          'label'     => Mage::helper('sliderdata')->__('Date End'),
+          'name'      => 'active_to',
+          'class'     => 'validate-date',
+          'after_element_html' => '<small>Select Date</small>',
+          'image'     => $this->getSkinUrl('images/grid-cal.gif'),
+
+          'format' => "MMM d, y",
+      ));
 
 
     $form->setValues($data);

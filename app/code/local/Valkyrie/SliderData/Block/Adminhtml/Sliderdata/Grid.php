@@ -78,9 +78,42 @@ class Valkyrie_SliderData_Block_Adminhtml_SliderData_Grid extends Mage_Adminhtml
       'width'     => '30px',
     ));
 
+     $this->addColumn('active', array(
+      'header'    => Mage::helper('sliderdata')->__('Status'),
+      'align'     => 'left',
+      'index'     => 'active',
+      'width'     => '30px',
+
+         'type' => 'options',
+         'options' => $this->GetStatusCaptions(),
+
+    ));
+
+     $this->addColumn('active_from', array(
+      'header'    => Mage::helper('sliderdata')->__('Date Start'),
+      'align'     => 'center',
+      'index'     => 'active_from',
+      'width'     => '30px',
+         'type' => 'date',
+         'format' => 'MMM d, Y', //Dec 28, 2015
+    ));
+
+     $this->addColumn('active_to', array(
+      'header'    => Mage::helper('sliderdata')->__('Date End'),
+      'align'     => 'center',
+      'index'     => 'active_to',
+      'width'     => '30px',
+         'type' => 'date',
+         'format' => "MMM d, y",
+    ));
+//var_dump(Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_LONG));
 
     return parent::_prepareColumns();
   }
+
+    public function GetStatusCaptions() {
+        return  array('0' => 'Inactive', '1' => 'Active');
+    }
 
   public function getRowUrl($row)
   {

@@ -40,15 +40,31 @@
         $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'" /></p>';
         $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
     }
+
+    $_catImg = '';
+    if($_catImg = $_category->getData('cat_image')) {
+        $_catImg = Mage::getBaseUrl('media').'catalog/category/'.$_catImg;
+    }
+
+    $_textColor = $_category->getData('text_color');
+
 ?>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 
 <?php if($_imgUrl): ?>
     <?php /*echo $_imgHtml*/ ?>
 <?php endif; ?>
-<div id="hero">
+<div id="hero"
+     <?php if($_catImg):?>
+         style="background-image: url('<?php echo $_catImg; ?>');"
+    <?php endif;?>
+    >
       <div class="text">
-        <div class="title"><?php echo $categoryName ?></div>
+        <div class="title"
+            <?php if($_textColor): ?>
+                style="color: #<?php echo $_textColor; ?>"
+            <?php endif; ?>
+            ><?php echo $categoryName ?></div>
         <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
           <div class="subtitle"><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></div>
         <?php endif; ?>

@@ -125,6 +125,12 @@ class Valkyrie_SliderData_Adminhtml_SliderDataController extends Mage_Adminhtml_
             else
                 unset($data['mobile_image']);
         }
+//var_dump($data);
+        if(!$data['active']) {
+            $data['active'] = '0';
+        } else {
+            $data['active'] = '1';
+        }
 
 //die();
       $model = Mage::getModel('sliderdata/sliderdata');
@@ -142,6 +148,8 @@ class Valkyrie_SliderData_Adminhtml_SliderDataController extends Mage_Adminhtml_
       }
 
       $model->setData($data);
+//var_dump($data);die();
+
 
       Mage::getSingleton('adminhtml/session')->setFormData($data);
       try {
