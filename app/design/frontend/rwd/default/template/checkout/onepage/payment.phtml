@@ -32,11 +32,17 @@
     var lastPrice;
 //]]>
 </script>
-<form action="" id="co-payment-form">
+<!-- <form action="" id="co-payment-form">
     <div class="fieldset">
         <?php echo $this->getChildChildHtml('methods_additional', '', true, true) ?>
         <?php echo $this->getChildHtml('methods') ?>
     </div>
+</form> -->
+<form action="" id="co-payment-form">
+<div class="fieldset" id="checkout-payment-method-load">
+    <?php echo $this->getChildChildHtml('methods_additional', '', true, true) ?>
+    <?php echo $this->getChildHtml('methods') ?>
+</div>
 </form>
 <div class="tool-tip" id="payment-tool-tip" style="display:none;">
     <div class="btn-close"><a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>

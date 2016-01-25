@@ -368,6 +368,9 @@ $data['street'] = str_replace(",", "", $data['street']);
         	$address = $this->getQuote()->{"get{$type}Address"}();
         	$data	= $address->getData();
 		}
+        if(is_array($data['street'])){
+            $data['street'] = $data['street'][0].$data['street'][1];
+        }
 
         if(isset($data['country_id']) && !empty($data['country_id']) && $data['country_id'] == 'US')
         {
@@ -435,7 +438,7 @@ $data['street'] = str_replace(",", "", $data['street']);
 				if(isset($data['company']) && !empty($data['company']))
 					$usps_address->setFirmName($data['company']);
 				
-				$street_info	= $address->getStreet();
+				$street_info	= $data['street'];
 				$street1	= '';
 				$street2	= '';
 				if(is_array($street_info))
@@ -543,7 +546,7 @@ $data['street'] = str_replace(",", "", $data['street']);
 					{
 						return array('error' => 'This Information has not been included in this Test Server.', 'candidates' => array(), 'original_address' => $check_address);
 					}
-					return array('error' => 'NO', 'candidates' => array(), 'original_address' => $check_address);
+                    return array('error' => 'NO', 'candidates' => array(), 'original_address' => $check_address);
 				}
         	}
         }

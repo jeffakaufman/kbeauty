@@ -703,6 +703,11 @@ function get_separate_save_methods_function(url, update_payments)
                             }
                         }
                     }
+                    // ////////////// SB Custom Code  ///////////////////
+                    // if (data.isaddress == 'No') {
+                    //     $$('#id_subscribe_newsletter').invoke('addClassName', 'required-entry');
+                    // }
+                    // ////////////// SB Custom Code  ///////////////////
                 }
             },
             onFailure: function(transport) {

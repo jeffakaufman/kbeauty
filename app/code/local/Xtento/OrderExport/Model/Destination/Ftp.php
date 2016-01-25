@@ -84,7 +84,8 @@ class Xtento_OrderExport_Model_Destination_Ftp extends Xtento_OrderExport_Model_
         // Test & init connection
         $this->initConnection();
         if (!$this->getTestResult()->getSuccess()) {
-            $logEntry->setResult(Xtento_OrderExport_Model_Log::RESULT_WARNING);
+            $logEntry->setResult(Xtento_OrderExport_Model_Log::RESULT_FAILED);
+//            $logEntry->setResult(Xtento_OrderExport_Model_Log::RESULT_WARNING); //Changed To Failed
             $logEntry->addResultMessage(Mage::helper('xtento_orderexport')->__('Destination "%s" (ID: %s): %s', $this->getDestination()->getName(), $this->getDestination()->getId(), $this->getTestResult()->getMessage()));
             return false;
         }
@@ -100,7 +101,8 @@ class Xtento_OrderExport_Model_Destination_Ftp extends Xtento_OrderExport_Model_
             fwrite($tempHandle, $data);
             rewind($tempHandle);
             if (!@ftp_fput($this->_connection, $filename, $tempHandle, FTP_BINARY)) {
-                $logEntry->setResult(Xtento_OrderExport_Model_Log::RESULT_WARNING);
+                $logEntry->setResult(Xtento_OrderExport_Model_Log::RESULT_FAILED);
+//                $logEntry->setResult(Xtento_OrderExport_Model_Log::RESULT_WARNING); // Changed To Failed
                 $message = sprintf("Could not save file %s in directory %s on FTP server %s. You can try enabling passive mode in the configuration. Please make sure the directory is writable. Also please make sure that there is no firewall blocking the outgoing connection to the FTP server. If this error keeps occurring, please get in touch with your server hoster / server administrator AND with the server hoster / server administrator of the remote FTP server, so they can adjust the firewall.", $filename, $this->getDestination()->getPath(), $this->getDestination()->getHostname());
                 $logEntry->addResultMessage(Mage::helper('xtento_orderexport')->__('Destination "%s" (ID: %s): %s', $this->getDestination()->getName(), $this->getDestination()->getId(), $message));
                 if (!$this->getDestination()->getBackupDestination()) {

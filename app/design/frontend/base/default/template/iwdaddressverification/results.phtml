@@ -3,4 +3,18 @@ if(Mage::helper('addressverification')->isAddressVerificationEnabled()):
 $is_mobile	= Mage::helper('addressverification')->isMobile();
 ?>
 <div id='checkout-address-validation-load' <?php if($is_mobile){echo " class='av-mobile-device' ";}?>></div>
+    <?php if(Mage::getStoreConfig('onestepcheckout/general/rewrite_checkout_links')){
+    $settings = Mage::helper('onestepcheckout/checkout')->loadConfig();?>
+    <script type="text/javascript">
+//        $ji(document).ready(function(){
+            av_base_url = '<?php echo Mage::getBaseUrl('link');?>';
+            av_idev_ajax_billing = <?php echo Mage::getStoreConfig('onestepcheckout/ajax_update/enable_ajax_save_billing')?'true' : 'false';?>;
+            av_idev_bill_save_url = '<?php echo $this->getUrl('onestepcheckout/ajax/save_billing', array('_secure'=>true)); ?>';
+            av_idev_methods_separate_save_url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)); ?>';
+            av_idev_update_payment_on_shipping = <?php echo $settings['enable_update_payment_on_shipping'] ? 'true' : 'false'; ?>;
+//        })
+    </script>
+    <?php
+    }?>
+
 <?php endif;?>

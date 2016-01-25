@@ -18,6 +18,11 @@
             <addressverification>
                 <class>IWD_AddressVerification_Block</class>
             </addressverification>
+            <onestepcheckout>
+                <rewrite>
+                    <billing>IWD_AddressVerification_Block_Rewrite_Billing</billing>
+                </rewrite>
+            </onestepcheckout>
         </blocks>
         <helpers>
             <addressverification>
@@ -51,6 +56,21 @@
                     </modules>
                 </args>
             </aw_onestepcheckout>
+            <iwd_addressverification>
+                <use>standard</use>
+                <args>
+                    <module>IWD_AddressVerification</module>
+                    <frontName>iwd_addressverification</frontName>
+                </args>
+            </iwd_addressverification>
+            <!--<onestepcheckout>-->
+                <!--<use>standard</use>-->
+                <!--<args>-->
+                    <!--<modules>-->
+                        <!--<iwd_addressverification before="Mage_Checkout">IWD_AddressVerification</iwd_addressverification>-->
+                    <!--</modules>-->
+                <!--</args>-->
+            <!--</onestepcheckout>-->
         </routers>
         <layout>
              <updates>

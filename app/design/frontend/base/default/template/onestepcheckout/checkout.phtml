@@ -95,6 +95,30 @@ $helper = Mage::helper('onestepcheckout/checkout');
                         <input type="hidden" name="billing[use_for_shipping]" id="billing:use_for_shipping_yes" value="1" />
                     <?php endif; ?>
                 </li>
+                <!-- <div class="checkbox">
+                        <input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Yes. Keep me up-to-date with kardashian beauty newsletters, special offers and other promotions.') ?>" value="1" id="is_subscribed" checked="checked" class="checkbox" />
+                        <label for="is_subscribed"><?php echo $this->__('Yes. Keep me up-to-date with kardashian beauty newsletters, special offers and other promotions.') ?></label>
+                    </div> -->
+                <?php if(!Mage::getSingleton('customer/session')->isLoggedIn()):?>
+                    <li>
+                        <?php if($this->settings['enable_newsletter'] && !$this->isSubScribed($customerEmail)): ?>
+                            <div class="onestepcheckout-enable-newsletter">
+                                <input type="checkbox" id="id_subscribe_newsletter" name="subscribe_newsletter" value="1" <?php if($this->settings['newsletter_default_checked']): ?>checked="checked"<?php endif; ?> />
+                                <label for="id_subscribe_newsletter">
+                                    <div class="text-contain">
+                                        <?php echo $this->__('Yes. Keep me up-to-date with kardashian beauty newsletters, special offers and other promotions.'); ?>
+                                    </div>
+                                </label>
+                            </div>
+                        <?php endif; ?>
+                    </li>    
+                    <li>
+                        <div class="checkbox">
+                            <input type="checkbox" name="terms_of_use" value="0" id="terms_of_use" class="checkbox required-entry" />
+                            <label for="terms_of_use">By Clicking submit, I agree to the <a href="<?php echo Mage::helper('cms/page')->getPageUrl( 11 ) ?>" target="_blank">Terms of Use</a> and <a href="<?php echo Mage::helper('cms/page')->getPageUrl( 6 ) ?>" target="_blank">Privacy Policy</a> for this website.</label>
+                        </div>
+                    </li>
+                <?php endif; ?>    
             </ul>
         </div>
     <?php if($this->differentShippingAvailable()): ?>
@@ -636,10 +660,10 @@ $helper = Mage::helper('onestepcheckout/checkout');
 
         <?php $customerEmail = (($this->isCustomerLoggedIn())) ? $this->getQuote()->getCustomer()->getEmail() : false ;?>
         <?php if($this->settings['enable_newsletter'] && !$this->isSubScribed($customerEmail)): ?>
-            <div class="onestepcheckout-enable-newsletter">
+            <!-- <div class="onestepcheckout-enable-newsletter">
                 <input type="checkbox" id="id_subscribe_newsletter" name="subscribe_newsletter" value="1" <?php if($this->settings['newsletter_default_checked']): ?>checked="checked"<?php endif; ?> />
                 <label for="id_subscribe_newsletter"><?php echo $this->__('Subscribe to our newsletter'); ?></label>
-            </div>
+            </div> -->
         <?php endif; ?>
 
         <?php $_extraProductsHelper = Mage::helper('onestepcheckout/extraproducts'); ?>
@@ -982,7 +1006,7 @@ Event.observe(window, 'load', function() {
         reviewmodal = false;
 
         /* Handle place order click event */
-        $$('.onestepcheckout-place-order').each(function(elem){
+        $$('#onestepcheckout-place-order').each(function(elem){
             elem.observe('click', function(e)   {
                 Event.stop(e);
 

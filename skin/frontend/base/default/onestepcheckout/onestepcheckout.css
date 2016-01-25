@@ -470,7 +470,7 @@ table.onestepcheckout-totals tr:last-child td {
 }
 table.onestepcheckout-totals tr td.a-right {
     /*padding-left: 6px;*/
-    text-align: left;
+    text-align: right;
 }
 table.onestepcheckout-summary td.name {
     width: 75%;

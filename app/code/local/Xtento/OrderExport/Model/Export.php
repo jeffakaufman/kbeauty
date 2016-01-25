@@ -272,7 +272,8 @@ class Xtento_OrderExport_Model_Export extends Mage_Core_Model_Abstract
                         $this->setFiles($savedFiles);
                     }
                 } catch (Exception $e) {
-                    $this->getLogEntry()->setResult(Xtento_OrderExport_Model_Log::RESULT_WARNING);
+                    $this->getLogEntry()->setResult(Xtento_OrderExport_Model_Log::RESULT_FAILED);
+//                    $this->getLogEntry()->setResult(Xtento_OrderExport_Model_Log::RESULT_WARNING); //Changed To Failed To Check if this will go to Next Export
                     $this->getLogEntry()->addResultMessage($e->getMessage());
                 }
             }

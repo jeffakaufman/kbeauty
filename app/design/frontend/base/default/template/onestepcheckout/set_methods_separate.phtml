@@ -4,6 +4,23 @@ $data = array(
     'payment_method' => $this->getChildHtml('choose-payment-method'),
     'summary' => $this->getChildHtml('summary')
 );
+////////////////  SB Custom Code ///////////////////
+// $_billingaddress = Mage::getSingleton('checkout/type_onepage')->getQuote()->getBillingAddress();
+// $_billingemail = $_billingaddress->getEmail();
+
+// $subscriber = Mage::getModel('newsletter/subscriber')->loadByEmail($_billingemail);
+// if ($subscriber->getId()) {
+//      $data = array(
+//     	'payment_method' => $this->getChildHtml('choose-payment-method'),
+//     	'summary' => $this->getChildHtml('summary'),
+//     	'isaddress' => 'Yes');
+// }else{
+// $data = array(
+//     'payment_method' => $this->getChildHtml('choose-payment-method'),
+//     'summary' => $this->getChildHtml('summary'),
+//     'isaddress' => 'No');
+// }
+////////////////  SB Custom Code ///////////////////
 
 echo Zend_Json::encode($data);
 

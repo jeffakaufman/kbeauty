@@ -27,6 +27,7 @@
             <div class="fieldset">
                 <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
                 <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+                <input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey() ?>" />
                 <h2 class="legend"><?php echo $this->__('Personal Information') ?></h2>
                 <ul class="form-list">
                     <li class="fields">
@@ -63,7 +64,7 @@
                     <li class="control">
                         <div class="checkbox">
                             <input type="checkbox" name="terms_of_use" value="0" id="terms_of_use" class="checkbox required-entry" />
-                            <label for="terms_of_use">By Clicking submit, I agree to the <a href="<?php echo Mage::helper('cms/page')->getPageUrl( 11 ) ?>" target="_blank">Terms of Use</a> and <a href="<?php echo Mage::helper('cms/page')->getPageUrl( 6 ) ?>" target="_blank">Privacy Policy</a> for this website.</label>
+                            <label for="terms_of_use">By Clicking submit, I agree to the <a href="<?php echo Mage::helper('cms/page')->getPageUrl( 11 ) ?>" target="_blank">Terms of Use</a> and <a href="<?php echo Mage::helper('cms/page')->getPageUrl( 6 ) ?>" target="_blank">Privacy Policy</a> for this website. *</label>
                         </div>
                         
                         <?php /* Extensions placeholder */ ?>
