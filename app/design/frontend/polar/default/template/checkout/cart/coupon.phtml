@@ -24,18 +24,18 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<a href="#" onclick="Effect.toggle('discount-coupon', 'blind', {duration: 0.2 }); return false;" class="coupon-link"><?php echo $this->__('Apply Coupon Code'); ?></a>
-<div id="discount-coupon" style="display: none;">
+<!-- <a href="#" onclick="Effect.toggle('discount-coupon', 'blind', {duration: 0.2 }); return false;" class="coupon-link"><?php echo $this->__('Apply Promo Code'); ?></a> -->
+<div id="discount-coupon">
     <form class="discount" id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
         <div class="discount-form">
             <input type="hidden" name="remove" id="remove-coupone" value="0" />
             <div class="input-box">
-                <input class="input-text" type="text" id="coupon_code" name="coupon_code" value="<?php echo $this->htmlEscape($this->getCouponCode()) ?>" />
+                <input class="input-text" type="text" id="coupon_code" name="coupon_code" placeholder="<?php echo $this->__('Enter Promo Code'); ?>" value="<?php echo $this->htmlEscape($this->getCouponCode()) ?>" />
             </div>
             
-                <button title="<?php echo $this->__('Apply Coupon') ?>" class="button dark small" onclick="discountForm.submit(false)" value="<?php echo $this->__('Apply Coupon') ?>"><span><span><?php echo $this->__('Apply Coupon') ?></span></span></button>
+                <button title="<?php echo $this->__('Apply Code') ?>" class="button dark small" onclick="discountForm.submit(false)" value="<?php echo $this->__('Apply Code') ?>"><span><span><?php echo $this->__('Apply Code') ?></span></span></button>
                 <?php if(strlen($this->getCouponCode())): ?>
-                    &nbsp; <button type="button" title="<?php echo $this->__('Cancel Coupon') ?>" class="button" onclick="discountForm.submit(true)" value="<?php echo $this->__('Cancel Coupon') ?>"><span><span><?php echo $this->__('Cancel Coupon') ?></span></span></button>
+                    &nbsp; <button type="button" title="<?php echo $this->__('Cancel Code') ?>" class="button" onclick="discountForm.submit(true)" value="<?php echo $this->__('Cancel Code') ?>"><span><span><?php echo $this->__('Cancel Code') ?></span></span></button>
                 <?php endif;?>
             
         </div>
@@ -45,13 +45,13 @@
 //<![CDATA[
 var discountForm = new VarienForm('discount-coupon-form');
 discountForm.submit = function (isRemove) {
-//    console.log('submit');
+    console.log('submit');
     if (isRemove) {
-//        console.log('isRemove');
+        console.log('isRemove');
         $('coupon_code').removeClassName('required-entry');
         $('remove-coupone').value = "1";
     } else {
-//        console.log('notRemove');
+        console.log('notRemove');
         $('coupon_code').addClassName('required-entry');
         $('remove-coupone').value = "0";
     }

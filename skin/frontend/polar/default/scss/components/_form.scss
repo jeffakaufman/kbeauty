@@ -120,7 +120,6 @@ input[type="checkbox"] + label, input[type="radio"] + label {
 input:checked + label span.custom {
   background: url(../images/check.svg) no-repeat #fff;
   background-position: center center;
-  float: left;
 }
 
 .checkbox:hover span.custom {
@@ -227,7 +226,7 @@ form ul:after {
 }
 .cvv-what-is-this {
   position: absolute;
-  right: 10px;
+  left: 100px;
   top: 30px;
   font-family: arial;
   padding: 0 4px;
@@ -756,14 +755,14 @@ p.required, .required em {
   border-top: 1px solid $black;
   position: relative;
   z-index: 5;
-  @include transition(max-height 1s ease 0s);
+  @include transition(max-height 1s ease 0s, opacity 0s ease 1s);
   max-height: 0;
   overflow: hidden;
   
   &.opened {
     max-height: 1000px;
     opacity: 1;
-    @include transition(max-height 1s ease 0s);
+    @include transition(max-height 1s ease 0s, opacity 1s ease 0s);
   }
   &.overlay {
     position: absolute;

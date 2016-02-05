@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/** 
+ * @package     Cunning_Promoproduct
+ * @Author      Cunning (jaydeep.cunning@gmail.com)
+ * @Created At  2014-11-05
+ */
+-->
+<config>
+    <modules>
+        <Cunning_Promoproduct>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Cunning_Promoproduct>
+    </modules>
+</config>

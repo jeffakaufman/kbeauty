@@ -684,7 +684,7 @@ class Idev_OneStepCheckout_AjaxController extends Mage_Core_Controller_Front_Act
                 ->getBlock('choose-payment-method')
                 ->append($giftcardScripts);
         }
-
+        
         $this->renderLayout();
     }
 

@@ -37,12 +37,13 @@
 				->setOrder('created_at', 'desc')
                 ->load();
 		}
-				
+//var_dump($_orderCollections);
 		$show_order_statuses = $_REQUEST['show_order_statuses'];
 		$result_order = $_orderCollections->count();
 		
 		$i=0;
 		foreach($_orderCollections as $key=>$single_order) {
+
 			if(($filter_type == 'shipping_date')){
 				$_orderId = $single_order->getOrderId();
 			}else{
@@ -105,7 +106,12 @@
 			
 			$item_line="";
 			foreach ($items as $itemId => $item){
-				
+//var_dump($item);
+
+                if($item->getParentItemId()) {
+                    continue;
+                }
+
 				if($item->getQtyToInvoice()!=0):
 					$itemorderqty = $item->getQtyToInvoice();
 				else:

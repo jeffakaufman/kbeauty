@@ -75,8 +75,8 @@
     <?php echo $this->getCmsBlockHtml() ?>
 
 <?php elseif($this->isMixedMode()): ?>
-    <?php echo $this->getCmsBlockHtml() ?>
     <?php echo $this->getProductListHtml() ?>
+    <?php echo $this->getCmsBlockHtml() ?>
 
 <?php else: ?>
     <?php echo $this->getProductListHtml() ?>

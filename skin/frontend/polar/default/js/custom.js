@@ -64,6 +64,12 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 	});
 	//shipping = shipping.substr(1);
 	//console.log('shipping 1: '+shipping);
+
+	$('#onestepcheckout-place-order').click(function() {
+		$('html,body').animate({
+			scrollTop: $('body').find('.validation-advice').filter('.validation-advice:first').first().parent().offset().top
+		}, 500);
+	});
 	
 	//console.log(shipping);
 	$('#co-shipping-method-form .button, #checkout-step-payment .button').click(function() {
@@ -495,6 +501,10 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 	  	$('.cs-skin-slide.cs-active::before').css('transform','scale3d(1.1,'+attributeCount+',1)').css('-webkit-transform','scale3d(1.1,'+attributeCount+',1)');*/
 	}
 	cartActions();
+
+	$('#authnetcim_card_id').change(function() {
+		if(this.value) $('#authnetcim_cc_type_cvv_div').show();
+	});
 
 	$('#faqs a[href=#shipping]').click(function(e) {
 		e.preventDefault();
@@ -1144,8 +1154,9 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
                 imageHeights.push(imageHeight);
                 tallestImage = Math.max.apply( null, imageHeights );
 
-//console.log(imageHeight);
-				$("#slider li").css('height',tallestImage+'px');
+console.log(tallestImage);
+				//$("#slider li").css('height',tallestImage+'px');
+				$("#slider li").height(tallestImage+'px');
 
 //console.log(wW);
 //console.log($(this).innerHeight());

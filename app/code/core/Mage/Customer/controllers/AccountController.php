@@ -20,7 +20,7 @@
  *
  * @category    Mage
  * @package     Mage_Customer
- * @copyright  Copyright (c) 2006-2014 X.commerce, Inc. (http://www.magento.com)
+ * @copyright  Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
@@ -68,7 +68,7 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
             return;
         }
 
-        $action = $this->getRequest()->getActionName();
+        $action = strtolower($this->getRequest()->getActionName());
         $openActions = array(
             'create',
             'login',
@@ -140,64 +140,46 @@ class Mage_Customer_AccountController extends Mage_Core_Controller_Front_Action
      */
     public function loginPostAction()
     {
-//echo "1<br >";
         if (!$this->_validateFormKey()) {
             $this->_redirect('*/*/');
             return;
         }
-//echo "2<br >";
 
         if ($this->_getSession()->isLoggedIn()) {
             $this->_redirect('*/*/');
             return;
         }
-//echo "3<br >";
-
         $session = $this->_getSession();
-//echo "4<br >";
 
         if ($this->getRequest()->isPost()) {
-//echo "10<br >";
             $login = $this->getRequest()->getPost('login');
-//echo "11<br >";
             if (!empty($login['username']) && !empty($login['password'])) {
                 try {
                     $session->login($login['username'], $login['password']);
-//echo "12<br >";
                     if ($session->getCustomer()->getIsJustConfirmed()) {
-//echo "13<br >";
                         $this->_welcomeCustomer($session->getCustomer(), true);
-//echo "14<br >";
                     }
-//echo "15<br >";
                 } catch (Mage_Core_Exception $e) {
-//echo "20<br >";
                     switch ($e->getCode()) {
                         case Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED:
-//echo "21<br >";
                             $value = $this->_getHelper('customer')->getEmailConfirmationUrl($login['username']);
                             $message = $this->_getHelper('customer')->__('This account is not confirmed. <a href="%s">Click here</a> to resend confirmation email.', $value);
                             break;
                         case Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD:
-//echo "22<br >";
                             $message = $e->getMessage();
                             break;
                         default:
-//echo "23<br >";
                             $message = $e->getMessage();
                     }
                     $session->addError($message);
                     $session->setUsername($login['username']);
                 } catch (Exception $e) {
-//echo "25<br >";
                     // Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
                 }
             } else {
-//echo "30<br >";
                 $session->addError($this->__('Login and password are required.'));
             }
         }
-//echo "5<br >";
 
         $this->_loginPostRedirect();
     }

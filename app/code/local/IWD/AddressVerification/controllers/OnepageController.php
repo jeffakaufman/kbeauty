@@ -53,6 +53,7 @@ class IWD_AddressVerification_OnepageController extends Mage_Checkout_OnepageCon
      */
     public function saveBillingAction()
     {
+
         if ($this->_expireAjax()) {
             return;
         }
@@ -75,6 +76,7 @@ class IWD_AddressVerification_OnepageController extends Mage_Checkout_OnepageCon
 	    		}
 	    		else
 	    		{
+
 	    			$this->getVerification()->setVerificationLib($validation_enabled);
 
 	    			$this->getVerification()->getCheckout()->setShippingWasValidated(false);
@@ -97,10 +99,12 @@ class IWD_AddressVerification_OnepageController extends Mage_Checkout_OnepageCon
 			        
 			        if($bill_was_validated)
 			        {
+
 			        	parent::saveBillingAction();
 			        }
 			        else
 			        {
+
 			            if (isset($data['email'])) {
 			                $data['email'] = trim($data['email']);
 			            }
@@ -111,6 +115,10 @@ class IWD_AddressVerification_OnepageController extends Mage_Checkout_OnepageCon
 			            {
 			            	// run validation
 					        $bill_validate	= $this->getVerification()->validate_address('Billing');
+//							echo '<pre>';
+//							var_dump($bill_validate);
+//							echo '</pre>';
+//							die();
 					        if($bill_validate)
 					        	$this->getVerification()->getCheckout()->setBillingWasValidated(true);
 					        else

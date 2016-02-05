@@ -22,6 +22,20 @@ public function indexAction()
     {
 		if ($data = $this->getRequest()->getPost()) {
 
+
+			$csv = "";
+			$headArr = array("created_at", "orderID", "invoiceID", "sku", "itemPrice", "itemOriginalPrice", "quantity",
+				"firstname", "lastname",
+//				"billingAddress", "billingCity",
+				"billingState", "billingZip", "billingCountry",
+				"billingEmail",
+//				"billingPhone",
+				"subtotal", "shippingAmount", "taxAmount", "cost", "orderStatus",
+				"creditCardType", "paymentMethod", "shippingCreatedAt", "shippingState", "shippingZip", "orderDiscount", "S&amp;H",
+				"Tax", "Discount", "Subtotal", "Total", );
+
+			$csv .= implode(',', $headArr)."\r\n";
+
 			$orserstatus = "";
 			$reportaddress = Mage::helper('salesreport')->getReportAddress();
 			$addtess_title = ($reportaddress=="billing")?"Billing":"Shipping";
@@ -68,9 +82,34 @@ public function indexAction()
 				
 				$myOrder = Mage::getModel('sales/order');
 				$myOrder->load($_orderId);
-				
+
+
+				$createdAt = new DateTime($single_order->getCreatedAt());
+				$orderIncrementId = $single_order->getIncrementId();
+
+
+				$invoiceId = "";
+
+				if($myOrder->hasInvoices()) {
+					foreach ($myOrder->getInvoiceCollection() as $inv) {
+						$invoiceId = $inv->getIncrementId();
+						break;
+					}
+				}
+
+				$shippingCreatedAt = "";
+				foreach($myOrder->getShipmentsCollection() as $shipment){
+					/** @var $shipment Mage_Sales_Model_Order_Shipment */
+					$shippingCreatedAt = $shipment->getCreatedAt();
+					break;
+				}
+
+				if($shippingCreatedAt) {
+					$shippingCreatedAt = date("m/d/Y", strtotime($shippingCreatedAt));
+				}
+
 				//Some Random Fields
-				if($reportaddress=="billing"){
+//				if($reportaddress=="billing"){
 									
 					$country_id = utf8_decode($myOrder->getBillingAddress()->getCountryId());
 					$country = Mage::getModel('directory/country')->load($country_id)->getName();
@@ -90,7 +129,10 @@ public function indexAction()
 					$region = utf8_decode($myOrder->getBillingAddress()->getRegion());
 					
 					$postcode = utf8_decode($myOrder->getBillingAddress()->getPostcode());
-					
+
+					$phone = utf8_decode($myOrder->getBillingAddress()->getTelephone());
+
+/*
 				}else{
 					
 					$country_id = utf8_decode($myOrder->getShippingAddress()->getCountryId());
@@ -108,73 +150,186 @@ public function indexAction()
 					
 					$city = utf8_decode($myOrder->getShippingAddress()->getCity());
 					
-					$region = utf8_decode($myOrder->getShippingAddress()->getRegion());
-					
+
 					$postcode = utf8_decode($myOrder->getShippingAddress()->getPostcode());
 				}
-							
+
+*/
+
+				$shippingState = utf8_decode($myOrder->getShippingAddress()->getRegion());
+				$shippingZip = utf8_decode($myOrder->getShippingAddress()->getPostcode());
+
+
 				$myOrder->loadByIncrementId($myOrder->getIncrementId());
 				
 				$store = Mage::app()->getStore();
 				$items = $myOrder->getItemsCollection();
 				$ic=1;
 				$countitems=0;
-				
+
+				$customer_email = "";
+				if($custoer_id = $myOrder->getCustomerId()){
+					$customer = Mage::getModel('customer/customer')->load($custoer_id);
+					$customer_email = $customer->getEmail();
+					$customer_phone = $customer->getPhone();
+				}
+
+				if(empty($customer_email)){
+					$customer_email=$myOrder->getCustomerEmail();
+				}
+
+
+				$payment = $myOrder->getPayment();
+				$paymentAdditionalData = $payment->getAdditionalInformation();
+
+				$paymentType = $paymentAdditionalData['method'];
+				switch($paymentType) {
+					case 'CC':
+						$paymentType = "Credit Card";
+						break;
+
+					default:
+						//Do Nothing
+						break;
+				}
+
+//				var_dump(get_class_methods($payment));
+//die();
 				$item_line="";
-				foreach ($items as $itemId => $item){
-					
+
+
+				$orderDiscount = $single_order->getDiscountAmount();
+
+				$defaultOrderDiscount = $orderDiscount;
+
+				$itemsCount = 0;
+				foreach ($items as $itemId => $item) {
+					if($item->getParentItemId()) {
+						continue;
+					}
+
 					if($item->getQtyToInvoice()!=0):
-						$itemorderqty = $item->getQtyToInvoice();
+						$itemOrderQty = $item->getQtyToInvoice();
 					else:
-						$itemorderqty = round($item->getQtyOrdered());
+						$itemOrderQty = round($item->getQtyOrdered());
 					endif;
-					
-					if($item->getParentItemId() && round($item->getOriginalPrice())==0){
-						$parentitem = $myOrder->getItemById($item->getParentItemId());
 
-						$originalprice = $parentitem->getOriginalPrice();
-						
-						$subtotal = ($parentitem->getOriginalPrice()*$itemorderqty);
-						
-						$discountamount=0;				
-						if(round($parentitem->getDiscountAmount())!=0){
-							$discountamount=$parentitem->getDiscountAmount();
-							$subtotal=($subtotal-$discountamount);
-						}						
-						$subtotal = number_format($subtotal,2);						
-						$eachitemdiscountamount = ($discountamount/$itemorderqty);
-						$discountamount = number_format($eachitemdiscountamount,2);						
-						$taxpercent = $parentitem->getTaxPercent();						
-						$eachitemvat = $vatamount_eachproduct/$itemorderqty;														
-						$totalvatdisamount = $eachitemvat+$eachitemdiscountamount;							
-						$net_price = round($originalprice-($totalvatdisamount),2);						
-					}else{						
-						$originalprice = $item->getOriginalPrice();						
-						$subtotal = ($item->getOriginalPrice()*$itemorderqty);						
-						$discountamount=0;				
-						if(round($item->getDiscountAmount())!=0){
-							$discountamount=$item->getDiscountAmount();
-							$subtotal=($subtotal-$discountamount);
-						}						
-						$subtotal = number_format($subtotal,2);						
-						$eachitemdiscountamount = ($discountamount/$itemorderqty);
-						$discountamount = number_format($eachitemdiscountamount,2);						
-						$taxpercent = $item->getTaxPercent();						
-						$eachitemvat = $vatamount_eachproduct/$itemorderqty;														
-						$totalvatdisamount = $eachitemvat+$eachitemdiscountamount;							
-						$net_price = round($originalprice-($totalvatdisamount),2);
-					}
-										
-					$customer_email = "";
-					if($custoer_id = $myOrder->getCustomerId()){
-						$customer = Mage::getModel('customer/customer')->load($custoer_id);
-						$customer_email = $customer->getEmail();
-					}
-					
-					if(empty($customer_email)){
-						$customer_email=$myOrder->getCustomerEmail();
-					}					
+					$_productId = $item->getProductId();
+					$productModel = Mage::getModel('catalog/product');
+					$productModel->load($_productId);
 
+					$currentProductPrice = $productModel->getFinalPrice();
+//var_dump($productModel->getData());
+
+					$itemPrice = $item->getPrice();
+
+					$originalPrice = $currentProductPrice;
+
+					$productDiscount = round($originalPrice - $itemPrice, 2) * $itemOrderQty;
+
+					$orderDiscount += $productDiscount;
+
+					++$itemsCount;
+				}
+
+				$itemIdx = 0;
+				foreach ($items as $itemId => $item){
+
+					if($item->getParentItemId()) {
+						continue;
+					}
+
+					if($item->getQtyToInvoice()!=0):
+						$itemOrderQty = $item->getQtyToInvoice();
+					else:
+						$itemOrderQty = round($item->getQtyOrdered());
+					endif;
+
+					$itemPrice = $item->getPrice();
+
+					$_productId = $item->getProductId();
+					$productModel = Mage::getModel('catalog/product');
+					$productModel->load($_productId);
+					$currentProductPrice = $productModel->getFinalPrice();
+					$originalPrice = $currentProductPrice;
+//					$originalPrice = $item->getOriginalPrice();
+					$productDiscount = round($originalPrice - $itemPrice, 2) * $itemOrderQty;
+
+//var_dump($currentProductPrice);
+
+/*
+					$originalprice = $item->getOriginalPrice();
+					$subtotal = ($item->getOriginalPrice()*$itemorderqty);
+					$discountamount=0;
+					if(round($item->getDiscountAmount())!=0){
+						$discountamount=$item->getDiscountAmount();
+						$subtotal=($subtotal-$discountamount);
+					}
+					$subtotal = number_format($subtotal,2);
+					$eachitemdiscountamount = ($discountamount/$itemorderqty);
+					$discountamount = number_format($eachitemdiscountamount,2);
+					$taxpercent = $item->getTaxPercent();
+					$eachitemvat = $vatamount_eachproduct/$itemorderqty;
+					$totalvatdisamount = $eachitemvat+$eachitemdiscountamount;
+					$net_price = round($originalprice-($totalvatdisamount),2);
+*/
+
+
+					$rowArr = array();
+					$rowArr[] = $createdAt->format("m/d/Y H:i"); //created_at 		[0]		[0]
+					$rowArr[] = $orderIncrementId; //orderID						[1]		[1]
+					$rowArr[] = $invoiceId; //invoiceID								[2]		[2]
+
+					$rowArr[] = $item->getSku();//sku								[3]		[3]
+					$rowArr[] = $itemPrice;//itemPrice								[4]		[4]
+					$rowArr[] = $originalPrice;//itemOriginalPrice					[5]		[5]
+
+					$rowArr[] = $itemOrderQty; //quantity							[6]		[6]
+					$rowArr[] = $single_order->getCustomerFirstname(); //firstname	[7]		[7]
+					$rowArr[] = $single_order->getCustomerLastname(); //lastname	[9]		[8]
+
+//					$rowArr[] = $address; //billingAddress							[10]
+//					$rowArr[] = $city; //billingCity								[11]
+					$rowArr[] = $region; //billingState								[12]	[9]
+					$rowArr[] = $postcode; //billingZip								[13]	[10]
+					$rowArr[] = $country; //billingCountry							[14]	[11]
+					$rowArr[] = $customer_email; //billingEmail						[15]	[12]
+//					$rowArr[] = $phone; //billingPhone								[16]
+
+					$rowArr[] = $single_order->getSubtotal(); //subtotal			[17]	[13]
+					$rowArr[] = $single_order->getShippingAmount(); //shippingAmount[18]	[14]
+					$rowArr[] = $single_order->getTaxAmount(); //taxAmount			[19]	[15]
+					$rowArr[] = $single_order->getBaseTotalInvoicedCost(); //cost	[20]	[16]
+					$rowArr[] = $single_order->getStatus(); //orderStatus			[21]	[17]
+
+					$rowArr[] = $payment->getCcType(); //creditCardType				[22]	[18]
+					$rowArr[] = $paymentType; //paymentMethod						[23]	[19]
+
+					$rowArr[] = $shippingCreatedAt; //shippingCreatedAt				[24]	[20]
+					$rowArr[] = $shippingState; //shippingState						[25]	[21]
+					$rowArr[] = $shippingZip; //shippingZip							[25]	[22]
+
+					$rowArr[] = -$orderDiscount; //orderDiscount						[26]	[23]
+
+					$rowArr[] = (($itemsCount - 1) == $itemIdx ? $rowArr[14] : 0); // S&amp;H		[27]	[24]
+					$rowArr[] = (($itemsCount - 1) == $itemIdx ? $rowArr[15] : 0); // Tax			[28]	[25]
+					$rowArr[] = -($productDiscount + (($itemsCount - 1) == $itemIdx ? $defaultOrderDiscount : 0)); // Discount		[29]	[26]
+					$rowArr[] = $rowArr[6] * $rowArr[4]; // Subtotal								[30]	[27]
+
+					$rowArr[] = $rowArr[24] + $rowArr[25] + $rowArr[26] + $rowArr[27]; // Total		[31]	[28]
+
+//					continue;
+
+
+
+
+					/*
+                    $headArr = array(
+                        "", "Discount", "Subtotal", "Total", );
+    */
+
+
+/*
 					$datarow =  array(date("d/m/Y",strtotime($myOrder->getCreatedAt())), $myOrder->getIncrementId(), utf8_decode($item->getName()), $itemorderqty, utf8_decode($net_price),$subtotal,$name,$customer_email,$address,$city,$region,$postcode,$country);
 								
 					$line = "";
@@ -187,13 +342,18 @@ public function indexAction()
 					$line .= "\n";
 					
 					$orders_csv_row .=$line;
+*/
+					$csv .= "\"".implode("\",\"", $rowArr)."\"\r\n";
+
+					++$itemIdx;
 									
 				}
 			}
 			
 			$reportname = Mage::helper('salesreport')->getReportName();
 			$fileName   = $reportname.'.csv';
-			$this->_sendUploadResponse($fileName, $orders_csv_row);
+//			$this->_sendUploadResponse($fileName, $orders_csv_row);
+			$this->_sendUploadResponse($fileName, $csv);
 		}
     }
 	

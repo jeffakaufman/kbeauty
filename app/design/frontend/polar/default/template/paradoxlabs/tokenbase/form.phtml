@@ -10,8 +10,8 @@
 		<li>
 			<label for="<?php echo $this->getMethodCode(); ?>_payment_id"><?php echo $this->__('Pay with credit card on file'); ?></label>
 			<div class="input-box">
-				<select name="payment[card_id]" id="<?php echo $this->getMethodCode(); ?>_card_id" class="<?php echo $this->getMethodCode(); ?>_require required-entry">
-					<option value=""><?php echo $this->__('-- Select One --'); ?></option>
+				<select name="payment[card_id]" id="<?php echo $this->getMethodCode(); ?>_card_id" class="<?php echo $this->getMethodCode(); ?>_require required-entry my_select">
+					<option value="empty"><?php echo $this->__('-- Select One --'); ?></option>
 					<?php foreach( $this->getStoredCards() as $card ): ?>
 						<?php $card = $card->getTypeInstance(); ?>
 						<option value="<?php echo $card->getHash(); ?>" <?php if( $card->getId() == $this->getInfoData('tokenbase_id') || count( $this->getStoredCards() ) == 1 ): ?>selected="selected"<?php endif; ?>><?php echo $card->getLabel(); ?></option>
@@ -28,14 +28,15 @@
 				</div>
 			</li>
 		<?php endif; ?>
-		<!--             SB Custom COde          -->
+		<!--             SB Custom Code          -->
 		<?php if( $this->getMethod()->getConfigData('useccv') ): ?>
 			<li>
-				<div class="<?php echo $newClass; ?> small-12 medium-4 columns" id="<?php echo $this->getMethodCode(); ?>_cc_type_cvv_div">
+				<div class="<?php echo $newClass; ?> small-12 medium-4 columns cv_toshow" id="<?php echo $this->getMethodCode(); ?>_cc_type_cvv_div">
 					<input type="text" class="required-entry" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv <?php echo $requireClass; ?> <?php if( !$this->haveStoredCards() ): ?>validate-cc-cvn<?php endif; ?>" id="<?php echo $this->getMethodCode(); ?>_cc_cid" name="payment[cc_cid]" placeholder="<?php echo $this->__('CVV') ?>*" autocomplete="off" value="" maxlength="4" style="  width: 75%; float: left; margin-right: 10px;" /><a href="#" class="cvv-what-is-this"><?php echo $this->__('<nobr>What is this?</nobr>') ?></a>
 				</div>
 			</li>
 		<?php endif; ?>
+		<!--             SB Custom Code         -->
 		<li>
 			<div class="input-box">
 				<?php echo $this->__('Or,'); ?> <a href="#" id="<?php echo $this->getMethodCode(); ?>_add_new"><?php echo $this->__('use a different card.'); ?></a>
@@ -58,7 +59,7 @@
 		</div>
 	</li>
 	<li <?php if( $this->haveStoredCards() ): ?>style="display:none"<?php endif; ?> class="<?php echo $newClass; ?> row" id="<?php echo $this->getMethodCode(); ?>_cc_type_exp_div">
-		<div <?php if( $this->haveStoredCards() ): ?>style="display:none"<?php endif; ?> class="input-box row" >
+		<div <?php if( $this->haveStoredCards() ): ?>style="display:block"<?php endif; ?> class="input-box row" >
 			<div class="v-fix small-12 medium-4 columns">
 				<select id="<?php echo $this->getMethodCode(); ?>_expiration" name="payment[cc_exp_month]" class="month <?php echo $requireClass; ?>">
 					<option value=""><?php echo $this->__('Expiration Month') ?>*</option>
@@ -76,7 +77,7 @@
 				</select>
 			</div>
 			<?php if( $this->getMethod()->getConfigData('useccv') ): ?>
-			<div class="<?php echo $newClass; ?> small-12 medium-4 columns" id="<?php echo $this->getMethodCode(); ?>_cc_type_cvv_div">
+			<div class="<?php echo $newClass; ?> small-12 medium-4 columns" style="display:none" id="<?php echo $this->getMethodCode(); ?>_cc_type_cvv_div">
 				<input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv <?php echo $requireClass; ?> <?php if( !$this->haveStoredCards() ): ?>validate-cc-cvn<?php endif; ?>" id="<?php echo $this->getMethodCode(); ?>_cc_cid" name="payment[cc_cid]" placeholder="<?php echo $this->__('CVV') ?>*" autocomplete="off" value="" maxlength="4" style="  width: 75%; float: left; margin-right: 10px;" /><a href="#" class="cvv-what-is-this"><?php echo $this->__('<nobr>What is this?</nobr>') ?></a>
 			</div>
 		<?php endif; ?>
@@ -144,3 +145,10 @@
 	//]]>
 	</script>
 <?php endif; ?>
+<script>
+	jQuery('.my_select').on('change', function() {
+	  if( jQuery(this).find("option:selected").val() !="empty"){
+	  		jQuery('.cv_toshow').css("display","block");
+	  } else{jQuery('.cv_toshow').css("display","none");}
+	});
+</script>

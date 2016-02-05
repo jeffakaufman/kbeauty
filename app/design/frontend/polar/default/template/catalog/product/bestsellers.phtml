@@ -89,7 +89,9 @@
                   </a>
                   <div class="actions">
                       <?php if ($_product->isSaleable()): ?>
-                        <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form<?php echo $_product->getId() ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                      <?php $_parentId = Mage::getResourceSingleton('catalog/product_type_configurable')->getParentIdsByChild($_product->getId()); ?>
+                      <?php $_parent = Mage::getModel('catalog/product')->load($_parentId); ?>
+                        <form action="<?php echo Mage::helper('checkout/cart')->getAddUrl($_parent) ?>" method="post" id="product_addtocart_form<?php echo $_product->getId() ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
                           <?php echo $this->getBlockHtml('formkey') ?>
                           <div class="no-display">
                             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />

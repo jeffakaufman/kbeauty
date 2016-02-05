@@ -46,7 +46,7 @@
             <action method="setHeaderTitle" translate="title"><title>Checkout</title></action>
         </reference>
         <reference name="head">
-            <action method="setTitle" translate="title"><title>One Step Checkout</title></action>
+            <action method="setTitle" translate="title"><title>Checkout</title></action>
             <!-- action method="addItem"><type>skin_js</type><name>onestepcheckout/js/jquery-1.11.3.min.js</name></action -->
             <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/remodal.min.js</name></action>
             <action method="addItem"><type>skin_js</type><name>onestepcheckout/js/onestepcheckout.js</name></action>
