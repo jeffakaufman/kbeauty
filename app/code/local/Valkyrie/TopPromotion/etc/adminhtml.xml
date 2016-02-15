@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+  <menu>
+    <cms>
+      <children>
+        <top_promotion>
+          <title>Top Promotion</title>
+          <sort_order>3</sort_order>
+          <action>toppromotion_admin/adminhtml_toppromotion/index</action>
+        </top_promotion>
+      </children>
+    </cms>
+  </menu>
+</config>

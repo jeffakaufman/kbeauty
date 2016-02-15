@@ -988,4 +988,49 @@ body.customer-paymentinfo-index {
 	}
 }
 
+.text-contain {
+	margin-left:40px;
+}
 
+.onestepcheckout-enable-newsletter .custom {
+	float: left;
+}
+
+body.onestepcheckout-index-index {
+	input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], 
+	input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], 
+	input[type="number"], input[type="search"], input[type="tel"], input[type="time"], 
+	input[type="url"], input[type="color"], textarea {
+		margin: 0 0 8px 0;
+	}
+	#authnetcim_cc_type_cvv_div input[type="text"] {
+		margin-bottom: 35px;
+	}
+	input[type="file"], select {
+		margin: 0 0 5px 0;
+	}
+	.checkbox {
+		input[type="checkbox"] {
+			position: absolute;
+		}
+		label {
+			padding-left: 32px;
+		}
+	}
+	input[type="radio"]+label {
+		padding-left: 10px;
+	}
+	#payment_form_authnetcim .save_for_next_time {
+		margin-top: -15px;
+	}
+	#checkout-payment-method-load dt {
+		clear: both;
+	}
+}
+#authnetcim_cc_type_exp_div .columns {
+	padding: 0 $base-font-size*0.75;
+}
+#authnetcim_cc_type_exp_div #authnetcim_cc_type_cvv_div {
+	width: 30%;
+	padding-right: $base-font-size;
+}

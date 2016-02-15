@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Valkyrie_TopPromotion>
+            <version>0.1.0</version>
+        </Valkyrie_TopPromotion>
+    </modules>
+
+    <adminhtml>
+        <!-- The <layout> updates allow us to define our block layouts in a seperate file so are aren't messin' with the magento layout files.  -->
+        <layout>
+            <updates>
+                <toppromotion>
+                    <file>top_promotion.xml</file>
+                </toppromotion>
+            </updates>
+        </layout>
+        <!-- The <acl> section is for access control. Here we define the pieces where access can be controlled within a role. -->
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <cms>
+                            <top_promotion translate="title" module="toppromotion">
+                                <title>Top Promotion</title>
+                                <sort_order>3</sort_order>
+                            </top_promotion>
+                        </cms>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <admin>
+        <!--
+            Here we are telling the Magento router to look for the controllers in the Super_Awesome_controllers_Adminhtml before we look in the
+            Mage_Adminhtml module for all urls that begin with /admin/controller_name
+         -->
+        <routers>
+            <toppromotion_admin>
+                <use>admin</use>
+                <args>
+                    <module>Valkyrie_TopPromotion</module>
+                    <frontName>toppromotion_admin</frontName>
+                    <!--<modules>-->
+                        <!--<sliderdata before="Mage_Adminhtml">Valkyrie_SliderData_Adminhtml</sliderdata>-->
+                    <!--</modules>-->
+                </args>
+            </toppromotion_admin>
+        </routers>
+    </admin>
+
+
+    <frontend>
+        <routers>
+            <TopPromotion>
+                <use>standard</use>
+                <args>
+                    <module>Valkyrie_TopPromotion</module>
+                    <frontName>toppromotion</frontName>
+                </args>
+            </TopPromotion>
+        </routers>
+
+        <layout>
+            <updates>
+                <valkyrie_toppromotion module="Valkyrie_TopPromotion">
+                    <file>valkyrie_toppromotion.xml</file>
+                </valkyrie_toppromotion>
+            </updates>
+        </layout>
+
+    </frontend>
+
+    <global>
+        <events>
+            <sales_order_place_after>
+                <observers>
+<!--
+                    <feed_sales_order_observer>
+                        <class>Wexo_Employee_Model_Observer</class>
+                        <method>sendAdditionalEmail</method>
+                    </feed_sales_order_observer>
+-->
+                </observers>
+            </sales_order_place_after>
+        </events>
+
+        <models>
+            <toppromotion>
+                <class>Valkyrie_TopPromotion_Model</class>
+                <resourceModel>toppromotion_mysql4</resourceModel>
+            </toppromotion>
+            <toppromotion_mysql4>
+                <class>Valkyrie_TopPromotion_Model_Mysql4</class>
+                <entities>
+                    <toppromotion>
+                        <table>top_promotion_list</table>
+                    </toppromotion>
+                </entities>
+            </toppromotion_mysql4>
+        </models>
+
+        <resources>
+            <toppromotion_setup>
+                <setup>
+                    <module>Valkyrie_TopPromotion</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </toppromotion_setup>
+            <toppromotion_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </toppromotion_write>
+            <toppromotion_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </toppromotion_read>
+        </resources>
+
+        <blocks>
+            <toppromotion>
+                <class>Valkyrie_TopPromotion_Block</class>
+            </toppromotion>
+        </blocks>
+
+        <helpers>
+            <toppromotion>
+                <class>Valkyrie_TopPromotion_Helper</class>
+            </toppromotion>
+        </helpers>
+
+    </global>
+</config>

@@ -284,6 +284,11 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 
 		$('div.super-attribute-select .cs-options li[data-value=""]').remove();
 
+		$('.product-1386 .cs-options li[data-value*="100"]').prependTo($('.product-1386 .cs-options ul'));
+		$('.product-1386 .color-swatch-wrapper li.color-swatch-132-100').prependTo($('.product-1386 .color-swatch-wrapper ul'));
+		$('.product-1386 .product-options .input-box select option[value*="100"]').insertAfter($('.product-1386 .product-options .input-box select option:first-child'));
+		$('.product-1386 .product-options .input-box select option[value*="100"]').prop('selected', true);
+
 		var variable = 'color';
 	    var query = window.location.search.substring(1);
 	    var vars = query.split("&");
@@ -336,13 +341,23 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 			var value = $(this).attr('data-value');
 			$('.color-swatch-wrapper li').removeClass('active');
 			$('.color-swatch-wrapper li.color-swatch-132-'+value).addClass('active');
+			$('.product-view .product-options .input-box select option[value*='+value+']').prop('selected', true);
 		});
+
+		// $('.product-1386 .cs-options li').removeClass('cs-selected');
+		// $('.product-1386 .cs-options li[data-value*="100"]').addClass('cs-selected');
+		// var newtext = $('.product-1386 .cs-options li[data-value*="100"]').text();
+		// $('.product-1386 .cs-placeholder').text(newtext);
+		// $('.product-1386 .product-options .input-box select option[value*="100"]').prop('selected', true);
+		// $('.product-1386 .color-swatch-wrapper li').removeClass('active');
+		// $('.product-1386 .color-swatch-wrapper li.color-swatch-132-100').addClass('active');
 
 		var color, colorArray, colorCode, groupArray, colorCount, groupCount, currentType, currentNumber, nextNumber, prevNumber;
 		var isQuickview = false;
 		if (typeof group !== 'undefined') groupCount = group.length;
 		//console.log('groupCount '+groupCount);
 		$('.color-swatch-wrapper li').click(function() {
+//console.log('one');
 			var productID = $(this).attr('data-product');
 			if ($(this).parent().hasClass('colorswatch-attribute')) {
 				var isQuickview = true;
@@ -371,7 +386,9 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 			if (classes.indexOf('colorswatch-swatch-container')) classes = classes.replace(' colorswatch-swatch-container','');
 			//console.log(classes);
 			colorCode = classes.replace(/color-swatch-132-/g,"");
-			
+			//console.log(colorCode);
+			//$('.product-'+productID+' .product-options .input-box select option[value*='+colorCode+']').prop('selected', true);
+//console.log($( '.product-'+productID+' .product-options .input-box select option:selected' ).text());
 			if (isQuickview) {
 				$('#attribute132-'+productID).val(colorCode);
 				$('#hidden-attribute-'+productID+'-132').val(colorCode);
@@ -384,20 +401,25 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
             $('.product-'+productID+' .main-image').attr('src',color);
             $('.product-'+productID+' .product-image').data('type','color');
             $('.product-'+productID+' .product-image').data('number',0);
-            getColor(productID);
+            //getColor(productID);
         });
 		$('div.cs-select').click(function() {
+//console.log('two');
 	    	if ($(this).hasClass('cs-active') && $(this).prev('.availability.out-of-stock').is(':hidden')) {
+//console.log('two A');
 	    		$(this).find('.cs-placeholder').html('Select an option');
 	    	} else {
+//console.log('two B');
 	    		$(this).find('.cs-placeholder').html($('.cs-options .cs-selected span').text());
 	    	}
 	    	$(this).mouseleave(function() {
+//console.log('two C');
 	    		$(this).removeClass('cs-active');
 	    		$(this).find('.cs-placeholder').html($(this).find('.cs-options .cs-selected span').text());
 	    	});
 	    });
 		$('.cs-options li').click(function() {
+//console.log('three');
 			var productID = $(this).parents('.input-box').attr('data-product');
 			var colorID = $(this).data('value');
 			colorCode = 'color_swatch_132_'+colorID;
@@ -407,6 +429,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
             $('.product-'+productID+' .product-image').data('number',0);
 		});
 		$('#quickView .super-attribute-select').change(function() {
+//console.log('four');
 			var productID = $(this).attr('id');
 			productID = productID.replace(/attribute132-/,'');
 			$('#quickView .colorswatch-attribute li').removeClass('active');

@@ -259,7 +259,6 @@ function oscUpdateCart(element, url, separate_url){
     var params = {}
     params[qtyElem.name] = qtyElem.value;
     oscUpdateCartCall(params, url,separate_url);
-
 };
 
 function oscUpdateCartCall(params, url, separate_url){
@@ -276,13 +275,11 @@ function oscUpdateCartCall(params, url, separate_url){
         payment_methods.update(preloader);
     }
     summary.update(preloader);
-
     new Ajax.Request(url, {
         method: 'post',
         onSuccess: function(transport){
             if(transport.status == 200){
-                var response = transport.responseText.evalJSON();
-
+                var response = JSON.parse(transport.responseText);
                 if(response.redirect){
                     location.assign(response.redirect);
                 } else {
@@ -324,6 +321,8 @@ function oscUpdateCartCall(params, url, separate_url){
                     summary.update(response.summary);
                     summary.show();
                 }
+                // jQuery('dl.shipment-methods,div.payment-methods').find('input[type=radio],input[type=checkbox]').next('label').prepend('<span class="custom"></span>');
+                jQuery('dl.shipment-methods,div.payment-methods').find('input[type=radio],input[type=checkbox]').next('label').prepend('<span class="custom"></span>');
             }
         },
         onFailure: function(transport) {

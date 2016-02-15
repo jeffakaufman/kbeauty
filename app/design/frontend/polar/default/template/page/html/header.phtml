@@ -30,9 +30,27 @@
 <?php echo $this->getChildHtml('topMenu') ?>
 <?php $count = $this->helper('checkout/cart')->getSummaryCount(); ?>
 <?php // In page/html/topmenu.phtml we've added two static blocks: polar-before-nav and polar-after-nav where you can place custom <li></li> for custom menu elements (Home, i.e.) ?>
-<?php if(Mage::getSingleton('customer/session')->isLoggedIn()) {
+<?php
+if(Mage::getSingleton('customer/session')->isLoggedIn()) {
      $customerAddressId = Mage::getSingleton('customer/session')->getCustomer()->getDefaultBilling();
-} ?>
+}
+
+
+$prHelper = $this->helper('toppromotion');
+/**
+ * @var Valkyrie_TopPromotion_Helper_Data $prHelper
+ */
+
+$currentTopPromotion = false;
+if($prHelper) {
+    $currentTopPromotion = $prHelper->getCurrentPromotion();
+    if($currentTopPromotion) {
+
+    }
+}
+
+//var_dump($currentTopPromotion);
+?>
 <div class="top-line">
     <div class="top-line-section">
       <section class="logo small-12 columns hide-for-medium-up">
@@ -89,8 +107,79 @@
           <?php /*echo $this->getChildHtml('topContainer')*/ ?>
       </section>
       <div class="miniSearch small-12 hide-for-medium-up"><?php echo $this->getChildHtml('topSearch-mobile') ?></div>
+
+
     </div>
 </div>
+
+<?php if($currentTopPromotion): ?>
+
+<style type="text/css">
+  .top-promotion {
+    color:white;
+    background-color: #a99969;
+    font-family: futura-pt, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size:14px;
+    padding: 10px;
+    line-height: 16px;
+  }
+
+  .top-promotion a.pop {
+    color: #CCCCCC;
+    letter-spacing: 2px;
+    font-size: 8px;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 40em) {
+    .top-promotion .line-breaker {
+      display:auto;
+    }
+
+    .top-promotion a.pop, .top-promotion a.pop span {
+      vertical-align: top;
+    }
+  }
+
+  @media (min-width: 40.065em) {
+    .top-promotion .line-breaker {
+      display:none;
+    }
+  }
+
+  /*
+$small-range: (0, 40em) !default;
+$medium-range: (40.0625em, 64em) !default;
+$large-range: (64.0625em, 90em) !default;
+$xlarge-range: (90.0625em, 120em) !default;
+$xxlarge-range: (120.0625em, 99999999em) !default;
+
+  */
+</style>
+
+  <div id="disclaimers-top-promotion" class="reveal-modal" data-reveal
+       aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h3 id="modalTitle">Details</h3>
+
+    <p><?php echo $currentTopPromotion->getData('details_content');?></p>
+    <button class="close-reveal-modal" aria-label="Close" type="button" class="button dark">Close</button>
+  </div>
+
+
+  <div class="top-promotion">
+    <div>
+      <?php
+        $tpTitle = $currentTopPromotion->getData('title');
+        $tpTitle = str_replace('{br}', '<span class="line-breaker"><br /></span>', $tpTitle);
+        echo $tpTitle;
+      ?>
+      <span class="line-breaker"><br /></span>
+      <a href='javascript:void(0);' class='pop' data-reveal-id='disclaimers-top-promotion'>DETAIL<span style='letter-spacing: 0;'>S</span></a>
+    </div>
+  </div>
+<?php endif; ?>
 
 
 
