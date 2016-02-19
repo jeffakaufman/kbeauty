@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author		Sashas
+ * @category    Sashas
+ * @package     Sashas_Freegift
+ * @copyright   Copyright (c) 2015 Sashas IT Support Inc. (http://www.sashas.org)
+ * @license    http://opensource.org/licenses/GPL-3.0  GNU General Public License, version 3 (GPL-3.0)
+ */
+-->
+<config>
+    <modules>
+        <Sashas_Freegift>
+            <version>1.0.1</version>
+        </Sashas_Freegift>
+    </modules>
+	<global>
+         <blocks>
+        	<freegift>
+        		<class>Sashas_Freegift_Block</class>        		
+        	</freegift>
+        </blocks> 
+        <helpers>
+        	<freegift>
+        		<class>Sashas_Freegift_Helper</class>        		
+        	</freegift>
+        </helpers> 
+        <models>
+        	<freegift>
+        		<class>Sashas_Freegift_Model</class>
+        		<resourceModel>freegift_resource</resourceModel>
+        	</freegift>
+        	<freegift_resource>
+                <class>Sashas_Freegift_Model_Resource</class>
+                <entities>
+                    <rule>
+                        <table>freegift_rule</table>
+                    </rule>
+                    <rule_apply>
+                        <table>freegift_rule_apply</table>
+                    </rule_apply>                    
+                </entities>
+            </freegift_resource>
+        	        
+        </models>         
+		<resources>
+            <freegift_setup>
+                <setup>
+                    <module>Sashas_Freegift</module>                 
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </freegift_setup>
+            <freegift_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </freegift_write>
+            <freegift_read>
+                <connection> 
+                    <use>core_read</use>
+                </connection>
+            </freegift_read>
+		</resources> 
+		<events>
+			<checkout_cart_product_add_after>
+				<observers>
+					<freegift_adddto_cart>					  
+						<class>freegift/observer</class>
+						<method>AddtoCart</method>
+					</freegift_adddto_cart>
+				</observers>
+			</checkout_cart_product_add_after>
+			<sales_quote_remove_item>
+				<observers>
+					<freegift_cart_product_remove>
+						<class>freegift/observer</class>
+						<method>RemovefromCart</method>
+					</freegift_cart_product_remove>
+				</observers>
+			</sales_quote_remove_item>		
+			<checkout_cart_update_items_after>
+				<observers>
+					<freegift_cart_update_item>
+						<class>freegift/observer</class>
+						<method>UpdateCartItem</method>
+					</freegift_cart_update_item>
+				</observers>				
+			</checkout_cart_update_items_after>
+		</events>                         
+	</global>
+	<frontend>
+        <layout>
+            <updates>
+                <freegift>
+                    <file>freegift.xml</file>
+                </freegift>
+            </updates>
+        </layout> 
+	</frontend> 	
+    <admin>
+        <routers>
+            <adminhtml>                 
+                <args>
+                    <modules> 
+                    	<Sashas_Freegift before="Mage_Adminhtml">Sashas_Freegift</Sashas_Freegift>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin> 
+    <adminhtml>
+		<layout>
+    		<updates>
+        		<freegift>
+            		<file>freegift.xml</file>
+        		</freegift>
+    		</updates>
+    	</layout>         
+    </adminhtml> 	    
+</config>
+
+

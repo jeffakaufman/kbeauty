@@ -134,7 +134,7 @@ class Sashas_CouponGift_Model_Observer
 			$quoteItem->setOriginalCustomPrice();
 		/* Optional */		
 		$quoteItem->setQty(1);
-		
+		$quoteItem->setIsCoupongift(1);
 		$quoteObj->addItem($quoteItem);
 		$quoteObj->save();
 		
@@ -265,7 +265,8 @@ class Sashas_CouponGift_Model_Observer
 		$quoteObj->setTotalsCollectedFlag(false)->collectTotals()->save();
 		
 		if ($cart->getQuote()->getAppliedRuleIds()) {
-			/* Add Item back if rule validated */ 			
+			/* Add Item back if rule validated */ 		
+			$quoteItemBack->setIsCoupongift(1);
 			$quoteObj->addItem($quoteItemBack);
 			$quoteObj->setTotalsCollectedFlag(false)->collectTotals()->save(); 
 		}	 

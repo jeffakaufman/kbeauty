@@ -140,9 +140,9 @@ class Mage_Checkout_CartController extends Mage_Core_Controller_Front_Action
     {
         $cart = $this->_getCart();
         if ($cart->getQuote()->getItemsCount()) {
-            $cart->init();
+            $cart->init();             
             $cart->save();
-
+            
             if (!$this->_getQuote()->validateMinimumAmount()) {
                 $minimumAmount = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())
                     ->toCurrency(Mage::getStoreConfig('sales/minimum_order/amount'));

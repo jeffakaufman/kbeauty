@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * @author		Sashas
+ * @category    Sashas
+ * @package     Sashas_Freegift
+ * @copyright   Copyright (c) 2013 Sashas IT Support Inc. (http://www.sashas.org)
+ * @license     http://opensource.org/licenses/GPL-3.0  GNU General Public License, version 3 (GPL-3.0)
+ */
+-->
+<layout>  
+    <adminhtml_adminhtml_freegift_edit>
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+        </reference>
+        <reference name="left">
+            <block type="freegift/adminhtml_freegift_edit_tabs" name="freegift_edit_tabs">
+                <block type="freegift/adminhtml_freegift_edit_tab_main" name="freegift_edit_tab_main"/>
+                <block type="freegift/adminhtml_freegift_edit_tab_conditions" name="freegift_edit_tab_conditions"/>
+                <block type="freegift/adminhtml_freegift_edit_tab_gifts" name="freegift_edit_tab_gifts"/>
+                <action method="addTab"><name>main_section</name><block>freegift_edit_tab_main</block></action>
+                <action method="addTab"><name>conditions_section</name><block>freegift_edit_tab_conditions</block></action>
+                <action method="addTab"><name>actions_section</name><block>freegift_edit_tab_gifts</block></action> 
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="freegift/adminhtml_freegift_edit" name="freegift_edit"/>
+        </reference>    
+    </adminhtml_adminhtml_freegift_edit>
+ 
+</layout>

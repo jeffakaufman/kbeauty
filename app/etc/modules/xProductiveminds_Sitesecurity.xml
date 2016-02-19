@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<config>
-	<modules>
-		<Productiveminds_Sitesecurity>
-			<active>true</active>
-			<codePool>local</codePool>
-		</Productiveminds_Sitesecurity>
-	</modules>
-</config>
