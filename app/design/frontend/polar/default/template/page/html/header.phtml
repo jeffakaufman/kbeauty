@@ -121,9 +121,7 @@ if($prHelper) {
     font-family: futura-pt, 'Helvetica Neue', Helvetica, Roboto, Arial, sans-serif;
     text-align: center;
     letter-spacing: 3px;
-    font-size:14px;
     padding: 10px;
-    line-height: 16px;
   }
 
   .top-promotion a.pop {
@@ -134,6 +132,12 @@ if($prHelper) {
   }
 
   @media (max-width: 40em) {
+
+    .top-promotion {
+      font-size:10px;
+      line-height: 12px;
+    }
+
     .top-promotion .line-breaker {
       display:auto;
     }
@@ -141,12 +145,41 @@ if($prHelper) {
     .top-promotion a.pop, .top-promotion a.pop span {
       vertical-align: top;
     }
+
+    .reveal-modal {
+      text-align: center;
+      top: 0px!important;
+
+      left: 10%;
+      width: 80%;
+      height: 80vh
+    }
+
+
+    #disclaimers-top-promotion {
+      min-height: unset;
+      height: auto;
+    }
   }
 
   @media (min-width: 40.065em) {
+
+    .top-promotion {
+      font-size:14px;
+      line-height: 16px;
+    }
+
     .top-promotion .line-breaker {
       display:none;
     }
+
+    .reveal-modal {
+      text-align: center;
+      width: 50%;
+      left: 0%;
+      top: 100px!important;
+    }
+
   }
 
   /*
@@ -175,7 +208,7 @@ $xxlarge-range: (120.0625em, 99999999em) !default;
         $tpTitle = str_replace('{br}', '<span class="line-breaker"><br /></span>', $tpTitle);
         echo $tpTitle;
       ?>
-      <span class="line-breaker"><br /></span>
+<!--      <span class="line-breaker"><br /></span>-->
       <a href='javascript:void(0);' class='pop' data-reveal-id='disclaimers-top-promotion'>DETAIL<span style='letter-spacing: 0;'>S</span></a>
     </div>
   </div>

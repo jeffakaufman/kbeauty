@@ -24,13 +24,13 @@
  * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  */
 ?>
-<div class="block block-subscribe">
-    <div class="icon icon-envelope text-center"></div>
-    <div class="block-title text-center">
-        <strong><span><?php echo $this->__('JOIN OUR MAILING LIST - GET 15% OFF!') ?></span></strong>
-    </div>
-    <p class="text-center"><?php echo $this->__("Don't forget to sign up for our glam newsletters, special offers and promotions. Plus 15% off when you join today! &#x1F48C") ?><span class="footnote"><?php echo $this->__("*It may take up to 24 hours after sign-up for you to <br>receive your 15% discount code via email.") ?></span></p>
-    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+
+<div id="subpop" class="reveal-modal block-subscribe" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    <div class="corner" id="corner1"></div><div class="corner" id="corner2"></div>
+    <h2 id="modalTitle" class="block-title text-center"><div><?php echo $this->__('Get 15% off') ?></div><?php echo $this->__('Sign up today!') ?></h2>
+    <p class="text-center"><?php echo $this->__("Join the KBeauty Insider to receive our newsletters and get the inside scoop on special offers, promotions and beauty tips!  Plus <strong>15%</strong> off when you join today!* 💌") ?><span class="footnote"><?php echo $this->__("*It may take up to 24 hours after sign-up for you to <br>receive your 15% discount code via email.") ?></span></p>
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail-popup">
         <div class="block-content text-center">
             <div class="input-box clearfix">
                 <div class="intro-field">
@@ -38,15 +38,15 @@
                     <input type="text" name="email" class="email" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" placeholder="Email Address" required />
                 </div>
                 <div class="more-fields">
-                    <input type="text" name="firstName" title="<?php echo $this->__('First Name') ?>" class="input-text required-entry firstname" placeholder="<?php echo $this->__('First Name') ?>" required />
-                    <input type="text" name="lastName" title="<?php echo $this->__('Last Name') ?>" class="input-text required-entry name" placeholder="<?php echo $this->__('Last Name') ?>" required />
-                    <select name="favoriteSister" class="cs-select cs-skin-border">
+                    <input type="text" name="firstname" title="<?php echo $this->__('First Name') ?>" class="input-text required-entry firstname" placeholder="<?php echo $this->__('First Name') ?>" required />
+                    <input type="text" name="name" title="<?php echo $this->__('Last Name') ?>" class="input-text required-entry name" placeholder="<?php echo $this->__('Last Name') ?>" required />
+                    <select class="cs-select cs-skin-border">
                         <option value="" disabled selected>Favorite Sister</option>
                         <option value="Kourtney">Kourtney</option>
                         <option value="Kim">Kim</option>
                         <option value="Khloe">Khloe</option>
                     </select>
-                    <div class="checkbox"><input type="checkbox" checked="true" value="1" id="newsletter_signup" value="I agree to receive email marketing communications from Kardashian Beauty"><label for="newsletter_signup" checked="checked"><?php echo $this->__('I agree to receive email marketing communications from Kardashian Beauty') ?></label></div>
+                    <div class="checkbox"><input type="checkbox" checked="true" value="1" id="newsletter_signup_popup" value="I agree to receive email marketing communications from Kardashian Beauty"><label for="newsletter_signup_popup" checked="checked"><?php echo $this->__('I agree to receive email marketing communications from Kardashian Beauty') ?></label></div>
                     
                     <button type="submit" title="<?php echo $this->__('Join') ?>" class="button submit"><span><span><?php echo $this->__('JOIN') ?></span></span></button>
                 </div>
@@ -55,13 +55,14 @@
     </form>
     <script type="text/javascript">
     //<![CDATA[
-        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+        var newsletterSubscriberFormDetail2 = new VarienForm('newsletter-validate-detail-popup');
+        
         var ua = navigator.userAgent.toLowerCase(); 
         if (ua.indexOf('safari') != -1) { 
             if (ua.indexOf('chrome') > -1) {
               
             } else {
-                var form = document.getElementById('newsletter-validate-detail'); // form has to have ID: <form id="formID">
+                var form = document.getElementById('newsletter-validate-detail-popup'); // form has to have ID: <form id="formID">
                 form.noValidate = true;
                 form.addEventListener('submit', function(event) { // listen for form submitting
                     if (!event.target.checkValidity()) {

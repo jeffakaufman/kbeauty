@@ -1,4 +1,4 @@
-﻿meta.foundation-version {
+meta.foundation-version {
     font-family: "/{{VERSION}}/";
 }
 
@@ -4906,7 +4906,7 @@ th {
 
 #crosssell-products-list li, .add-to-links li, .checkout-types li, .footer ul li, ul.form-list li, .products-grid li, .products-list li, .breadcrumbs li, .sidebar li {
     list-style-type: none;
-    height: 60px;
+    min-height: 60px;
     margin: auto 0;
 }
 
@@ -13565,12 +13565,16 @@ body.customer-paymentinfo-index .breadcrumbs {
 body.customer-paymentinfo-index .form-list {
     margin: 0 auto;
 }
-#shopping-cart-table-2 {
-    margin-top:-50px;
-}
 .text-contain{
     margin-left: 40px;
 }
 .onestepcheckout-enable-newsletter .custom {
     float: left;
+}
+
+.footnote {
+    font-style: italic;
+    font-size: 0.6em;
+    display: block;
+    margin: 10px 30px 0 30px;
 }

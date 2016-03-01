@@ -29,7 +29,7 @@
 
             <block type="newsletter/subscribe" name="left_newsletter" before="-" template="newsletter/subscribe_sidebar.phtml" />
          </block>
-
+         <block type="newsletter/subscribe" name="popup_newsletter" before="-" template="newsletter/subscribe_popup.phtml" />
          <block type="page/html_header" name="off_canvas_right" as="off_canvas_right" template="page/html/off-canvas-right.phtml">
             
             <block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml" before="-">

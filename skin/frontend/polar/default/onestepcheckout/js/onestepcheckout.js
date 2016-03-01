@@ -1,5 +1,4 @@
 
-
 /* Login popup class */
 var OneStepCheckoutLoginPopup = Class.create({
     initialize: function(options) {
@@ -321,7 +320,6 @@ function oscUpdateCartCall(params, url, separate_url){
                     summary.update(response.summary);
                     summary.show();
                 }
-                // jQuery('dl.shipment-methods,div.payment-methods').find('input[type=radio],input[type=checkbox]').next('label').prepend('<span class="custom"></span>');
                 jQuery('dl.shipment-methods,div.payment-methods').find('input[type=radio],input[type=checkbox]').next('label').prepend('<span class="custom"></span>');
             }
         },
@@ -579,7 +577,7 @@ function get_save_billing_function(url, set_methods_url, update_payments, trigge
                     }
 
                     totals.update(data.summary);
-
+                    jQuery('dl.shipment-methods,div.payment-methods').find('input[type=radio],input[type=checkbox]').next('label').prepend('<span class="custom"></span>');
                 }
             },
             onComplete: function(transport){
@@ -630,12 +628,18 @@ function get_separate_save_methods_function(url, update_payments)
     }
 
     return function(e)    {
+
+        var payment_method_clicked = false;
+
         if(typeof e != 'undefined')    {
             var element = e.element();
 
             if(element.name != 'shipping_method')    {
                 update_payments = false;
+                payment_method_clicked = true;
             }
+        } else {
+            payment_method_clicked = true;
         }
 
         var form = $('onestepcheckout-form');
@@ -707,6 +711,9 @@ function get_separate_save_methods_function(url, update_payments)
                     //     $$('#id_subscribe_newsletter').invoke('addClassName', 'required-entry');
                     // }
                     // ////////////// SB Custom Code  ///////////////////
+                }
+                if(payment_method_clicked == false){
+                    jQuery('div.payment-methods').find('input[type=radio],input[type=checkbox]').next('label').prepend('<span class="custom"></span>');
                 }
             },
             onFailure: function(transport) {

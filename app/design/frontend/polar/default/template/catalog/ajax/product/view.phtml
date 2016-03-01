@@ -67,7 +67,7 @@
                 <div class="product-options" id="product-options-wrapper">
                     <dl class="last">
                         <dt><label>Color</label></dt>
-                        <dd><div class="color-swatch-wrapper"><?php $listHelper->showSwatches($_product); ?></div></dd>
+                        <dd><div class="color-swatch-wrapper"><?php //$listHelper->showSwatches($_product); ?></div></dd>
                     </dl>
                 </div>
 
@@ -319,11 +319,11 @@
             
             if (typeof(itemElement.preloadElement) == 'undefined') {
                 itemElement.preloadElement = document.createElement('DIV');
-				Element.addClassName(itemElement.preloadElement, 'preload-wrapper');
+                Element.addClassName(itemElement.preloadElement, 'preload-wrapper');
                 Element.setStyle(itemElement, { position:'relative' });
                 Element.setStyle(itemElement.preloadElement, { background:'#111', position:'absolute', top: 0, left: 0, opacity:.1, width:'100%', height:'100%' });
                 itemElement.loadingIMG = document.createElement('IMG');
-				Element.addClassName(itemElement.loadingIMG, 'preload-wrapper-image');
+                Element.addClassName(itemElement.loadingIMG, 'preload-wrapper-image');
                 Element.setStyle(itemElement.loadingIMG, { top:'45%', left:'45%', position:'absolute', opacity:1 });
                 itemElement.loadingIMG.src = '<?php echo $this->getSkinUrl(); ?>images/colorswatch/colorswatch_loading.gif';
             }

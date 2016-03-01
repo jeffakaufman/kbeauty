@@ -87,7 +87,15 @@
 						<method>RemoveCoupon</method>
 					</coupongift_cancel_coupon>>
 				</observers>
-			</sales_quote_save_before>			
+			</sales_quote_save_before>	
+			<controller_action_predispatch>
+				<observers>
+					<controller_action_before>
+						<class>coupongift/observer</class>
+						<method>cartCheck</method>
+					</controller_action_before>
+				</observers>
+			</controller_action_predispatch>					
 		</events> 		
 	</frontend>
 	<adminhtml>
