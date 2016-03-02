@@ -65,144 +65,11 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
   </div>
 </div>
 
-<?php echo $this->getChildHtml('popup_newsletter'); ?>
-
 <?php // echo $this->getChildHtml('off_canvas_right') ?>
 <?php echo $this->getChildHtml('before_body_end') ?>
 <?php echo $this->getAbsoluteFooter() ?>
 <?php echo $this->getChildHtml('bottom') ?>
 <style>
-.block-subscribe.reveal-modal {
-    padding: 2em 4em;
-    overflow: auto;
-}
-@media only screen and (max-width: 860px) {
-    .block-subscribe.reveal-modal {
-        width: 80%;
-        padding: 2em;
-        height: auto;
-    }
-}
-.block-subscribe.reveal-modal .block-content {
-    max-width: 455px;
-    margin: 0 auto;
-    position: relative;
-}
-.block-subscribe.reveal-modal .close-reveal-modal {
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: #000;
-    background: none;
-    font-size: 2.8em;
-    font-weight: normal;
-    line-height: 1em;
-    padding: 0;
-}
-.block-subscribe.reveal-modal .close-reveal-modal:hover {
-    background: none;
-    text-decoration: none;
-    color: #a99969;
-}
-.block-subscribe.reveal-modal .corner {
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-}
-.block-subscribe.reveal-modal #corner1 {
-    background-image: url(/skin/frontend/polar/default/images/popup_corner1.jpg);
-    top: 0;
-    left: 0;
-    width: 150px;
-    height: 212px;
-}
-.block-subscribe.reveal-modal #corner2 {
-    background-image: url(/skin/frontend/polar/default/images/popup_corner2.jpg);
-    background-position: bottom;
-    bottom: 0;
-    right: 0;
-    width: 70px;
-    height: 68px;
-}
-@media only screen and (max-width: 640px) {
-    .block-subscribe.reveal-modal #corner1 {
-        width: 100px;
-    }
-}
-.block-subscribe.reveal-modal h2 {
-    font-size: 2em;
-    letter-spacing: 0.3em;
-    position: relative;
-    z-index: 5;
-    margin: 0;
-    line-height: 1.2em;
-}
-.block-subscribe.reveal-modal h2 div {
-    letter-spacing: 0.1em;
-    font-weight: normal;
-    font-size: 0.9em;
-}
-.block-subscribe.reveal-modal p {
-    position: relative;
-    z-index: 5;
-    max-width: 600px;
-    font-size: 1.3em;
-    margin: 0 auto 2em auto;
-}
-@media only screen and (max-width: 640px) {
-    .block-subscribe.reveal-modal h2 {
-        font-size: 1.5em;
-    }
-    .block-subscribe.reveal-modal p {
-        font-size: 1em;
-    }
-}
-.block-subscribe.reveal-modal .footnote {
-    font-style: italic;
-    font-size: 0.6em;
-    display: block;
-    margin: 10px 30px 0 30px;
-}
-.block-subscribe.reveal-modal .button.expand {
-    position: absolute;
-    right: 0;
-    font-size: 1em;
-    background: #000;
-    color: #fff;
-    vertical-align: middle;
-    padding: 1px 0;
-    width: 12%;
-}
-@media only screen and (max-width: 640px) {
-    .block-subscribe.reveal-modal .button.expand {
-        width: 18%;
-        padding: 1px 0 0 0;
-    }
-}
-.block-subscribe.reveal-modal .more-fields {
-    display: none;
-}
-.block-subscribe.reveal-modal div.cs-select {
-    display: block;
-}
-.block-subscribe.reveal-modal .checkbox {
-    text-align: left;
-}
-@media only screen and (max-width: 640px) {
-    .block-subscribe.reveal-modal input[type=checkbox] {
-        position: absolute;
-    }
-}
-.block-subscribe.reveal-modal .button.submit {
-    background: #000;
-    color: #fff;
-}
-@media only screen and (min-width: 40.063em) {
-    .block-subscribe.reveal-modal .close-reveal-modal {
-        
-    }
-}
-
 #slider { width: 100%; min-height: 300px; opacity: 0; position: relative; margin: 0; }
 @media only screen and (min-width: 40.063em) and (max-width: 64em) {
   #slider { overflow: hidden; min-height: 200px; } }
@@ -317,7 +184,6 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 
 }
 </style>
-<!-- <script src="/skin/frontend/polar/default/js/jquerysession.js"></script> -->
 <script>
 (function( $ ) {
   $(window).load(function() {
@@ -330,11 +196,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
       scrollbar: false
     });
   });
-  
-  //if (!$.session.get('promo15')) {
-    $('#subpop').foundation('reveal', 'open');
-    //$.session.set('promo15', 'on');
-  //}
+
 })(jQuery);
 </script>
 
@@ -375,7 +237,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 <?php
     }
 ?>
-
+];
 
             (function(sData) {
 

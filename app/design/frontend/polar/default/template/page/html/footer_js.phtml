@@ -1,3 +1,189 @@
+<div id="subpop" class="reveal-modal block-subscribe" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    <div class="corner" id="corner1"></div><div class="corner" id="corner2"></div>
+    <h2 id="modalTitle" class="block-title text-center"><div><?php echo $this->__('Get 15% off') ?></div><?php echo $this->__('Sign up today!') ?></h2>
+    <p class="text-center"><?php echo $this->__("Join the KBeauty Insider to receive our newsletters and get the inside scoop on special offers, promotions and beauty tips!  Plus <strong>15%</strong> off when you join today!* 💌") ?><span class="footnote"><?php echo $this->__("*It may take up to 24 hours after sign-up for you to <br>receive your 15% discount code via email.") ?></span></p>
+    <form action="/newsletter/subscriber/new/" method="post" id="newsletter-validate-detail-popup">
+        <div class="block-content text-center">
+            <div class="input-box clearfix">
+                <div class="intro-field">
+                    <button type="button" class="button expand"><span><span class="icon icon-submit"></span></span></button>
+                    <input type="text" name="email" class="email" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" placeholder="Email Address" required />
+                </div>
+                <div class="more-fields">
+                    <!--<input type="text" name="firstname" title="<?php echo $this->__('First Name') ?>" class="input-text required-entry firstname" placeholder="<?php echo $this->__('First Name') ?>" required />
+                    <input type="text" name="name" title="<?php echo $this->__('Last Name') ?>" class="input-text required-entry name" placeholder="<?php echo $this->__('Last Name') ?>" required />
+                    <select class="cs-select cs-skin-border">
+                        <option value="" disabled selected>Favorite Sister</option>
+                        <option value="Kourtney">Kourtney</option>
+                        <option value="Kim">Kim</option>
+                        <option value="Khloe">Khloe</option>
+                    </select>-->
+                    <div class="checkbox"><input type="checkbox" checked="true" value="1" id="newsletter_signup_popup" value="I agree to receive email marketing communications from Kardashian Beauty"><label for="newsletter_signup_popup" checked="checked"><?php echo $this->__('I agree to receive email marketing communications from Kardashian Beauty') ?></label></div>
+                    
+                    <button type="submit" title="<?php echo $this->__('Join') ?>" class="button submit"><span><span><?php echo $this->__('JOIN') ?></span></span></button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var newsletterSubscriberFormDetail2 = new VarienForm('newsletter-validate-detail-popup');
+        
+        var ua = navigator.userAgent.toLowerCase(); 
+        if (ua.indexOf('safari') != -1) { 
+            if (ua.indexOf('chrome') > -1) {
+              
+            } else {
+                var form = document.getElementById('newsletter-validate-detail-popup'); // form has to have ID: <form id="formID">
+                form.noValidate = true;
+                form.addEventListener('submit', function(event) { // listen for form submitting
+                    if (!event.target.checkValidity()) {
+                        event.preventDefault(); // dismiss the default functionality
+                        jQuery('<div class="validation-advice" id="advice-required-entry-email" style="">This is a required field.</div>').insertAfter('input.email');
+                    }
+                }, false);
+            }
+        }
+    //]]>
+    </script>
+</div>
+<style>
+.block-subscribe.reveal-modal {
+    padding: 2em 4em;
+    overflow: auto;
+    
+}
+@media only screen and (max-width: 860px) {
+    .block-subscribe.reveal-modal {
+        width: 80%;
+        padding: 2em;
+        height: auto;
+    }
+}
+.block-subscribe.reveal-modal .block-content {
+    max-width: 455px;
+    margin: 0 auto;
+    position: relative;
+}
+.block-subscribe.reveal-modal .close-reveal-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #000;
+    background: none;
+    font-size: 2.8em;
+    font-weight: normal;
+    line-height: 1em;
+    padding: 0;
+}
+.block-subscribe.reveal-modal .close-reveal-modal:hover {
+    background: none;
+    text-decoration: none;
+    color: #a99969;
+}
+.block-subscribe.reveal-modal .corner {
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+}
+.block-subscribe.reveal-modal #corner1 {
+    background-image: url(/skin/frontend/polar/default/images/popup_corner1.jpg);
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 212px;
+}
+.block-subscribe.reveal-modal #corner2 {
+    background-image: url(/skin/frontend/polar/default/images/popup_corner2.jpg);
+    background-position: bottom;
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    height: 68px;
+}
+@media only screen and (max-width: 640px) {
+    .block-subscribe.reveal-modal #corner1 {
+        width: 100px;
+    }
+}
+.block-subscribe.reveal-modal h2 {
+    font-size: 2em;
+    letter-spacing: 0.3em;
+    position: relative;
+    z-index: 5;
+    margin: 0;
+    line-height: 1.2em;
+}
+.block-subscribe.reveal-modal h2 div {
+    letter-spacing: 0.1em;
+    font-weight: normal;
+    font-size: 0.9em;
+}
+.block-subscribe.reveal-modal p {
+    position: relative;
+    z-index: 5;
+    max-width: 600px;
+    font-size: 1.3em;
+    margin: 0 auto 2em auto;
+}
+@media only screen and (max-width: 640px) {
+    .block-subscribe.reveal-modal h2 {
+        font-size: 1.5em;
+    }
+    .block-subscribe.reveal-modal p {
+        font-size: 1em;
+    }
+}
+.block-subscribe.reveal-modal .footnote {
+    font-style: italic;
+    font-size: 0.6em;
+    display: block;
+    margin: 10px 30px 0 30px;
+}
+.block-subscribe.reveal-modal .button.expand {
+    position: absolute;
+    right: 0;
+    font-size: 1em;
+    background: #000;
+    color: #fff;
+    vertical-align: middle;
+    padding: 1px 0;
+    width: 12%;
+}
+@media only screen and (max-width: 640px) {
+    .block-subscribe.reveal-modal .button.expand {
+        width: 18%;
+        padding: 1px 0 0 0;
+    }
+}
+.block-subscribe.reveal-modal .more-fields {
+    display: none;
+}
+.block-subscribe.reveal-modal div.cs-select {
+    display: block;
+}
+.block-subscribe.reveal-modal .checkbox {
+    text-align: left;
+}
+.block-subscribe.reveal-modal input[type=text] {
+	font-weight: normal;
+}
+@media only screen and (max-width: 640px) {
+    .block-subscribe.reveal-modal input[type=checkbox] {
+        position: absolute;
+    }
+}
+.block-subscribe.reveal-modal .button.submit {
+    background: #000;
+    color: #fff;
+}
+@media only screen and (min-width: 40.063em) {
+    .block-subscribe.reveal-modal .close-reveal-modal {
+        
+    }
+}
+</style>
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/custom.js') ?>"></script>
 <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"4066589"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script><noscript><img src="//bat.bing.com/action/0?ti=4066589&Ver=2" height="0" width="0" style="display:none; visibility: hidden;" /></noscript>
 

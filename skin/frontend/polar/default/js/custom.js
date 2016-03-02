@@ -1068,6 +1068,17 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 			});
 		});
 	});
+	if (!$.session.get('promo15')) {
+
+	    var _revealPromoTimer = setTimeout(function() {
+	        $('#subpop').foundation('reveal', 'open');
+	        //$('body').css('overflow','hidden');
+	        $.session.set('promo15', 'on');
+	    }, 60000);
+	    // $('#subpop').click(function() {
+	    //     $('body').css('overflow','auto');
+	    // });
+	}
 
 	$('.share .email').click(function(e) {
 		e.preventDefault();
