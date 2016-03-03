@@ -69,7 +69,6 @@
             <action method="addItem"><type>skin_js</type><name>js/jquery.js</name><params/></action>
             <action method="addItem"><type>skin_js</type><name>js/jquery.easing.js</name><params/></action>
             <action method="addItem"><type>skin_js</type><name>js/jquery.backgroundpos.min.js</name><params/></action>
-            <action method="addItem"><type>skin_js</type><name>js/jquerysession.js</name><params/></action>
 
             <!-- Set jQuery in noConflict() mode. -->
             <action method="addItem"><type>skin_js</type><name>js/jquery.noconflict.js</name><params/></action>

@@ -1080,7 +1080,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
     if (!cv) {
 	    var _revealPromoTimer = setTimeout(function() {
 	        $('#subpop').foundation('reveal', 'open');
-	        document.cookie="promo15=on";
+	        document.cookie="promo15=on; expires=20*365";
 	        //$('body').css('overflow','hidden');
 	        //$.session.set('promo15', 'on');
 	    }, 6000);
