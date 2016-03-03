@@ -11,14 +11,14 @@
                     <input type="text" name="email" class="email" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" placeholder="Email Address" required />
                 </div>
                 <div class="more-fields">
-                    <!--<input type="text" name="firstname" title="<?php echo $this->__('First Name') ?>" class="input-text required-entry firstname" placeholder="<?php echo $this->__('First Name') ?>" required />
-                    <input type="text" name="name" title="<?php echo $this->__('Last Name') ?>" class="input-text required-entry name" placeholder="<?php echo $this->__('Last Name') ?>" required />
-                    <select class="cs-select cs-skin-border">
+                    <input type="text" name="firstName" title="<?php echo $this->__('First Name') ?>" class="input-text required-entry firstname" placeholder="<?php echo $this->__('First Name') ?>" required />
+                    <input type="text" name="lastName" title="<?php echo $this->__('Last Name') ?>" class="input-text required-entry name" placeholder="<?php echo $this->__('Last Name') ?>" required />
+                    <select class="cs-select cs-skin-border" name="favoriteSister">
                         <option value="" disabled selected>Favorite Sister</option>
                         <option value="Kourtney">Kourtney</option>
                         <option value="Kim">Kim</option>
                         <option value="Khloe">Khloe</option>
-                    </select>-->
+                    </select>
                     <div class="checkbox"><input type="checkbox" checked="true" value="1" id="newsletter_signup_popup" value="I agree to receive email marketing communications from Kardashian Beauty"><label for="newsletter_signup_popup" checked="checked"><?php echo $this->__('I agree to receive email marketing communications from Kardashian Beauty') ?></label></div>
                     
                     <button type="submit" title="<?php echo $this->__('Join') ?>" class="button submit"><span><span><?php echo $this->__('JOIN') ?></span></span></button>
@@ -167,6 +167,10 @@
     text-align: left;
 }
 .block-subscribe.reveal-modal input[type=text] {
+	font-weight: normal;
+}
+
+.block-subscribe.reveal-modal .cs-placeholder, .block-subscribe.reveal-modal .cs-options li {
 	font-weight: normal;
 }
 @media only screen and (max-width: 640px) {

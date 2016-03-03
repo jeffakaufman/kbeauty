@@ -1068,13 +1068,23 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 			});
 		});
 	});
-	if (!$.session.get('promo15')) {
-
+	//if (!$.session.get('promo15')) {
+	var name = "promo15=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) var cv = c.substring(name.length,c.length);
+    }
+    //console.log(cv);
+    if (!cv) {
 	    var _revealPromoTimer = setTimeout(function() {
 	        $('#subpop').foundation('reveal', 'open');
+	        document.cookie="promo15=on";
 	        //$('body').css('overflow','hidden');
-	        $.session.set('promo15', 'on');
-	    }, 60000);
+	        //$.session.set('promo15', 'on');
+	    }, 6000);
+
 	    // $('#subpop').click(function() {
 	    //     $('body').css('overflow','auto');
 	    // });
