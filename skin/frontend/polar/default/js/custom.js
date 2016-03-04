@@ -401,7 +401,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
             $('.product-'+productID+' .main-image').attr('src',color);
             $('.product-'+productID+' .product-image').data('type','color');
             $('.product-'+productID+' .product-image').data('number',0);
-            //getColor(productID);
+            getColor(productID);
         });
 		$('div.cs-select').click(function() {
 //console.log('two');
