@@ -4909,6 +4909,7 @@ th {
     min-height: 60px;
     margin: auto 0;
 }
+
 .hidden, .no-display {
     display: none !important;
 }
