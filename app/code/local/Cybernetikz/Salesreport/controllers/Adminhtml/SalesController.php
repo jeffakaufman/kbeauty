@@ -32,7 +32,9 @@ public function indexAction()
 //				"billingPhone",
 				"subtotal", "shippingAmount", "taxAmount", "cost", "orderStatus",
 				"creditCardType", "paymentMethod", "shippingCreatedAt", "shippingState", "shippingZip", "orderDiscount", "S&amp;H",
-				"Tax", "Discount", "Subtotal", "Total", );
+				"Tax", "Discount", "Subtotal", "Total",
+				"Product", "InvoiceTotal",
+			);
 
 			$csv .= implode(',', $headArr)."\r\n";
 
@@ -317,6 +319,9 @@ public function indexAction()
 					$rowArr[] = $rowArr[6] * $rowArr[4]; // Subtotal								[30]	[27]
 
 					$rowArr[] = $rowArr[24] + $rowArr[25] + $rowArr[26] + $rowArr[27]; // Total		[31]	[28]
+
+					$rowArr[] = $originalPrice * $itemOrderQty; // Product									[29]
+					$rowArr[] = $rowArr[29] + $rowArr[26] + $rowArr[25] + $rowArr[24]; // Invoice Total		[30]
 
 //					continue;
 

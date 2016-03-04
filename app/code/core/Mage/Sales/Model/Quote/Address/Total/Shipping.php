@@ -186,9 +186,11 @@ class Mage_Sales_Model_Quote_Address_Total_Shipping extends Mage_Sales_Model_Quo
         $amount = $address->getShippingAmount();
         if ($amount != 0 || $address->getShippingDescription()) {
             $title = Mage::helper('sales')->__('Shipping & Handling');
-            if ($address->getShippingDescription()) {
-                $title .= ' (' . $address->getShippingDescription() . ')';
-            }
+            /////////////  BC Custom Code //////////////
+            // if ($address->getShippingDescription()) {
+            //     $title .= ' (' . $address->getShippingDescription() . ')';
+            // }
+            /////////////  BC Custom Code //////////////
             $address->addTotal(array(
                 'code' => $this->getCode(),
                 'title' => $title,
