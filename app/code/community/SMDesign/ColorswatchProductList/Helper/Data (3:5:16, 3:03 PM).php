@@ -98,6 +98,7 @@ class SMDesign_ColorswatchProductList_Helper_Data extends Mage_Core_Helper_Abstr
 			$attributeCollection = $_product->getTypeInstance(true)->getConfigurableAttributes($_product);
 
 			$_attribute = $attributeCollection->getFirstItem();
+//			foreach ($attributeCollection as $_attribute) { // to do in next verion to support more attributes.
 				echo "<ul class=\"colorswatch-attribute colorswatch-attribute-list-{$_attribute->getAttributeId()}-{$_product->getId()}\">";
 				$swatchCounter = 0;
 				foreach ($_attribute->getSwatches() as $swatch) { 
@@ -106,8 +107,7 @@ class SMDesign_ColorswatchProductList_Helper_Data extends Mage_Core_Helper_Abstr
 					}
 
 					if ($swatch->getInStock()) {
-						// echo "<li data-product=\"{$_product->getId()}\" class=\"colorswatch-{$_attribute->getAttributeId()}-{$swatch->getOptionId()} colorswatch-swatch-container\" onclick=\"initSwatch({$_product->getId()},{$_attribute->getAttributeId()},{$swatch->getOptionId()});\" >";
-						echo "<li data-product=\"{$_product->getId()}\" class=\"color-swatch-{$_attribute->getAttributeId()}-{$swatch->getOptionId()} colorswatch-swatch-container\" >";
+						echo "<li class=\"colorswatch-{$_attribute->getAttributeId()}-{$swatch->getOptionId()} colorswatch-swatch-container\" >";
 						echo "<span class=\"swatch\" style=\"width:{$this->config['swatch_image_width']}px;height:{$this->config['swatch_image_height']}px\" >";
 						$swatchImages = Mage::helper('colorswatch/images')->init($swatch);
 						if ($swatch->getImageBase()) {
@@ -121,19 +121,10 @@ class SMDesign_ColorswatchProductList_Helper_Data extends Mage_Core_Helper_Abstr
 
 				}
 				echo "</ul><br class=\"colorswatch-clear\" />";
-				echo "<div class='input-box'>";
-				echo "<select class=\"super-attribute-select cs-select cs-skin-border\" id=\"attribute{$_attribute->getAttributeId()}-{$_product->getId()}\" name=\"super_attribute[{$_attribute->getAttributeId()}]\">";
-				echo "<option value=\"\">Choose an Option...</option>";
-				foreach ($_attribute->getSwatches() as $swatch) { 
-					if ($swatch->getInStock()) {
-						echo "<option value=\"{$swatch->getOptionId()}\">{$swatch->getStoreLabel()}</option>";
-					}
-				}
-				echo "</select>";
-				
-				//echo "<input type=\"hidden\" id=\"hidden-attribute-{$_product->getId()}-{$_attribute->getAttributeId()}\" name=\"super_attribute[{$_product->getId()}][{$_attribute->getAttributeId()}]\" class=\"required-entry hidden-super-attribute-select\" />";
-				echo "<input type=\"hidden\" id=\"hidden-attribute-{$_product->getId()}-{$_attribute->getAttributeId()}\" name=\"super_attribute[{$_attribute->getAttributeId()}]\" class=\"required-entry hidden-super-attribute-select\" />";
-		}		echo "</div>";
+				echo "<input type=\"hidden\" id=\"hidden-attribute-{$_product->getId()}-{$_attribute->getAttributeId()}\" name=\"super_attribute[{$_product->getId()}][{$_attribute->getAttributeId()}]\" class=\"required-entry hidden-super-attribute-select\" />";
+				$attributeCounter++;
+//			}
+		}
 	}
 
 	public function showSwatches22($_product,$_colorswatch){
