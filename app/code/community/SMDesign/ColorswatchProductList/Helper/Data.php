@@ -93,7 +93,7 @@ class SMDesign_ColorswatchProductList_Helper_Data extends Mage_Core_Helper_Abstr
 		return $this->config;
 	}
 	
-	public function showSwatches($_product, $_colorswatch){
+	public function showSwatches($_product){
 		if (Mage_Catalog_Model_Product_Type::TYPE_CONFIGURABLE == $_product->getTypeId()) {
 			$attributeCollection = $_product->getTypeInstance(true)->getConfigurableAttributes($_product);
 
