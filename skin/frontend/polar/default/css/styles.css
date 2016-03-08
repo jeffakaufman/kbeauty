@@ -7936,7 +7936,7 @@ label span.custom, .label span.custom {
     height: 30px;
     border-radius: 50% 50%;
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: middle;
     margin: -5px 10px 0 0;
     display: none;
 }

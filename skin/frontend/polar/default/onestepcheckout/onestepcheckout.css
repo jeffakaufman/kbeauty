@@ -468,9 +468,9 @@ table.onestepcheckout-totals td, table.onestepcheckout-summary td, table.onestep
 table.onestepcheckout-totals tr:last-child td {
     border-bottom: none;
 }
-table.onestepcheckout-totals tr td.a-right {
+table.onestepcheckout-totals tr td.a-right:first-child {
     /*padding-left: 6px;*/
-    text-align: right;
+    text-align: left;
 }
 table.onestepcheckout-summary td.name {
     width: 75%;
