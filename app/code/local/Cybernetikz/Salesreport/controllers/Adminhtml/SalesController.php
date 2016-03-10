@@ -51,7 +51,18 @@ public function indexAction()
 			
 			$from_date = date('Y-m-d' . ' 00:00:00', strtotime($from));
 			$to_date = date('Y-m-d' . ' 23:59:59', strtotime($to));
-			
+
+			$tmpObj = new DateTime($from_date);
+			$tmpObj->setTimezone(new DateTimeZone("America/Los_Angeles"));
+			$from_date = $tmpObj->format("Y-m-d H:i:s");
+
+			$tmpObj = new DateTime($to_date);
+			$tmpObj->setTimezone(new DateTimeZone("America/Los_Angeles"));
+			$to_date = $tmpObj->format("Y-m-d H:i:s");
+
+			unset($tmpObj);
+
+
 			$filter_model  = ($filter_type == 'shipping_date')
             ? 'sales/order_shipment_collection'
             : 'sales/order_collection';
