@@ -35,7 +35,9 @@ class Scommerce_CatalogUrl_Model_Entity_Attribute_Source_Categories extends Mage
 		//all making sure that none of the child get loaded for excluded root categories
 		$sqlQuery = '';
 		foreach($excludedRootCategories as $excat){
-			$sqlQuery = $sqlQuery . ' instr(path,'.$excat.')=0 and ';
+      if (strlen($excat) > 0) {
+        $sqlQuery = $sqlQuery . ' instr(path,'.$excat.')=0 and ';
+      }
 		}
 		if ($sqlQuery){
 			$sqlQuery = substr($sqlQuery,0,strlen($sqlQuery)-5);

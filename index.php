@@ -40,8 +40,8 @@ Whoops, it looks like you have an invalid PHP version.</h3></div><p>Magento supp
 //error_reporting(E_ALL | E_STRICT);
 
 // XXX LC put this in for error reporting
-error_reporting(E_ALL ^ E_NOTICE);
-
+// error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(E_ERROR);
 /**
  * Compilation includes configuration file
  */

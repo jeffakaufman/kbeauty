@@ -81,25 +81,42 @@ class Sashas_CouponGift_Model_Observer
 	public function cartCheck(Varien_Event_Observer $observer){
 	 
 		if (Mage::getSingleton('checkout/session')->getQuote() && Mage::getSingleton('checkout/session')->getQuote()->getId()) {
-			$quote=Mage::getSingleton('checkout/session')->getQuote();
+
+			$quote=Mage::getSingleton('checkout/cart')->getQuote();
 			$cartHelper = Mage::helper('checkout/cart');
-			if ($quote->getAppliedRuleIds())
-				return;
-			foreach ($quote->getAllItems() as $quoteItem){
-				 
-				if ($quoteItem->getIsCoupongift()){
-					 
-					$quoteItem->setQty(0);
-					$quoteItem->isDeleted(true);
-					$quoteItem->save();
-					$quote->removeItem($quoteItem->getId());					
-					$quote->save();
-					$cartHelper->getCart()->removeItem($quoteItem->getId())->save();
+			
+			$appliedRuleIds = Mage::getSingleton('checkout/session')->getQuote()->getAppliedRuleIds();
+			$appliedRuleIds = explode(',', $appliedRuleIds);
+
+			// if ($quote->getAppliedRuleIds()){				
+			// 	return;
+			// }
+
+			$remove_flag = 1;
+			foreach ($appliedRuleIds as $rule_id) {
+				$rule = Mage::getModel('salesrule/coupon')->load($rule_id);				
+				// if ($rule_id == '2'){ //Gift Product Test Rule ID = 2
+				// 	$remove_flag = 0;
+				// }
+				if($rule->getSimpleAction()==self::COUPON_GIFT_CODE){
+					$remove_flag = 0;
 				}
 			}
-		}
 			
-			 
+			if ($remove_flag == 1){
+				foreach ($quote->getAllItems() as $quoteItem){				
+					if ($quoteItem->getIsCoupongift()){
+						 
+						$quoteItem->setQty(0);
+						$quoteItem->isDeleted(true);
+						$quoteItem->save();
+						$quote->removeItem($quoteItem->getId());					
+						$quote->save();
+						$cartHelper->getCart()->removeItem($quoteItem->getId())->save();
+					}
+				}
+			}
+		}			 
 	}
 	
 	public function SalesRuleGiftValidator(Varien_Event_Observer $observer) {
@@ -298,7 +315,7 @@ class Sashas_CouponGift_Model_Observer
 			$quoteObj->setTotalsCollectedFlag(false)->collectTotals()->save(); 
 		}	 
 		/*remove if qty changed*/				
-		
+
 		return $this;
 	}
 	
