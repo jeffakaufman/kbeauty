@@ -66,7 +66,7 @@ class Mage_Newsletter_SubscriberController extends Mage_Core_Controller_Front_Ac
                     $session->addSuccess($this->__('Confirmation request has been sent.'));
                 }
                 else {
-                    $session->addSuccess($this->__('Thanks for subscribing! Your 15% coupon code will be delivered via email within the next 24 hours.'));
+                    $session->addSuccess($this->__('Thank you for your subscription.'));
                 }
             }
             catch (Mage_Core_Exception $e) {

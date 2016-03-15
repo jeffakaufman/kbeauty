@@ -58,10 +58,13 @@ $dataHelper = Mage::helper('onestepcheckout');
         ?>
     <?php else:?>
         <?php
+        
+        //$this->getQuote()->getBillingAddress()->getStreet($_i)
+
         $addressFields = '';
             for ($_i=0, $_n=$this->helper('customer/address')->getStreetLines(); $_i<$_n; $_i++){
 
-                    $addressFields .= '<input type="text" title="'.$this->__('Street Address '.$_i).'" name="billing[street]['.$_i.']" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getStreet($_i)).'" class="'.(($_i == 0)? 'required-entry ' : '').'input-text onestepcheckout-address-line" />';
+                    $addressFields .= '<input type="text" title="'.$this->__('Street Address '.$_i).'" name="billing[street]['.$_i.']" id="billing:street'.$_i.'" value="'.$dataHelper->clearDash($this->getQuote()->getBillingAddress()->getData('street'.$_i)).'" class="'.(($_i == 0)? 'required-entry ' : '').'input-text onestepcheckout-address-line" />';
                     $addressFields .= (($_i != $this->helper('customer/address')->getStreetLines()) ? '': '');
             }
             $billingFields['street'] = '
