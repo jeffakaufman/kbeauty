@@ -52,12 +52,12 @@ public function indexAction()
 			$from_date = date('Y-m-d' . ' 00:00:00', strtotime($from));
 			$to_date = date('Y-m-d' . ' 23:59:59', strtotime($to));
 
-			$tmpObj = new DateTime($from_date);
-			$tmpObj->setTimezone(new DateTimeZone("America/Los_Angeles"));
+			$tmpObj = new DateTime($from_date, new DateTimeZone("America/Los_Angeles"));
+			$tmpObj->setTimezone(new DateTimeZone("Europe/London"));
 			$from_date = $tmpObj->format("Y-m-d H:i:s");
 
-			$tmpObj = new DateTime($to_date);
-			$tmpObj->setTimezone(new DateTimeZone("America/Los_Angeles"));
+			$tmpObj = new DateTime($to_date, new DateTimeZone("America/Los_Angeles"));
+			$tmpObj->setTimezone(new DateTimeZone("Europe/London"));
 			$to_date = $tmpObj->format("Y-m-d H:i:s");
 
 			unset($tmpObj);
@@ -97,7 +97,9 @@ public function indexAction()
 				$myOrder->load($_orderId);
 
 
-				$createdAt = new DateTime($single_order->getCreatedAt());
+				$createdAt = new DateTime($single_order->getCreatedAt(), new DateTimeZone("Europe/London"));
+				$createdAt->setTimezone(new DateTimeZone("America/Los_Angeles"));
+
 				$orderIncrementId = $single_order->getIncrementId();
 
 
@@ -118,7 +120,12 @@ public function indexAction()
 				}
 
 				if($shippingCreatedAt) {
-					$shippingCreatedAt = date("m/d/Y", strtotime($shippingCreatedAt));
+
+                    $shDateObj = new DateTime($shippingCreatedAt, new DateTimeZone("Europe/London"));
+                    $shDateObj->setTimezone(new DateTimeZone("America/Los_Angeles"));
+
+					$shippingCreatedAt = $shDateObj->format("m/d/Y");
+                    unset($shDateObj);
 				}
 
 				//Some Random Fields
@@ -211,7 +218,7 @@ public function indexAction()
 				$item_line="";
 
 
-				$orderDiscount = $single_order->getDiscountAmount();
+				$orderDiscount = -$single_order->getDiscountAmount();
 
 				$defaultOrderDiscount = $orderDiscount;
 
