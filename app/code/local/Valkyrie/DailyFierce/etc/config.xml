@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Valkyrie_DailyFierce>
+            <version>0.1.0</version>
+        </Valkyrie_DailyFierce>
+    </modules>
+
+    <adminhtml>
+        <!-- The <layout> updates allow us to define our block layouts in a seperate file so are aren't messin' with the magento layout files.  -->
+        <layout>
+            <updates>
+                <dailyfierce>
+                    <file>daily_fierce.xml</file>
+                </dailyfierce>
+            </updates>
+        </layout>
+        <!-- The <acl> section is for access control. Here we define the pieces where access can be controlled within a role. -->
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <cms>
+                            <daily_fierce translate="title" module="dailyfierce">
+                                <title>Daily Fierce</title>
+                                <sort_order>4</sort_order>
+                            </daily_fierce>
+                        </cms>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+
+    <admin>
+        <!--
+            Here we are telling the Magento router to look for the controllers in the Super_Awesome_controllers_Adminhtml before we look in the
+            Mage_Adminhtml module for all urls that begin with /admin/controller_name
+         -->
+        <routers>
+            <dailyfierce_admin>
+                <use>admin</use>
+                <args>
+                    <module>Valkyrie_DailyFierce</module>
+                    <frontName>dailyfierce_admin</frontName>
+                </args>
+            </dailyfierce_admin>
+        </routers>
+    </admin>
+
+
+    <frontend>
+        <routers>
+            <DailyFierce>
+                <use>standard</use>
+                <args>
+                    <module>Valkyrie_DailyFierce</module>
+                    <frontName>dailyfierce</frontName>
+                </args>
+            </DailyFierce>
+        </routers>
+
+        <layout>
+            <updates>
+                <valkyrie_dailyfierce module="Valkyrie_DailyFierce">
+                    <file>valkyrie_dailyfierce.xml</file>
+                </valkyrie_dailyfierce>
+            </updates>
+        </layout>
+
+    </frontend>
+
+    <global>
+        <events>
+            <sales_order_place_after>
+                <observers>
+<!--
+                    <feed_sales_order_observer>
+                        <class>Wexo_Employee_Model_Observer</class>
+                        <method>sendAdditionalEmail</method>
+                    </feed_sales_order_observer>
+-->
+                </observers>
+            </sales_order_place_after>
+        </events>
+
+        <models>
+            <dailyfierce>
+                <class>Valkyrie_DailyFierce_Model</class>
+                <resourceModel>dailyfierce_mysql4</resourceModel>
+            </dailyfierce>
+            <dailyfierce_mysql4>
+                <class>Valkyrie_DailyFierce_Model_Mysql4</class>
+                <entities>
+                    <dailyfierce>
+                        <table>daily_fierce_list</table>
+                    </dailyfierce>
+                </entities>
+            </dailyfierce_mysql4>
+        </models>
+
+        <resources>
+            <dailyfierce_setup>
+                <setup>
+                    <module>Valkyrie_DailyFierce</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </dailyfierce_setup>
+            <dailyfierce_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </dailyfierce_write>
+            <dailyfierce_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </dailyfierce_read>
+        </resources>
+
+        <blocks>
+            <dailyfierce>
+                <class>Valkyrie_DailyFierce_Block</class>
+            </dailyfierce>
+        </blocks>
+
+        <helpers>
+            <dailyfierce>
+                <class>Valkyrie_DailyFierce_Helper</class>
+            </dailyfierce>
+        </helpers>
+
+    </global>
+</config>
