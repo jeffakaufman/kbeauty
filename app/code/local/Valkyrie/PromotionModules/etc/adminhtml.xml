@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+  <menu>
+    <cms>
+      <children>
+        <promotion_modules>
+          <title>Promotion Modules</title>
+          <sort_order>5</sort_order>
+          <action>promotionmodules_admin/adminhtml_promotionmodules/index</action>
+        </promotion_modules>
+      </children>
+    </cms>
+  </menu>
+</config>
