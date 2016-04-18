@@ -54,7 +54,7 @@ $setup->addAttributeToGroup(
     $attributeSetId,
     $attributeGroupId,
     'fierce_collection',
-    '201'  //sort_order
+    '202'  //sort_order
 );
 
 $installer->endSetup();
