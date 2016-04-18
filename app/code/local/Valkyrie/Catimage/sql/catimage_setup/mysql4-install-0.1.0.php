@@ -27,7 +27,7 @@ $setup->addAttributeToGroup(
     $entityTypeId,
     $attributeSetId,
     $attributeGroupId,
-    'image1',
+    'cat_image',
     '999'  //sort_order
 );
 
