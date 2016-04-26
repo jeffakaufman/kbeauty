@@ -14,6 +14,10 @@ class Valkyrie_SliderData_Adminhtml_SliderDataController extends Mage_Adminhtml_
       $contentBlock = $this->getLayout()->createBlock('sliderdata/adminhtml_sliderdata');
       $this->_addContent($contentBlock);
 
+      $now = new DateTime('now');
+var_dump($now->getTimezone());
+var_dump($now);
+
     $this->renderLayout();
   }
 
