@@ -7,8 +7,10 @@ class Valkyrie_SliderData_Helper_Data extends Mage_Core_Helper_Abstract
         $collection->setOrder('sort_order', 'asc');
         $collection->addFieldToFilter('active', '1');
 
-        $now = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
-        $now->setTimezone(new DateTimeZone('Europe/London'));
+//        $now = new DateTime("now", new DateTimeZone('America/Los_Angeles'));
+//        $now->setTimezone(new DateTimeZone('Europe/London'));
+        $now = new DateTime("now");
+        $now->setTimezone(new DateTimeZone('PST'));
 
         $collection->addFieldToFilter("active_from", array(
             array('null' => true),
