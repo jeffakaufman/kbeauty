@@ -34,16 +34,6 @@
 <?php
   $_menu = $this->getHtml('level-top');
   $static_menu_block = $this->getChildHtml('polar.main.menu');
-  /*$_helper    = $this->helper('catalog/output');
-  $_category  = Mage::getModel('catalog/category')->load(CATEGORYID);// get your category here.
-  $_imgHtml   = '';
-  if ($_imgUrl = $_category->getImageUrl()) {
-      $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->htmlEscape($_category->getName()).'" title="'.$this->htmlEscape($_category->getName()).'" /></p>';
-      $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
-      echo $_imgHtml;
-  }*/
-  //$category = Mage::getModel('catalog/category')->load($catId);
-  //$category->getImageUrl();
 ?>
 <?php /*if($static_menu_block): ?>
   <div id="shopMenu" class="nav-container closed">
@@ -53,29 +43,16 @@
   </div>
 <?php else: ?>
   <?php if($_menu):*/ ?>
+
     <div id="shopMenu" class="nav-container f-fix closed">
         <ul id="nav" class="large-12 columns">
-          
-          <li class="level0 nav-1 first level-top" style="background-image: url(/media/catalog/category/bronzer_highlghter.jpg)"><a class="level-top" href="/bronzer-and-highlighter"><span>Bronzer<br>&amp;<br>Highlighter</span></a></li>
-
-          <li class="level0 nav-2 level-top" style="background-image: url(/media/catalog/category/brows.jpg)"><a class="level-top" href="/brows"><span>Brows</span></a></li>
-
-          <li class="level0 nav-3 level-top" style="background-image: url(/media/catalog/category/cheek_color.jpg)"><a class="level-top" href="/cheek-color"><span>Cheek<br>Color</span></a></li>
-
-          <li class="level0 nav-6 level-top" style="background-image: url(/media/catalog/category/eyeliner.jpg)"><a class="level-top" href="/eyeliner"><span>Eyeliner</span></a></li>
-
-          <li class="level0 nav-7 level-top" style="background-image: url(/media/catalog/category/eyeshadow.jpg)"><a class="level-top" href="/eyeshadow"><span>Eyeshadow</span></a></li>
-
-          <li class="level0 nav-8 level-top" style="background-image: url(/media/catalog/category/lashes_5.jpg)"><a class="level-top" href="/lashes"> <span>Lashes</span></a></li>
-
-          <li class="level0 nav-10 level-top" style="background-image: url(/media/catalog/category/lipcolor.jpg)"><a class="level-top" href="/lip-color"><span>Lip<br>Color</span></a></li>
-
-          <li class="level0 nav-9 level-top" style="background-image: url(/media/catalog/category/lipgloss.jpg)"><a class="level-top" href="/lip-gloss"><span>Lip<br>Gloss </span></a></li>
-
-          <li class="level0 nav-11 level-top" style="background-image: url(/media/catalog/category/mascara.jpg)"><a class="level-top" href="/mascara"><span>Mascara</span></a></li>
-          
-          <li class="level0 nav-12 level-top" style="background-image: url(/media/catalog/category/prime_finish.jpg)"><a class="level-top" href="/prime-and-powder"><span>Prime<br>&amp;<br>Powder</span></a></li>
-
+          <?php $cats = Mage::getModel('catalog/category')->getCategories(44);
+          $width = 100 / $cats->count();
+          $i = 1;
+          foreach ($cats as $category) {
+              echo '<li class="level0 nav-'.$i.' level-top" style="background-image: url('.Mage::getBaseUrl('media').'catalog/category/'.Mage::getModel('catalog/category')->load($category->getId())->getThumbnail().'); width: '.$width.'%"><a class="level-top" href="'.Mage::getModel('catalog/category')->load($category->getId())->getUrl().'"><span>'.$category->getName().'</span></a></li>';
+              $i++;
+          } ?>
         </ul>
     </div>
   <?php /*endif ?>

@@ -538,7 +538,8 @@
     </catalog_category_default>
     <catalog_category_layered>
         <reference name="root">
-            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <remove name="catalog.leftnav"/>
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
         </reference>
         <reference name="product_list">
             <action method="setColumnCount"><columns>4</columns></action>
