@@ -7549,8 +7549,8 @@ body.cms-index-noroute .wrapper .inner-wrap {
             list-style-type: none;
             position: relative;
             width: 20%;
-            border-bottom: 1px solid #8b8988;
-            border-right: 1px solid #8b8988;
+            border-bottom: 1px solid #161616;
+            border-right: 1px solid #161616;
             vertical-align: middle;
             display: table;
             #position:relative;
@@ -8311,7 +8311,20 @@ form ul {
     padding: 0.9625rem 2.125rem 0.925rem 2.125rem;
     margin: 0.5rem 0;
 }
-
+.button.bordered, button.bordered {
+    border-color: #b2a177;
+    background: transparent;
+    color: #b2a177;
+    padding: 0.9625rem 2.125rem 0.925rem 2.125rem;
+    margin: 0.5rem 0;
+}
+.button.gold, button.gold {
+    border-color: #b2a177;
+    background: #b2a177;
+    color: #000;
+    padding: 0.9625rem 2.125rem 0.925rem 2.125rem;
+    margin: 0.5rem 0;
+}
     .button.dark:hover, .button.dark:focus, button.dark:hover, button.dark:focus {
         border-color: #b2a177;
         background: #b2a177;
