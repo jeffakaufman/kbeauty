@@ -26,6 +26,7 @@
 ?>
 <?php $_product = $this->getProduct(); ?>
 <?php $buttonTitle = $this->__('Add to Bag'); ?>
+<?php $buttonTitle2 = $this->__('Buy Now'); ?>
 <?php if($_product->isSaleable()): ?>
     <div class="quantity">
         <?php if(!$_product->isGrouped()): ?>
@@ -39,6 +40,7 @@
 
     </div>
     <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><span><?php echo $buttonTitle ?></span></span></button>
+    <button type="button" title="<?php echo $buttonTitle2 ?>" id="product-buynow-button" class="button btn-cart buy-now" onclick="productAddToCartForm.buyNow(this)"><span><span><?php echo $buttonTitle2 ?></span></span></button>
     <div class='ajax_loader' style="display:none; text-align: center;"><img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif')?>'/></div>
     <div class="status_message"></div>
     <?php echo $this->getChildHtml('', true, true) ?>
