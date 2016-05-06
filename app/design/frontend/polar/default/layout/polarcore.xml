@@ -116,7 +116,7 @@
 
             <!-- Loaded separatly to speed things up slightly -->
             <action method="addItem"><type>skin_css</type><name>fonts/fonts.css</name><params/></action>
-
+            
             <!-- For small custom changes, edit custom.css -->
             <action method="addCss"><stylesheet>css/custom.css</stylesheet></action>
 
@@ -537,6 +537,10 @@
         </reference>
     </catalog_category_default>
     <catalog_category_layered>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>css/owl.carousel.css</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>js/owl.carousel.min.js</name><params/></action>
+        </reference>
         <reference name="root">
             <remove name="catalog.leftnav"/>
             <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>

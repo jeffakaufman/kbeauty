@@ -104,6 +104,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
                         <div class="title"><img src="/media/homepage/txt_daily_fierce.png"></div>
                         I’m a woman.<br>
                         What’s your superpower?
+                        <div class="tweet">Tweet <span class="icon icon-twitter"></span></div>
                     </div>
                 </div>
             </div>
@@ -248,7 +249,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     -webkit-box-shadow: -25px -26px 38px rgba(0,0,0,.16);
     -moz-box-shadow: -25px -26px 38px rgba(0,0,0,.16);
     box-shadow: -25px -26px 38px rgba(0,0,0,.16);
-    margin-bottom: 5em;
+    margin: 5em auto;
 }
 #summersquad {
     background: #fff;
@@ -315,6 +316,15 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 #quote .text .title {
     width: 25%;
     margin: auto;
+}
+#quote .tweet {
+    font-size: 18px;
+    margin-top: 2em;
+    color: #c8b184;
+    text-transform: uppercase;
+}
+#quote .tweet .icon-twitter {
+    border: 2px solid #c8b184;
 }
 @media only screen and (min-width: 40.063em) {
     .cbanner {
@@ -390,7 +400,6 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     }
     #quote .text {
         font-size: 3em;
-        padding-bottom: 40px;
     }
 }
 @media only screen and (max-width: 40em) {
@@ -464,7 +473,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 
 @media only screen and (min-width: 40.063em) and (max-width: 1400px) {
     .cbanner {
-        margin: 0 3em 3em 3em;
+        margin: 3em;
     }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1200px) {
@@ -501,7 +510,6 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     }
     #quote .text {
         font-size: 2.5em;
-        padding-bottom: 50px;
     }
 }
 /*@media only screen and (min-width: 40.063em) and (max-width: 1100px) {
@@ -568,6 +576,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
             //     console.log('image: '+ $('.not-mobile .cbanner .image img').height() );
             // });
             function cbannerLayout() {
+                $('.cbanner').delay(1000).animate({opacity:1});
                 $('.cbanner').each(function() {
                     if ($(this).attr('id') == 'fierce_collection') {
                         var imageWidth = 35;

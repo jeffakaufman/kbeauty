@@ -46,25 +46,29 @@
     <?php $_collectionSize = $_productCollection->count() ?>
     <?php /*$_columnCount = $this->getColumnCount();*/ ?>
     <?php $_columnCount = 3; ?>
-    <?php $row = 0; $i=0; ?>
+    <?php $i=0; ?>
+    <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" data-equalizer>
     <?php foreach ($_productCollection as $_product): ?>
-        <?php if ($i% $_columnCount==0 && $_product->getTypeId() == "configurable"): ?>
-          <div id="group<?php echo $row ?>" class="row group lazy" data-group="<?php echo $row ?>">
-            <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" data-equalizer>
-        <?php endif ?>
 
         <?php if ($_product->getTypeId() == "configurable") { ?>
-                <li class="item item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
-                  <?php $categories = $_product->getCategoryIds(); ?>
+            <?php $cats = $_product->getCategoryIds(); 
+                $currentCat = Mage::registry('current_category');
+                foreach ($cats as $category_id) {
+                $_cat = Mage::getModel('catalog/category')->load($category_id) ;
+                  if ($_cat->getParentCategory()->getId() == $currentCat->getId())
+                        $categoryName = $_cat->getName();
+                } ?>
+                <li class="item lazy item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?> <?php if ($categoryName) echo strtolower($categoryName); ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
+                  
                   <?php
                    if ($_product->getFinalPrice() < $_product->getPrice()):?>
                        <?php echo $this->getChildHtml('polar.sale.item') ?>
-                  <?php endif; ?>
+                  <?php endif; ?><?php $_category = Mage::getModel('catalog/category')->load($currentCat->getParentId());  $_subcategories = $_category->getChildrenCategories();?>
                   <div class="item-wrapper">
                     <a href="<?php echo $_product->getProductUrl() ?>">
                       <div class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></div>
                       <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></h3>
-                      <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
+                      <div class="category"><?php if ($categoryName) echo $categoryName; ?></div>
                       <?php /*if($_product->getRatingSummary()): ?>
                         <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
                       <?php endif;*/ ?>
@@ -82,13 +86,28 @@
         <?php $i++; 
         } ?>
 
-        <?php if ($i % $_columnCount==0 && $_product->getTypeId() == "configurable") { ?>
-          <?php $row++ ?>
-            </ul>
-          </div>
-        <?php } ?>
-
     <?php endforeach ?>
-
+    </ul>
 </div>
+<script type="text/javascript">
+
+    (function($) {
+      $('#subcategories .item').click( function() {
+        var filterValue = $(this).attr('data-filter');
+        $('#subcategories .item').removeClass('selected');
+        $(this).addClass('selected');
+        $('.category-products li').fadeOut('fast');
+        if (filterValue == 'all') $('.category-products li').fadeIn();
+        else $('.category-products li.'+filterValue).fadeIn();
+      });
+      // $(document).ready(function() {
+      //   $('#subcategories .owl-carousel').owlCarousel({
+      //     items: 6,
+      //     autoWidth:true
+      //   });
+      // });
+      
+    })(jQuery);
+
+</script>
 <?php endif; ?>

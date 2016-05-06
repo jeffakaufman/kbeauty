@@ -68,6 +68,17 @@
       </div>
 </div>
 
+<div id="subcategories">
+    <ul>
+        <li class="item selected" data-filter="all">All</li>
+        <?php $subcategories = Mage::getModel('catalog/category')->getCategories($_category->getId());
+
+        foreach ($subcategories as $subcategory){
+            echo '<li class="item" data-filter="'.strtolower($subcategory->getData('name')).'">'.$subcategory->getData('name').'</li>';
+             //print_r($subcategory->getData());
+        } ?>
+    </ul>
+</div>
 <?php if($this->isContentMode()): ?>
     <?php echo $this->getCmsBlockHtml() ?>
 
