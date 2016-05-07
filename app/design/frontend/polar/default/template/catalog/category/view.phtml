@@ -74,7 +74,7 @@
         <?php $subcategories = Mage::getModel('catalog/category')->getCategories($_category->getId());
 
         foreach ($subcategories as $subcategory){
-            echo '<li class="item" data-filter="'.strtolower($subcategory->getData('name')).'">'.$subcategory->getData('name').'</li>';
+            echo '<li class="item" data-filter="'.str_replace('+', '', str_replace(' ', '', strtolower($subcategory->getData('name') ) ) ).'">'.$subcategory->getData('name').'</li>';
              //print_r($subcategory->getData());
         } ?>
     </ul>

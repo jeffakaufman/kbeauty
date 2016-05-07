@@ -58,7 +58,7 @@
                   if ($_cat->getParentCategory()->getId() == $currentCat->getId())
                         $categoryName = $_cat->getName();
                 } ?>
-                <li class="item lazy item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?> <?php if ($categoryName) echo strtolower($categoryName); ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
+                <li class="item lazy item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?> <?php if ($categoryName) echo str_replace('+', '', str_replace(' ', '', strtolower($categoryName) ) ); ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
                   
                   <?php
                    if ($_product->getFinalPrice() < $_product->getPrice()):?>
@@ -100,12 +100,6 @@
         if (filterValue == 'all') $('.category-products li').fadeIn();
         else $('.category-products li.'+filterValue).fadeIn();
       });
-      // $(document).ready(function() {
-      //   $('#subcategories .owl-carousel').owlCarousel({
-      //     items: 6,
-      //     autoWidth:true
-      //   });
-      // });
       
     })(jQuery);
 
