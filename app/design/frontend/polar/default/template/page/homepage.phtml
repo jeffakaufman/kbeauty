@@ -96,18 +96,35 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
             </div>
             <div class="cbanner-mobile"><button type="button" title="Shop #summersquad" class="button dark shop-collection2"><span><span>SHOP #summersquad</span></span></button></div>
 
+<?php
+$dfHelper = $this->helper('dailyfierce');
+/**
+ * @var Valkyrie_DailyFierce_Helper_Data $dfHelper
+ */
+$dailyFierce = $dfHelper->getCurrentFierce();
+
+if($dailyFierce) {
+?>
+
+
             <div id="quote">
                 <h2>Daily Fierce</h2>
                 <div class="bg">
                     <div class="chevron"></div>
                     <div class="text">
                         <div class="title"><img src="/media/homepage/txt_daily_fierce.png"></div>
-                        I’m a woman.<br>
+                            <?php
+//                            var_dump($dailyFierce->getData());
+                            echo $dailyFierce->getData('details_content');
+                            ?>
+<!--                        I’m a woman.<br>
                         What’s your superpower?
+-->
                         <div class="tweet">Tweet <span class="icon icon-twitter"></span></div>
                     </div>
                 </div>
             </div>
+<?php } ?>
 
             <?php echo $this->getChildHtml('faves') ?>
             <?php echo $this->getChildHtml('bestsellers') ?>
