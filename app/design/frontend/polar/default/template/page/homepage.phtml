@@ -119,7 +119,7 @@ if($dailyFierce) {
 <!--                        I’m a woman.<br>
                         What’s your superpower?
 -->
-                        <div class="tweet">Tweet <span class="icon icon-twitter"></span></div>
+                        <div class="tweet"><a href="https://twitter.com/share?url=<?php echo urlencode('https://kbeauty.com'); ?>&hashtags=DailyFierce&text=<?php echo strip_tags($dailyFierce->getData('details_content') ); ?>" class="sharelink">Tweet <span class="icon icon-twitter"></span></a></div>
                     </div>
                 </div>
             </div>
@@ -342,6 +342,9 @@ if($dailyFierce) {
     color: #c8b184;
     text-transform: uppercase;
 }
+.quote .tweet a:hover {
+    text-decoration: none;
+}
 .quote .tweet .icon-twitter {
     border: 2px solid #c8b184;
 }
@@ -537,7 +540,11 @@ if($dailyFierce) {
       scrollbar: false
     });
   });
-
+  $('.sharelink').click(function(e) {
+        e.preventDefault();
+        window.open($(this).attr('href'),"share","toolbar=no, scrollbars=no, resizable=yes, width=500, height=400");
+        return false;
+    });
 })(jQuery);
 </script>
 
