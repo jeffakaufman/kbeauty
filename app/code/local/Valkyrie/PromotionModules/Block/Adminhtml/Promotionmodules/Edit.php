@@ -11,6 +11,7 @@ class Valkyrie_PromotionModules_Block_Adminhtml_PromotionModules_Edit extends Ma
     $this->_controller = 'adminhtml_promotionmodules';
     $this->_mode = 'edit';
 
+
     $this->_addButton('save_and_continue', array(
       'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
       'onclick' => 'saveAndContinueEdit()',
@@ -33,6 +34,8 @@ class Valkyrie_PromotionModules_Block_Adminhtml_PromotionModules_Edit extends Ma
         ";
   }
 
+
+
   public function getHeaderText()
   {
     if (Mage::registry('promotionmodules') && Mage::registry('promotionmodules')->getId())
@@ -41,6 +44,13 @@ class Valkyrie_PromotionModules_Block_Adminhtml_PromotionModules_Edit extends Ma
     } else {
       return Mage::helper('promotionmodules')->__('New Module');
     }
+  }
+
+
+  protected function _prepareLayout()
+  {
+    $this->getLayout()->getBlock('head')->addJs('jscolor/jscolor.js');
+    return parent::_prepareLayout();
   }
 
 }

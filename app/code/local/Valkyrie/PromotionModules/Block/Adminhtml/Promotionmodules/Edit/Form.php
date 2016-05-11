@@ -123,14 +123,16 @@ class Valkyrie_PromotionModules_Block_Adminhtml_PromotionModules_Edit_Form exten
     $fieldset->addField('text_color', 'text', array(
         'label'     => Mage::helper('promotionmodules')->__('Text Color'),
         'name'      => 'text_color',
-        'class'     => 'validate-digits',
+//        'class'     => 'validate-digits',
+        'class'     => 'color {required:false, adjust:false, hash:true}',
         'after_element_html' => '<small>Color Of The Text</small>',
     ));
 
     $fieldset->addField('bg_color', 'text', array(
         'label'     => Mage::helper('promotionmodules')->__('BG Color'),
         'name'      => 'bg_color',
-        'class'     => 'validate-digits',
+//        'class'     => 'validate-digits',
+        'class'     => 'color {required:false, adjust:false, hash:true}',
         'after_element_html' => '<small>Color Of The Background</small>',
     ));
 

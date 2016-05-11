@@ -39,8 +39,8 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 <?php
     $slHelper = $this->helper('sliderdata');
     /**
-    * @var Valkyrie_SliderData_Helper_Data $slHelper
-    */
+     * @var Valkyrie_SliderData_Helper_Data $slHelper
+     */
     foreach($slHelper->getSlidesList() as $sl) {
         if(strlen($sl->getData('disclaimers_content'))) {
             ?>
@@ -56,6 +56,79 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
         }
     }
 ?>
+
+<?php
+    $pmHelper = $this->helper('promotionmodules');
+    /**
+     * @var Valkyrie_PromotionModules_Helper_Data $pmHelper
+     */
+
+    $modulesList = $pmHelper->getModulesList();
+    if(count($modulesList)) {
+        $alignmentClass = '';
+        foreach($modulesList as $pm) {
+            switch($alignmentClass) {
+                case 'textleft':
+                    $alignmentClass = 'textright';
+                    break;
+
+                case 'textright':
+                default:
+                    $alignmentClass = 'textleft';
+                    break;
+            }
+
+            $bgColor = $pm->getData('bg_color');
+            $textColor = $pm->getData('text_color');
+?>
+            <div class="cbanner <?php echo $alignmentClass; ?> clearfix" style="background-color: #<?php echo $bgColor; ?>; color: #<?php echo $textColor; ?>;">
+
+                <?php if($alignmentClass == 'textright') { ?>
+                    <div class="image"><img src="<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="'.$pm->getData('desktop_image').'"}}'); ?>" alt=""></div>
+                <?php } ?>
+
+                <div class="text">
+                    <div class="inner">
+                        <h3 style="color: #<?php echo $textColor; ?>;"><?php echo $pm->getData('title'); ?></h3>
+                        <h2 style="color: #<?php echo $textColor; ?>;"><?php echo $pm->getData('sub_title'); ?></h2>
+                        <div class="more">
+                            <?php echo nl2br($pm->getData('details')); ?>
+                        </div>
+                        <button type="button" title="Read More" class="button bordered read-more"><span><span>Read More</span></span></button>
+                        <button type="button" title="<?php echo $pm->getData('link_caption'); ?>" class="button shop-button" onclick="document.location.href='<?php echo $pm->getData('link_href'); ?>'"><span><span><?php echo $pm->getData('link_caption'); ?></span></span></button>
+                    </div>
+                </div>
+                <?php if($alignmentClass == 'textleft') { ?>
+                    <div class="image"><img src="<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="'.$pm->getData('desktop_image').'"}}'); ?>" alt=""></div>
+                <?php } ?>
+
+            </div>
+            <div class="cbanner-mobile"><button type="button" title="<?php echo $pm->getData('link_caption'); ?>" class="button mobile-button" onclick="document.location.href='<?php echo $pm->getData('link_href'); ?>'"><span><span><?php echo $pm->getData('link_caption'); ?></span></span></button></div>
+
+<?php
+        }
+    }
+
+/*
+array (size=14)
+  'module_id' => string '1' (length=1)
+  'title' => string 'La-lA' (length=5)
+  'sub_title' => string 'fffdgdd' (length=7)
+  'link_caption' => string 'fghfgghf' (length=8)
+  'link_href' => string 'http://adfsdfg.fdgd.fgd' (length=23)
+  'desktop_image' => string 'promotionmodules_images/desktop/ModulesOutlined.jpg' (length=51)
+  'mobile_image' => string '' (length=0)
+  'details' => string 'srffdgdfghfghfgh' (length=16)
+  'sort_order' => string '3' (length=1)
+  'active' => string '1' (length=1)
+  'active_from' => string '2016-05-01' (length=10)
+  'active_to' => string '2016-05-31' (length=10)
+  'text_color' => null
+  'bg_color' => null
+ */
+?>
+
+<!--
             <div class="cbanner textleft clearfix" style="background-color: #222; color: #a99a6a;">
                 
                 <div class="text">
@@ -96,6 +169,7 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
             </div>
             <div class="cbanner-mobile"><button type="button" title="Shop #summersquad" class="button mobile-button"><span><span>SHOP #summersquad</span></span></button></div>
 
+-->
 <?php
 $dfHelper = $this->helper('dailyfierce');
 /**
@@ -634,11 +708,19 @@ if($dailyFierce) {
                             $(this).find('.image').css('width',cbannerFactor + imageWidth + '%');
                             $(this).find('.text').css('width', textWidth - cbannerFactor + '%');
                         }
-                        $('.cbanner.textright .image').prependTo($('.cbanner.textright'));
+
+                        if($(this).hasClass('textright')) {
+                            $(this).find('.image').prependTo($(this));
+                        }
+
+//                        $('.cbanner.textright .image').prependTo($('.cbanner.textright'));
                     } else {
-                        $('.image').css('width', '80%');
-                        $('.text').css('width', '100%');
-                        $('.cbanner.textright .text').prependTo($('.cbanner.textright'));
+                        $(this).find('.image').css('width', '80%');
+                        $(this).find('.text').css('width', '100%');
+                        if($(this).hasClass('textright')) {
+                            $(this).find('.text').prependTo($(this));
+                        }
+//                        $('.cbanner.textright .text').prependTo($('.cbanner.textright'));
                     }
                 });
                     
