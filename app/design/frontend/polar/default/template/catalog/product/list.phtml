@@ -1,4 +1,4 @@
-<?php
+  <?php
 /**
  * Magento
  *
@@ -53,12 +53,20 @@
         <?php if ($_product->getTypeId() == "configurable") { ?>
             <?php $cats = $_product->getCategoryIds(); 
                 $currentCat = Mage::registry('current_category');
+                $categoryName = []; $categoryTag = [];
                 foreach ($cats as $category_id) {
-                $_cat = Mage::getModel('catalog/category')->load($category_id) ;
-                  if ($_cat->getParentCategory()->getId() == $currentCat->getId())
-                        $categoryName = $_cat->getName();
+                  $_cat = Mage::getModel('catalog/category')->load($category_id) ;
+                  if ($_cat->getParentCategory()->getId() == $currentCat->getId()) {
+                    $cat = str_replace('+', '', str_replace(' ', '', strtolower($_cat->getName()) ) );
+                    if (!in_array($cat, $categoryTag)) {
+                      array_push($categoryTag, $cat);
+                    }
+                    if (!in_array($_cat->getName(), $categoryName)) {
+                      array_push($categoryName, $_cat->getName());
+                    }
+                  }
                 } ?>
-                <li class="item lazy item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?> <?php if ($categoryName) echo str_replace('+', '', str_replace(' ', '', strtolower($categoryName) ) ); ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
+                <li class="item lazy item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?><?php foreach ($categoryTag as $value) { echo ' '.$value; } ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
                   
                   <?php
                    if ($_product->getFinalPrice() < $_product->getPrice()):?>
@@ -68,7 +76,7 @@
                     <a href="<?php echo $_product->getProductUrl() ?>">
                       <div class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></div>
                       <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></h3>
-                      <div class="category"><?php if ($categoryName) echo $categoryName; ?></div>
+                      <div class="category"><?php echo implode(", ",$categoryName); ?></div>
                       <?php /*if($_product->getRatingSummary()): ?>
                         <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
                       <?php endif;*/ ?>
