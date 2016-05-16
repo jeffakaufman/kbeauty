@@ -7564,9 +7564,6 @@ body.cms-index-noroute .wrapper .inner-wrap {
             -webkit-transition: background-size 0.5s ease;
             transition: background-size 0.5s ease;
         }
-        .nav-container #nav li.nav-4 a, .nav-container #nav li.nav-5 a {
-            color: #fff;
-        }
             .nav-container #nav li:hover {
                 background-size: 110% 110%;
             }
@@ -9985,7 +9982,6 @@ body.catalog-category-view .group, #group0 {
 @media (max-width: 1200px) {
     #bestsellers .products-grid .item {
         cursor: move;
-        cursor: -webkit-grabbing;
     }
 }
 
