@@ -10317,7 +10317,9 @@ body.catalog-category-view .group, #group0 {
     width: 100%;
     margin-bottom: 0.5em;
 }
-
+.product-essential button.buy-now {
+    width: 100%;
+}
     .product-essential button.btn-cart:hover, .product-essential button.btn-cart:focus, .product-essential button.btn-cart:active {
         background: #b2a177;
         color: #fff;
