@@ -265,6 +265,9 @@ class Sashas_CouponGift_Model_Observer
 	}
 	
 	public function UpdateCartItem (Varien_Event_Observer $observer) {   
+                //$cookie_name = "cart_time";
+                //$cookie_value = time();
+                //setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 		$new_info=$observer->getInfo();
 		$cart=$observer->getCart();
 		 
@@ -320,6 +323,9 @@ class Sashas_CouponGift_Model_Observer
 	}
 	
 	public function RemovefromCart(Varien_Event_Observer $observer) {
+                $cookie_name = "cart_time";
+                $cookie_value = time();
+                setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 	    $removed_quote_item=$observer->getQuoteItem();
 	    $removed_product_id=$removed_quote_item->getProductId();
 	    $cart=Mage::getModel('checkout/cart');

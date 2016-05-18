@@ -543,7 +543,6 @@ $data['street'] = str_replace(",", "", $data['street']);
 					{
 						return array('error' => 'This Information has not been included in this Test Server.', 'candidates' => array(), 'original_address' => $check_address);
 					}
-					return array('error' => 'NO', 'candidates' => array(), 'original_address' => $check_address);
 				}
         	}
         }
