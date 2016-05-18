@@ -39,8 +39,8 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 <?php
     $slHelper = $this->helper('sliderdata');
     /**
-    * @var Valkyrie_SliderData_Helper_Data $slHelper
-    */
+     * @var Valkyrie_SliderData_Helper_Data $slHelper
+     */
     foreach($slHelper->getSlidesList() as $sl) {
         if(strlen($sl->getData('disclaimers_content'))) {
             ?>
@@ -56,6 +56,148 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
         }
     }
 ?>
+
+<?php
+    $pmHelper = $this->helper('promotionmodules');
+    /**
+     * @var Valkyrie_PromotionModules_Helper_Data $pmHelper
+     */
+
+    $modulesList = $pmHelper->getModulesList();
+    if(count($modulesList)) {
+        $alignmentClass = '';
+        foreach($modulesList as $pm) {
+            switch($alignmentClass) {
+                case 'textleft':
+                    $alignmentClass = 'textright';
+                    break;
+
+                case 'textright':
+                default:
+                    $alignmentClass = 'textleft';
+                    break;
+            }
+
+            $bgColor = $pm->getData('bg_color');
+            $textColor = $pm->getData('text_color');
+?>
+            <div class="cbanner <?php echo $alignmentClass; ?> clearfix" style="background-color: #<?php echo $bgColor; ?>; color: #<?php echo $textColor; ?>;">
+
+                <?php if($alignmentClass == 'textright') { ?>
+                    <div class="image"><img src="<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="'.$pm->getData('desktop_image').'"}}'); ?>" alt=""></div>
+                <?php } ?>
+
+                <div class="text">
+                    <div class="inner">
+                        <h3 style="color: #<?php echo $textColor; ?>;"><?php echo $pm->getData('title'); ?></h3>
+                        <h2 style="color: #<?php echo $textColor; ?>;"><?php echo $pm->getData('sub_title'); ?></h2>
+                        <div class="more">
+                            <?php echo nl2br($pm->getData('details')); ?>
+                        </div>
+                        <button type="button" title="Read More" class="button bordered read-more"><span><span>Read More</span></span></button>
+                        <button type="button" title="<?php echo $pm->getData('link_caption'); ?>" class="button shop-button" onclick="document.location.href='<?php echo $pm->getData('link_href'); ?>'"><span><span><?php echo $pm->getData('link_caption'); ?></span></span></button>
+                    </div>
+                </div>
+                <?php if($alignmentClass == 'textleft') { ?>
+                    <div class="image"><img src="<?php echo $this->helper('cms')->getBlockTemplateProcessor()->filter('{{media url="'.$pm->getData('desktop_image').'"}}'); ?>" alt=""></div>
+                <?php } ?>
+
+            </div>
+            <div class="cbanner-mobile"><button type="button" title="<?php echo $pm->getData('link_caption'); ?>" class="button mobile-button" onclick="document.location.href='<?php echo $pm->getData('link_href'); ?>'"><span><span><?php echo $pm->getData('link_caption'); ?></span></span></button></div>
+
+<?php
+        }
+    }
+
+/*
+array (size=14)
+  'module_id' => string '1' (length=1)
+  'title' => string 'La-lA' (length=5)
+  'sub_title' => string 'fffdgdd' (length=7)
+  'link_caption' => string 'fghfgghf' (length=8)
+  'link_href' => string 'http://adfsdfg.fdgd.fgd' (length=23)
+  'desktop_image' => string 'promotionmodules_images/desktop/ModulesOutlined.jpg' (length=51)
+  'mobile_image' => string '' (length=0)
+  'details' => string 'srffdgdfghfghfgh' (length=16)
+  'sort_order' => string '3' (length=1)
+  'active' => string '1' (length=1)
+  'active_from' => string '2016-05-01' (length=10)
+  'active_to' => string '2016-05-31' (length=10)
+  'text_color' => null
+  'bg_color' => null
+ */
+?>
+
+<!--
+            <div class="cbanner textleft clearfix" style="background-color: #222; color: #a99a6a;">
+                
+                <div class="text">
+                    <div class="inner">
+                        <h3 style="color: #a99a6a;">Introducing</h3>
+                        <h2 style="color: #a99a6a;">the fierce collection</h2>
+                        <div class="more">
+                            Unleash your fierce side with products that showcase your beauty, applaud your strength and empower your confidence.<br><br>
+
+                            Inspired by the strong women in our lives. May we know them. May we be them. May we raise them. Here’s to you!
+                        </div>
+                        <button type="button" title="Read More" class="button bordered read-more"><span><span>Read More</span></span></button>
+                        <button type="button" title="SHOP THE COLLECTION" class="button shop-button"><span><span>SHOP THE COLLECTION</span></span></button>
+                    </div>
+                </div>
+                <div class="image"><img src="/media/homepage/fierce.png" alt=""></div>
+                
+            </div>
+            <div class="cbanner-mobile"><button type="button" title="SHOP THE COLLECTION" class="button mobile-button"><span><span>SHOP THE COLLECTION</span></span></button></div>
+
+            <div class="cbanner textright clearfix" style="background-color: #fff; color: #000;">
+                
+                <div class="image"><img src="/media/homepage/summersquad.jpg" alt=""></div>
+                <div class="text">
+                    <div class="inner">
+                        <h3 style="color: #000;">NEW COLLECTION</h3>
+                        <h2 style="color: #000;">#SUMMERSQUAD</h2>
+                        <div class="more">
+                            Breezy hues inspired by the beaches of Fiji and the radiant glow of summer, our new collection will get you ready when the weather heats up.<br><br>
+
+                            Get glowing with new Strobe Domes. Lorem ipsum dolor sit amet. It’s your summer... slayed!
+                        </div>
+                        <button type="button" title="Read More" class="button bordered read-more"><span><span>Read More</span></span></button>
+                        <button type="button" title="SHOP #summersquad" class="button shop-button"><span><span>SHOP #summersquad</span></span></button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="cbanner-mobile"><button type="button" title="Shop #summersquad" class="button mobile-button"><span><span>SHOP #summersquad</span></span></button></div>
+
+-->
+<?php
+$dfHelper = $this->helper('dailyfierce');
+/**
+ * @var Valkyrie_DailyFierce_Helper_Data $dfHelper
+ */
+$dailyFierce = $dfHelper->getCurrentFierce();
+
+if($dailyFierce) {
+?>
+
+            <div class="quote">
+                <h2>Daily Fierce</h2>
+                <div class="bg">
+                    <div class="chevron"></div>
+                    <div class="text">
+                        <div class="t"><img src="/media/homepage/txt_daily_fierce.png"></div>
+                            <?php
+//                            var_dump($dailyFierce->getData());
+                            echo $dailyFierce->getData('details_content');
+                            ?>
+<!--                        I’m a woman.<br>
+                        What’s your superpower?
+-->
+                        <div class="tweet"><a href="https://twitter.com/share?url=<?php echo urlencode('https://kbeauty.com'); ?>&hashtags=DailyFierce&text=<?php echo strip_tags($dailyFierce->getData('details_content') ); ?>" class="sharelink">Tweet <span class="icon icon-twitter"></span></a></div>
+                    </div>
+                </div>
+            </div>
+<?php } ?>
             <?php echo $this->getChildHtml('faves') ?>
             <?php echo $this->getChildHtml('bestsellers') ?>
           </div>
@@ -183,6 +325,288 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     }
 
 }
+
+.cbanner {
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-box-shadow: -25px -26px 38px rgba(0,0,0,.16);
+    -moz-box-shadow: -25px -26px 38px rgba(0,0,0,.16);
+    box-shadow: -25px -26px 38px rgba(0,0,0,.16);
+    margin: 5em auto;
+}
+.cbanner h2, .cbanner h3 {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+    line-height: 1em;
+}
+.cbanner.textleft h2, .cbanner.textleft h3 {
+    text-align: left;
+}
+.cbanner.textright h2, .cbanner.textright h3 {
+    text-align: right;
+}
+.cbanner h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+.cbanner h3 {
+    font-size: 1.5em;
+}
+.cbanner .text {
+    position: relative;
+    font-size: 1.3em;
+}
+.cbanner .image img {
+    max-width: 100%;
+}
+.cbanner button, .cbanner .button {
+    margin-top: 2em;
+    width: auto;
+}
+.cbanner.light button, .cbanner.light .button {
+    border-color: #000;
+    background: #000;
+    color: #fff;
+}
+.cbanner.light button:hover, .cbanner.light .button:hover {
+    border-color: #a99a6a;
+    background: #a99a6a;
+    color: #000;
+}
+.cbanner.dark .shop-button {
+    background: #a99a6a;
+    color: #000;
+    border-color: #a99a6a;
+}
+.cbanner.dark button:hover, .cbanner.dark .button:hover {
+    border-color: #fff;
+    background: #fff;
+}
+
+.quote {
+    margin: 5em auto;
+}
+.quote .bg {
+    position: relative;
+}
+.quote .chevron {
+    position: absolute;
+    background-size: 100%;
+}
+.quote .text {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    vertical-align: middle;
+    width: 80% !important;
+    margin: 0 auto;
+    color: #fff;
+    max-width: 1000px;
+}
+.quote .text .t {
+    width: 25%;
+    margin: auto;
+}
+.quote .tweet {
+    font-size: 18px;
+    margin-top: 2em;
+    color: #c8b184;
+    text-transform: uppercase;
+}
+.quote .tweet a:hover {
+    text-decoration: none;
+}
+.quote .tweet .icon-twitter {
+    border: 2px solid #c8b184;
+}
+@media only screen and (min-width: 40.063em) {
+    .cbanner {
+        display: table;
+        margin: 5em auto;
+    }
+    .cbanner .text {
+        width: 55%;
+        position: relative;
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .cbanner.textleft .text .inner {
+        margin: 0 15% 0 0;
+        text-align: left;
+    }
+    .cbanner.textright .text .inner {
+        margin: 0 0 0 15%;
+        text-align: right;
+    }
+    .cbanner .text .read-more {
+        display: none;
+    }
+    .cbanner .image {
+        margin: 0;
+        display: table-cell;
+        position: relative;
+        vertical-align: bottom;
+        height: 100%;
+        width: 40%;
+    }
+    .cbanner.textleft .image {
+        text-align: left;
+    }
+    .cbanner.textright .image {
+        text-align: right;
+    }
+    .cbanner .image img {
+        max-width: 90%;
+        /*position: absolute;
+        bottom: 0;*/
+    }
+    .cbanner .shop-button {
+        display: inline-block;
+        white-space: normal;
+    }
+    .cbanner-mobile {
+        display: none;
+    }
+    .quote h2 {
+        display: none;
+    }
+    .quote .bg {
+        background-image: url(/media/homepage/bg_quote.jpg);
+        background-size: cover;
+        background-position: center center;
+    }
+    .quote .chevron {
+        background-image: url(/media/homepage/chevron.png);
+        background-size: contain;
+        top: 0;
+        left: 0;
+        width: 150px;
+        height: 150px;
+    }
+    .quote .text {
+        font-size: 2.5em;
+    }
+}
+@media only screen and (max-width: 40em) {
+    .cbanner {
+        margin: 2em 10px;
+    }
+    .cbanner h2, .cbanner h3, .cbanner.textleft h2, .cbanner.textleft h3, .cbanner.textright h2, .cbanner.textright h3 {
+        text-align: center;
+    }
+    .cbanner h2 {
+        font-size: 1.6em;
+    }
+    .cbanner h3 {
+        font-size: 1.2em;
+    }
+    .cbanner .text, .cbanner.textleft .text, .cbanner.textright .text {
+        text-align: center;
+        display: block;
+        font-size: 0.9em;
+        width: 100%;
+        padding-top: 3em;
+    }
+    .cbanner .text .more {
+        display: none;
+        margin: 0 10%;
+    }
+    .cbanner .text .read-more {
+        border-width: .2em;
+        margin-top: 1em;
+    }
+    .cbanner .image, .cbanner.textleft .image, .cbanner.textleft .image {
+        display: block;
+        width: 80%;
+        margin: 0 10%;
+        text-align: center;
+    }
+    .shop-button {
+        display: none;
+    }
+    .mobile-button {
+        width: auto;
+    }
+    .cbanner-mobile {
+        margin: 1em 0 3em 0;
+        text-align: center;
+    }
+    .quote .bg {
+        background: #000;
+        margin: 20px 10px;
+    }
+    .quote .chevron {
+        width: 120px;
+        height: 120px;
+        top: -10px;
+        left: -10px;
+        background-image: url(/media/homepage/chevron_mobile.png);
+        background-size: contain;
+    }
+    .quote .text {
+        font-size: 2em;
+        line-height: 1.2em;
+    }
+    .quote .text .t {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 40.063em) and (max-width: 1400px) {
+    .cbanner {
+        margin: 3em;
+    }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1200px) {
+    .cbanner .text {
+        font-size: 1.1em;
+    }
+    /*.cbanner h3 {
+        font-size: 1.35em;
+    }*/
+}
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+    .cbanner {
+        margin: 10px;
+    }
+    .cbanner .text {
+        font-size: 1em;
+    }
+    .cbanner h2 {
+        font-size: 1.6em;
+    }
+    .cbanner h3 {
+        font-size: 1.2em;
+    }
+    .cbanner .more, .cbanner .more p {
+        font-size: 0.9em;
+        line-height: 1.2em;
+    }
+    .cbanner button, .cbanner .button {
+        padding: 0.5em 1em;
+        font-size: 0.7em;
+    }
+    .quote {
+        margin: 10px auto;
+    }
+    .quote .text {
+        font-size: 2.5em;
+    }
+}
+/*@media only screen and (min-width: 40.063em) and (max-width: 1100px) {
+    .cbanner .image {
+        width: 40%;
+        padding: 0 1%;
+    }
+}*/
+
+
 </style>
 <script>
 (function( $ ) {
@@ -196,7 +620,11 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
       scrollbar: false
     });
   });
-
+  $('.sharelink').click(function(e) {
+        e.preventDefault();
+        window.open($(this).attr('href'),"share","toolbar=no, scrollbars=no, resizable=yes, width=500, height=400");
+        return false;
+    });
 })(jQuery);
 </script>
 
@@ -208,8 +636,142 @@ $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
     }
 
     (function($) {
+        $.fn.lightOrDark = function(){
+            var r,b,g,hsp
+              , a = this.css('background-color');
+            
+            if (a.match(/^rgb/)) {
+              a = a.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(?:\.\d+)?))?\)$/);
+              r = a[1];
+              g = a[2];
+              b = a[3];
+            } else {
+              a = +("0x" + a.slice(1).replace( // thanks to jed : http://gist.github.com/983661
+                  a.length < 5 && /./g, '$&$&'
+                )
+              );
+              r = a >> 16;
+              b = a >> 8 & 255;
+              g = a & 255;
+            }
+            hsp = Math.sqrt( // HSP equation from http://alienryderflex.com/hsp.html
+              0.299 * (r * r) +
+              0.587 * (g * g) +
+              0.114 * (b * b)
+            );
+            if (hsp>127.5) {
+              this.addClass('light');
+            } else {
+              this.addClass('dark');
+            }
+          }
         $(document).ready(function() {
 
+            var wW;
+
+            function detectMobile() {
+                if(device.desktop()) wW = window.outerWidth;
+                else wW = $(window).width();
+                
+                var is_windows = navigator.appVersion.indexOf("Win") != -1;
+                var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+                
+                //if (is_windows || is_chrome) wW = parseInt(wW) - 16;
+            }
+            detectMobile();
+
+            $('.cbanner .read-more').click(function() {
+                if ($(this).hasClass('less')) {
+                    $(this).prev('.more').slideUp();
+                    $(this).removeClass('less').text('Read More');
+                } else {
+                    $(this).prev('.more').slideDown();
+                    $(this).addClass('less').text('Read Less');
+                }
+            });
+            // console.log('text: '+ $('.not-mobile .cbanner .text .inner').height() );
+            // console.log('image: '+ $('.not-mobile .cbanner .image img').height() );
+            // $(window).resize(function() {
+            //     console.log('text: '+ $('.not-mobile .cbanner .text .inner').height() );
+            //     console.log('image: '+ $('.not-mobile .cbanner .image img').height() );
+            // });
+            function cbannerLayout() {
+                $('.cbanner').delay(1000).animate({opacity:1});
+                $('.cbanner').each(function() {
+                    var imageWidth = 40;
+                    var textWidth = 55;
+                    var f = 0.1;
+                    
+                    var cbannerImage = $(this).find('.image img').height() - 60;
+                    var cbannerText = $(this).find('.text .inner').height();
+                    var cbannerDiff = cbannerText - cbannerImage;
+                    
+                    if (wW > 640) {
+                        $(this).find('.image').css('width', '');
+                        $(this).find('.text').css('width', '');
+                        if (cbannerDiff > 0) {
+                            var cbannerFactor = cbannerDiff * f;
+                            $(this).find('.image').css('width',cbannerFactor + imageWidth + '%');
+                            $(this).find('.text').css('width', textWidth - cbannerFactor + '%');
+                        }
+
+                        if($(this).hasClass('textright')) {
+                            $(this).find('.image').prependTo($(this));
+                        }
+
+//                        $('.cbanner.textright .image').prependTo($('.cbanner.textright'));
+                    } else {
+                        $(this).find('.image').css('width', '80%');
+                        $(this).find('.text').css('width', '100%');
+                        if($(this).hasClass('textright')) {
+                            $(this).find('.text').prependTo($(this));
+                        }
+//                        $('.cbanner.textright .text').prependTo($('.cbanner.textright'));
+                    }
+                });
+                    
+                
+                $('.quote').each(function() {
+                    if (wW > 1024) {
+                        var quoteHeight = $(this).find('.text').height() + 140;
+                    } else {
+                        var quoteHeight = $(this).find('.text').height() + 80;
+                    }
+                    $(this).find('.bg').css('height',quoteHeight);
+                });
+
+            }
+            cbannerLayout();
+            $('.cbanner').each(function() {
+                $(this).lightOrDark();
+            });
+            $('.cbanner.dark').next('.cbanner-mobile').find('.button').addClass('gold');
+            $('.cbanner.light').next('.cbanner-mobile').find('.button').addClass('dark');
+            $(window).resize(function() {
+                detectMobile();
+                cbannerLayout();
+            });
+            // var allowedHeight = $('.not-mobile .cbanner .image img').height() - 60;
+            // var textHeight, imageHeight = $('.not-mobile .cbanner .image img').height();
+            // $('.not-mobile .cbanner').css('min-height',imageHeight+'px');
+            // $(window).resize(function() {
+            //     labelMobile();
+            //     allowedHeight = $('.not-mobile .cbanner .image img').height() - 60;
+            //     if ($('.not-mobile .cbanner .text').height() > allowedHeight) {
+            //         textHeight = $('.not-mobile .cbanner .text').height() + 60;
+            //         $('.not-mobile .cbanner').css('min-height',textHeight+'px').addClass('medium');
+
+            //         // $('.not-mobile .cbanner .image img').height(imageHeight);
+            //         // $('.not-mobile .cbanner .image img').css('width','auto');
+            //     } else {
+            //         $('.not-mobile .cbanner').removeClass('medium');
+            //         $('.not-mobile .cbanner').css('min-height',$('.cbanner .image img').height()+'px');
+            //         // $('.not-mobile .cbanner .image img').css('height','auto');
+            //         // $('.not-mobile .cbanner .image img').css('width','100%');
+            //     }
+
+            //     if (wW <= 640) $('.cbanner').css('height','auto');
+            // });
 
             $("#slider").mouseenter(function() {
                 $(this).find(".arrow").stop().animate({opacity:1})

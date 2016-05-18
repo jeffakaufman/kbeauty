@@ -388,7 +388,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 			colorCode = classes.replace(/color-swatch-132-/g,"");
 			//console.log(colorCode);
 			//$('.product-'+productID+' .product-options .input-box select option[value*='+colorCode+']').prop('selected', true);
-//console.log($( '.product-'+productID+' .product-options .input-box select option:selected' ).text());
+// console.log($( '.product-'+productID+' .product-options .input-box select option:selected' ).text());
 			if (isQuickview) {
 				$('#attribute132-'+productID).val(colorCode);
 				$('#hidden-attribute-'+productID+'-132').val(colorCode);
@@ -427,6 +427,10 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
             $('.product-'+productID+' .main-image').attr('src',color);
             $('.product-'+productID+' .product-image').data('type','color');
             $('.product-'+productID+' .product-image').data('number',0);
+
+			$("#hidden-attribute-132").val(colorID);
+
+// console.log(colorID);
 		});
 		$('#quickView .super-attribute-select').change(function() {
 //console.log('four');

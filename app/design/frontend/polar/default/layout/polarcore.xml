@@ -116,7 +116,7 @@
 
             <!-- Loaded separatly to speed things up slightly -->
             <action method="addItem"><type>skin_css</type><name>fonts/fonts.css</name><params/></action>
-
+            
             <!-- For small custom changes, edit custom.css -->
             <action method="addCss"><stylesheet>css/custom.css</stylesheet></action>
 
@@ -538,7 +538,8 @@
     </catalog_category_default>
     <catalog_category_layered>
         <reference name="root">
-            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <remove name="catalog.leftnav"/>
+            <action method="setTemplate"><template>page/1column-fullwidth.phtml</template></action>
         </reference>
         <reference name="product_list">
             <action method="setColumnCount"><columns>4</columns></action>

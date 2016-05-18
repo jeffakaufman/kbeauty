@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config>
+  <menu>
+    <cms>
+      <children>
+        <daily_fierce>
+          <title>Daily Fierce</title>
+          <sort_order>4</sort_order>
+          <action>dailyfierce_admin/adminhtml_dailyfierce/index</action>
+        </daily_fierce>
+      </children>
+    </cms>
+  </menu>
+</config>

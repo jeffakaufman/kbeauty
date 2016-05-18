@@ -41,10 +41,7 @@
         $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
     }
 
-    $_catImg = '';
-    if($_catImg = $_category->getData('cat_image')) {
-        $_catImg = Mage::getBaseUrl('media').'catalog/category/'.$_catImg;
-    }
+    $_catImg = $_category->getImageUrl();
 
     $_textColor = $_category->getData('text_color');
 
@@ -61,16 +58,27 @@
     >
       <div class="text">
         <div class="title"
-            <?php if($_textColor): ?>
+            <?php /*if($_textColor): ?>
                 style="color: #<?php echo $_textColor; ?>"
-            <?php endif; ?>
+            <?php endif;*/ ?>
             ><?php echo $categoryName ?></div>
-        <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+        <?php if($_description=$_category->getDescription()): ?>
           <div class="subtitle"><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></div>
         <?php endif; ?>
       </div>
 </div>
 
+<div id="subcategories">
+    <ul>
+        <li class="item selected" data-filter="all">All</li>
+        <?php $subcategories = Mage::getModel('catalog/category')->getCategories($_category->getId());
+
+        foreach ($subcategories as $subcategory){
+            echo '<li class="item" data-filter="'.str_replace('+', '', str_replace(' ', '', strtolower($subcategory->getData('name') ) ) ).'">'.$subcategory->getData('name').'</li>';
+             //print_r($subcategory->getData());
+        } ?>
+    </ul>
+</div>
 <?php if($this->isContentMode()): ?>
     <?php echo $this->getCmsBlockHtml() ?>
 

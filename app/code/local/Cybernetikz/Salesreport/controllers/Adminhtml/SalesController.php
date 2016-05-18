@@ -202,7 +202,8 @@ public function indexAction()
 				$payment = $myOrder->getPayment();
 				$paymentAdditionalData = $payment->getAdditionalInformation();
 
-				$paymentType = $paymentAdditionalData['method'];
+//				$paymentType = $paymentAdditionalData['method'];
+				$paymentType = $payment->getMethod();
 				switch($paymentType) {
 					case 'CC':
 						$paymentType = "Credit Card";
