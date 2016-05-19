@@ -431,7 +431,7 @@ if($dailyFierce) {
         margin: 5em auto;
     }
     .cbanner .text {
-        width: 50%;
+        width: 55%;
         position: relative;
         display: table-cell;
         vertical-align: middle;
@@ -453,7 +453,7 @@ if($dailyFierce) {
         position: relative;
         vertical-align: bottom;
         height: 100%;
-        width: 45%;
+        width: 40%;
     }
     .cbanner.textleft .image {
         text-align: left;
@@ -490,7 +490,7 @@ if($dailyFierce) {
         height: 150px;
     }
     .quote .text {
-        font-size: 3em;
+        font-size: 2.5em;
     }
 }
 @media only screen and (max-width: 40em) {
@@ -591,6 +591,9 @@ if($dailyFierce) {
     .cbanner button, .cbanner .button {
         padding: 0.5em 1em;
         font-size: 0.7em;
+    }
+    .quote {
+        margin: 10px auto;
     }
     .quote .text {
         font-size: 2.5em;
@@ -695,8 +698,8 @@ if($dailyFierce) {
             function cbannerLayout() {
                 $('.cbanner').delay(1000).animate({opacity:1});
                 $('.cbanner').each(function() {
-                    var imageWidth = 45;
-                    var textWidth = 50;
+                    var imageWidth = 40;
+                    var textWidth = 55;
                     var f = 0.1;
                     
                     var cbannerImage = $(this).find('.image img').height() - 60;
@@ -727,16 +730,16 @@ if($dailyFierce) {
                     }
                 });
                     
-                //if (wW <= 640) {
-                    $('.quote').each(function() {
-                        var quoteHeight = $(this).find('.text').height() + 60;
-                        $(this).find('.bg').css('height',quoteHeight);
-                    });
-                // } else {
-                //     $('.quote').each(function() {
-                //         $(this).find('.bg').css('height','');
-                //     });
-                // }
+                
+                $('.quote').each(function() {
+                    if (wW > 1024) {
+                        var quoteHeight = $(this).find('.text').height() + 140;
+                    } else {
+                        var quoteHeight = $(this).find('.text').height() + 80;
+                    }
+                    $(this).find('.bg').css('height',quoteHeight);
+                });
+
             }
             cbannerLayout();
             $('.cbanner').each(function() {
