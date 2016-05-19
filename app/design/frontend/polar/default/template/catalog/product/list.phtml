@@ -69,12 +69,22 @@
                 <li class="item lazy item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?><?php foreach ($categoryTag as $value) { echo ' '.$value; } ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
                   
                   <?php
+//var_dump($_product->getAttributeText('k_sister_fave'));
+//var_dump($_product->getResource()->getAttribute('k_sister_fave')->getFrontend()->getValue($_product));
+//var_dump($_product->getData('k_sister_fave'));
                    if ($_product->getFinalPrice() < $_product->getPrice()):?>
                        <?php echo $this->getChildHtml('polar.sale.item') ?>
                   <?php endif; ?><?php $_category = Mage::getModel('catalog/category')->load($currentCat->getParentId());  $_subcategories = $_category->getChildrenCategories();?>
                   <div class="item-wrapper">
                     <a href="<?php echo $_product->getProductUrl() ?>">
-                      <div class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></div>
+                      <div class="product-image" style="position:relative;">
+                          <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                        <?php if('1' == $_product->getData('k_sister_fave')) { ?>
+                          <div class="sisters-fav" style="position:relative;text-align:left;left:47px;bottom:75px;">
+                              <img src="http://kbeauty.com/media/lips_icon.png" style="box-shadow: none;" />
+                          </div>
+                        <?php } ?>
+                      </div>
                       <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></h3>
                       <div class="category"><?php echo implode(", ",$categoryName); ?></div>
                       <?php /*if($_product->getRatingSummary()): ?>
