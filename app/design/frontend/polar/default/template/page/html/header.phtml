@@ -26,6 +26,20 @@
 /**
  * @var Mage_Page_Block_Html_Header $this
  */
+//if($_SERVER['REQUEST_URI'] == "/checkout/cart/"){
+//
+//        $newTime = time();
+//        $oldTime = $_COOKIE['cart_time'] + 10;
+//        if($oldTime < $newTime || empty($_COOKIE['cart_time'])){
+//                //Set cookie for page reload, check if page already reloaded
+//                $cookie_name = "cart_time";
+//                $cookie_value = time();
+//                setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
+//                header("Refresh:0");
+//        }else{
+//
+//        }
+//}
 ?>
 <?php echo $this->getChildHtml('topMenu') ?>
 <?php $count = $this->helper('checkout/cart')->getSummaryCount(); ?>
