@@ -77,16 +77,17 @@
                 <div class="item-wrapper">
                   <a href="<?php echo $parent->getProductUrl() ?>?color=<?php echo $_attribute_id; ?>">
                     <span class="product-image"><img src="<?php if ($_imgUrl) echo $_imgUrl; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></span>
-                    <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h3>
-                    <?php /*if($_product->getRatingSummary()): ?>
-                      <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
-                    <?php endif;*/ ?>
-
-                    <div class="attribute">
-                      <?php if ($_attribute_name != 'None') echo $_attribute_name; ?>
-                    </div>
-                    <?php echo $this->getPriceHtml($_product, true) ?>
                   </a>
+                  <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h3>
+                  <?php /*if($_product->getRatingSummary()): ?>
+                    <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                  <?php endif;*/ ?>
+
+                  <div class="attribute">
+                    <?php if ($_attribute_name != 'None') echo $_attribute_name; ?>
+                  </div>
+                  <?php echo $this->getPriceHtml($_product, true) ?>
+                  
                   <div class="actions">
                       <?php if ($_product->isSaleable()): ?>
                       <?php $_parentId = Mage::getResourceSingleton('catalog/product_type_configurable')->getParentIdsByChild($_product->getId()); ?>

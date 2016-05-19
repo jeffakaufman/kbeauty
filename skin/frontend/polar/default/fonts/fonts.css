@@ -52,7 +52,7 @@ e001 - Trash can
 }
 */
  
- [class^="icon-"]:before, [class*=" icon-"]:before {
+ [class^="icon-"]:before, [class*=" icon-"]:before, .arrow-icon:before {
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
@@ -87,8 +87,8 @@ e001 - Trash can
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-arrow_left:before { content: '\e800'; } /* '' */
-.icon-arrow_right:before { content: '\e801'; } /* '' */
+.icon-arrow_left:before, .arrow-icon.left:before { content: '\e800'; } /* '' */
+.icon-arrow_right:before, .arrow-icon.right:before { content: '\e801'; } /* '' */
 .icon-plus:before { content: '\e802'; } /* '' */
 .icon-facebook:before { content: '\e803'; } /* '' */
 .icon-instagram:before { content: '\e804'; } /* '' */

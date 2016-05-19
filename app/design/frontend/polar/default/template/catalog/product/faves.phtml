@@ -47,7 +47,7 @@
       <?php $row = 0; $i=0; ?>
       <?php foreach ($_productCollection as $_product): ?>
           <?php if ($i%$_columnCount==0): ?>
-          <div id="group<?php echo $row ?>" class="row group" data-group="<?php echo $row ?>">
+          <div id="group<?php echo $row ?>" class="row<?php if ($_collectionSize > 3) : ?> multi<?php endif; ?> group" data-group="<?php echo $row ?>">
             <?php //print_r($_product) ?>
             <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-3 products-grid" data-equalizer>
           <?php endif ?>
