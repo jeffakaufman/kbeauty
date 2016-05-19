@@ -97,7 +97,7 @@ text-shadow:1px 1px #1a1a1a;padding:0 22px;text-transform:uppercase;cursor:point
 .va_choices{padding-top:10px;margin-bottom:10px;}
 .va_choice_row{text-align:left;}
 .va_choice{float:left;}
-.va_choice input{margin-top:-2px;margin-right:5px;display:initial;}
+.va_choice input{margin-top:-2px;margin-right:5px;}
 .va_info{float:left;text-align:left;}
 
 .bs_tit{font-size:14px;font-weight:bold;margin-bottom:5px;}
