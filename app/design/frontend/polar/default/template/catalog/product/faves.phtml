@@ -59,7 +59,41 @@
                   <?php endif; ?>
                   <div class="item-wrapper">
                     <a href="<?php echo $_product->getProductUrl() ?>">
-                      <div class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></div>
+                      <div class="product-image">
+                          <span class="product-image-wrapper" style="width: 400px;display: inline-block;top: 0px;max-width: 100%;position: relative;">
+                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+                              <?php if('1' == $_product->getData('k_sister_fave')) { ?>
+                                  <div class="sisters-fav" style="position:absolute;text-align:left;left:0px;bottom:0px;width:400px;max-width:100%;display:inline-block;">
+                                      <img src="http://kbeauty.com/media/lips_icon.png" style="box-shadow: none;" />
+                                  </div>
+                              <?php }
+                              switch($_product->getAttributeText('top_logo')) {
+                                  case 'New Colors':
+                                      ?>
+                                      <div class="new-colors" style="position:absolute;text-align:center;left:0px;top:12px;width:400px;max-width:100%;display:inline-block;font-weight:bold;font-size:18pt;">
+                                            <span>NEW COLORS</span>
+                                      </div>
+                                      <?php
+                                      break;
+
+                                  case 'New Products':
+                                      ?>
+                                      <div class="new-products" style="position:absolute;text-align:center;left:0px;top:12px;width:400px;max-width:100%;display:inline-block;font-weight:bold;font-size:18pt;">
+                                            <span>NEW PRODUCTS</span>
+                                      </div>
+                                      <?php
+                                      break;
+
+                                  default:
+                                      //Do Nothing
+                                      break;
+                              }
+
+                              ?>
+                           </span>
+
+<!--                          <img src="--><?php //echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?><!--" alt="--><?php //echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?><!--" />-->
+                      </div>
                       <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h3>
                       <div class="category"><?php echo Mage::getModel('catalog/category')->load($categories[0])->getName(); ?></div>
                       <?php /*if($_product->getRatingSummary()): ?>
