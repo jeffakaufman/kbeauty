@@ -1008,9 +1008,8 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 					app_id: 770199153099219,
 					//display: 'dialog',
 					link: 'http://kardashianbeauty.hellojrdev.com/',
-            picture: 'http://kardashianbeauty.hellojrdev.com/media/wysiwyg/images/khloe2.jpg',
-//					picture: $scope.videoInfo.thumbnailUrl,
-					//source: $scope.videoInfo.videoUrl,
+            // picture: 'http://kardashianbeauty.hellojrdev.com/media/wysiwyg/images/khloe2.jpg',
+            		picture: 'http://kbeauty.com/media/KBeauty_FBShare.jpg',
 					source: '',
 					name: "YEAH!!!",
 					caption: "Take A Look",
@@ -1019,7 +1018,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 					ref: "Public"
 				};
 
-//console.log(requestObj);
+// console.log(requestObj);
 
 				function _fbShare(error, response) {
 
@@ -1029,6 +1028,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 						return;
 					}
 
+					console.log(requestObj);
 					console.log(response);
 
 					FB.ui(requestObj, function(response){
@@ -1040,6 +1040,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 
 				FB.getLoginStatus(function(response) {
 					if (response.status == 'connected') {
+console.log(response);
 						FB.api('/me', function(response) {
 							_fbShare(null, response);
 						});
