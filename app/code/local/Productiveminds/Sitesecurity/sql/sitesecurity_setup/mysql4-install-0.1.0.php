@@ -189,11 +189,11 @@ $installer->run("
 	INSERT INTO `{$installer->getTable('sitesecurity/acl')}` (`code`, `description`, `status`)
 	values
 	('{$ACL_CODE_NONE}', 'admin', 1),
-	('{$ACL_CODE_BLACKLIST_COUNTRY}', 'Blacklist a Country', 1),
-	('{$ACL_CODE_BLACKLIST_IP}', 'Blacklist an IP Address', 1),
-	('{$ACL_CODE_XSS}', 'Block an XSS Threat', 1),
-	('{$ACL_CODE_SQL_INJECTION}', 'Block an SQl Injection', 1),
-	('{$ACL_CODE_EMAIL_INJECTION}', 'Block an Email Injection', 1);
+	('{$ACL_CODE_BLACKLIST_COUNTRY}', 'Blacklisted Country', 1),
+	('{$ACL_CODE_BLACKLIST_IP}', 'Blacklisted IP Address', 1),
+	('{$ACL_CODE_XSS}', 'Blocked XSS Threat', 1),
+	('{$ACL_CODE_SQL_INJECTION}', 'Blocked SQL Injection', 1),
+	('{$ACL_CODE_EMAIL_INJECTION}', 'Blocked Email Injection', 1);
 ");
 
 $installer->run("

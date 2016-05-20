@@ -4,7 +4,7 @@ class Productiveminds_Sitesecurity_Block_Adminhtml_Customer_Visitor_Grid_Rendere
 {
     public function render(Varien_Object $row)
     {
-        return long2ip($row->getData($this->getColumn()->getIndex()));
+    		return long2ip($row->getData($this->getColumn()->getIndex()));
     }
-
+    
 }

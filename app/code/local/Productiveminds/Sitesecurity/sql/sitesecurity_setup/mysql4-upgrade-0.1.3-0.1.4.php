@@ -11,7 +11,7 @@ $installer->run("
 		`type_code` varchar(24) NOT NULL COMMENT 'ACL Type (e.g xssBlock)',
 		`store_id` int(10) unsigned NOT NULL default '0',
 		`customer_id` int(11) NOT NULL DEFAULT '0' COMMENT 'Customer ID',
-		`url` varchar(255) NOT NULL COMMENT 'Visited URL',
+		`url` text COMMENT 'Visited URL',
 		`server_addr` bigint(20) DEFAULT NULL COMMENT 'Server Address',
 	  	`remote_addr` bigint(20) DEFAULT NULL COMMENT 'Remote Address',
 		`visitor_country` varchar(4) NOT NULL default '',

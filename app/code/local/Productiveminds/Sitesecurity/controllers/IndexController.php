@@ -4,6 +4,7 @@ class Productiveminds_Sitesecurity_IndexController extends Mage_Core_Controller_
 {
     public function indexAction() {
     	$this->loadLayout();
+    	Mage::getModel('sitesecurity/cleanhouse')->updateVisitor();
     	$this->renderLayout();
     }
     

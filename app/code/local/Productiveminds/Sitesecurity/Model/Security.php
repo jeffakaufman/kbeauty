@@ -28,6 +28,7 @@ class Productiveminds_Sitesecurity_Model_Security extends Mage_Core_Model_Abstra
 	const BLACKLIST_ACTION_MESSAGE = 'Blacklist IP Address(s)';
 	
 	const BLACKLISTED_FROM_VISITOR = 'From visitor list';
+	const BLACKLISTED_FROM_ATTEMPT = 'From threat attempt';
 	const BLACKLISTED_FROM_ORDER = 'From a completer order';
 	const BLACKLISTED_FROM_REVIEW = 'From a completed product review';
 	const BLACKLISTED_FROM_COUNTRY = 'Country';

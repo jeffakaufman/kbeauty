@@ -38,13 +38,11 @@ class Productiveminds_Sitesecurity_Model_Email extends Mage_Core_Model_Abstract
 		$timeSinceLastEmail = new DateTime('Yesterday 07:14:59');
 		$timeSinceLastEmail = $timeSinceLastEmail->format('Y-m-d H:i:s');
 		
-		// Get order model
 		$deniedAttempts = Mage::getModel('sitesecurity/sitesecure')
 		->getCollection()
-		->addFieldToFilter('created_at ', array('gt'=> $timeSinceLastEmail)); // get all since 7:15am yesterday
+		->addFieldToFilter('created_at', array('gt'=> $timeSinceLastEmail));
 		
 		if (count($deniedAttempts) > 0 ) {
-			
 			$translate = Mage::getSingleton('core/translate');
 			$translate->setTranslateInline(false);
 			$data = array(
@@ -67,7 +65,7 @@ class Productiveminds_Sitesecurity_Model_Email extends Mage_Core_Model_Abstract
 			}
 			
 			$data['total'] = count($deniedAttempts);
-			$data['admin_url'] = Mage::getUrl('sitesecurity_admin/adminhtml_sitesecure');
+			$data['admin_url'] = Mage::getUrl('adminhtml/adminhtml_sitesecure');
 			
 			try {
 				$dataObject = new Varien_Object();

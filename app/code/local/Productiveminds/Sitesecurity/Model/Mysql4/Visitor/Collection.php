@@ -3,15 +3,20 @@
 class Productiveminds_Sitesecurity_Model_Mysql4_Visitor_Collection
     extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
+	
+
 	public function getVisitorInfo() {
+		$log_url_info_table = Mage::getSingleton('core/resource')->getTableName('log/url_info_table');
 		$this->getSelect()
 		->joinLeft(
-				array('luit' => 'log_url_info'),
+				array('luit' => $log_url_info_table),
 					'luit.url_id = main_table.last_url_id',
 					array('url', 'referer'))
 					->order('main_table.last_visit_at DESC');
 		return $this;
 	}
+
+
 	
 	public function addStoreFilter($store = null) {
 		if ($store === null) {

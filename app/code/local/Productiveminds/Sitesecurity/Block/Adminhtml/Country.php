@@ -30,7 +30,7 @@ class Productiveminds_Sitesecurity_Block_Adminhtml_Country extends Mage_Adminhtm
     	$this->setChild('add_new_group_button', $this->getLayout()->createBlock('adminhtml/widget_button')
     			->setData(array(
     					'label' => Mage::helper('sitesecurity')->__('Add a New Continent / Group'),
-    					'onclick' => "setLocation('" . $this->getUrl('sitesecurity_admin/adminhtml_countrycat/new') . "')",
+    					'onclick' => "setLocation('" . $this->getUrl('adminhtml/adminhtml_countrycat/new') . "')",
     					'class' => 'add'
     			))
     	);

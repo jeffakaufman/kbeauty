@@ -25,32 +25,25 @@
 class Productiveminds_Sitesecurity_Model_Observer
 {
 	public function saveAfterCustomerOrder(Varien_Event_Observer $observer) {
-		$order = $observer->getEvent()->getOrder();
-		$orderStoreId = $order->getStoreId();
-		$ipAddy = Mage::helper('core/http')->getRemoteAddr();
-		$ipAddy = Mage::getModel('sitesecurity/security')->getIp2long($ipAddy);
 		
-		if (!$order) {
-			return $this;
-		}
-		try {
-			$order->setPmsSitesecurityIp($ipAddy);
-			$order->save();
-		} catch (Exception $e) {
-			Mage::log('Productiveminds_Sitesecurity_Model_Observer::saveAfterCustomerOrder - failed. Unable to add customer IP address to order', null, 'Productiveminds_Sitesecurity.log');
-		}
-	}
-	
-	
-	public function mailDeniedAttemps() {
-		// do only if module is enabled
-		if (Mage::helper('sitesecurity')->isModuleActive() && Mage::getStoreConfig('sitesecurity_sectns/sitesecurity_grps/email_daily_report')) {
-			$items = Mage::getModel('sitesecurity/email')->sendEmail();
-		} else {
-			Mage::log('Productiveminds_Sitesecurity_Model_Observer::mailDeniedAttemps - denied attempts email is disabled', null, 'Productiveminds_Sitesecurity.log');
+		if ( Mage::helper('sitesecurity')->isModuleActive() ) {
+			
+			$order = $observer->getEvent()->getOrder();
+			$orderStoreId = $order->getStoreId();
+			$ipAddy = Mage::helper('core/http')->getRemoteAddr();
+			$ipAddy = Mage::getModel('sitesecurity/security')->getIp2long($ipAddy);
+			
+			if (!$order) {
+				return $this;
+			}
+			try {
+				$order->setPmsSitesecurityIp($ipAddy);
+				$order->save();
+			} catch (Exception $e) {
+				Mage::log('Productiveminds_Sitesecurity_Model_Observer::saveAfterCustomerOrder - failed. Unable to add customer IP address to order', null, 'Productiveminds_Sitesecurity.log');
+			}
 		}
 	}
-	
 	
 	public function blockAllSpecified($observer = null) {
 		

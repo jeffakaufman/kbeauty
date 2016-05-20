@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Productiveminds_Sitesecurity>
-            <version>0.1.6</version>
+            <version>0.1.8</version>
         </Productiveminds_Sitesecurity>
     </modules>
     <adminhtml>
@@ -180,9 +180,28 @@
                    	<cron_expr>15 7 * * *</cron_expr>
                 </schedule>
                 <run>
-                    <model>sitesecurity/observer::mailDeniedAttemps</model>
+                    <model>sitesecurity/cron::mailDeniedAttemps</model>
                 </run>
             </sitesecurity_generate>
+            <sitesecurity_updatevisitor>
+                <schedule>
+                	<!-- run at even hours of the day -->
+                    <cron_expr>0 0,2,4,6,8,10,12,14,16,18,20,22 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>sitesecurity/cron::updateVisitor</model>
+                </run>
+            </sitesecurity_updatevisitor>
+            <sitesecurity_cleanhouse>
+                <schedule>
+                	<!-- run at 00:00Hrs on the 1st day of every month -->
+                    <cron_expr>0 3 1 * *</cron_expr>
+                    <!-- run at 00:00Hrs on the 1st day of every month -->
+                </schedule>
+                <run>
+                    <model>sitesecurity/cron::cleanHouse</model>
+                </run>
+            </sitesecurity_cleanhouse>
         </jobs>
     </crontab>
 </config>

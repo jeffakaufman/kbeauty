@@ -4,7 +4,7 @@
  *
  * NOTICE OF LICENSE
  *
- * This code is the effort and copyright of Productive Minds Ltd, A UK registered company.
+ * This code is the work and copyright of Productive Minds Ltd, A UK registered company.
  * The copyright owner prohibit any fom of distribution of this code
  *
  * DISCLAIMER
@@ -22,25 +22,26 @@
  * @author     	ProductiveMinds <info@productiveminds.com>
  */
 
-class Productiveminds_Sitesecurity_Model_Visitor extends Mage_Core_Model_Abstract
+class Productiveminds_Sitesecurity_Model_Cron
 {
-	const VISITOR_TYPE_CUSTOMER = 'c';
-	const VISITOR_TYPE_VISITOR  = 'v';
-	
-	public function _construct()
-	{
-		parent::_construct();
-		$this->_init('sitesecurity/visitor');
+	public function mailDeniedAttemps() {
+		if (Mage::helper('sitesecurity')->isModuleActive() && Mage::getStoreConfig('sitesecurity_sectns/sitesecurity_grps/email_daily_report')) {
+			$items = Mage::getModel('sitesecurity/email')->sendEmail();
+		} else {
+			Mage::log('Productiveminds_Sitesecurity_Model_Observer::mailDeniedAttemps - denied attempts email is disabled', null, 'Productiveminds_Sitesecurity.log');
+		}
 	}
 	
-	/* Add Filter by status
-	*
-	* @param int $visitor_id
-	* @return Productiveminds_Sitesecurity_Model_Visitor
-	*/
-	public function addVisitorInfoFilter($visitor_id) {
-		$this->getSelect()->where('main_table.visitor_id = ?', $visitor_id);
-		return $this;
+	public function updateVisitor() {
+		if ( Mage::helper('sitesecurity')->isModuleActive() ) {
+			Mage::getModel('sitesecurity/cleanhouse')->updateVisitor();
+		}
 	}
-
+	
+	public function cleanHouse() {
+		if ( Mage::helper('sitesecurity')->isModuleActive() ) {
+			Mage::getModel('sitesecurity/cleanhouse')->doCleanHouse();
+		}
+	}
+	
 }

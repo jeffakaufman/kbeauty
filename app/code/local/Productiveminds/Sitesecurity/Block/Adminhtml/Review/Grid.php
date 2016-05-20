@@ -10,7 +10,7 @@ class Productiveminds_Sitesecurity_Block_Adminhtml_Review_Grid extends Mage_Admi
 		if ( Mage::helper('sitesecurity')->isModuleActive() ) {
 			$this->getMassactionBlock()->addItem('blacklist_id', array(
 					'label' => Mage::helper('sitesecurity')->__(Productiveminds_Sitesecurity_Model_Security::BLACKLIST_ACTION_MESSAGE),
-					'url' => $this->getUrl('sitesecurity_admin/adminhtml_blacklist/blacklistipfromreview'),
+					'url' => $this->getUrl('adminhtml/adminhtml_blacklist/blacklistipfromreview'),
 					'confirm' => Mage::helper('sitesecurity')->__('Blocking multiple visitors - are you sure?')
 			));
 		}

@@ -9,6 +9,9 @@ class Productiveminds_Sitesecurity_Block_Adminhtml_Customer_Visitor_Grid extends
         $this->setSaveParametersInSession(true);
         $this->setDefaultSort('last_activity');
         $this->setDefaultDir('DESC');
+        
+        // get the latest visitors for this request
+        Mage::getModel('sitesecurity/cleanhouse')->updateVisitor();
     }
     
     protected function _getStore() {

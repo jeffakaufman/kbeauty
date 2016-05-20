@@ -96,6 +96,48 @@ class Productiveminds_Sitesecurity_Adminhtml_BlacklistController extends Mage_Ad
     	return $this;
     }
     
+    public function massblacklistattemptAction() {
+    	$sitesecurityIds = $this->getRequest()->getParam('sitesecuritys');
+    	if (!is_array($sitesecurityIds)) {
+    		Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Please select shome items(s)'));
+    	} else {
+    		try {
+    			foreach ($sitesecurityIds as $sitesecurityId) {
+    				$visitor = Mage::getModel('sitesecurity/sitesecure')->load($sitesecurityId);
+    				$user = Mage::getSingleton('admin/session')->getData('user');
+    				$isAlreadyBlacklisted = Mage::getModel('sitesecurity/blacklist')->load($visitor->getRemoteAddr(), 'remote_addr');
+    				if (null != $isAlreadyBlacklisted && !empty($isAlreadyBlacklisted) && $isAlreadyBlacklisted->getStatus() == 1) {
+    					// Do nothing, IP address is already blacklisted.
+    				} else {
+    					$blacklistModel = Mage::getModel('sitesecurity/blacklist');
+    					$blacklistModel->setAclCode(Productiveminds_Sitesecurity_Model_Security::ACL_CODE_BLACKLIST_IP);
+    					$blacklistModel->setUserId($user->getId());
+    					$blacklistModel->setServerAddr($visitor->getServerAddr());
+    					$blacklistModel->setRemoteAddr($visitor->getRemoteAddr());
+    					$blacklistModel->setBlacklistedFrom(Productiveminds_Sitesecurity_Model_Security::BLACKLISTED_FROM_ATTEMPT);
+    					$blacklistModel->setStatus(Productiveminds_Sitesecurity_Model_System_Config_Source_Status::ALLOWED);
+    					$blacklistModel->setUpdatedAt(gmdate('Y-m-d H:i:s'));
+    					$blacklistModel->save();
+    				}
+    				unset($isAlreadyBlacklisted);
+    			}
+    			Mage::getSingleton('adminhtml/session')->addSuccess(
+    					Mage::helper('adminhtml')->__(
+    							'%d IP address(es) were successully blacklisted', count($sitesecurityIds)
+    					)
+    			);
+    		} catch (Exception $e) {
+    			Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+    		}
+    	}
+    	$refererUrl = $this->_getRefererUrl();
+    	if (empty($refererUrl)) {
+    		$this->_redirect('*/*/');
+    	}
+    	$this->getResponse()->setRedirect($refererUrl);
+    	return $this;
+    }
+    
     public function massblacklistipAction() {
     	$sitesecurityIds = $this->getRequest()->getParam('sitesecuritys');
     	if (!is_array($sitesecurityIds)) {

@@ -136,6 +136,12 @@ class Productiveminds_Sitesecurity_Block_Adminhtml_Sitesecure_Grid extends Mage_
     			'confirm' => Mage::helper('sitesecurity')->__('Deleting multiple items - are you sure?')
     	));
     	
+    	$this->getMassactionBlock()->addItem('blacklist_id', array(
+    			'label' => Mage::helper('sitesecurity')->__(Productiveminds_Sitesecurity_Model_Security::BLACKLIST_ACTION_MESSAGE),
+    			'url' => $this->getUrl('adminhtml/adminhtml_blacklist/massblacklistattempt'),
+    			'confirm' => Mage::helper('sitesecurity')->__('Blocking multiple visitors - are you sure?')
+    	));
+    	
     	return $this;
     }
 

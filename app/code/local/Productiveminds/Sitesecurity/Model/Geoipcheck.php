@@ -1,8 +1,10 @@
 <?php
 
-include_once("Productiveminds/MaxMind/geoip/geoip.php");
-include_once("Productiveminds/MaxMind/geoip/geoipcity.php");
-include_once("Productiveminds/MaxMind/geoip/geoipregionvars.php");
+if(!function_exists('geoip_load_shared_mem')) {
+	include_once("Productiveminds/MaxMind/geoip/geoip.php");
+	include_once("Productiveminds/MaxMind/geoip/geoipcity.php");
+	include_once("Productiveminds/MaxMind/geoip/geoipregionvars.php");
+}
 
 class Productiveminds_Sitesecurity_Model_Geoipcheck
 {
