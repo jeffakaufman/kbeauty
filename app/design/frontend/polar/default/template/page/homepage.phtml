@@ -170,6 +170,7 @@ array (size=14)
             <div class="cbanner-mobile"><button type="button" title="Shop #summersquad" class="button mobile-button"><span><span>SHOP #summersquad</span></span></button></div>
 
 -->
+<!--
 <?php
 $dfHelper = $this->helper('dailyfierce');
 /**
@@ -190,14 +191,12 @@ if($dailyFierce) {
 //                            var_dump($dailyFierce->getData());
                             echo $dailyFierce->getData('details_content');
                             ?>
-<!--                        I’m a woman.<br>
-                        What’s your superpower?
--->
                         <div class="tweet"><a href="https://twitter.com/share?url=<?php echo urlencode('https://kbeauty.com'); ?>&hashtags=DailyFierce&text=<?php echo strip_tags($dailyFierce->getData('details_content') ); ?>" class="sharelink">Tweet <span class="icon icon-twitter"></span></a></div>
                     </div>
                 </div>
             </div>
 <?php } ?>
+-->
             <?php echo $this->getChildHtml('faves') ?>
             <?php echo $this->getChildHtml('bestsellers') ?>
           </div>
