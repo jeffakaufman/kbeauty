@@ -115,14 +115,16 @@
                     </div>
                   </div><!-- /item-wrapper -->
                 </li>
-        <?php $i++; 
+        <?php $i++;
+            if ($i % $_columnCount==0 && $_product->getTypeId() == "configurable") {
+                ++$row;
+                ?>
+                </ul>
+                </div>
+                <?php
+            }
         } ?>
 
-        <?php if ($i % $_columnCount==0 && $_product->getTypeId() == "configurable") { ?>
-          <?php $row++ ?>
-            </ul>
-          </div>
-        <?php } ?>
 
 
     <?php endforeach ?>
