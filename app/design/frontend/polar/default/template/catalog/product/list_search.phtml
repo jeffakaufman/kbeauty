@@ -72,7 +72,30 @@
                                   <div class="sisters-fav" style="position:absolute;text-align:left;left:0px;bottom:0px;width:400px;max-width:100%;display:inline-block;">
                                       <img src="http://kbeauty.com/media/lips_icon.png" style="box-shadow: none;" />
                                   </div>
-                              <?php } ?>
+                              <?php }
+                              switch($_product->getAttributeText('top_logo')) {
+                                  case 'New Colors':
+                                      ?>
+                                      <div class="new-colors" style="position:absolute;text-align:center;left:0px;top:12px;width:400px;max-width:100%;display:inline-block;font-weight:bold;font-size:18pt;">
+                                            <span>NEW COLORS</span>
+                                      </div>
+                                      <?php
+                                      break;
+
+                                  case 'New Products':
+                                      ?>
+                                      <div class="new-products" style="position:absolute;text-align:center;left:0px;top:12px;width:400px;max-width:100%;display:inline-block;font-weight:bold;font-size:18pt;">
+                                            <span>NEW PRODUCTS</span>
+                                      </div>
+                                      <?php
+                                      break;
+
+                                  default:
+                                      //Do Nothing
+                                      break;
+                              }
+
+                              ?>
                            </span>
                       </div>
                       <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></h3>
