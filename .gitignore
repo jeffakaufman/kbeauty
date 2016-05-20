@@ -21,6 +21,7 @@ sitemap.xml
 app/etc/config.xml
 app/etc/local.xml
 media/
+media
 
 deploy/
 deploy
