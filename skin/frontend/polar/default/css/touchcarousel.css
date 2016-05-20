@@ -97,11 +97,12 @@
 	width: 45px;
 	height: 90px;
 	top:50%;
+	font-size: 38px;
 	margin-top:-45px;	
 	position: absolute;	
 	cursor: pointer;	
 }
-.touchcarousel .arrow-icon.left { }
+.touchcarousel .arrow-icon.left { float}
 .touchcarousel .arrow-icon.right { }
 .touchcarousel .arrow-holder:hover .arrow-icon { }
 .touchcarousel .arrow-holder.disabled { cursor: default; }

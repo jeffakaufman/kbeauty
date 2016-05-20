@@ -771,7 +771,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 	});
 	$('input[type=radio],input[type=checkbox]').next('label').prepend('<span class="custom"></span>');
 
-	$('<div id="morePlus"><span class="icon icon-plus"></span></div>').insertAfter('.cms-home #group0, .block-related #group0');
+	$('<div id="morePlus"><span class="icon icon-plus"></span></div>').insertAfter('.cms-home #group0.multi, .block-related #group0');
 	$('#morePlus .icon').click(function() {
 
 		if ($('#quickView').hasClass('opened')) {
@@ -1008,8 +1008,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 					app_id: 770199153099219,
 					//display: 'dialog',
 					link: 'http://kardashianbeauty.hellojrdev.com/',
-            // picture: 'http://kardashianbeauty.hellojrdev.com/media/wysiwyg/images/khloe2.jpg',
-            picture: 'http://kbeauty.com/media/KBeauty_FBShare.jpg',
+            picture: 'http://kardashianbeauty.hellojrdev.com/media/wysiwyg/images/khloe2.jpg',
 //					picture: $scope.videoInfo.thumbnailUrl,
 					//source: $scope.videoInfo.videoUrl,
 					source: '',
