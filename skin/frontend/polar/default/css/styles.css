@@ -9198,6 +9198,9 @@ body.catalog-category-view .category-products, body.catalogsearch-result-index .
         opacity: 1;
         padding-top: 1.5rem;
     }
+    body.catalogsearch-result-index .group.opened, body.catalogsearch-result-index .group.loaded {
+        padding-top: 3.5rem;
+    }
 
 body.catalog-category-view .group, #group0 {
     opacity: 1;
