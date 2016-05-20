@@ -130,12 +130,15 @@
                     </div>
                   </div><!-- /item-wrapper -->
                 </li>
-                <?php if($i% $_columnCount==0) { ?>
-                </div>
-              </ul>
+                <?php ++$i; ?>
+                <?php if($i% $_columnCount==0) {
+                    ++$row;
+                ?>
+                </ul>
+              </div>
             <?php } ?>
 
-        <?php $i++; 
+        <?php
         } ?>
 
     <?php endforeach ?>
