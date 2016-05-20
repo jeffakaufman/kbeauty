@@ -50,7 +50,6 @@
 
     <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" data-equalizer>
     <?php foreach ($_productCollection as $_product): ?>
-<?php var_dump($i% $_columnCount); ?>
         <?php if ($i% $_columnCount==0 && $_product->getTypeId() == "configurable"): ?>
           <div id="group<?php echo $row ?>" class="row group lazy" data-group="<?php echo $row ?>">
             <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" data-equalizer>

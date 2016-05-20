@@ -48,7 +48,7 @@
     <?php $_collectionSize = $_productCollection->count() ?>
     <?php /*$_columnCount = $this->getColumnCount();*/ ?>
     <?php $_columnCount = 3; ?>
-    <?php $i=0; ?>
+    <?php $i=0; $row=0; ?>
     <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" data-equalizer>
     <?php foreach ($_productCollection as $_product): ?>
         <?php if ($_product->getTypeId() == "configurable") { ?>
@@ -67,6 +67,12 @@
                     }
                   }
                 } ?>
+
+            <?php if($i% $_columnCount==0) { ?>
+        <div id="group<?php echo $row ?>" class="row group lazy" data-group="<?php echo $row ?>">
+            <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" data-equalizer>
+            <?php } ?>
+
                 <li class="item lazy item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?><?php foreach ($categoryTag as $value) { echo ' '.$value; } ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
                   
                   <?php
@@ -124,6 +130,11 @@
                     </div>
                   </div><!-- /item-wrapper -->
                 </li>
+                <?php if($i% $_columnCount==0) { ?>
+                </div>
+              </ul>
+            <?php } ?>
+
         <?php $i++; 
         } ?>
 
