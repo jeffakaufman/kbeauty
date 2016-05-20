@@ -674,7 +674,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 	$('.btn-quick').click(function() {
 		if ($('#closeBtn').length) $('#closeBtn').click();
 		var group = $(this).parents('.row').data('group');
-		//console.log(group);
+console.log(group);
 		/*if ($('#quickView').length) {
 			if (wW > 640) { 
 				$('#quickView').insertAfter('#group'+group);
@@ -688,6 +688,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 				$('<li id="quickView"><div class="loader"><img src="/skin/frontend/polar/default/images/opc-ajax-loader.gif"></div></li>').insertAfter($(this).parent().parent().parent());
 			}		
 		//}
+console.log($('#group'+group));
 console.log($('#quickView'));
 		$('html,body').animate({
 			scrollTop: $('#quickView').offset().top - 40
