@@ -275,11 +275,11 @@ productAddToCartForm.buyNow = function(button, url) {
         var e = null;
 
         if (!url) {
-            url = jQuery('#product_addtocart_form').attr('action');
+            url = jQuery('#product_addtocart_form<?php echo $_product->getId() ?>').attr('action');
         }
         url = url.replace("checkout/cart", "ajax/index");
 
-        var data = jQuery('#product_addtocart_form').serialize();
+        var data = jQuery('#product_addtocart_form<?php echo $_product->getId() ?>').serialize();
         console.log(data);
         data += '&isAjax=1';
         //console.log(data);
