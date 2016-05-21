@@ -147,7 +147,18 @@
 <script type="text/javascript">
 
     (function($) {
+      if(device.desktop()) var wW = window.outerWidth;
+      else var wW = $(window).width();
+      
+      var is_windows = navigator.appVersion.indexOf("Win") != -1;
+      var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+      
+      if (is_windows && is_chrome) wW = parseInt(wW) - 16;
+      $(window).resize(function() {
+        if (is_windows && is_chrome) wW = parseInt(wW) - 16;
+      });
       $('#subcategories .item').click( function() {
+        $('#closeBtn').click();
         var filterValue = $(this).attr('data-filter');
         $('#subcategories .item').removeClass('selected');
         $(this).addClass('selected');
@@ -164,6 +175,41 @@
             $('#temp li.show').slice(0, 3).prependTo('#group'+count+' ul').fadeIn();
             count++;
           }
+          $('.btn-quick').click(function() {
+            if ($('#closeBtn').length) $('#closeBtn').click();
+            var group = $(this).parents('.row').data('group');
+              if (wW > 640) { 
+                $('<div id="quickView"><div class="loader"><img src="/skin/frontend/polar/default/images/opc-ajax-loader.gif"></div></div>').insertAfter('#group'+group);
+              } else {
+                $('<li id="quickView"><div class="loader"><img src="/skin/frontend/polar/default/images/opc-ajax-loader.gif"></div></li>').insertAfter($(this).parent().parent().parent());
+              }   
+            $('html,body').animate({
+              scrollTop: $('#quickView').offset().top - 40
+            }, 500);
+            $('#quickView').addClass('opened');
+            //console.log('opened');
+            $.get( $(this).data('url'), function(data) {
+              $('#quickView').html(data);
+              $('#quickView').prepend('<div id="closeBtn"><span class="icon-delete"></span></div>');
+              //console.log('get');
+              $('#closeBtn').click(function() {
+                //console.log('clicked');
+                $('#quickView').removeClass('opened');
+                if (group == 1) {
+                  $('html,body').animate({
+                    scrollTop: $('#group1').offset().top - 100
+                  }, 1000);
+                } else {
+                  $('html,body').animate({
+                    scrollTop: $('#group'+group).offset().top - 80
+                  }, 1000);
+                }
+                //setTimeout(function(){ $('#quickView').empty(); }, 1000);
+                $('#quickView').remove();
+              });
+              cartActions();
+            });
+          });
         }
       });
       
