@@ -7589,7 +7589,7 @@ body.cms-index-noroute .wrapper .inner-wrap {
 
 .nav-container #nav li a {
     line-height: 1.2em;
-    font-size: 100%;
+    font-size: 85%;
     color: #000;
     text-transform: uppercase;
     text-align: center;
@@ -7620,11 +7620,6 @@ body.cms-index-noroute .wrapper .inner-wrap {
 @media only screen and (min-width: 64.063em) and (max-width: 90em) {
     .nav-container #nav li a {
         font-size: 120%;
-    }
-}
-@media only screen and (min-width: 40.063em) and (max-width: 64em) {
-    .nav-container #nav li a {
-        font-size: 85%;
     }
 }
 
