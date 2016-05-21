@@ -49,7 +49,7 @@
     <?php /*$_columnCount = $this->getColumnCount();*/ ?>
     <?php $_columnCount = 3; ?>
     <?php $i=0; $row=0; ?>
-    <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" data-equalizer>
+    
     <?php foreach ($_productCollection as $_product): ?>
         <?php if ($_product->getTypeId() == "configurable") { ?>
             <?php $cats = $_product->getCategoryIds();
@@ -85,7 +85,7 @@
                           <span class="product-image-wrapper" style="width: 400px;display: inline-block;top: 0px;max-width: 100%;position: relative;">
                             <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
                               <?php if('1' == $_product->getData('k_sister_fave')) { ?>
-                                  <div class="sisters-fav" style="position:absolute;text-align:left;left:0px;bottom:0px;width:400px;max-width:100%;display:inline-block;">
+                                  <div class="sisters-fav" style="position:absolute;text-align:left;left:-15px;top:60px;width:75px;max-width:100%;display:inline-block;">
                                       <img src="http://kbeauty.com/media/lips_icon.png" style="box-shadow: none;" />
                                   </div>
                               <?php }
@@ -101,7 +101,7 @@
                                   case 'New Products':
                                       ?>
                                       <div class="new-products" style="position:absolute;text-align:center;left:0px;top:12px;width:400px;max-width:100%;display:inline-block;font-weight:bold;font-size:18pt;">
-                                            <span>NEW PRODUCT</span>
+                                            <span>NEW PRODUCT!</span>
                                       </div>
                                       <?php
                                       break;
@@ -142,8 +142,8 @@
         } ?>
 
     <?php endforeach ?>
-    </ul>
 </div>
+<div id="temp"></div>
 <script type="text/javascript">
 
     (function($) {
@@ -151,9 +151,20 @@
         var filterValue = $(this).attr('data-filter');
         $('#subcategories .item').removeClass('selected');
         $(this).addClass('selected');
-        $('.category-products li').fadeOut('fast');
-        if (filterValue == 'all') $('.category-products li').fadeIn();
-        else $('.category-products li.'+filterValue).fadeIn();
+        if (filterValue == 'all') {
+          $('.category-products li.show').remove();
+          $('.category-products li').fadeIn();
+        } else { 
+          $('.category-products li.show').remove();
+          $('.category-products li').fadeOut('fast');
+          //$('.category-products li.'+filterValue).length
+          $('.category-products li.'+filterValue).clone().addClass('show').prependTo('#temp');
+          var count = 0;
+          while( $('#temp li.show').length) {
+            $('#temp li.show').slice(0, 3).prependTo('#group'+count+' ul').fadeIn();
+            count++;
+          }
+        }
       });
       
     })(jQuery);
