@@ -56,8 +56,8 @@
                   $_cat = Mage::getModel('catalog/category')->load($category_id) ;
                   
                   $cat = str_replace('+', '', str_replace(' ', '', strtolower($_cat->getName()) ) );
-                  if (!in_array($_cat->getName(), $categoryName) && $_cat->getId() != 65 && $_cat->getId() != 58) {
-                    if ($_cat->getParentCategory()->getId() == 43 || $_cat->getParentCategory()->getId() == 44 || $_cat->getParentCategory()->getId() == 45) {
+                  if (!in_array($_cat->getName(), $categoryName)) {
+                    if ($_cat->getParentCategory()->getName() == 'Eyes' || $_cat->getParentCategory()->getName() == 'Lips' || $_cat->getParentCategory()->getName() == 'Face') {
                       array_push($categoryName, $_cat->getName());
                     }
                   }
