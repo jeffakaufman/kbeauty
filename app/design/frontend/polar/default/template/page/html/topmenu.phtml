@@ -46,7 +46,9 @@
 
     <div id="shopMenu" class="nav-container f-fix closed">
         <ul id="nav" class="large-12 columns">
-          <?php $cats = Mage::getModel('catalog/category')->getCategories(45);
+          <?php $cat = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('name', 'Shop');
+          $cats = Mage::getModel('catalog/category')->getCategories($cat->getFirstItem()->getEntityId());
+
           $width = 100 / $cats->count();
           $i = 1;
           foreach ($cats as $category) {
