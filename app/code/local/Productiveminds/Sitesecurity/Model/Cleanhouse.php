@@ -118,7 +118,7 @@ class Productiveminds_Sitesecurity_Model_Cleanhouse extends Mage_Core_Model_Abst
 		
 		$deniedAttempts = Mage::getModel('sitesecurity/sitesecure')->getCollection()
 			->setOrder('id', 'DESC')
-			->addFieldToFilter('created_at ', array('lt'=> $timeSinceLastCleanUp));
+			->addFieldToFilter('created_at', array('lt'=> $timeSinceLastCleanUp));
 		
 		if (count($deniedAttempts) > 0) {
 			$write = Mage::getSingleton('core/resource')->getConnection('core_write');
