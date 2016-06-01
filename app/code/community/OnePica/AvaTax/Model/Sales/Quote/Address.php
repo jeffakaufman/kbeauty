@@ -16,51 +16,22 @@
  */
 
 /**
- * The Sales Quote Address model.
+ * The Sales Quote Address model
+ *
+ * @category   OnePica
+ * @package    OnePica_AvaTax
+ * @author     OnePica Codemaster <codemaster@onepica.com>
  */
-class OnePica_AvaTax_Model_Sales_Quote_Address extends OnePica_AvaTax_Model_Sales_Quote_Address_Amasty_Pure
+class OnePica_AvaTax_Model_Sales_Quote_Address extends Mage_Sales_Model_Quote_Address
 {
-    /**
-     * Avatax address validator instance
-     *
-     * @var OnePica_AvaTax_Model_Avatax_Address
-     */
-    protected $_avataxValidator = null;
-
-    /**
-     * Validation results array (to avoid double valiadation of same address)
-     *
-     * @var array
-     */
-    static protected $_validationResult = array();
-
-    /**
-     * Avatax address validator accessor method
-     *
-     * @return OnePica_AvaTax_Model_Avatax_Address
-     */
-    public function getAvataxValidator() {
-        return $this->_avataxValidator;
-    }
-
-    /**
-     * Avatax address validator mutator method
-     *
-     * @return OnePica_AvaTax_Model_Avatax_Address
-     * @return self
-     */
-    public function setAvataxValidator(OnePica_AvaTax_Model_Avatax_Address $object) {
-        $this->_avataxValidator = $object;
-        return $this;
-    }
-
     /**
      * Creates a hash key based on only address data for caching
      *
      * @return string
      */
-    public function getCacheHashKey() {
-        if(!$this->getData('cache_hash_key')) {
+    public function getCacheHashKey()
+    {
+        if (!$this->getData('cache_hash_key')) {
             $this->setData('cache_hash_key', hash('md4', $this->format('text')));
         }
         return $this->getData('cache_hash_key');
@@ -72,12 +43,12 @@ class OnePica_AvaTax_Model_Sales_Quote_Address extends OnePica_AvaTax_Model_Sale
      *
      * @return true|array
      */
-    public function validate () {
-
-        if (! Mage::helper('avatax')->fullStopOnError()) {
+    public function validate()
+    {
+        if (!$this->_getConfigHelper()->fullStopOnError($this->getQuote()->getStoreId())) {
             return true;
         }
-        
+
         $result = parent::validate();
 
         //if base validation fails, don't bother with additional validation
@@ -89,26 +60,29 @@ class OnePica_AvaTax_Model_Sales_Quote_Address extends OnePica_AvaTax_Model_Sale
         $data = Mage::app()->getRequest()->getPost('billing', array());
         $useForShipping = isset($data['use_for_shipping']) ? (int)$data['use_for_shipping'] : 0;
 
-        if($this->getAddressType() == self::TYPE_SHIPPING || $this->getUseForShipping() /* <1.9 */ || $useForShipping /* >=1.9 */) {
-            if (!isset(self::$_validationResult[$this->getAddressId()])) {
-                if(!$this->getAvataxValidator()) {
-                    $validator = Mage::getModel('avatax/avatax_address')->setAddress($this);
-                    $this->setAvataxValidator($validator);
-                }
-
-                self::$_validationResult[$this->getAddressId()] = $this->getAvataxValidator()->validate();
-            }
-
-            return self::$_validationResult[$this->getAddressId()];
+        if ($this->getAddressType() == self::TYPE_SHIPPING
+            || $this->getUseForShipping()/* <1.9 */ || $useForShipping/* >=1.9 */
+        ) {
+            return Mage::getModel('avatax/action_validator')->validate($this);
         }
 
         return $result;
     }
 
-
     /* BELOW ARE MAGE CORE PROPERTIES AND METHODS ADDED FOR OLDER VERSION COMPATABILITY */
 
+    /**
+     * Total amount
+     *
+     * @var array
+     */
     protected $_totalAmounts = array();
+
+    /**
+     * Base total amount
+     *
+     * @var array
+     */
     protected $_baseTotalAmounts = array();
 
     /**
@@ -116,11 +90,11 @@ class OnePica_AvaTax_Model_Sales_Quote_Address extends OnePica_AvaTax_Model_Sale
      *
      * @param   string $code
      * @param   float $amount
-     * @return  OnePica_AvaTax_Model_Sales_Quote_Address_Amasty_Pure
+     * @return  Mage_Sales_Model_Quote_Address
      */
     public function addTotalAmount($code, $amount)
     {
-        $amount = $this->getTotalAmount($code)+$amount;
+        $amount = $this->getTotalAmount($code) + $amount;
         $this->setTotalAmount($code, $amount);
         return $this;
     }
@@ -130,11 +104,11 @@ class OnePica_AvaTax_Model_Sales_Quote_Address extends OnePica_AvaTax_Model_Sale
      *
      * @param   string $code
      * @param   float $amount
-     * @return  OnePica_AvaTax_Model_Sales_Quote_Address_Amasty_Pure
+     * @return  Mage_Sales_Model_Quote_Address
      */
     public function addBaseTotalAmount($code, $amount)
     {
-        $amount = $this->getBaseTotalAmount($code)+$amount;
+        $amount = $this->getBaseTotalAmount($code) + $amount;
         $this->setBaseTotalAmount($code, $amount);
         return $this;
     }
@@ -144,13 +118,13 @@ class OnePica_AvaTax_Model_Sales_Quote_Address extends OnePica_AvaTax_Model_Sale
      *
      * @param   string $code
      * @param   float $amount
-     * @return  OnePica_AvaTax_Model_Sales_Quote_Address_Amasty_Pure
+     * @return  Mage_Sales_Model_Quote_Address
      */
     public function setTotalAmount($code, $amount)
     {
         $this->_totalAmounts[$code] = $amount;
         if ($code != 'subtotal') {
-            $code = $code.'_amount';
+            $code = $code . '_amount';
         }
         $this->setData($code, $amount);
         return $this;
@@ -161,15 +135,15 @@ class OnePica_AvaTax_Model_Sales_Quote_Address extends OnePica_AvaTax_Model_Sale
      *
      * @param   string $code
      * @param   float $amount
-     * @return  OnePica_AvaTax_Model_Sales_Quote_Address_Amasty_Pure
+     * @return  Mage_Sales_Model_Quote_Address
      */
     public function setBaseTotalAmount($code, $amount)
     {
         $this->_baseTotalAmounts[$code] = $amount;
         if ($code != 'subtotal') {
-            $code = $code.'_amount';
+            $code = $code . '_amount';
         }
-        $this->setData('base_'.$code, $amount);
+        $this->setData('base_' . $code, $amount);
         return $this;
     }
 
@@ -182,7 +156,7 @@ class OnePica_AvaTax_Model_Sales_Quote_Address extends OnePica_AvaTax_Model_Sale
     public function getTotalAmount($code)
     {
         if (isset($this->_totalAmounts[$code])) {
-            return  $this->_totalAmounts[$code];
+            return $this->_totalAmounts[$code];
         }
         return 0;
     }
@@ -196,8 +170,18 @@ class OnePica_AvaTax_Model_Sales_Quote_Address extends OnePica_AvaTax_Model_Sale
     public function getBaseTotalAmount($code)
     {
         if (isset($this->_baseTotalAmounts[$code])) {
-            return  $this->_baseTotalAmounts[$code];
+            return $this->_baseTotalAmounts[$code];
         }
         return 0;
+    }
+
+    /**
+     * Get avatax config helper
+     *
+     * @return OnePica_AvaTax_Helper_Config
+     */
+    protected function _getConfigHelper()
+    {
+        return Mage::helper('avatax/config');
     }
 }

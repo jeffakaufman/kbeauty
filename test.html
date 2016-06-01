@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function share() {
+            var requestObj = {
+                method: 'feed',
+//                app_id: 235468389807927,
+                app_id: 770199153099219,
+                //display: 'dialog',
+                link: 'http://kardashianbeauty.hellojrdev.com/',
+                // picture: 'http://kardashianbeauty.hellojrdev.com/media/wysiwyg/images/khloe2.jpg',
+//                picture: 'https://kbeauty.com/media/KBeauty_FBShare.jpg',
+//                source: '',
+//                name: "YEAH!!!",
+                caption: "Take A Look",
+//                description: 'Hey  hey',
+//            redirect_uri: '<?php echo $canvasUrl; ?>Spanish/',
+                ref: "Public"
+            };
+
+
+//            requestObj = {
+//                method: 'share',
+//                href: 'http://kardashianbeauty.hellojrdev.com/',
+//            };
+            // console.log(requestObj);
+
+            function _fbShare(error, response) {
+
+                if (error) {
+                    console.log("FB Error");
+                    console.log(error);
+                    return;
+                }
+
+//console.log(requestObj);
+//console.log(response);
+
+                FB.ui(requestObj, function (response) {
+                    $(".fb_dialog").css("z-index", "10000000!important");
+console.log(response);
+                });
+
+            }
+
+            FB.getLoginStatus(function (response) {
+console.log(response);
+                if (response.status == 'connected') {
+                    FB.api('/me', function (response) {
+console.log(response);
+                        _fbShare(null, response);
+                    });
+                } else if (response.status == 'not_authorized') {
+                    FB.login(function (response) {
+                        if (response.authResponse) {
+                            FB.api('/me', function (response) {
+                                _fbShare(null, response);
+                            });
+                        } else {
+                            _fbShare(response.error, null);
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '770199153099219',
+            xfbml      : true,
+            version    : 'v2.6'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<button onclick="share();">Share</button>
+
+</body>
+</html>

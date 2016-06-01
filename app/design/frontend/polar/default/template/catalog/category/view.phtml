@@ -67,18 +67,20 @@
         <?php endif; ?>
       </div>
 </div>
-
+<?php $subcategories = Mage::getModel('catalog/category')->getCategories($_category->getId()); 
+if ($subcategories) : ?>
 <div id="subcategories">
     <ul>
         <li class="item selected" data-filter="all">All</li>
-        <?php $subcategories = Mage::getModel('catalog/category')->getCategories($_category->getId());
-
+        <?php 
         foreach ($subcategories as $subcategory){
             echo '<li class="item" data-filter="'.str_replace('+', '', str_replace(' ', '', strtolower($subcategory->getData('name') ) ) ).'">'.$subcategory->getData('name').'</li>';
              //print_r($subcategory->getData());
         } ?>
     </ul>
 </div>
+<?php endif; ?>
+
 <?php if($this->isContentMode()): ?>
     <?php echo $this->getCmsBlockHtml() ?>
 

@@ -1,9 +1,7 @@
 <?php
 /**
  * OnePica_AvaTax
- *
  * NOTICE OF LICENSE
- *
  * This source file is subject to the Open Software License (OSL 3.0), a
  * copy of which is available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
@@ -16,401 +14,208 @@
  */
 
 /**
- * The base AvaTax Helper class.
+ * The base AvaTax Helper class
+ *
+ * @category   OnePica
+ * @package    OnePica_AvaTax
+ * @author     OnePica Codemaster <codemaster@onepica.com>
  */
-class OnePica_AvaTax_Helper_Data extends Mage_Core_Helper_Abstract 
-{	
-	public function isAvataxEnabled($store = null)
-	{
-		return ($this->_getConfig('action', $store) != OnePica_AvaTax_Model_Config::ACTION_DISABLE);
-	}
-	
-	/**
-	 * Gets the documenation url
-	 *
-	 * @return string
-	 */
-	public function getDocumentationUrl()
-	{
-		return 'http://www.onepica.com/magento-extensions/avatax/';
-	}
-	
-	/**
-	 * Loads a class from the AvaTax library.
-	 *
-	 * @param string $className
-	 * @return OnePica_AvaTax_Helper_Data
-	 */
-	public function loadClass ($className)
-	{
-		require_once $this->getLibPath() . DS . 'classes' . DS . $className . '.class.php';
-		return $this;
-	}
-
-	/**
-	 * Loads an array of AvaTax classes.
-	 *
-	 * @param array $classes
-	 * @return OnePica_AvaTax_Helper_Data
-	 */
-	public function loadClasses (array $classes)
-	{
-		foreach ($classes as $class) {
-			$this->loadClass($class);
-		}
-		return $this;
-	}
-
-	/**
-	 * Returns the path to the etc directory.
-	 *
-	 * @return string
-	 */
-	public function getEtcPath ()
-	{
-		return dirname(dirname(__FILE__)) . DS . 'etc';
-	}
-
-	/**
-	 * Returns the path to the AvaTax SDK lib directory.
-	 *
-	 * @return string
-	 */
-	public function getLibPath ()
-	{
-		return Mage::getModuleDir('', 'OnePica_AvaTax') . DS . 'lib';
-	}
-
-	/**
-	 * Returns the path to the AvaTax SDK WSDL directory.
-	 *
-	 * @return string
-	 */
-	public function getWsdlPath ()
-	{
-		return $this->getLibPath() . DS . 'wsdl';
-	}
-
-	/**
-	 * Returns a config value from the admin.
-	 *
-	 * @param string $path
-	 * @param int $store
-	 * @return string
-	 */
-	protected function _getConfig ($path, $store = null)
-	{
-		return Mage::getSingleton('avatax/config')->getConfig($path, $store);
-	}
-    
-	/**
-	 * Returns the logging level
-	 *
-	 * @return int
-	 */
-    public function getLogMode($store=null)
-    {
-        return $this->_getConfig('log_status', $store);
-    }
-
-	/**
-	 * Returns the logging type
-	 *
-	 * @return string
-	 */
-    public function getLogType($store=null)
-    {
-        return explode(",", $this->_getConfig('log_type_list', $store));
-    }
-
-    
-	/**
-	 * Returns shipping line item faked sku
-	 *
-	 * @return string
-	 */
-    public function getShippingSku($store=null)
-    {
-        return $this->_getConfig('shipping_sku', $store);
-    }
-	
-	/**
-	 * Returns giftwraporder line item faked sku
-	 *
-	 * @return string
-	 */
-    public function getGwOrderSku($store=null)
-    {
-        return $this->_getConfig('gw_order_sku', $store);
-    }
-    
+class OnePica_AvaTax_Helper_Data extends Mage_Core_Helper_Abstract
+{
     /**
-	 * Returns giftwrapitems line item faked sku
-	 *
-	 * @return string
-	 */
-    public function getGwItemsSku($store=null)
+     * Check if avatax extension is enabled
+     *
+     * @param null|bool|int|Mage_Core_Model_Store $store $store
+     * @return bool
+     */
+    public function isServiceEnabled($store = null)
     {
-        return $this->_getConfig('gw_items_sku', $store);
-    }
-    
-        /**
-	 * Returns giftwrapprintedcard line item faked sku
-	 *
-	 * @return string
-	 */
-    public function getGwPrintedCardSku($store=null)
-    {
-        return $this->_getConfig('gw_printed_card_sku', $store);
-    }
-    
-	/**
-	 * Returns shipping line item faked sku
-	 *
-	 * @return string
-	 */
-    public function getSalesPersonCode($store=null)
-    {
-        return $this->_getConfig('sales_person_code', $store);
-    }
-    
-	/**
-	 * Returns attribute code for the location code to send to Avalara
-	 *
-	 * @return string
-	 */
-    public function getLocationCode($store=null)
-    {
-        return $this->_getConfig('location_code', $store);
-    }
-    
-	/**
-	 * Returns attribute code for the reference code 1 to send to Avalara
-	 *
-	 * @return string
-	 */
-    public function getRef1AttributeCode($store=null)
-    {
-        return $this->_getConfig('line_ref1_code', $store);
-    }
-    
-	/**
-	 * Returns attribute code for the reference code 2 to send to Avalara
-	 *
-	 * @return string
-	 */
-    public function getRef2AttributeCode($store=null)
-    {
-        return $this->_getConfig('line_ref2_code', $store);
-    }
-    
-	/**
-	 * Returns the positive adjustment identifier to send to Avalara
-	 *
-	 * @return string
-	 */
-    public function getPositiveAdjustmentSku($store=null)
-    {
-        return $this->_getConfig('adjustment_positive_sku', $store);
-    }
-    
-	/**
-	 * Returns the negative adjustment identifier to send to Avalara
-	 *
-	 * @return string
-	 */
-    public function getNegativeAdjustmentSku($store=null)
-    {
-        return $this->_getConfig('adjustment_negative_sku', $store);
+        return ($this->_getConfigData()->getStatusServiceAction($store)
+                != OnePica_AvaTax_Model_Service_Abstract_Config::ACTION_DISABLE);
     }
 
-	/**
-	 * Returns the required field list
-	 *
-	 * @return string
-	 */
-    public function getFieldRequiredList($store=null)
+    /**
+     * Is avatax 16 service type
+     *
+     * @return bool
+     */
+    public function isAvatax16()
     {
-        return $this->_getConfig('field_required_list', $store);
+        return $this->_getConfigData()->getActiveService() === OnePica_AvaTax_Helper_Config::AVATAX16_SERVICE_TYPE;
     }
 
-	/**
-	 * Returns the rules for field
-	 *
-	 * @return string
-	 */
-    public function getFieldRule($store=null)
+    /**
+     * Is avatax service type
+     *
+     * @return bool
+     */
+    public function isAvatax()
     {
-        return $this->_getConfig('field_rule', $store);
+        return $this->_getConfigData()->getActiveService() === OnePica_AvaTax_Helper_Config::AVATAX_SERVICE_TYPE;
     }
 
-    
-	/**
-	 * 
-	 *
-	 * @return string
-	 */
-    public function fullStopOnError($store=null)
+    /**
+     * Gets the documenation url
+     *
+     * @return string
+     */
+    public function getDocumentationUrl()
     {
-        return (bool)$this->_getConfig('error_full_stop', $store);
+        return 'http://www.onepica.com/magento-extensions/avatax/';
     }
-    
-	/**
-	 * Adds error message if there is an error
-	 *
-	 * @return string
-	 */
-    public function addErrorMessage($store=null)
+
+    /**
+     * Is development mod
+     *
+     * @param int $storeId
+     * @return bool
+     */
+    public function isDevMod($storeId)
     {
-    	static $isMessageSet = false;
-    	$message = $this->getErrorMessage($store);
-    	
-		if(Mage::app()->getStore()->isAdmin()) {
-    		if(!$isMessageSet) Mage::getSingleton('adminhtml/session_quote')->addError($message);
-		} else {
-			if(!$isMessageSet) Mage::getSingleton('checkout/session')->addError($message);
-		}
-    	
-    	$isMessageSet = true;
-    	return $message;
+        $serviceUrl = $this->_getConfigData()->getServiceUrl($storeId);
+
+        return ($this->isAvatax()
+                && ($serviceUrl === OnePica_AvaTax_Model_Source_Avatax_Url::DEVELOPMENT_URL))
+               || ($this->isAvatax16()
+                   && ($serviceUrl === OnePica_AvaTax_Model_Source_Avatax16_Url::DEVELOPMENT_URL));
     }
-    
-	/**
-	 * Gets error message
-	 *
-	 * @return string
-	 */
-    public function getErrorMessage($store=null) {
-		if(Mage::app()->getStore()->isAdmin()) {
-			return $this->_getConfig('error_backend_message', $store);
-		} else {
-			return $this->_getConfig('error_frontend_message', $store);
-		}
+
+    /**
+     * Returns the logging level
+     *
+     * @param null|bool|int|Mage_Core_Model_Store $store
+     * @return int
+     */
+    public function getLogMode($store = null)
+    {
+        return $this->_getConfigData()->getConfigLogMode($store);
     }
-    
-	/**
-	 * Does any store have this extension disabled?
-	 *
-	 * @return bool
-	 */
+
+    /**
+     * Returns the logging type
+     *
+     * @param null|bool|int|Mage_Core_Model_Store $store
+     * @return string
+     */
+    public function getLogType($store = null)
+    {
+        return explode(",", $this->_getConfigData()->getLogTypeList($store));
+    }
+
+    /**
+     * Does any store have this extension disabled?
+     *
+     * @return bool
+     */
     public function isAnyStoreDisabled()
     {
-    	$disabled = false;
-    	$storeCollection = Mage::app()->getStores();
-    	
-    	foreach($storeCollection as $store) {
-    		$disabled |= Mage::getStoreConfig('tax/avatax/action', $store->getId()) == OnePica_AvaTax_Model_Config::ACTION_DISABLE;
-    	}
-    	
-    	return $disabled;
+        $disabled = false;
+        $storeCollection = Mage::app()->getStores();
+
+        foreach ($storeCollection as $store) {
+            $disabled |= $this->_getConfigData()->getStatusServiceAction($store->getId())
+                         == OnePica_AvaTax_Model_Service_Abstract_Config::ACTION_DISABLE;
+        }
+
+        return $disabled;
     }
-    
-	/**
-	 * Determines if address validation is enabled
-	 *
-	 * @param Mage_Customer_Model_Address $address
-	 * @param int $storeId
-	 * @return bool
-	 */
-    public function isAddressValidationOn($address, $storeId) {
-    	if(!$this->isAddressActionable($address, $storeId)) {
-    		return false;
-    	}
-    	return Mage::getStoreConfig('tax/avatax/validate_address', $storeId);
+
+    /**
+     * Create Zend_Date object with date converted to store timezone and store Locale
+     * This method from Mage_Core_Model_Locale.
+     * This need for backward compatibility with older magento versions which not have 4th parameter in this method
+     *
+     * @param   mixed                               $store       Information about store
+     * @param   string|integer|Zend_Date|array|null $date        date in UTC
+     * @param   boolean                             $includeTime flag for including time to date
+     * @param   string|null                         $format
+     * @return  Zend_Date
+     */
+    public function storeDate($store = null, $date = null, $includeTime = false, $format = null)
+    {
+        $timezone = Mage::app()->getStore($store)->getConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE);
+        $date = new Zend_Date($date, $format, Mage::app()->getLocale()->getLocale());
+        $date->setTimezone($timezone);
+        if (!$includeTime) {
+            $date->setHour(0)
+                ->setMinute(0)
+                ->setSecond(0);
+        }
+
+        return $date;
     }
-    
-	/**
-	 * Determines if address normalization is enabled
-	 *
-	 * @param Mage_Customer_Model_Address $address
-	 * @param int $storeId
-	 * @return bool
-	 */
-    public function isAddressNormalizationOn($address, $storeId) {
-    	if(!$this->isAddressActionable($address, $storeId)) {
-    		return false;
-    	}
-    	return Mage::getStoreConfig('tax/avatax/normalize_address', $storeId);
+
+    /**
+     * Adds a comment to order history. Method chosen based on Magento version.
+     *
+     * @param Mage_Sales_Model_Order $order
+     * @param string                 $comment
+     * @return $this
+     */
+    public function addStatusHistoryComment($order, $comment)
+    {
+        if (method_exists($order, 'addStatusHistoryComment')) {
+            $order->addStatusHistoryComment($comment)->save();
+        } elseif (method_exists($order, 'addStatusToHistory')) {
+            $order->addStatusToHistory($order->getStatus(), $comment, false)->save();
+        }
+
+        return $this;
     }
-    
-	/**
-	 * Determines if the address should be filtered
-	 *
-	 * @param Mage_Customer_Model_Address
-	 * @param int $storeId
-	 * @return bool
-	 */
-    public function isAddressActionable($address, $storeId, $filterMode = OnePica_AvaTax_Model_Config::REGIONFILTER_ALL) {
-    	$filter = false;
-    	
-    	if(Mage::getStoreConfig('tax/avatax/action', $storeId) == OnePica_AvaTax_Model_Config::ACTION_DISABLE) {
-			return false;
-    	}
-    	
-    	if(Mage::getStoreConfig('tax/avatax/region_filter_mode', $storeId) >= $filterMode) {
-	    	$regionFilters = explode(',', Mage::getStoreConfig('tax/avatax/region_filter_list', $storeId));
-	    	if(!in_array($address->getRegionId(), $regionFilters)) {
-	    		$filter = 'region';
-	    	}
-    	}
-			
-    	$countryFilters = explode(',', Mage::getStoreConfig('tax/avatax/country_filter_list', $storeId));
-    	if(!in_array($address->getCountryId(), $countryFilters)) {
-    		$filter = 'country';
-    	}
-   		
-		if($filter && $this->getLogMode($storeId)) {
-			$filterLog = Mage::getSingleton('avatax/session')->getFilterLog();
-			if(!is_array($filterLog)) $filterLog = array();
-			$key = $address->getCacheHashKey();
-			
-			//did we already log this filtered address?
-			if(!in_array($key, $filterLog)) {
-				$filterLog[] = $key;
-				Mage::getSingleton('avatax/session')->setFilterLog($filterLog);
-				
-				$type = ($filterMode == OnePica_AvaTax_Model_Config::REGIONFILTER_TAX) ? 'tax_calc' : 'tax_calc|address_opts';
-		    	Mage::getModel('avatax_records/log')
-					->setStoreId($storeId)
-					->setLevel('Success')
-					->setType('Filter')
-					->setRequest(print_r($address->debug(), true))
-					->setResult('filter: ' . $filter . ', type: ' . $type)
-					->save();
-			}
-		}
-    	
-    	return $filter ? false : true;    	
+
+    /**
+     * Round up
+     *
+     * @param float $value
+     * @param int   $precision
+     * @return float
+     */
+    public function roundUp($value, $precision)
+    {
+        $fact = pow(10, $precision);
+
+        return ceil($fact * $value) / $fact;
     }
-    
-	/**
-	 * Determines if the object (quote, invoice, or credit memo) should use AvaTax services
-	 *
-	 * @param Mage_Sales_Model_Quote|Mage_Sales_Model_Order_Invoice|Mage_Sales_Model_Order_Creditmemo
-	 * @param Mage_Sales_Model_Quote_Address
-	 * @return bool
-	 */
-    public function isObjectActionable($object, $shippingAddress=null) {
-    	$storeId = $object->getStore()->getId();
-    	
-    	//is action enabled?
-    	$action = $object->getOrder() ? OnePica_AvaTax_Model_Config::ACTION_CALC_SUBMIT : OnePica_AvaTax_Model_Config::ACTION_CALC;
-    	if(Mage::getStoreConfig('tax/avatax/action', $storeId) < $action) {
-			return false;
-    	}
-    	
-    	if(!$shippingAddress) {
-    		$shippingAddress = $object->getShippingAddress();
-    	}
-    	if(!$shippingAddress) {
-    		$shippingAddress = $object->getBillingAddress();
-    	}
-    	
-    	//is the region filtered?
-    	if(!$this->isAddressActionable($shippingAddress, $storeId, OnePica_AvaTax_Model_Config::REGIONFILTER_TAX)) {
-    		return false;
-    	}
-    	
-    	return true;
+
+    /**
+     * Get config helper
+     *
+     * @return OnePica_AvaTax_Helper_Config
+     */
+    private function _getConfigData()
+    {
+        return Mage::helper('avatax/config');
+    }
+
+    /**
+     * Generates client name for requests
+     * Parts:
+     * - MyERP: the ERP that this connector is for (not always applicable)
+     * - Majver: version info for the ERP (not always applicable)
+     * - MinVer: version info for the ERP (not always applicable)
+     * - MyConnector: Name of the OEM's connector AND the name of the OEM (company)  *required*
+     * - Majver: OEM's connector version *required*
+     * - MinVer: OEM's connector version *required*
+     *
+     * @example Magento,1.4,.0.1,OP_AvaTax by One Pica,2,0.1
+     * @return string
+     */
+    public function getClientName()
+    {
+        $mageVersion = Mage::getVersion();
+        $mageVerParts = explode('.', $mageVersion, 2);
+
+        $opVersion = Mage::getResourceModel('core/resource')->getDbVersion('avatax_records_setup');
+        $opVerParts = explode('.', $opVersion, 2);
+
+        $part = array();
+        $part[] = OnePica_AvaTax_Model_Service_Abstract_Config::CONFIG_KEY;
+        $part[] = $mageVerParts[0];
+        $part[] = $mageVerParts[1];
+        $part[] = OnePica_AvaTax_Model_Service_Abstract_Config::APP_NAME;
+        $part[] = $opVerParts[0];
+        $part[] = $opVerParts[1];
+
+        return implode(',', $part);
     }
 }

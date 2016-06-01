@@ -1,0 +1,59 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Top menu for store
+ *
+ * @see Mage_Page_Block_Html_Topmenu
+ */
+?>
+<?php
+  $_menu = $this->getHtml('level-top');
+  $static_menu_block = $this->getChildHtml('polar.main.menu');
+?>
+<?php /*if($static_menu_block): ?>
+  <div id="shopMenu" class="nav-container closed">
+    <ul id="nav" class="large-12 columns">
+      <?php echo $static_menu_block; ?>
+    </ul>
+  </div>
+<?php else: ?>
+  <?php if($_menu):*/ ?>
+
+    <div id="shopMenu" class="nav-container f-fix closed">
+        <ul id="nav" class="large-12 columns">
+          <?php $cats = Mage::getModel('catalog/category')->getCategories(42);
+          $width = 100 / $cats->count();
+          $i = 1;
+          foreach ($cats as $category) {
+              echo '<li class="level0 nav-'.$i.' level-top" style="background-image: url('.Mage::getBaseUrl('media').'catalog/category/'.Mage::getModel('catalog/category')->load($category->getId())->getThumbnail().'); width: '.$width.'%"><a class="level-top" href="'.Mage::getModel('catalog/category')->load($category->getId())->getUrl().'"><span>'.$category->getName().'</span></a></li>';
+              $i++;
+          } ?>
+        </ul>
+    </div>
+  <?php /*endif ?>
+<?php endif;*/ ?>

@@ -15,40 +15,65 @@
  * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  */
 
-
+/**
+ * Log type source model
+ *
+ * @category   OnePica
+ * @package    OnePica_AvaTax
+ * @author     OnePica Codemaster <codemaster@onepica.com>
+ */
 class OnePica_AvaTax_Model_Source_Logtype
 {
-	const PING		= 'Ping';
-	const GET_TAX	= 'GetTax';
-	const FILTER	= 'Filter';
-	const VALIDATE	= 'Validate';
-	const QUEUE		= 'Queue';
-	
     /**
-	 * Gets the list of type for the admin config dropdown
-	 *
-	 * @return array
-	 */
+     * Gets the list of type for the admin config dropdown
+     *
+     * @return array
+     * @throws OnePica_AvaTax_Exception
+     */
     public function toOptionArray()
     {
-        return array(
-            array(
-            	'value' => self::PING,
-            	'label' => Mage::helper('avatax')->__('Ping')),
-			array(
-				'value' => self::GET_TAX,
-				'label' => Mage::helper('avatax')->__('Get Tax')),
-			array(
-				'value' => self::FILTER,
-				'label' => Mage::helper('avatax')->__('Filter')),
-			array(
-				'value' => self::VALIDATE,
-				'label' => Mage::helper('avatax')->__('Validate')),
-			array(
-				'value' => self::QUEUE,
-				'label' => Mage::helper('avatax')->__('Queue'))
+        return $this->_getLogTypeModel()->toArray();
+    }
 
+    /**
+     * Get log types array
+     *
+     * @return array
+     */
+    public function getLogTypes()
+    {
+        return $this->_getLogTypeModel()->getLogTypes();
+    }
 
-        );
+    /**
+     * Get LogType source model
+     *
+     * @return false|OnePica_AvaTax_Model_Source_Avatax16_Logtype|OnePica_AvaTax_Model_Source_Avatax_Logtype
+     * @throws \OnePica_AvaTax_Exception
+     */
+    protected function _getLogTypeModel()
+    {
+        $activeService = $this->_getConfigHelper()->getActiveService(Mage::app()->getStore());
+        if (!$activeService) {
+            throw new OnePica_AvaTax_Exception('Service source model is not defined.');
+        }
+
+        $model = Mage::getModel('avatax/source_' . $activeService . '_logtype');
+
+        if (!$model) {
+            throw new OnePica_AvaTax_Exception('Could not found source model ' . $activeService);
+        }
+
+        return $model;
+    }
+
+    /**
+     * Get config helper
+     *
+     * @return OnePica_AvaTax_Helper_Config
+     */
+    protected function _getConfigHelper()
+    {
+        return Mage::helper('avatax/config');
     }
 }
