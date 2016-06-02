@@ -688,8 +688,8 @@ console.log(group);
 				$('<li id="quickView"><div class="loader"><img src="/skin/frontend/polar/default/images/opc-ajax-loader.gif"></div></li>').insertAfter($(this).parent().parent().parent());
 			}		
 		//}
-console.log($('#group'+group));
-console.log($('#quickView'));
+//console.log($('#group'+group));
+//console.log($('#quickView'));
 		$('html,body').animate({
 			scrollTop: $('#quickView').offset().top - 40
 		}, 500);
