@@ -530,7 +530,14 @@ class Mage_Paypal_Model_Ipn
      */
     protected function _registerPaymentFailure()
     {
+//        $this->_importPaymentInformation();
+//        $this->_order
+//            ->registerCancellation($this->_createIpnComment(''), false)
+//            ->save();
         $this->_importPaymentInformation();
+        foreach ($this->_order->getInvoiceCollection() as $invoice){
+                $invoice->cancel()->save();
+        }
         $this->_order
             ->registerCancellation($this->_createIpnComment(''), false)
             ->save();
