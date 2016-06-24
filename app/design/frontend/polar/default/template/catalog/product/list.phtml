@@ -47,13 +47,15 @@
 
     <?php $_collectionSize = $_productCollection->count() ?>
     <?php /*$_columnCount = $this->getColumnCount();*/ ?>
-    <?php $_columnCount = 3; ?>
+    <?php $currentCat = Mage::registry('current_category');
+    if ($currentCat->getName() == 'The Fierce Collection') $_columnCount = 1;
+      else $_columnCount = 3; ?>
     <?php $i=0; $row=0; ?>
     
     <?php foreach ($_productCollection as $_product): ?>
         <?php if ($_product->getTypeId() == "configurable") { ?>
+
             <?php $cats = $_product->getCategoryIds();
-                $currentCat = Mage::registry('current_category');
                 $categoryName = []; $categoryTag = [];
                 foreach ($cats as $category_id) {
                   $_cat = Mage::getModel('catalog/category')->load($category_id) ;
@@ -70,18 +72,24 @@
 
             <?php if($i% $_columnCount==0) { ?>
         <div id="group<?php echo $row ?>" class="row group lazy" data-group="<?php echo $row ?>">
-            <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" data-equalizer>
+          <?php if ($currentCat->getName() == 'The Fierce Collection') :?>
+            <div class="bg"></div>
+          <?php endif; ?>
+            <ul class="small-block-grid-1 medium-block-grid-<?php echo $_columnCount; ?> large-block-grid-<?php echo $_columnCount; ?> products-grid" <?php if ($currentCat->getName() != 'The Fierce Collection') :?>data-equalizer<?php endif; ?>>
             <?php } ?>
 
-                <li class="item lazy item<?php echo $i ?> text-center <?php echo $_product->getTypeId() ?><?php foreach ($categoryTag as $value) { echo ' '.$value; } ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" data-equalizer-watch>
+                <li class="item lazy item<?php echo $i ?> text-center clearfix <?php echo $_product->getTypeId() ?><?php foreach ($categoryTag as $value) { echo ' '.$value; } ?>" itemscope itemtype="http://schema.org/Product" data-id="<?php echo $_product->entity_id; ?>" <?php if ($currentCat->getName() != 'The Fierce Collection') :?>data-equalizer-watch<?php endif; ?>>
                   
                   <?php
                    if ($_product->getFinalPrice() < $_product->getPrice()):?>
                        <?php echo $this->getChildHtml('polar.sale.item') ?>
-                  <?php endif; ?><?php $_category = Mage::getModel('catalog/category')->load($currentCat->getParentId());  $_subcategories = $_category->getChildrenCategories();?>
-                  <div class="item-wrapper">
+                  <?php endif; ?>
+                  <?php $_category = Mage::getModel('catalog/category')->load($currentCat->getParentId());  $_subcategories = $_category->getChildrenCategories();?>
+                  <div class="item-wrapper" <?php if ($currentCat->getName() == 'The Fierce Collection') :?>data-equalizer<?php endif; ?>>
+                    <?php if ($currentCat->getName() != 'The Fierce Collection') :?>
                     <a href="<?php echo $_product->getProductUrl() ?>">
-                      <div class="product-image">
+                    <?php endif; ?>
+                      <div class="product-image" <?php if ($currentCat->getName() == 'The Fierce Collection') :?>data-equalizer-watch<?php endif; ?>>
                           <span class="product-image-wrapper" style="width: 400px;display: inline-block;top: 0px;max-width: 100%;position: relative;">
                             <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
                               <?php if('1' == $_product->getData('k_sister_fave')) { ?>
@@ -114,20 +122,38 @@
                               ?>
                            </span>
                       </div>
-                      <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></h3>
-                      <div class="category"><?php echo implode(", ",$categoryName); ?></div>
-                      <?php /*if($_product->getRatingSummary()): ?>
-                        <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
-                      <?php endif;*/ ?>
-                      <div class="price"><?php echo $this->getPriceHtml($_product, true) ?></div>
-                    </a>
-                    <div class="actions">
-                        
-                      <button type="button" title="<?php echo $this->__('QUICK VIEW') ?>" class="button btn-quick quick-view-link" data-url="<?php echo Mage::getBaseUrl(), 'catalog/ajax_product/view/id/', $_product->getId() ?>"><span><span><?php echo $this->__('QUICK VIEW') ?></span></span></button>
+                      <?php if ($currentCat->getName() == 'The Fierce Collection') :?>
+                        <div class="info" <?php if ($currentCat->getName() == 'The Fierce Collection') :?>data-equalizer-watch<?php endif; ?>><div class="inner">
+                      <?php endif; ?>
+                          <h3 class="product-name" itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?></h3>
+                          <div class="category"><?php echo implode(", ",$categoryName); ?></div>
+                          <?php /*if($_product->getRatingSummary()): ?>
+                            <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                          <?php endif;*/ ?>
+                          <?php if ($currentCat->getName() != 'The Fierce Collection') :?>
+                            <div class="price"><?php echo $this->getPriceHtml($_product, true) ?></div>
+                            </a>
+                          <?php else: ?>
+                            <div class="desc"><?php echo $_helper->productAttribute($_product, $_product->getDescription(), 'description') ?></div>
 
-                      <button type="button" title="<?php echo $this->__('DETAILS') ?>" class="button btn-cart" onclick="setLocation('<?php echo $_product->getProductUrl() ?>')"><span><span><?php echo $this->__('DETAILS') ?></span></span></button>
-                        
-                    </div>
+                            <button type="button" title="<?php echo $this->__('QUICK VIEW') ?>" class="button btn-quick quick-view-link" data-url="<?php echo Mage::getBaseUrl(), 'catalog/ajax_product/view/id/', $_product->getId() ?>"><span><span><?php echo $this->__('QUICK VIEW') ?></span></span></button>
+                            
+                          <?php endif; ?>
+                      
+                      <?php if ($currentCat->getName() != 'The Fierce Collection') :?>
+                        <div class="actions">
+
+                          <button type="button" title="<?php echo $this->__('QUICK VIEW') ?>" class="button btn-quick quick-view-link" data-url="<?php echo Mage::getBaseUrl(), 'catalog/ajax_product/view/id/', $_product->getId() ?>"><span><span><?php echo $this->__('QUICK VIEW') ?></span></span></button>
+
+                          <?php if ($currentCat->getName() != 'The Fierce Collection') :?>
+                            <button type="button" title="<?php echo $this->__('DETAILS') ?>" class="button btn-cart" onclick="setLocation('<?php echo $_product->getProductUrl() ?>')"><span><span><?php echo $this->__('DETAILS') ?></span></span></button>
+                          <?php endif; ?>
+
+                        </div>
+                      <?php endif; ?>
+                      <?php if ($currentCat->getName() == 'The Fierce Collection') :?>
+                        </div></div><!-- .info -->
+                      <?php endif; ?>
                   </div><!-- /item-wrapper -->
                 </li>
                 <?php ++$i; ?>
