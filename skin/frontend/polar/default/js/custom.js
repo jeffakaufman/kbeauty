@@ -674,7 +674,7 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 	$('.btn-quick').click(function() {
 		if ($('#closeBtn').length) $('#closeBtn').click();
 		var group = $(this).parents('.row').data('group');
-console.log(group);
+//console.log(group);
 		/*if ($('#quickView').length) {
 			if (wW > 640) { 
 				$('#quickView').insertAfter('#group'+group);
@@ -683,9 +683,9 @@ console.log(group);
 			}		
 		} else { */
 			if (wW > 640) { 
-				$('<div id="quickView"><div class="loader"><img src="/skin/frontend/polar/default/images/opc-ajax-loader.gif"></div></div>').insertAfter('#group'+group);
+				$('<div id="quickView"><div class="loader"></div></div>').insertAfter('#group'+group);
 			} else {
-				$('<li id="quickView"><div class="loader"><img src="/skin/frontend/polar/default/images/opc-ajax-loader.gif"></div></li>').insertAfter($(this).parent().parent().parent());
+				$('<li id="quickView"><div class="loader"></div></li>').insertAfter($(this).parent().parent().parent());
 			}		
 		//}
 //console.log($('#group'+group));
@@ -1122,6 +1122,19 @@ console.log(response);
 		});
 	});
 
+	$('#hero .bg').addClass('anim');
+	$(window).scroll(function (event) {
+	    var topWindow = $(window).scrollTop();
+	    var heroTop = $('#hero').height();
+	    var topLine = $('.top-line').height();
+	    if (topWindow > heroTop) {
+	    	$('#hero .bg').removeClass('anim');
+	    } 
+	    if (topWindow < topLine) {
+	    	$('#hero .bg').addClass('anim');
+	    }
+	});
+
 	function responsiveStuff() {
 		if(device.desktop()) wW = window.outerWidth;
 		else wW = $(window).width();
@@ -1140,13 +1153,13 @@ console.log(response);
 				$(this).find('.text').prependTo( $(this) );
 			});
 			var imageHeights = [], imageHeight, tallestImage;
-			$('.cms-home #slider li').each(function() {
+			$('.cms-home #slider li, #hero').each(function() {
 				var textHeight = $(this).find('.text').outerHeight();
-
+//console.log(textHeight);
 				$(this).find('.text').height(textHeight).css('position','absolute');
 
 				$(this).find('.big-image.desktop img').css('height','auto');
-				imageHeight = $(this).find('.big-image.desktop img').height();
+				imageHeight = $(this).find('.big-image.desktop img, .subtitle img').height();
 				$(this).find('.image').css('position','absolute');
 				imageHeights.push(imageHeight);
 				tallestImage = Math.max.apply( null, imageHeights );
@@ -1155,11 +1168,11 @@ console.log(response);
 //console.log(tallestImage);
 
 			if (!tallestImage) {
-				/*var bg = $('.catalog-category-view #slider li:first-child').css('background-image');
-				bg = bg.replace('url(','').replace(')','');
-				var tmpImg = new Image();
-				tmpImg.src=bg;
-				tallestImage = tmpImg.height;*/
+				// var bg = $('.catalog-category-view #hero .text').css('background-image');
+				// bg = bg.replace('url(','').replace(')','');
+				// var tmpImg = new Image();
+				// tmpImg.src=bg;
+				// tallestImage = tmpImg.height;
 				tallestImage = wW * 0.39;
         	}
    //      	$('.catalog-category-view #slider li').each(function() {
@@ -1168,7 +1181,7 @@ console.log(response);
 			//if (wW <= 1284) {
 				$('.cms-home #slider li .container, #slider li .image #slider li .image img').css('height',tallestImage);
 				$('#slider li .big-image img').css('height',tallestImage);
-				$('.cms-home #slider ul, #slider li, #hero').css('height',tallestImage+0);
+				$('.cms-home #slider ul, #slider li').css('height',tallestImage+0);
                 $('#slider li.nextSlide').css('margin-top','-'+(tallestImage+0)+'px');
 			//} else {
 				//$('.cms-home #slider li .container, #slider li .image, #slider li .image img').css('height','500px');
@@ -1180,8 +1193,33 @@ console.log(response);
 			}, 1000);
 
 			var categoryTextHeight = $('#hero .text').outerHeight();
-			$('#hero .text').height(categoryTextHeight).css('position','absolute');
-
+			// var bg_url = $('#hero').css('background-image');
+			// bg_url = /^url\((['"]?)(.*)\1\)$/.exec(bg_url);
+   //  		bg_url = bg_url ? bg_url[2] : "";
+   //  		var tmpImg = new Image();
+			// tmpImg.src = bg_url;
+			
+			// $(tmpImg).on('load',function(){
+			//   var heroWidth = tmpImg.width;
+			//   var heroHeight = tmpImg.height;
+			//   imgRatio = heroHeight / heroWidth;
+			// });
+			//heroHeight = Math.max(heroHeight,categoryTextHeight);
+			
+        	if ($('#hero img').length) {
+        		$('#hero').height(wW * 0.384);
+        		var textH = $('#hero').height() * 0.52;
+        		$('#hero .text').height( textH );
+        		$('#hero, body.category-the-fierce-collection .category-products').animate({
+					opacity: 1
+				}, 500);
+			} else {
+				$('#hero .text').height(categoryTextHeight).css('position','absolute');
+				$('#hero').css('height',tallestImage+0);
+				$('#hero').animate({
+					opacity: 1
+				}, 1000);
+			}
 		} else {
 
 			$('.cms-the-kurrent-kourtney .bio, .cms-the-kurrent-kim .bio, .cms-the-kurrent-khloe .bio').insertAfter('.top_image');
@@ -1204,7 +1242,7 @@ console.log(response);
                 imageHeights.push(imageHeight);
                 tallestImage = Math.max.apply( null, imageHeights );
 
-console.log(tallestImage);
+//console.log(tallestImage);
 				//$("#slider li").css('height',tallestImage+'px');
 				$("#slider li").height(tallestImage+'px');
 
@@ -1219,11 +1257,12 @@ console.log(tallestImage);
                 }
 
 			});
+			
 			$('#hero').each(function() {
-				if (wW > 641) {
-					tallestImage = wW;
-					$(this).css('height',tallestImage);
-				}
+				// if (wW > 641) {
+				// 	tallestImage = wW;
+				// 	$(this).css('height',tallestImage);
+				// }
 
                 if($(this).hasClass('nextSlide')) {
                     $(this).css('margin-top','-'+(tallestImage)+'px');
@@ -1234,8 +1273,19 @@ console.log(tallestImage);
 				//$(this).css('background-image','url('+$(this).attr('data-mobile')+')').css('height',tallestImage);
 			});
 			
-			$('#hero .text').css('height','auto').css('position','relative');
-			$('#slider, #hero').animate({
+			if ($('body').hasClass('category-the-fierce-collection') && $('#hero img').length) {
+				$('#hero').height(wW);
+        		var textH = $('#hero').height() * 0.52;
+        		var textMargin = ($('#hero').height() - textH) * 0.5;
+        		$('#hero .text').height( textH ).css('top',textMargin+'px');
+        		$('#hero, .category-products').animate({
+					opacity: 1
+				}, 500);
+			} else {
+				$('#hero .text').css('height','auto').css('position','relative');
+			}
+
+			$('#slider').animate({
 				opacity: 1
 			}, 1000);
 		}

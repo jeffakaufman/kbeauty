@@ -669,6 +669,8 @@ abstract class Mage_Payment_Model_Method_Abstract extends Varien_Object
             'quote'           => $quote,
         ));
 
+error_log($this->getCode());
+
         if ($checkResult->isAvailable && $quote) {
             $checkResult->isAvailable = $this->isApplicableToQuote($quote, self::CHECK_RECURRING_PROFILES);
         }
