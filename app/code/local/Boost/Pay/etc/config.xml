@@ -7,19 +7,19 @@
     </modules>
     <frontend>
         <routers>
-            <boost>
+            <pay>
                 <use>standard</use>
                 <args>
                     <module>Boost_Pay</module>
-                    <frontName>boost</frontName>
+                    <frontName>boost_pay</frontName>
                 </args>
-            </boost>
+            </pay>
         </routers>
         <layout>
             <updates>
-                <boost>
-                    <file>boost.xml</file>
-                </boost>
+                <pay>
+                    <file>pay.xml</file>
+                </pay>
             </updates>
         </layout>
     </frontend> 
@@ -32,31 +32,31 @@
             <boost_mysql4>
                 <class>Boost_Pay_Model_Mysql4</class>
                 <entities>
-                    <boost>
+                    <pay>
                         <table>boost</table>
-                    </boost>
+                    </pay>
                 </entities>
             </boost_mysql4>
         </models>
         <resources>
-            <boost_setup>
+            <pay_setup>
                 <setup>
                     <module>Boost_Pay</module>
                 </setup>
                 <connection>
                     <use>core_setup</use>
                 </connection>
-            </boost_setup>
-            <boost_write>
+            </pay_setup>
+            <pay_write>
                 <connection>
                     <use>core_write</use>
                 </connection>
-            </boost_write>
-            <boost_read>
+            </pay_write>
+            <pay_read>
                 <connection>
                     <use>core_read</use>
                 </connection>
-            </boost_read>
+            </pay_read>
         </resources>
         <blocks>
             <boost>
@@ -73,9 +73,9 @@
         <payment>
             <boost>
                 <active>1</active>
-                <model>boost/boost</model>
+                <model>boost/pay</model>
                 <order_status>processing</order_status>
-                <title>Boost Pay</title>
+                <title>Boost Payment Method</title>
             </boost>
          </payment>
     </default>
