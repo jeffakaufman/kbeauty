@@ -74,7 +74,8 @@
             <boost>
                 <active>1</active>
                 <model>boost/pay</model>
-                <order_status>processing</order_status>
+                <order_status>pending</order_status>
+                <payment_action>authorize_capture</payment_action>
                 <title>Boost Payment Method</title>
             </boost>
          </payment>
