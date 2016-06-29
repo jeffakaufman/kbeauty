@@ -13781,7 +13781,7 @@ body.category-the-fierce-collection #group0 .bg {
 }
 body.category-the-fierce-collection #group1 .bg {
     background-image: url(../images/cat_fierce_product_bg2.jpg);
-    right: -700px;
+    right: -570px;
     top: -200px;
 }
 body.category-the-fierce-collection #group2 .bg {
@@ -13806,7 +13806,6 @@ body.category-the-fierce-collection #quickView {
 }
 body.category-the-fierce-collection #quickView .product-essential {
     border: none;
-    padding: 0;
 }
 body.category-the-fierce-collection #quickView .out_of_stock_message {
     color: #222;
@@ -13853,9 +13852,6 @@ body.category-the-fierce-collection #quickView .buy-now:hover, body.category-the
     body.category-the-fierce-collection #hero .text .subtitle p {
         font-size: inherit;
     }
-    body.category-the-fierce-collection .products-grid .item button {
-        width: 90%;
-    }
     body.category-the-fierce-collection div.product-image {
         height: auto !important;
     }
@@ -13884,7 +13880,7 @@ body.category-the-fierce-collection #quickView .buy-now:hover, body.category-the
     }
     body.category-the-fierce-collection #group4 .bg {
         left: -500px;
-        top: 500px;
+        top: -100px;
     }
 }
 @media only screen and (min-width: 641px) {
