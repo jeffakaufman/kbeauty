@@ -672,30 +672,31 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
     });
 
 	$('.btn-quick').click(function() {
+
+		if ($('#quickView').length) {
+			console.log('yes');
+			$('#overlay').addClass('loading').animate({
+				opacity: 1
+			}, 0);
+		}
 		if ($('#closeBtn').length) $('#closeBtn').click();
 		var group = $(this).parents('.row').data('group');
-//console.log(group);
-		/*if ($('#quickView').length) {
-			if (wW > 640) { 
-				$('#quickView').insertAfter('#group'+group);
-			} else {
-				$('#quickView').insertAfter($(this).parents('li'));
-			}		
-		} else { */
-			if (wW > 640) { 
-				$('<div id="quickView"><div class="loader"></div></div>').insertAfter('#group'+group);
-			} else {
-				$('<li id="quickView"><div class="loader"></div></li>').insertAfter($(this).parent().parent().parent());
-			}		
-		//}
-//console.log($('#group'+group));
-//console.log($('#quickView'));
+
+		if (wW > 640) { 
+			$('<div id="quickView"><div class="loader"></div></div>').insertAfter('#group'+group);
+		} else {
+			$('<li id="quickView"><div class="loader"></div></li>').insertAfter($(this).parent().parent().parent());
+		}		
+
+
+		$('#quickView').addClass('opened');
 		$('html,body').animate({
 			scrollTop: $('#quickView').offset().top - 40
 		}, 500);
-		$('#quickView').addClass('opened');
 		//console.log('opened');
+		
 		$.get( $(this).data('url'), function(data) {
+
 			$('#quickView').html(data);
 			$('#quickView').prepend('<div id="closeBtn"><span class="icon-delete"></span></div>');
 			//console.log('get');
@@ -715,6 +716,10 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 				$('#quickView').remove();
 			});
 			cartActions();
+		}).done(function() {
+			$('#overlay').removeClass('loading').animate({
+				opacity: 0
+			}, 1000);
 		});
 	});
 	window.getLoginForm = function() {
