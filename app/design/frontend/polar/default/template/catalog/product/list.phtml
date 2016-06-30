@@ -91,7 +91,13 @@
                     <?php endif; ?>
                       <div class="product-image" <?php if ($currentCat->getName() == 'The Fierce Collection') :?>data-equalizer-watch<?php endif; ?>>
                           <span class="product-image-wrapper" style="width: 400px;display: inline-block;top: 0px;max-width: 100%;position: relative;">
-                            <img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
+
+                            
+                            <img src="<?php if ($currentCat->getName() == 'The Fierce Collection') { 
+                              echo $this->helper('catalog/image')->init($_product, 'thumbnail')->resize(400);
+                              } else {
+                                echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(400);
+                              } ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" />
                               <?php if('1' == $_product->getData('k_sister_fave')) { ?>
                                   <div class="sisters-fav" style="position:absolute;text-align:left;left:20px;bottom:20px;width:40px;max-width:100%;display:inline-block;">
                                       <img src="https://kbeauty.com/media/lips_icon.png" style="box-shadow: none;" />

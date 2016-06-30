@@ -12616,7 +12616,18 @@ body.overlay {
     opacity: 0;
     text-align: center;
 }
-
+#overlay.loading {
+    background-image: url(../images/opc-ajax-loader_dark.gif);
+    background-color: #0d0d0d;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: block;
+    /*opacity: 1;
+    -moz-transition: opacity 1s ease;
+    -o-transition: opacity 1s ease;
+    -webkit-transition: opacity 1s ease;
+    transition: opacity 1s ease;*/
+}
     #overlay .container {
         display: inline-block;
         padding: 5%;
@@ -13811,9 +13822,9 @@ body.category-the-fierce-collection #quickView .out_of_stock_message {
     color: #222;
 }
 body.category-the-fierce-collection #quickView .loader {
-    background-image: url(../images/opc-ajax-loader_dark.gif);
-    width: 43px;
-    height: 11px;
+    background-image: url(../images/opc-ajax-loader_gold.gif);
+    width: 120px;
+    height: 120px;
 }
 body.category-the-fierce-collection #quickView select.super-attribute-select, body.category-the-fierce-collection #quickView .quantity input, 
 body.category-the-fierce-collection #quickView .buy-now, body.category-the-fierce-collection #quickView .btn-more {
@@ -13832,6 +13843,12 @@ body.category-the-fierce-collection #quickView .buy-now {
 body.category-the-fierce-collection #quickView .buy-now:hover, body.category-the-fierce-collection #quickView .btn-more:hover {
     background-color: #000;
     color: #fff;
+}
+body.category-the-fierce-collection #quickView .product-essential .color-swatch-wrapper li {
+    border-color: #c0af85;
+}
+body.category-the-fierce-collection #quickView .product-essential .color-swatch-wrapper li.active {
+    border-color: #000;
 }
 @media only screen and (max-width: 640px) {
 
