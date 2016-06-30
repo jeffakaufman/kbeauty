@@ -17,11 +17,6 @@ try{Typekit.load();}catch(e){} //Typekit font requirement, do not remove
 	    return oldHTML.replace(/ /g, '<br/>');
 	});*/
 
-	var catWidth = $('#nav li:first-child').width() * 0.9;
-	$('#nav li').each(function() {
-		$(this).height(catWidth);
-	});
-
 	// var q = 1;
 	// $('body.cms-customer-service .col-main #faqs h3').each(function() {
 	// 	$(this).next('p').wrap('<div class="content"></div>');
@@ -1225,6 +1220,11 @@ console.log(response);
 					opacity: 1
 				}, 1000);
 			}
+			var catWidth = $('#nav li:first-child').width() * 0.9;
+			$('#nav li').each(function() {
+				$(this).height(catWidth);
+				if ($(this).data('mobile')) $(this).css('background-image','url('+$(this).attr('data-desktop')+')');
+			});
 		} else {
 
 			$('.cms-the-kurrent-kourtney .bio, .cms-the-kurrent-kim .bio, .cms-the-kurrent-khloe .bio').insertAfter('.top_image');
@@ -1293,6 +1293,12 @@ console.log(response);
 			$('#slider').animate({
 				opacity: 1
 			}, 1000);
+
+			var catWidth = $('#nav li:first-child').width() * 0.9;
+			$('#nav li').each(function() {
+				$(this).height(catWidth);
+				if ($(this).data('mobile')) $(this).css('background-image','url('+$(this).attr('data-mobile')+')');
+			});
 		}
 	}
 	responsiveStuff();

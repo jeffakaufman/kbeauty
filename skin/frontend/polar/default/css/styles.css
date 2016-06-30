@@ -7574,6 +7574,10 @@ body.cms-index-noroute .wrapper .inner-wrap {
 @media only screen and (max-width: 40em) {
     .nav-container #nav li {
         width: 50% !important;
+        background-size: cover;
+    }
+    .nav-container #nav li:hover {
+        background-size: cover;
     }
     .nav-container #nav li.nav-5 {
         width: 100% !important;
@@ -7603,6 +7607,11 @@ body.cms-index-noroute .wrapper .inner-wrap {
     display: table-cell;
     vertical-align: middle;
     padding: 0 10px;
+}
+@media only screen and (min-width: 40em) and (max-width: 800px) {
+    .nav-container #nav li a {
+        font-size: 65%;
+    }
 }
 @media only screen and (min-width: 40em) {
     .nav-container #nav li a {

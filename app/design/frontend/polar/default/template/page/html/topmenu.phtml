@@ -52,7 +52,12 @@
           $width = 100 / $cats->count();
           $i = 1;
           foreach ($cats as $category) {
+            $mobileimage = Mage::getModel('catalog/category')->load($category->getId())->getMobileimage();
+            if ($mobileimage) {
+              echo '<li class="level0 nav-'.$i.' level-top" style="background-image: url('.Mage::getBaseUrl('media').'catalog/category/'.Mage::getModel('catalog/category')->load($category->getId())->getThumbnail().'); width: '.$width.'%" data-mobile="'.Mage::getBaseUrl('media').'catalog/category/'.$mobileimage.'" data-desktop="'.Mage::getBaseUrl('media').'catalog/category/'.Mage::getModel('catalog/category')->load($category->getId())->getThumbnail().'"><a class="level-top" href="'.Mage::getModel('catalog/category')->load($category->getId())->getUrl().'"><span>'.$category->getName().'</span></a></li>';
+            } else {
               echo '<li class="level0 nav-'.$i.' level-top" style="background-image: url('.Mage::getBaseUrl('media').'catalog/category/'.Mage::getModel('catalog/category')->load($category->getId())->getThumbnail().'); width: '.$width.'%"><a class="level-top" href="'.Mage::getModel('catalog/category')->load($category->getId())->getUrl().'"><span>'.$category->getName().'</span></a></li>';
+            }
               $i++;
           } ?>
         </ul>
