@@ -1210,7 +1210,7 @@ console.log(response);
         		$('#hero').height(wW * 0.384);
         		var textH = $('#hero').height() * 0.52;
         		$('#hero .text').height( textH );
-        		$('#hero, body.category-the-fierce-collection .category-products').animate({
+        		$('#hero, body.category-fierce-collection .category-products').animate({
 					opacity: 1
 				}, 500);
 			} else {
@@ -1278,7 +1278,7 @@ console.log(response);
 				//$(this).css('background-image','url('+$(this).attr('data-mobile')+')').css('height',tallestImage);
 			});
 			
-			if ($('body').hasClass('category-the-fierce-collection') && $('#hero img').length) {
+			if ($('body').hasClass('category-fierce-collection') && $('#hero img').length) {
 				$('#hero').height(wW);
         		var textH = $('#hero').height() * 0.52;
         		var textMargin = ($('#hero').height() - textH) * 0.5;
