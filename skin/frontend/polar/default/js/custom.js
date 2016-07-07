@@ -1290,7 +1290,7 @@ console.log(response);
 				$('#hero .text').css('height','auto').css('position','relative');
 			}
 
-			$('#slider').animate({
+			$('#slider, #hero').animate({
 				opacity: 1
 			}, 1000);
 
