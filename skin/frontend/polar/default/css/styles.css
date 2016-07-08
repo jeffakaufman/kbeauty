@@ -5625,10 +5625,10 @@ body.cms-index-noroute .wrapper .inner-wrap {
         border: 1px solid #fff;
         border-right: 0;
         vertical-align: middle;
-        -moz-transition: -moz-transform 0.5s ease;
+        /*-moz-transition: -moz-transform 0.5s ease;
         -o-transition: -o-transform 0.5s ease;
         -webkit-transition: -webkit-transform 0.5s ease;
-        transition: transform 0.5s ease;
+        transition: transform 0.5s ease;*/
         -moz-transform: translate(330px, 0);
         -ms-transform: translate(330px, 0);
         -webkit-transform: translate(330px, 0);
@@ -5658,7 +5658,6 @@ body.cms-index-noroute .wrapper .inner-wrap {
                 .top-line #search_mini_form.open .searchField #searchBtn:hover {
                     color: #000;
                 }
-
 .top-line #open-shop {
     cursor: pointer;
     color: #000;
