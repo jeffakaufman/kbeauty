@@ -436,11 +436,11 @@ if($dailyFierce) {
         vertical-align: middle;
     }
     .cbanner.textleft .text .inner {
-        margin: 0 15% 0 0;
+        margin: 20px 15% 20px 50px;
         text-align: left;
     }
     .cbanner.textright .text .inner {
-        margin: 0 0 0 15%;
+        margin: 20px 50px 20px 15%;
         text-align: right;
     }
     .cbanner .text .read-more {
@@ -452,16 +452,16 @@ if($dailyFierce) {
         position: relative;
         vertical-align: bottom;
         height: 100%;
-        width: 40%;
+        width: 45%;
     }
     .cbanner.textleft .image {
-        text-align: left;
-    }
-    .cbanner.textright .image {
         text-align: right;
     }
+    .cbanner.textright .image {
+        text-align: left;
+    }
     .cbanner .image img {
-        max-width: 90%;
+        /*max-width: 90%;*/
         /*position: absolute;
         bottom: 0;*/
     }
@@ -700,7 +700,7 @@ if($dailyFierce) {
             function cbannerLayout() {
                 $('.cbanner').delay(1000).animate({opacity:1});
                 $('.cbanner').each(function() {
-                    var imageWidth = 40;
+                    var imageWidth = 45;
                     var textWidth = 55;
                     var f = 0.1;
                     
