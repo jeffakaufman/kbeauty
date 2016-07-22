@@ -13644,20 +13644,20 @@ body.customer-paymentinfo-index .form-list {
 }
 
 
-body.category-no-apologies-collection .main {
+body.category-fierce-collection .main {
     background: #0D0D0D;
     color: #c0af85;
 }
-body.category-no-apologies-collection .products-grid .product-image img {
+body.category-fierce-collection .products-grid .product-image img {
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
         
-body.category-no-apologies-collection nav.breadcrumbs, body.category-no-apologies-collection #hero .text .title { 
+body.category-fierce-collection nav.breadcrumbs, body.category-fierce-collection #hero .text .title { 
     display: none; 
 }
-body.category-no-apologies-collection nav.breadcrumbs > * {
+body.category-fierce-collection nav.breadcrumbs > * {
     color: #c0af85;
 }
 nav.breadcrumbs > *.current {}
@@ -13674,121 +13674,121 @@ nav.breadcrumbs > *.current {}
     from { opacity: 0; }
     to { opacity: 1; }
 }
-body.category-no-apologies-collection #hero {
+body.category-fierce-collection #hero {
     padding: 0;
     z-index: 10;
     max-height: none;
 }
-body.category-no-apologies-collection #hero .bg {
+body.category-fierce-collection #hero .bg {
     opacity: 0;
 }
-body.category-no-apologies-collection #hero .bg.anim {
+body.category-fierce-collection #hero .bg.anim {
     opacity: 1;
     -webkit-animation: animateDown 1s ease;
     animation: animateDown 1s ease;
 }
-body.category-no-apologies-collection #hero .text {
+body.category-fierce-collection #hero .text {
     padding: 10%;
     -webkit-animation: fadeIn 5s ease;
     animation: fadeIn 5s ease;
 }
 @media only screen and (min-width: 640px) and (max-width: 1199px) {
-    body.category-no-apologies-collection #hero .text {
+    body.category-fierce-collection #hero .text {
         width: 50%;
         left: 25%;
         right: 25%;
     }
 }
 @media only screen and (min-width: 1200px) {
-    body.category-no-apologies-collection #hero .text {
+    body.category-fierce-collection #hero .text {
         width: 600px;
         left: 50%;
         margin-left: -300px;
     }
 }
-body.category-no-apologies-collection .category-products {
+body.category-fierce-collection .category-products {
     opacity: 0;
 }
-body.category-no-apologies-collection .products-grid {
+body.category-fierce-collection .products-grid {
     position: relative;
     z-index: 1;
 }
-body.category-no-apologies-collection .group.opened, body.category-no-apologies-collection .group.loaded {
+body.category-fierce-collection .group.opened, body.category-fierce-collection .group.loaded {
     padding-top: 0;
 }
-body.category-no-apologies-collection .lazy.loaded .item {
+body.category-fierce-collection .lazy.loaded .item {
     -moz-animation: animateUp 1s both;
     -webkit-animation: animateUp 1s both;
     animation: animateUp 1s both;
 }
 
-body.category-no-apologies-collection .products-grid .item .item-wrapper {
+body.category-fierce-collection .products-grid .item .item-wrapper {
     padding-bottom: 2em;
 }
-body.category-no-apologies-collection #hero .text .subtitle {
+body.category-fierce-collection #hero .text .subtitle {
     margin-right: 0;
 }
-body.category-no-apologies-collection #hero .text .subtitle img {
+body.category-fierce-collection #hero .text .subtitle img {
     width: 90%;
 }
-body.category-no-apologies-collection #quickView.opened {
+body.category-fierce-collection #quickView.opened {
     background: #c0af85;
     color: #000;
     margin-bottom: 5em;
 }
-body.category-no-apologies-collection h3 {
+body.category-fierce-collection h3 {
     color: #c0af85;
 }
-body.category-no-apologies-collection .products-grid .item .btn-quick {
+body.category-fierce-collection .products-grid .item .btn-quick {
     background: #0d0d0d;
     color: #fff;
     border-width: 2px;
     border-color: #fff;
 }
-body.category-no-apologies-collection .products-grid .item button:hover {
+body.category-fierce-collection .products-grid .item button:hover {
     border-color: #c0af85;
     background-color: #c0af85;
     color: #000;
 }
-body.category-no-apologies-collection .products-grid .product-image {
+body.category-fierce-collection .products-grid .product-image {
     display: table-cell;
     vertical-align: middle;
     float: right;
     width: 100%;
     padding-top: 10px;
 }
-/*body.category-no-apologies-collection .row.group:nth-child(2n+1) .products-grid .product-image {
+/*body.category-fierce-collection .row.group:nth-child(2n+1) .products-grid .product-image {
     float: left;
     text-align: right;
 }*/
-body.category-no-apologies-collection .products-grid .info {
+body.category-fierce-collection .products-grid .info {
     text-align: center;
     display: block;
     width: 100%;
 }
-body.category-no-apologies-collection .products-grid .info .inner {
+body.category-fierce-collection .products-grid .info .inner {
     margin: 0 5%;
 }
-body.category-no-apologies-collection .products-grid .item .desc {
+body.category-fierce-collection .products-grid .item .desc {
     margin-bottom: 1em;
 }
-body.category-no-apologies-collection .products-grid .desc blockquote {
+body.category-fierce-collection .products-grid .desc blockquote {
     display: none;
 }
-body.category-no-apologies-collection .short-description {
+body.category-fierce-collection .short-description {
     color: #222;
 }
-body.category-no-apologies-collection .products-grid .product-name {
+body.category-fierce-collection .products-grid .product-name {
     font-size: 2em;
     line-height: 1em;
     margin: 0.5em 0;
     text-transform: uppercase;
     color: #c0af85;
 }
-body.category-no-apologies-collection .product-essential .color-swatch-wrapper ul {
+body.category-fierce-collection .product-essential .color-swatch-wrapper ul {
     text-align: left;
 }
-body.category-no-apologies-collection .group .bg {
+body.category-fierce-collection .group .bg {
     position: absolute;
     width: 1000px;
     height: 847px;
@@ -13796,209 +13796,209 @@ body.category-no-apologies-collection .group .bg {
     background-size: cover;
     background-repeat: no-repeat;
 }
-body.category-no-apologies-collection #group0 .bg {
+body.category-fierce-collection #group0 .bg {
     background-image: url(../images/cat_fierce_product_bg1.jpg);
     left: -700px;
 }
-body.category-no-apologies-collection #group1 .bg {
+body.category-fierce-collection #group1 .bg {
     background-image: url(../images/cat_fierce_product_bg2.jpg);
     right: -570px;
     top: -200px;
 }
-body.category-no-apologies-collection #group2 .bg {
+body.category-fierce-collection #group2 .bg {
     background-image: url(../images/cat_fierce_product_bg3.jpg);
     left: -480px;
     top: -300px;
 }
-body.category-no-apologies-collection #group3 .bg {
+body.category-fierce-collection #group3 .bg {
     background-image: url(../images/cat_fierce_product_bg4.jpg);
     right: -600px;
     top: -200px;
 }
-body.category-no-apologies-collection #group4 .bg {
+body.category-fierce-collection #group4 .bg {
     background-image: url(../images/cat_fierce_product_bg5.jpg);
     left: -500px;
     top: 100px;
 }
-body.category-no-apologies-collection #quickView {
+body.category-fierce-collection #quickView {
     -moz-box-shadow: 0px -15px 15px 0px rgba(0,0,0,0.4);
     -webkit-box-shadow: 0px -15px 15px 0px rgba(0,0,0,0.4);
     box-shadow: 0px -15px 15px 0px rgba(0,0,0,0.4);
 }
-body.category-no-apologies-collection #quickView .product-essential {
+body.category-fierce-collection #quickView .product-essential {
     border: none;
 }
-body.category-no-apologies-collection #quickView .out_of_stock_message {
+body.category-fierce-collection #quickView .out_of_stock_message {
     color: #222;
 }
-body.category-no-apologies-collection #quickView .loader {
+body.category-fierce-collection #quickView .loader {
     background-image: url(../images/opc-ajax-loader_gold.gif);
     width: 120px;
     height: 120px;
 }
-body.category-no-apologies-collection #quickView select.super-attribute-select, body.category-no-apologies-collection #quickView .quantity input, 
-body.category-no-apologies-collection #quickView .buy-now, body.category-no-apologies-collection #quickView .btn-more {
+body.category-fierce-collection #quickView select.super-attribute-select, body.category-fierce-collection #quickView .quantity input, 
+body.category-fierce-collection #quickView .buy-now, body.category-fierce-collection #quickView .btn-more {
     background-color: #c0af85;
     border-color: #000;
     color: #000;
 }
-body.category-no-apologies-collection #quickView .btn-cart:hover {
+body.category-fierce-collection #quickView .btn-cart:hover {
     background-color: #c0af85;
     color: #000;
     border-color: #000;
 }
-body.category-no-apologies-collection #quickView .buy-now {
+body.category-fierce-collection #quickView .buy-now {
     border-color: #000;
 }
-body.category-no-apologies-collection #quickView .buy-now:hover, body.category-no-apologies-collection #quickView .btn-more:hover {
+body.category-fierce-collection #quickView .buy-now:hover, body.category-fierce-collection #quickView .btn-more:hover {
     background-color: #000;
     color: #fff;
 }
-body.category-no-apologies-collection #quickView .product-essential .color-swatch-wrapper li {
+body.category-fierce-collection #quickView .product-essential .color-swatch-wrapper li {
     border-color: #c0af85;
 }
-body.category-no-apologies-collection #quickView .product-essential .color-swatch-wrapper li.active {
+body.category-fierce-collection #quickView .product-essential .color-swatch-wrapper li.active {
     border-color: #000;
 }
 @media only screen and (max-width: 640px) {
 
-    body.category-no-apologies-collection #hero {
+    body.category-fierce-collection #hero {
         background-size: 100% auto;
     }
-    body.category-no-apologies-collection #hero .text {
+    body.category-fierce-collection #hero .text {
         padding: 10% 7%;
         position: absolute;
     }
-    body.category-no-apologies-collection #hero .text .subtitle {
+    body.category-fierce-collection #hero .text .subtitle {
         font-size: 0.8em;
         letter-spacing: 0.2em;
     }
-    body.category-no-apologies-collection #hero .text .subtitle img {
+    body.category-fierce-collection #hero .text .subtitle img {
         width: 85%;
     }
-    body.category-no-apologies-collection #hero .text .subtitle p {
+    body.category-fierce-collection #hero .text .subtitle p {
         font-size: inherit;
     }
-    body.category-no-apologies-collection div.product-image {
+    body.category-fierce-collection div.product-image {
         height: auto !important;
     }
-    body.category-no-apologies-collection .products-grid .item .actions {
+    body.category-fierce-collection .products-grid .item .actions {
         position: relative;
     }
-    body.category-no-apologies-collection .group .bg {
+    body.category-fierce-collection .group .bg {
         width: 700px;
         background-size: 100% auto;
     }
-    body.category-no-apologies-collection #group0 .bg {
+    body.category-fierce-collection #group0 .bg {
         left: -500px;
         top: -100px;
     }
-    body.category-no-apologies-collection #group1 .bg {
+    body.category-fierce-collection #group1 .bg {
         right: -530px;
         top: 0;
     }
-    body.category-no-apologies-collection #group2 .bg {
+    body.category-fierce-collection #group2 .bg {
         left: -420px;
         top: -150px;
     }
-    body.category-no-apologies-collection #group3 .bg {
+    body.category-fierce-collection #group3 .bg {
         right: -480px;
         top: -150px;
     }
-    body.category-no-apologies-collection #group4 .bg {
+    body.category-fierce-collection #group4 .bg {
         left: -500px;
         top: -100px;
     }
 }
 @media only screen and (min-width: 641px) {
 
-    body.category-no-apologies-collection #group0 .products-grid .info, body.category-no-apologies-collection #group2 .products-grid .info, 
-        body.category-no-apologies-collection #group4 .products-grid .info, body.category-no-apologies-collection #group6 .products-grid .info {
+    body.category-fierce-collection #group0 .products-grid .info, body.category-fierce-collection #group2 .products-grid .info, 
+        body.category-fierce-collection #group4 .products-grid .info, body.category-fierce-collection #group6 .products-grid .info {
         text-align: left;
     }
-    body.category-no-apologies-collection #group0 .products-grid .product-image, body.category-no-apologies-collection #group2 .products-grid .product-image, 
-        body.category-no-apologies-collection #group4 .products-grid .product-image, body.category-no-apologies-collection #group6 .products-grid .product-image {
+    body.category-fierce-collection #group0 .products-grid .product-image, body.category-fierce-collection #group2 .products-grid .product-image, 
+        body.category-fierce-collection #group4 .products-grid .product-image, body.category-fierce-collection #group6 .products-grid .product-image {
         float: left;
         text-align: right;
     }
-    body.category-no-apologies-collection .products-grid .product-image, body.category-no-apologies-collection .products-grid .info {
+    body.category-fierce-collection .products-grid .product-image, body.category-fierce-collection .products-grid .info {
         width: 50%;
         display: table-cell;
         vertical-align: middle;
         text-align: left;
     }
-    body.category-no-apologies-collection #hero .text .subtitle p {
+    body.category-fierce-collection #hero .text .subtitle p {
         font-size: 14px;
     }
-    /*body.category-no-apologies-collection .products-grid .info {
+    /*body.category-fierce-collection .products-grid .info {
         text-align: right;
     }
-    body.category-no-apologies-collection .row.group:nth-child(2n+1) .products-grid .info {
+    body.category-fierce-collection .row.group:nth-child(2n+1) .products-grid .info {
         text-align: left;
     }*/
-    body.category-no-apologies-collection .products-grid .info .inner {
+    body.category-fierce-collection .products-grid .info .inner {
         margin: 0 12.5%;
     }
-    body.category-no-apologies-collection #hero .text {
+    body.category-fierce-collection #hero .text {
         padding: 0;
     }
 }
 @media only screen and (min-width: 641px) and (max-width: 900px) {
-    body.category-no-apologies-collection #hero .text .subtitle p {
+    body.category-fierce-collection #hero .text .subtitle p {
         font-size: 13px;
     }
 }
 @media only screen and (min-width: 641px) and (max-width: 800px) {
-    body.category-no-apologies-collection #group0 .bg {
+    body.category-fierce-collection #group0 .bg {
         left: -750px;
     }
-    body.category-no-apologies-collection #group1 .bg {
+    body.category-fierce-collection #group1 .bg {
         right: -750px;
     }
-    body.category-no-apologies-collection #group2 .bg {
+    body.category-fierce-collection #group2 .bg {
         left: -680px;
         top: -200px;
     }
-    body.category-no-apologies-collection #group3 .bg {
+    body.category-fierce-collection #group3 .bg {
         right: -750px;
     }
-    body.category-no-apologies-collection #hero .text .subtitle p {
+    body.category-fierce-collection #hero .text .subtitle p {
         font-size: 12px;
     }
 }
 @media only screen and (min-width: 641px) and (max-width: 800px) {
-    body.category-no-apologies-collection #hero .text .subtitle p {
+    body.category-fierce-collection #hero .text .subtitle p {
         font-size: 11px;
     }
 }
 @media only screen and (min-width: 801px) and (max-width: 1024px) {
-    body.category-no-apologies-collection #group0 .bg {
+    body.category-fierce-collection #group0 .bg {
         left: -800px;
     }
-    body.category-no-apologies-collection #group2 .bg {
+    body.category-fierce-collection #group2 .bg {
         left: -680px;
         top: -200px;
     }
-    body.category-no-apologies-collection #group4 .bg {
+    body.category-fierce-collection #group4 .bg {
         left: -600px;
     }
 }
 @media only screen and (min-width: 641px) and (max-width: 1024px) {
 
-    body.category-no-apologies-collection .products-grid .item .desc, body.category-no-apologies-collection .products-grid .item .desc p {
+    body.category-fierce-collection .products-grid .item .desc, body.category-fierce-collection .products-grid .item .desc p {
         line-height: 1.2em;
     }
-    body.category-no-apologies-collection .products-grid .info .inner {
+    body.category-fierce-collection .products-grid .info .inner {
         margin: 0 5% 0 10%;
     }
-    body.category-no-apologies-collection .row.group:nth-child(2n+1) .products-grid .info .inner {
+    body.category-fierce-collection .row.group:nth-child(2n+1) .products-grid .info .inner {
         margin: 0 10% 0 5%;
     }
 }
-/*body.category-no-apologies-collection .row {
+/*body.category-fierce-collection .row {
     max-width: none;
 }
-body.category-no-apologies-collection .row ul {
+body.category-fierce-collection .row ul {
     max-width: 75rem;
     margin: 0 auto;
 }*/
